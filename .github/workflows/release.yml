@@ -1,0 +1,107 @@
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+permissions:
+  contents: write # write to release artifacts
+jobs:
+  build-shared-library:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+          - os: ubuntu-latest
+            target: aarch64-unknown-linux-gnu
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+          - os: macos-13 # x86
+            target: x86_64-apple-darwin
+          - os: macos-14 # M1
+            target: aarch64-apple-darwin
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Build library
+        uses: houseabsolute/actions-rust-cross@v1
+        with:
+          command: 'both' # test and build
+          target: ${{ matrix.target }}
+          args: "--locked --release"
+      - name: Upload library
+        uses: actions/upload-artifact@v4
+        with:
+          name: library-${{ matrix.target }}
+          path: |
+            target/${{ matrix.target }}/release/einvoice.dll
+            target/${{ matrix.target }}/release/libeinvoice.dylib
+            target/${{ matrix.target }}/release/libeinvoice.so
+      - name: Upload uniffi-bindgen executable
+        uses: actions/upload-artifact@v4
+        if: ${{ matrix.target == 'x86_64-unknown-linux-gnu' }}
+        with:
+          name: bindgen-${{ matrix.target }}
+          path: 'target/${{ matrix.target }}/release/uniffi-bindgen'
+  build-kotlin-bindings:
+    runs-on: ubuntu-latest
+    needs: build-shared-library
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: bindings/kotlin/build/native
+      - name: move library files
+        run: |
+          mkdir -p bindings/kotlin/src/main/resources/darwin-aarch64
+          mkdir -p bindings/kotlin/src/main/resources/linux-aarch64
+          mkdir -p bindings/kotlin/src/main/resources/win32-x86-64
+          mkdir -p bindings/kotlin/src/main/resources/darwin-x86-64
+          mkdir -p bindings/kotlin/src/main/resources/linux-x86-64
+          cp -r bindings/kotlin/build/native/library-aarch64-apple-darwin/*  bindings/kotlin/src/main/resources/darwin-aarch64
+          cp -r  bindings/kotlin/build/native/library-aarch64-unknown-linux-gnu/*  bindings/kotlin/src/main/resources/linux-aarch64
+          cp -r  bindings/kotlin/build/native/library-x86_64-pc-windows-msvc/* bindings/kotlin/src/main/resources/win32-x86-64
+          cp -r  bindings/kotlin/build/native/library-x86_64-apple-darwin/*  bindings/kotlin/src/main/resources/darwin-x86-64
+          cp -r  bindings/kotlin/build/native/library-x86_64-unknown-linux-gnu/* bindings/kotlin/src/main/resources/linux-x86-64
+          mkdir -p target/release
+          cp bindings/kotlin/src/main/resources/linux-x86-64/* -r target/release/
+          cp bindings/kotlin/build/native/bindgen-x86_64-unknown-linux-gnu/* -r target/release/
+          ls -R bindings/kotlin/src/main/resources
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+      - name: Build with Gradle
+        run: |
+          chmod +x target/release/uniffi-bindgen
+          cd bindings/kotlin
+          ./gradlew build --stacktrace --info
+      - name : Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: kotlin-binding
+          path: bindings/kotlin/build/libs
+  upload-to-release:
+      name: Upload to artifacts release
+      runs-on: ubuntu-latest
+      needs: [ build-kotlin-bindings ]
+      steps:
+        - name: Download artifacts
+          uses: actions/download-artifact@v4
+          with:
+            path: dist
+        - name: Flatten files
+          run: |
+            for dir in dist/*; do
+              for file in $dir/*; do
+                mv $file $dir-$(basename $file)
+              done
+              rm -r $dir
+            done
+        - name: Publish release assets
+          uses: softprops/action-gh-release@v2
+          with:
+            files: |
+              dist/*
+            fail_on_unmatched_files: true
+
