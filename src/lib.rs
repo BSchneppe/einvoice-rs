@@ -12,6 +12,11 @@ use crate::cii::cii_business_rule_validator;
 use crate::ubl::ubl_business_rule_validator;
 use crate::ZugferdProfile::EN16931;
 pub use cii::cii_model::CrossIndustryInvoice;
+use einvoice_deps_yaserde::__xml::attribute::OwnedAttribute;
+use einvoice_deps_yaserde::__xml::namespace::Namespace;
+use einvoice_deps_yaserde::de::Deserializer;
+use einvoice_deps_yaserde::ser::Serializer;
+use einvoice_deps_yaserde::{YaDeserialize, YaSerialize};
 use lopdf::Document;
 use lopdf::Error;
 use lopdf::Object;
@@ -20,11 +25,6 @@ use std::io::{Read, Write};
 use std::sync::Arc;
 use thiserror::Error;
 pub use ubl::ubl_model::UblInvoice;
-use yaserde::__xml::attribute::OwnedAttribute;
-use yaserde::__xml::namespace::Namespace;
-use yaserde::de::Deserializer;
-use yaserde::ser::Serializer;
-use yaserde::{YaDeserialize, YaSerialize};
 
 uniffi::setup_scaffolding!();
 #[derive(Debug, uniffi::Error, Error)]
@@ -104,7 +104,7 @@ impl YaSerialize for InvoiceStandard {
 #[uniffi::export]
 pub fn validate_invoice(xml: &str) -> Result<InvoiceStandard, InvoiceError> {
     let invoice_standard: InvoiceStandard =
-        yaserde::de::from_str(xml).map_err(InvoiceError::ParseError)?;
+        einvoice_deps_yaserde::de::from_str(xml).map_err(InvoiceError::ParseError)?;
 
     match &invoice_standard {
         InvoiceStandard::UBL(invoice) => {

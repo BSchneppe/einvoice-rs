@@ -17,7 +17,7 @@ mod tests {
 
         let invoice = validate_invoice(&original).unwrap();
         // Serialize
-        let serialized = yaserde::ser::to_string(&invoice).unwrap();
+        let serialized = einvoice_deps_yaserde::ser::to_string(&invoice).unwrap();
 
         // Normalize both strings
         let normalized_original = normalize_xml(&original);
@@ -38,7 +38,7 @@ mod tests {
 
         let invoice = validate_invoice(&original).unwrap();
         // Serialize
-        let serialized = yaserde::ser::to_string(&invoice).unwrap();
+        let serialized = einvoice_deps_yaserde::ser::to_string(&invoice).unwrap();
 
         // Normalize both strings
         let normalized_original = normalize_xml(&original);
