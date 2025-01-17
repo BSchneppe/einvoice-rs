@@ -43,11 +43,11 @@ This will validate that we can deserialize and serialize all tests in the [xrech
 ## Examples
 ### Java
 ```java
-import com.schneppe.einvoice.Invoice;
+import com.schneppe.einvoice.InvoiceStandard;
 import com.schneppe.einvoice.EinvoiceKt;
 
 String xml = new String(Files.readAllBytes(path));
-Invoice invoice = EinvoiceKt.validateXRechnung(xml);
+InvoiceStandard invoiceStandard = EinvoiceKt.validateInvoice(xml);
 ```
 ### Rust 
 
