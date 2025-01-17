@@ -48,7 +48,6 @@ mod tests {
         assert_eq!(normalized_serialized, normalized_original);
     }
 
-    use einvoice::ZugferdProfile::EN16931;
     use regex::Regex;
     use xmltree::{Element, ParserConfig};
 
