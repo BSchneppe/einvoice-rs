@@ -4,8 +4,8 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-yaserde = { git = "https://github.com/BSchneppe/yaserde.git" , branch = "feat/nested"}
-yaserde_derive ={ git = "https://github.com/BSchneppe/yaserde.git" , branch = "feat/nested"}
+einvoice_deps_yaserde = { version = "0.0.1"}
+einvoice_deps_yaserde_derive ={ version = "0.0.1"}
 thiserror = "2.0.11"
 rayon = "1.10.0"
 uniffi = { version = "0.28.3", features = ["cli"] }

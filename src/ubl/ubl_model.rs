@@ -1,19 +1,19 @@
 use crate::UniffiCustomTypeConverter;
 use chrono::{DateTime, NaiveDate, NaiveTime, TimeZone, Utc};
+use einvoice_deps_yaserde::__xml::attribute::OwnedAttribute;
+use einvoice_deps_yaserde::__xml::name::OwnedName;
+use einvoice_deps_yaserde::__xml::namespace::Namespace;
+use einvoice_deps_yaserde::__xml::reader::XmlEvent as ReaderXmlEvent;
+use einvoice_deps_yaserde::__xml::writer::XmlEvent;
+use einvoice_deps_yaserde::de::Deserializer;
+use einvoice_deps_yaserde::ser::Serializer;
+use einvoice_deps_yaserde::{YaDeserialize, YaSerialize};
+use einvoice_deps_yaserde_derive::{YaDeserialize, YaSerialize};
 use rust_decimal::prelude::ToPrimitive;
 use rust_decimal::Decimal;
 use std::io::Read;
 use std::str::FromStr;
 use std::time::SystemTime;
-use yaserde::__xml::attribute::OwnedAttribute;
-use yaserde::__xml::name::OwnedName;
-use yaserde::__xml::namespace::Namespace;
-use yaserde::__xml::reader::XmlEvent as ReaderXmlEvent;
-use yaserde::__xml::writer::XmlEvent;
-use yaserde::de::Deserializer;
-use yaserde::ser::Serializer;
-use yaserde::{YaDeserialize, YaSerialize};
-use yaserde_derive::{YaDeserialize, YaSerialize};
 
 #[derive(Debug)]
 pub struct Iso8601Date(NaiveDate);

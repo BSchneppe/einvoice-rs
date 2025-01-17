@@ -1,4 +1,4 @@
-use yaserde_derive::{YaDeserialize, YaSerialize};
+use einvoice_deps_yaserde_derive::{YaDeserialize, YaSerialize};
 #[derive(YaSerialize, YaDeserialize, uniffi::Record)]
 #[yaserde(
 default_namespace = "",
