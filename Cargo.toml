@@ -2,6 +2,9 @@
 name = "einvoice"
 version = "0.1.0"
 edition = "2021"
+license-file = "LICENSE"
+license = "MIT"
+description = "E-Invoice library with language bindings"
 
 [dependencies]
 einvoice_deps_yaserde = { version = "0.0.1"}
