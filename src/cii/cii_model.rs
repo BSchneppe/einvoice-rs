@@ -73,7 +73,7 @@ pub struct RamGuidelineSpecifiedDocumentContextParameter {
     #[yaserde(text = true)]
     pub text: Option<String>,
     #[yaserde(rename = "ID", prefix = "ram")]
-    pub ram_id: Option<IdType>,
+    pub id: Option<IdType>,
 }
 
 #[derive(YaSerialize, YaDeserialize, uniffi::Record)]

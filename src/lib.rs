@@ -10,7 +10,6 @@ pub mod ubl {
 
 use crate::cii::cii_business_rule_validator;
 use crate::ubl::ubl_business_rule_validator;
-use crate::ZugferdProfile::EN16931;
 pub use cii::cii_model::CrossIndustryInvoice;
 use einvoice_deps_yaserde::__xml::attribute::OwnedAttribute;
 use einvoice_deps_yaserde::__xml::namespace::Namespace;
@@ -119,8 +118,9 @@ pub fn validate_invoice(xml: &str) -> Result<InvoiceStandard, InvoiceError> {
             })?;
         }
         InvoiceStandard::CII(invoice) => {
+            let profile = determine_profile(invoice).map_err(InvoiceError::ValidationError)?;
             let arc = Arc::new(invoice);
-            cii_business_rule_validator::validate_invoice(EN16931, arc).map_err(|e| {
+            cii_business_rule_validator::validate_invoice(profile, arc).map_err(|e| {
                 InvoiceError::ValidationError(
                     e.iter()
                         .map(|e| e.to_string())
@@ -242,10 +242,31 @@ fn get_embedded_xml_file(pdf: &Document) -> Result<Option<(String, Vec<u8>)>, Er
 }
 
 #[derive(uniffi::Enum)]
-// TODO: parse the profile based on the XML content
 pub enum ZugferdProfile {
     Basic,
-    EN16931,
+    En16931,
+    Extended,
+}
+
+fn determine_profile(invoice: &CrossIndustryInvoice) -> Result<ZugferdProfile, String> {
+    if let Some(exchanged_context) = &invoice.rsm_exchanged_document_context {
+        if let Some(guideline_context) =
+            &exchanged_context.ram_guideline_specified_document_context_parameter
+        {
+            if let Some(guideline_id) = &guideline_context.id {
+                if let Some(id) = &guideline_id.id {
+                    return  match id.as_str() {
+                        "urn:cen.eu:en16931:2017" | "urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0" |"urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0#conformant#urn:xeinkauf.de:kosit:extension:xrechnung_3.0"  => Ok(ZugferdProfile::En16931),
+                        "urn:cen.eu:en16931:2017#compliant#urn:factur-x.eu:1p0:basic"
+                        | "urn:ferd:CrossIndustryDocument:invoice:1p0:basic" => Ok(ZugferdProfile::Basic),
+                        "urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended" => Ok(ZugferdProfile::Extended),
+                        _ => Err(format!("Unknown guideline ID: {}", id)),
+                    };
+                }
+            }
+        }
+    }
+    Err("Document did not contain Profile ID".to_string())
 }
 
 #[cfg(test)]
