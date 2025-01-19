@@ -9,7 +9,8 @@ pub fn validate_invoice(
 ) -> Result<(), Vec<ValidationError>> {
     let validation_rules = match zugferd_profile {
         ZugferdProfile::Basic => BASIC_BUSINESS_RULES,
-        ZugferdProfile::EN16931 => EN16931_BUSINESS_RULES,
+        ZugferdProfile::En16931 => EN16931_BUSINESS_RULES,
+        ZugferdProfile::Extended => &*vec![],
     };
 
     let results: Vec<_> = validation_rules
