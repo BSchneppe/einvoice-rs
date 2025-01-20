@@ -14,7 +14,7 @@ rayon = "1.10.0"
 uniffi = { version = "0.28.3", features = ["cli"] }
 chrono = "0.4.39"
 rust_decimal = { version = "1.36.0",features = ["c-repr"] }
-lopdf = "=0.34.0"
+lopdf = "=0.35.0"
 
 [dev-dependencies]
 rstest = "0.24.0"
