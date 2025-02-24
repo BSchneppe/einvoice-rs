@@ -28,7 +28,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$co_routines_version")
     val jna_version = "5.16.0";
     implementation("net.java.dev.jna:jna:$jna_version")
-    val junit_version = "5.11.4"
+    val junit_version = "5.12.0"
     testImplementation("org.junit.jupiter:junit-jupiter:$junit_version")
 }
 val nativeDir = layout.buildDirectory.dir("generated/sources/native").get().asFile.absolutePath
