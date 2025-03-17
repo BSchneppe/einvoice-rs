@@ -26,7 +26,7 @@ repositories {
 dependencies {
     val co_routines_version = "1.10.1"
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$co_routines_version")
-    val jna_version = "5.16.0";
+    val jna_version = "5.17.0";
     implementation("net.java.dev.jna:jna:$jna_version")
     val junit_version = "5.11.4"
     testImplementation("org.junit.jupiter:junit-jupiter:$junit_version")
