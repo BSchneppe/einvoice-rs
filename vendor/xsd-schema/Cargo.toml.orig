@@ -1,0 +1,144 @@
+[package]
+name = "xsd-schema"
+version = "0.3.0"
+edition = "2021"
+rust-version = "1.85"
+authors = ["semyonc"]
+description = "XML Schema (XSD 1.0/1.1) validator with PSVI and a built-in XPath 2.0 engine"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/semyonc/xsd-schema"
+readme = "README.md"
+keywords = ["xsd", "xml", "schema", "validation", "xpath"]
+categories = ["parser-implementations", "data-structures"]
+
+[package.metadata.docs.rs]
+# Document every public API: XSD 1.1 and XPath (`xsd11`), composition
+# (`compose`) and the asynchronous loading API (`async`). Every feature is
+# additive, so all of them build together; `all-features` also covers a
+# feature added later, which an explicit list would leave out.
+all-features = true
+
+[dependencies]
+# XML parsing
+quick-xml = "0.41"           # Streaming XML parser with byte position tracking
+roxmltree = "0.19"           # Read-only tree for W3C test suite parsing
+
+# Data structures
+slotmap = "1.0"              # Arena storage with typed keys
+bitflags = "2.4"             # DerivationSet flags
+ahash = "0.8"                # Fast, DoS-resistant (keyed) hashing for name interning
+
+# Error handling
+thiserror = "1.0"            # Error derive macros
+
+# Pattern matching and validation
+regex = "1.10"               # Pattern facet validation
+
+# Date/time types (for Phase 2 - type system)
+chrono = "0.4"               # Date/time types
+
+# Precision decimals (for Phase 2 - type system)
+rust_decimal = "1.33"        # xs:decimal precision
+
+# XSD atomic value parsing/formatting
+num-bigint = "0.4"           # Unbounded integers for xs:integer
+base64 = "0.22"              # Base64 encoding/decoding
+hex = "0.4"                  # Hex encoding/decoding
+
+# Async support (optional, enabled by "async" feature)
+futures = { version = "0.3", optional = true }
+
+# XPath parser (LALRPOP runtime) - only needed with xsd11
+lalrpop-util = { version = "0.22.2", optional = true }
+
+# Lazy statics (used by validator registry and xpath function registry)
+once_cell = "1.19"
+
+# Arena allocator for BufferDocument (only with xsd11)
+bumpalo = { version = "3", features = ["collections"], optional = true }
+
+# Unicode normalization (for fn:normalize-unicode)
+unicode-normalization = { version = "0.1", optional = true }
+
+# XML Schema 1.1 regex engine (native XSD/XPath regex with ICU4X Unicode).
+# The maintained fork of `regexml`, published as `regexml-fork`; renamed back
+# so the code keeps the name `regexml`.
+regexml = { package = "regexml-fork", version = "0.3", optional = true }
+
+[build-dependencies]
+lalrpop = { version = "0.22.2", optional = true }
+
+[dev-dependencies]
+pretty_assertions = "1.4"    # Better assertion output in tests
+criterion = "0.5"            # Benchmarking (optional)
+
+[features]
+default = ["unicode-normalization"]
+xsd11 = ["dep:lalrpop-util", "dep:lalrpop", "dep:bumpalo", "dep:regexml"]
+# XQuery-style XML composition from Rust (src/compose): needs the XPath engine
+# and the document buffer, so it implies xsd11.
+compose = ["xsd11"]
+unicode-normalization = ["dep:unicode-normalization"]
+async = ["dep:futures"]
+
+[lib]
+name = "xsd_schema"
+path = "src/lib.rs"
+
+[[test]]
+name = "conformance"
+path = "tests/conformance/driver.rs"
+harness = false
+
+[[test]]
+name = "xpath_integration"
+path = "tests/xpath_integration.rs"
+required-features = ["xsd11"]
+
+[[test]]
+name = "serialize_roundtrip"
+path = "tests/serialize_roundtrip.rs"
+required-features = ["xsd11"]
+
+[[test]]
+name = "copy_roundtrip"
+path = "tests/copy_roundtrip.rs"
+required-features = ["xsd11"]
+
+[[test]]
+name = "multi_document"
+path = "tests/multi_document.rs"
+required-features = ["xsd11"]
+
+[[test]]
+name = "compose_public_api"
+path = "tests/compose_public_api.rs"
+required-features = ["compose"]
+
+[[test]]
+name = "compose_usecase_r"
+path = "tests/compose_usecase_r.rs"
+required-features = ["compose"]
+
+[[test]]
+name = "xqts_xpath"
+path = "tests/xqts/driver.rs"
+harness = false
+required-features = ["xsd11"]
+
+[[bench]]
+name = "general_compare"
+path = "benches/general_compare.rs"
+harness = false
+required-features = ["xsd11"]
+
+[[bench]]
+name = "regex_functions"
+path = "benches/regex_functions.rs"
+harness = false
+required-features = ["xsd11"]
+
+[[example]]
+name = "xquery_without_xquery"
+path = "examples/xquery_without_xquery.rs"
+required-features = ["compose"]
