@@ -4,8 +4,8 @@ use einvoice::{
 };
 
 const PROFILE: &str = "urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0";
-const FIXTURE: &[u8] =
-    include_bytes!("../../einvoice-core/tests/inputs/cii/01.01a-INVOICE_uncefact.xml");
+// Test-authored syntax/profile fixture, deliberately NOT a conformant invoice.
+const FIXTURE: &[u8] = include_bytes!("fixtures/profile-only.xml");
 
 // Minimal XML sufficient for target preflight, deliberately NOT a valid invoice.
 fn source(profile: &str) -> String {
