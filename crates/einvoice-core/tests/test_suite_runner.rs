@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod tests {
-    use einvoice::validate_invoice;
+    use einvoice_core::parse_invoice;
     use rstest::rstest;
     use std::borrow::Cow;
     use std::io::Read;
@@ -15,7 +15,7 @@ mod tests {
             .read_to_string(&mut original)
             .expect("Cannot read file");
 
-        let invoice = validate_invoice(&original).unwrap();
+        let invoice = parse_invoice(&original).unwrap();
         // Serialize
         let serialized = einvoice_deps_yaserde::ser::to_string(&invoice).unwrap();
 
@@ -36,7 +36,7 @@ mod tests {
             .read_to_string(&mut original)
             .expect("Cannot read file");
 
-        let invoice = validate_invoice(&original).unwrap();
+        let invoice = parse_invoice(&original).unwrap();
         // Serialize
         let serialized = einvoice_deps_yaserde::ser::to_string(&invoice).unwrap();
 

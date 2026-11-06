@@ -1,64 +1,50 @@
-
 # einvoice-rs
 
-The goal of this project is to implement
-- XML parsing of CII and UBL e-invoices
-- Validation / [Parsing](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/) of CII and UBL e-invoices
-- Generation of XML for CII and UBL e-invoices
-- visualization of CII and UBL e-invoices
-- generation of PDFs for CII  e-invoices (zugferd)
-- parsing of XMls embedded in PDFs (zugferd)
-- provide cross-language and platform bindings for the above
+An experimental native Rust library for European e-invoices. The workspace currently contains `crates/einvoice-core`, with typed CII and UBL XML parsing and serialization.
 
 > [!CAUTION]
-> Early stage of development, not ready for production use
+> Not ready for production use. Parsing does not establish invoice conformance. The incomplete business-rule validators (mostly stubs, with some real checks) and UniFFI/Kotlin bindings have been removed. The workspace crate is not publishable yet.
 
+## Direction
+
+The first release targets XRechnung CII XML: complete in-process validation against a pinned ruleset, immutable received documents, and a limited builder for ordinary VAT invoices. PDF/ZUGFeRD containers, language bindings and additional formats come later.
+
+The current plan and backlog live in [Linear](https://linear.app/bschneppe/project/rust-e-invoice-library-0bad68cfeaeb). The existing schema-shaped models are experimental. The public business API, validator, builder and conversion support are separate follow-up work.
+
+## Workspace
+
+- `crates/einvoice-core`: existing XML models, parser, serialization.
+
+## Parsing example
+
+```rust
+use einvoice_core::parse_invoice;
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let xml = std::fs::read_to_string("invoice.xml")?;
+    let _parsed = parse_invoice(&xml)?;
+    // Parsing succeeded; schema and business-rule conformance remain unchecked.
+    Ok(())
+}
+```
+
+Runnable examples live in [crates/einvoice-core/examples](crates/einvoice-core/examples):
+
+```sh
+cargo run -p einvoice-core --example parse_cii
+cargo run -p einvoice-core --example parse_ubl
+```
+
+## Checks
+
+```sh
+cargo test --workspace --all-features --locked
+cargo fmt --all -- --check
+cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
+```
+
+The existing fixture tests exercise parsing and normalized serialization. They are not schema/business-rule conformance tests and do not prove byte-identical round trips. The reference-rule fixture preserves a small set of historical checks for later implementation.
 
 ## License
 
-This project is licensed under the terms described in the [LICENSE](LICENSE) file (MIT).
-
-## Features
-
-- Serialization and Deserialization of CII and UBL XML invoices (EN 16931)
-- Java Binding based on kotlin works for jre 8 and above
-
-
-## Roadmap
-
-- Implement validation for Invoices
-- Clean-Up generated files according to xsds / use stricter types
-- add more language bindings
-
-
-## Running Tests
-
-To run tests, run the following command
-
-```bash
-  cargo test  
-```
-This will validate that we can deserialize and serialize all tests in the [xrechnung testsuite](https://github.com/itplr-kosit/xrechnung-testsuite/tree/master/src/test )
-
-## Examples
-### Java
-```java
-import com.schneppe.einvoice.InvoiceStandard;
-import com.schneppe.einvoice.EinvoiceKt;
-
-String xml = new String(Files.readAllBytes(path));
-InvoiceStandard invoiceStandard = EinvoiceKt.validateInvoice(xml);
-```
-### Rust 
-
-see [examples](examples) for rust examples
-
-
-## Authors
-
-- [Benedikt Schneppe](https://www.github.com/bschneppe)
-
-
-
-
-
+[MIT](LICENSE).

@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+      - refactor/native-rust-workspace
 
 
 jobs:
@@ -18,9 +19,9 @@ jobs:
             target: aarch64-unknown-linux-gnu
           - os: windows-latest
             target: x86_64-pc-windows-msvc
-          - os: macos-13 # x86
+          - os: macos-15-intel # x86
             target: x86_64-apple-darwin
-          - os: macos-14 # M1
+          - os: macos-15 # Apple Silicon
             target: aarch64-apple-darwin
     runs-on: ${{ matrix.os }}
     steps:
@@ -31,7 +32,8 @@ jobs:
         with:
           command: 'test'
           target: ${{ matrix.target }}
-          args: "--all-features --workspace"
+          toolchain: 1.83.0
+          args: "--locked --all-features --workspace"
 
   check-format:
     name: Check formatting
@@ -71,7 +73,7 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: clippy
-          args: --all-targets --all-features --workspace -- -D warnings
+          args: --locked --all-targets --all-features --workspace -- -D warnings
 
   docs:
     name: Docs
@@ -92,4 +94,4 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: doc
-          args: --no-deps --document-private-items --all-features --workspace --examples
+          args: --locked --no-deps --document-private-items --all-features --workspace --examples

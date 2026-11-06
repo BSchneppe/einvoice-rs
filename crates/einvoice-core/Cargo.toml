@@ -1,0 +1,24 @@
+[package]
+name = "einvoice-core"
+version = "0.1.0"
+edition = "2021"
+license-file = "../../LICENSE"
+description = "Experimental CII and UBL invoice parsing library"
+publish = false
+repository  = "https://github.com/BSchneppe/einvoice-rs"
+documentation = "https://docs.rs/einvoice-core"
+
+[dependencies]
+einvoice_deps_yaserde = { version = "0.0.1"}
+einvoice_deps_yaserde_derive = { version = "0.0.1"}
+thiserror = "2.0.11"
+chrono = "0.4.39"
+rust_decimal = { version = "1.36.0", features = ["c-repr"] }
+
+[dev-dependencies]
+rstest = "0.24.0"
+xmltree = { version = "0.11.0", features = ["attribute-order"] }
+regex = "1.11.1"
+
+[lib]
+crate-type = ["lib"]
