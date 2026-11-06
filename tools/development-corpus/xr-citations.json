@@ -1,0 +1,84 @@
+{
+  "format": "bsc10-independent-xr-citation-check-v1",
+  "historical_manifest_changed": false,
+  "kind": "static_source_citation_check",
+  "runtime_coverage": false,
+  "archive": {
+    "locator": "https://projekte.kosit.org/api/v4/projects/356/packages/maven/de/xeinkauf/xrechnung-3.0.2-schematron/2.6.0/xrechnung-3.0.2-schematron-2.6.0.zip",
+    "sha256": "ca5e07afd04e72cd283d581590ffff3a15f4aac9d2f40c993345d78e67ea22b4",
+    "bytes": 66380,
+    "status": "independently_verified_read_only",
+    "read_once_held_bytes": true
+  },
+  "member": {
+    "archive": "xr.zip",
+    "archive_sha256": "ca5e07afd04e72cd283d581590ffff3a15f4aac9d2f40c993345d78e67ea22b4",
+    "bytes": 54795,
+    "member": "schematron/cii/XRechnung-CII-validation.sch",
+    "sha256": "53bb5c0664fc603bbaaddeed26eb59525a05d3359d1a63f148876b2f2eedde1d",
+    "observed_sha256": "53bb5c0664fc603bbaaddeed26eb59525a05d3359d1a63f148876b2f2eedde1d",
+    "encoding": "UTF-8",
+    "line_split": "bytes.splitlines(keepends=True); inclusive 1-based range; join without newline normalization",
+    "crlf_count": 0,
+    "bare_lf_count": 573
+  },
+  "citations": [
+    {
+      "id": "buyer-reference",
+      "line_end_1based": 338,
+      "line_start_1based": 336,
+      "locator": "BR-DE-15",
+      "member_ref": "xr-cii",
+      "utf8_excerpt_sha256": "c7caba6a15048c669ff359e5b7f40ae4509ac1260930439d6dbc644f424ee5f0",
+      "observed_sha256": "c7caba6a15048c669ff359e5b7f40ae4509ac1260930439d6dbc644f424ee5f0",
+      "bytes": 284,
+      "byte_start_0based": 27086,
+      "byte_end_exclusive": 27370,
+      "excerpt_base64": "ICAgICAgICAgPGFzc2VydCB0ZXN0PSJyc206U3VwcGx5Q2hhaW5UcmFkZVRyYW5zYWN0aW9uL3JhbTpBcHBsaWNhYmxlSGVhZGVyVHJhZGVBZ3JlZW1lbnQvcmFtOkJ1eWVyUmVmZXJlbmNlW2Jvb2xlYW4obm9ybWFsaXplLXNwYWNlKC4pKV0iCiAgICAgICAgICAgICAgICAgZmxhZz0iZmF0YWwiCiAgICAgICAgICAgICAgICAgaWQ9IkJSLURFLTE1Ij5bQlItREUtMTVdIERhcyBFbGVtZW50ICJCdXllciByZWZlcmVuY2UiIChCVC0xMCkgbXVzcyDDvGJlcm1pdHRlbHQgd2VyZGVuLjwvYXNzZXJ0Pgo=",
+      "verified": true
+    },
+    {
+      "id": "empty",
+      "line_end_1based": 299,
+      "line_start_1based": 296,
+      "locator": "PEPPOL-EN16931-R008 lexical name() context",
+      "member_ref": "xr-cii",
+      "utf8_excerpt_sha256": "180161b6c17719775ea643b81cae537e4c99bf874c657faa02050dd6e9d79367",
+      "observed_sha256": "180161b6c17719775ea643b81cae537e4c99bf874c657faa02050dd6e9d79367",
+      "bytes": 314,
+      "byte_start_0based": 23664,
+      "byte_end_exclusive": 23978,
+      "excerpt_base64": "ICAgPHBhdHRlcm4gaWQ9InBlcHBvbC1jaWktcGF0dGVybi0wLWEiPgogICAgICA8cnVsZSBjb250ZXh0PSIvLypbbm90KG5hbWUoKSA9ICdyYW06QXBwbGljYWJsZUhlYWRlclRyYWRlRGVsaXZlcnknKSBhbmQgbm90KCopIGFuZCBub3Qobm9ybWFsaXplLXNwYWNlKCkpXSI+CiAgICAgICAgIDxhc3NlcnQgaWQ9IlBFUFBPTC1FTjE2OTMxLVIwMDgiIHRlc3Q9ImZhbHNlKCkiIGZsYWc9ImZhdGFsIj5bUEVQUE9MLUVOMTY5MzEtUjAwOF0tRG9jdW1lbnQgTVVTVCBub3QgY29udGFpbiBlbXB0eSBlbGVtZW50cy48L2Fzc2VydD4KICAgICAgPC9ydWxlPgo=",
+      "verified": true
+    },
+    {
+      "id": "line-arithmetic",
+      "line_end_1based": 257,
+      "line_start_1based": 239,
+      "locator": "PEPPOL-EN16931-R120 and operand lets",
+      "member_ref": "xr-cii",
+      "utf8_excerpt_sha256": "23a274462a288f1ccb831e8f0ec5d82225597bc674f8eb667f586e22e7a5deee",
+      "observed_sha256": "23a274462a288f1ccb831e8f0ec5d82225597bc674f8eb667f586e22e7a5deee",
+      "bytes": 3380,
+      "byte_start_0based": 19013,
+      "byte_end_exclusive": 22393,
+      "excerpt_base64": "ICAgICAgICAgICAgICAgICB0ZXN0PSJ1ZHQ6RGF0ZVRpbWVTdHJpbmcgJmx0Oz0gLi4vLi4vLi4vLi4vcmFtOkFwcGxpY2FibGVIZWFkZXJUcmFkZVNldHRsZW1lbnQvcmFtOkJpbGxpbmdTcGVjaWZpZWRQZXJpb2QvcmFtOkVuZERhdGVUaW1lL3VkdDpEYXRlVGltZVN0cmluZyIKICAgICAgICAgICAgICAgICBmbGFnPSJmYXRhbCI+W1BFUFBPTC1FTjE2OTMxLVIxMTFdLUVuZCBkYXRlIG9mIGxpbmUgcGVyaW9kIE1VU1QgYmUgd2l0aGluIGludm9pY2UgcGVyaW9kLjwvYXNzZXJ0PgogICAgICA8L3J1bGU+CiAgICAgIDxydWxlIGNvbnRleHQ9InJhbTpJbmNsdWRlZFN1cHBseUNoYWluVHJhZGVMaW5lSXRlbSI+CiAgICAgICAgIDxsZXQgbmFtZT0ibGluZUV4dGVuc2lvbkFtb3VudCIKICAgICAgICAgICAgICB2YWx1ZT0iICAgICAgICAgICAgICAgICAgICAgaWYgKHJhbTpTcGVjaWZpZWRMaW5lVHJhZGVTZXR0bGVtZW50L3JhbTpTcGVjaWZpZWRUcmFkZVNldHRsZW1lbnRMaW5lTW9uZXRhcnlTdW1tYXRpb24vcmFtOkxpbmVUb3RhbEFtb3VudCkgdGhlbiAgICAgICAgICAgICAgICAgICAgICAgICB4czpkZWNpbWFsKHJhbTpTcGVjaWZpZWRMaW5lVHJhZGVTZXR0bGVtZW50L3JhbTpTcGVjaWZpZWRUcmFkZVNldHRsZW1lbnRMaW5lTW9uZXRhcnlTdW1tYXRpb24vcmFtOkxpbmVUb3RhbEFtb3VudCkgICAgICAgICAgICAgICAgICAgICBlbHNlICAgICAgICAgICAgICAgICAgICAgICAgIDAiLz4KICAgICAgICAgPGxldCBuYW1lPSJxdWFudGl0eSIKICAgICAgICAgICAgICB2YWx1ZT0iICAgICAgICAgICAgICAgICAgICAgaWYgKHJhbTpTcGVjaWZpZWRMaW5lVHJhZGVEZWxpdmVyeS9yYW06QmlsbGVkUXVhbnRpdHkpIHRoZW4gICAgICAgICAgICAgICAgICAgICAgICAgeHM6ZGVjaW1hbChyYW06U3BlY2lmaWVkTGluZVRyYWRlRGVsaXZlcnkvcmFtOkJpbGxlZFF1YW50aXR5KSAgICAgICAgICAgICAgICAgICAgIGVsc2UgICAgICAgICAgICAgICAgICAgICAgICAgMSIvPgogICAgICAgICA8bGV0IG5hbWU9InByaWNlQW1vdW50IgogICAgICAgICAgICAgIHZhbHVlPSIgICAgICAgICAgICAgICAgICAgICBpZiAocmFtOlNwZWNpZmllZExpbmVUcmFkZUFncmVlbWVudC9yYW06TmV0UHJpY2VQcm9kdWN0VHJhZGVQcmljZS9yYW06Q2hhcmdlQW1vdW50KSB0aGVuICAgICAgICAgICAgICAgICAgICAgICAgIHhzOmRlY2ltYWwocmFtOlNwZWNpZmllZExpbmVUcmFkZUFncmVlbWVudC9yYW06TmV0UHJpY2VQcm9kdWN0VHJhZGVQcmljZS9yYW06Q2hhcmdlQW1vdW50KSAgICAgICAgICAgICAgICAgICAgIGVsc2UgICAgICAgICAgICAgICAgICAgICAgICAgMCIvPgogICAgICAgICA8bGV0IG5hbWU9ImJhc2VRdWFudGl0eSIKICAgICAgICAgICAgICB2YWx1ZT0iaWYgKHJhbTpTcGVjaWZpZWRMaW5lVHJhZGVBZ3JlZW1lbnQvcmFtOk5ldFByaWNlUHJvZHVjdFRyYWRlUHJpY2UvcmFtOkJhc2lzUXVhbnRpdHkgYW5kIHhzOmRlY2ltYWwocmFtOlNwZWNpZmllZExpbmVUcmFkZUFncmVlbWVudC9yYW06TmV0UHJpY2VQcm9kdWN0VHJhZGVQcmljZS9yYW06QmFzaXNRdWFudGl0eSkgIT0gMCkgdGhlbiB4czpkZWNpbWFsKHJhbTpTcGVjaWZpZWRMaW5lVHJhZGVBZ3JlZW1lbnQvcmFtOk5ldFByaWNlUHJvZHVjdFRyYWRlUHJpY2UvcmFtOkJhc2lzUXVhbnRpdHkpIGVsc2UgaWYgKHJhbTpTcGVjaWZpZWRMaW5lVHJhZGVBZ3JlZW1lbnQvcmFtOkdyb3NzUHJpY2VQcm9kdWN0VHJhZGVQcmljZS9yYW06QmFzaXNRdWFudGl0eSBhbmQgeHM6ZGVjaW1hbChyYW06U3BlY2lmaWVkTGluZVRyYWRlQWdyZWVtZW50L3JhbTpHcm9zc1ByaWNlUHJvZHVjdFRyYWRlUHJpY2UvcmFtOkJhc2lzUXVhbnRpdHkpICE9IDApIHRoZW4geHM6ZGVjaW1hbChyYW06U3BlY2lmaWVkTGluZVRyYWRlQWdyZWVtZW50L3JhbTpHcm9zc1ByaWNlUHJvZHVjdFRyYWRlUHJpY2UvcmFtOkJhc2lzUXVhbnRpdHkpIGVsc2UgMSIvPgogICAgICAgICA8bGV0IG5hbWU9ImFsbG93YW5jZXNUb3RhbCIKICAgICAgICAgICAgICB2YWx1ZT0iICAgICAgICAgICAgICAgICAgICAgaWYgKHJhbTpTcGVjaWZpZWRMaW5lVHJhZGVTZXR0bGVtZW50L3JhbTpTcGVjaWZpZWRUcmFkZUFsbG93YW5jZUNoYXJnZVtub3JtYWxpemUtc3BhY2UocmFtOkNoYXJnZUluZGljYXRvci91ZHQ6SW5kaWNhdG9yKSA9ICdmYWxzZSddKSB0aGVuICAgICAgICAgICAgICAgICAgICAgICAgIHJvdW5kKHN1bShyYW06U3BlY2lmaWVkTGluZVRyYWRlU2V0dGxlbWVudC9yYW06U3BlY2lmaWVkVHJhZGVBbGxvd2FuY2VDaGFyZ2Vbbm9ybWFsaXplLXNwYWNlKHJhbTpDaGFyZ2VJbmRpY2F0b3IvdWR0OkluZGljYXRvcikgPSAnZmFsc2UnXS9yYW06QWN0dWFsQW1vdW50L3hzOmRlY2ltYWwoLikpICogMTAgKiAxMCkgZGl2IDEwMCAgICAgICAgICAgICAgICAgICAgIGVsc2UgICAgICAgICAgICAgICAgICAgICAgICAgMCIvPgogICAgICAgICA8bGV0IG5hbWU9ImNoYXJnZXNUb3RhbCIKICAgICAgICAgICAgICB2YWx1ZT0iICAgICAgICAgICAgICAgICAgICAgaWYgKHJhbTpTcGVjaWZpZWRMaW5lVHJhZGVTZXR0bGVtZW50L3JhbTpTcGVjaWZpZWRUcmFkZUFsbG93YW5jZUNoYXJnZVtub3JtYWxpemUtc3BhY2UocmFtOkNoYXJnZUluZGljYXRvci91ZHQ6SW5kaWNhdG9yKSA9ICd0cnVlJ10pIHRoZW4gICAgICAgICAgICAgICAgICAgICAgICAgcm91bmQoc3VtKHJhbTpTcGVjaWZpZWRMaW5lVHJhZGVTZXR0bGVtZW50L3JhbTpTcGVjaWZpZWRUcmFkZUFsbG93YW5jZUNoYXJnZVtub3JtYWxpemUtc3BhY2UocmFtOkNoYXJnZUluZGljYXRvci91ZHQ6SW5kaWNhdG9yKSA9ICd0cnVlJ10vcmFtOkFjdHVhbEFtb3VudC94czpkZWNpbWFsKC4pKSAqIDEwICogMTApIGRpdiAxMDAgICAgICAgICAgICAgICAgICAgICBlbHNlICAgICAgICAgICAgICAgICAgICAgICAgIDAiLz4KICAgICAgICAgPGFzc2VydCBpZD0iUEVQUE9MLUVOMTY5MzEtUjEyMCIKICAgICAgICAgICAgICAgICB0ZXN0PSJ1OnNsYWNrKCRsaW5lRXh0ZW5zaW9uQW1vdW50LCAoJHF1YW50aXR5ICogKCRwcmljZUFtb3VudCBkaXYgJGJhc2VRdWFudGl0eSkpICsgJGNoYXJnZXNUb3RhbCAtICRhbGxvd2FuY2VzVG90YWwsICRzbGFja1ZhbHVlKSIKICAgICAgICAgICAgICAgICBmbGFnPSJ3YXJuaW5nIj5bUEVQUE9MLUVOMTY5MzEtUjEyMF0tSW52b2ljZSBsaW5lIG5ldCBhbW91bnQgTVVTVCBlcXVhbCAoSW52b2ljZWQgcXVhbnRpdHkgKiAoSXRlbSBuZXQgcHJpY2UvaXRlbSBwcmljZSBiYXNlIHF1YW50aXR5KSArIFN1bSBvZiBpbnZvaWNlIGxpbmUgY2hhcmdlIGFtb3VudCAtIHN1bSBvZiBpbnZvaWNlIGxpbmUgYWxsb3dhbmNlIGFtb3VudDwvYXNzZXJ0Pgo=",
+      "verified": true
+    },
+    {
+      "id": "slack",
+      "line_end_1based": 33,
+      "line_start_1based": 32,
+      "locator": "slackValue, not an acceptance policy",
+      "member_ref": "xr-cii",
+      "utf8_excerpt_sha256": "1659ae471a4b2937ca872def6f9fda87568961713ceae527f44c082ee7d63aef",
+      "observed_sha256": "1659ae471a4b2937ca872def6f9fda87568961713ceae527f44c082ee7d63aef",
+      "bytes": 97,
+      "byte_start_0based": 3538,
+      "byte_end_exclusive": 3635,
+      "excerpt_base64": "ICAgPGxldCBuYW1lPSJzbGFja1ZhbHVlIgogICAgICAgIHZhbHVlPSJpZigkZG9jdW1lbnRDdXJyZW5jeUNvZGUgPSAnSFVGJykgdGhlbiAwLjUgZWxzZSAwLjAyIi8+Cg==",
+      "verified": true
+    }
+  ],
+  "limits": "Static cited source bytes only; no evaluation, assertion/site coverage, authority or causality claim."
+}

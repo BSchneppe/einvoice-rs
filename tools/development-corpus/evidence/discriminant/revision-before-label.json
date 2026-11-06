@@ -1,0 +1,19 @@
+{
+  "sequence": 1,
+  "original_ledger_sha256": "8496eb001e6bfea360d40565cbebec1d95c955dfb5f732888af22c9af1c4f099",
+  "previous_observations_sha256": "ccacf388c390725be929a730b722d145892df061922d5e9f68550c63cb58d1b0",
+  "previous_attempts": "All four Java processes exit 1 at literal JDK home guard before input read/configuration loading; no invoice stages or labels.",
+  "diagnosis": "Requested JDK path is a symlink; Java java.home reports resolved mise installation. Same executable hashes and Corretto version retained.",
+  "changes": [
+    "Compare java.home paths through toRealPath, preserving exact invoked JDK executable and binary hashes.",
+    "Use new driver class/output directory; retain original sources, compiled classes, logs and metadata.",
+    "Retain partial subprocess streams on timeout; fail wrapper if any case process fails."
+  ],
+  "recipes_or_inputs_changed": false,
+  "new_full_oracle_labels_at_revision": "unknown",
+  "scripts": {
+    "revise.py": "2264764a891a64a303f1092fbb63ae8251619188a0456aae301d98d5a33a55a7",
+    "run_v2.py": "340b09205dba64ee555adff1cbbff2c07c866e1ffc6a97ccdeb915260882b0d8",
+    "DiscriminantDriverV2.java": "73168cdc705b422e3a923228e69fa0df61a052a4c41c6e60dfd6a06809e40be2"
+  }
+}

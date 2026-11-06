@@ -1,0 +1,79 @@
+Pinned XSD SHA-256 1c42244298a863bcc0b5196983ff0a5d084fcabe58aea77ef82b242e7cd0ddfd
+311: 	<xsd:complexType name="HeaderTradeAgreementType">
+312: 		<xsd:sequence>
+313: 			<xsd:element name="Reference" type="udt:TextType" minOccurs="0" maxOccurs="unbounded"/>
+314: 			<xsd:element name="BuyerReference" type="udt:TextType" minOccurs="0"/>
+315: 			<xsd:element name="SellerTradeParty" type="ram:TradePartyType" minOccurs="0"/>
+316: 			<xsd:element name="BuyerTradeParty" type="ram:TradePartyType" minOccurs="0"/>
+317: 			<xsd:element name="SalesAgentTradeParty" type="ram:TradePartyType" minOccurs="0"/>
+318: 			<xsd:element name="BuyerRequisitionerTradeParty" type="ram:TradePartyType" minOccurs="0" maxOccurs="unbounded"/>
+319: 			<xsd:element name="BuyerAssignedAccountantTradeParty" type="ram:TradePartyType" minOccurs="0"/>
+320: 			<xsd:element name="SellerAssignedAccountantTradeParty" type="ram:TradePartyType" minOccurs="0"/>
+321: 			<xsd:element name="BuyerTaxRepresentativeTradeParty" type="ram:TradePartyType" minOccurs="0"/>
+322: 			<xsd:element name="SellerTaxRepresentativeTradeParty" type="ram:TradePartyType" minOccurs="0"/>
+323: 			<xsd:element name="ProductEndUserTradeParty" type="ram:TradePartyType" minOccurs="0"/>
+324: 			<xsd:element name="ApplicableTradeDeliveryTerms" type="ram:TradeDeliveryTermsType" minOccurs="0"/>
+325: 			<xsd:element name="SellerOrderReferencedDocument" type="ram:ReferencedDocumentType" minOccurs="0"/>
+326: 			<xsd:element name="BuyerOrderReferencedDocument" type="ram:ReferencedDocumentType" minOccurs="0"/>
+327: 			<xsd:element name="QuotationReferencedDocument" type="ram:ReferencedDocumentType" minOccurs="0"/>
+328: 			<xsd:element name="OrderResponseReferencedDocument" type="ram:ReferencedDocumentType" minOccurs="0"/>
+329: 			<xsd:element name="ContractReferencedDocument" type="ram:ReferencedDocumentType" minOccurs="0"/>
+330: 			<xsd:element name="DemandForecastReferencedDocument" type="ram:ReferencedDocumentType" minOccurs="0"/>
+331: 			<xsd:element name="SupplyInstructionReferencedDocument" type="ram:ReferencedDocumentType" minOccurs="0"/>
+332: 			<xsd:element name="PromotionalDealReferencedDocument" type="ram:ReferencedDocumentType" minOccurs="0"/>
+333: 			<xsd:element name="PriceListReferencedDocument" type="ram:ReferencedDocumentType" minOccurs="0"/>
+334: 			<xsd:element name="AdditionalReferencedDocument" type="ram:ReferencedDocumentType" minOccurs="0" maxOccurs="unbounded"/>
+335: 			<xsd:element name="RequisitionerReferencedDocument" type="ram:ReferencedDocumentType" minOccurs="0" maxOccurs="unbounded"/>
+336: 			<xsd:element name="BuyerAgentTradeParty" type="ram:TradePartyType" minOccurs="0"/>
+337: 			<xsd:element name="PurchaseConditionsReferencedDocument" type="ram:ReferencedDocumentType" minOccurs="0" maxOccurs="unbounded"/>
+338: 			<xsd:element name="SpecifiedProcuringProject" type="ram:ProcuringProjectType" minOccurs="0"/>
+339: 			<xsd:element name="UltimateCustomerOrderReferencedDocument" type="ram:ReferencedDocumentType" minOccurs="0" maxOccurs="unbounded"/>
+340: 		</xsd:sequence>
+341: 	</xsd:complexType>
+909: 	<xsd:complexType name="TaxRegistrationType">
+910: 		<xsd:sequence>
+911: 			<xsd:element name="ID" type="udt:IDType" minOccurs="0"/>
+912: 			<xsd:element name="AssociatedRegisteredTax" type="ram:RegisteredTaxType" minOccurs="0"/>
+913: 		</xsd:sequence>
+914: 	</xsd:complexType>
+915: 	<xsd:complexType name="TradeAccountingAccountType">
+925: 	<xsd:complexType name="TradeAddressType">
+926: 		<xsd:sequence>
+927: 			<xsd:element name="ID" type="udt:IDType" minOccurs="0"/>
+928: 			<xsd:element name="PostcodeCode" type="udt:CodeType" minOccurs="0"/>
+929: 			<xsd:element name="PostOfficeBox" type="udt:TextType" minOccurs="0"/>
+930: 			<xsd:element name="BuildingName" type="udt:TextType" minOccurs="0"/>
+931: 			<xsd:element name="LineOne" type="udt:TextType" minOccurs="0"/>
+932: 			<xsd:element name="LineTwo" type="udt:TextType" minOccurs="0"/>
+933: 			<xsd:element name="LineThree" type="udt:TextType" minOccurs="0"/>
+934: 			<xsd:element name="LineFour" type="udt:TextType" minOccurs="0"/>
+935: 			<xsd:element name="LineFive" type="udt:TextType" minOccurs="0"/>
+936: 			<xsd:element name="StreetName" type="udt:TextType" minOccurs="0"/>
+937: 			<xsd:element name="CityName" type="udt:TextType" minOccurs="0"/>
+938: 			<xsd:element name="CitySubDivisionName" type="udt:TextType" minOccurs="0"/>
+939: 			<xsd:element name="CountryID" type="qdt:CountryIDType" minOccurs="0"/>
+940: 			<xsd:element name="CountryName" type="udt:TextType" minOccurs="0" maxOccurs="unbounded"/>
+941: 			<xsd:element name="CountrySubDivisionID" type="udt:IDType" minOccurs="0"/>
+942: 			<xsd:element name="CountrySubDivisionName" type="udt:TextType" minOccurs="0" maxOccurs="unbounded"/>
+943: 			<xsd:element name="AttentionOf" type="udt:TextType" minOccurs="0"/>
+944: 			<xsd:element name="CareOf" type="udt:TextType" minOccurs="0"/>
+945: 			<xsd:element name="BuildingNumber" type="udt:TextType" minOccurs="0"/>
+946: 			<xsd:element name="DepartmentName" type="udt:TextType" minOccurs="0"/>
+1029: 	<xsd:complexType name="TradePartyType">
+1030: 		<xsd:sequence>
+1031: 			<xsd:element name="ID" type="udt:IDType" minOccurs="0" maxOccurs="unbounded"/>
+1032: 			<xsd:element name="GlobalID" type="udt:IDType" minOccurs="0" maxOccurs="unbounded"/>
+1033: 			<xsd:element name="Name" type="udt:TextType" minOccurs="0"/>
+1034: 			<xsd:element name="RoleCode" type="qdt:PartyRoleCodeType" minOccurs="0" maxOccurs="unbounded"/>
+1035: 			<xsd:element name="Description" type="udt:TextType" minOccurs="0" maxOccurs="unbounded"/>
+1036: 			<xsd:element name="SpecifiedLegalOrganization" type="ram:LegalOrganizationType" minOccurs="0"/>
+1037: 			<xsd:element name="DefinedTradeContact" type="ram:TradeContactType" minOccurs="0" maxOccurs="unbounded"/>
+1038: 			<xsd:element name="PostalTradeAddress" type="ram:TradeAddressType" minOccurs="0"/>
+1039: 			<xsd:element name="URIUniversalCommunication" type="ram:UniversalCommunicationType" minOccurs="0" maxOccurs="unbounded"/>
+1040: 			<xsd:element name="SpecifiedTaxRegistration" type="ram:TaxRegistrationType" minOccurs="0" maxOccurs="unbounded"/>
+1041: 			<xsd:element name="EndPointURIUniversalCommunication" type="ram:UniversalCommunicationType" minOccurs="0"/>
+1042: 			<xsd:element name="LogoAssociatedSpecifiedBinaryFile" type="ram:SpecifiedBinaryFileType" minOccurs="0" maxOccurs="unbounded"/>
+1043: 		</xsd:sequence>
+1044: 	</xsd:complexType>
+1045: 	<xsd:complexType name="TradePaymentDiscountTermsType">
+Development seed agreement child expanded names: ["{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}BuyerReference", "{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}SellerTradeParty", "{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}BuyerTradeParty", "{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}BuyerOrderReferencedDocument", "{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ContractReferencedDocument"]

@@ -1,0 +1,962 @@
+[
+  {
+    "ordinal": 3,
+    "id": "F01-empty-delivery-ram",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "BR-DE-TMP-32",
+      "severity": "information",
+      "effective_severity": "information",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]",
+      "line": null,
+      "column": null,
+      "message": "\n              [BR-DE-TMP-32] Eine Rechnung sollte zur Angabe des Liefer-/Leistungsdatums entweder BT-72 \"Actual delivery date\", BG-14 \"Invoicing period\" oder in jeder Rechnungsposition BG-26 \"Invoice line period\" enthalten.\n          ",
+      "stage": "val-sch.2"
+    }
+  },
+  {
+    "ordinal": 4,
+    "id": "F01-empty-delivery-b",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "PEPPOL-EN16931-R008",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ApplicableHeaderTradeDelivery[1]",
+      "line": null,
+      "column": null,
+      "message": "[PEPPOL-EN16931-R008]-Document MUST not contain empty elements.",
+      "stage": "val-sch.2"
+    }
+  },
+  {
+    "ordinal": 4,
+    "id": "F01-empty-delivery-b",
+    "bucket": "findings",
+    "occurrence_index": 1,
+    "finding": {
+      "id": "BR-DE-TMP-32",
+      "severity": "information",
+      "effective_severity": "information",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]",
+      "line": null,
+      "column": null,
+      "message": "\n              [BR-DE-TMP-32] Eine Rechnung sollte zur Angabe des Liefer-/Leistungsdatums entweder BT-72 \"Actual delivery date\", BG-14 \"Invoicing period\" oder in jeder Rechnungsposition BG-26 \"Invoice line period\" enthalten.\n          ",
+      "stage": "val-sch.2"
+    }
+  },
+  {
+    "ordinal": 5,
+    "id": "F01-local-shadow",
+    "bucket": "structural_findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "cvc-complex-type.2.4.a",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": null,
+      "line": "119",
+      "column": "55",
+      "message": "Invalid content was found starting with element '{\"urn:bsc10:neutral:other\":Name}'. One of '{\"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":ID, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":GlobalID, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":Name, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":RoleCode, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":Description, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":SpecifiedLegalOrganization, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":DefinedTradeContact, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":PostalTradeAddress, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":URIUniversalCommunication, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":SpecifiedTaxRegistration, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":EndPointURIUniversalCommunication, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":LogoAssociatedSpecifiedBinaryFile}' is expected.",
+      "stage": "val-xsd"
+    }
+  },
+  {
+    "ordinal": 6,
+    "id": "F02-buyer-missing",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "BR-DE-15",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-DE-15] Das Element \"Buyer reference\" (BT-10) muss \u00fcbermittelt werden.",
+      "stage": "val-sch.2"
+    }
+  },
+  {
+    "ordinal": 7,
+    "id": "F02-buyer-empty",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "PEPPOL-EN16931-R008",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ApplicableHeaderTradeAgreement[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}BuyerReference[1]",
+      "line": null,
+      "column": null,
+      "message": "[PEPPOL-EN16931-R008]-Document MUST not contain empty elements.",
+      "stage": "val-sch.2"
+    }
+  },
+  {
+    "ordinal": 7,
+    "id": "F02-buyer-empty",
+    "bucket": "findings",
+    "occurrence_index": 1,
+    "finding": {
+      "id": "BR-DE-15",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-DE-15] Das Element \"Buyer reference\" (BT-10) muss \u00fcbermittelt werden.",
+      "stage": "val-sch.2"
+    }
+  },
+  {
+    "ordinal": 8,
+    "id": "F02-buyer-whitespace",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "PEPPOL-EN16931-R008",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ApplicableHeaderTradeAgreement[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}BuyerReference[1]",
+      "line": null,
+      "column": null,
+      "message": "[PEPPOL-EN16931-R008]-Document MUST not contain empty elements.",
+      "stage": "val-sch.2"
+    }
+  },
+  {
+    "ordinal": 8,
+    "id": "F02-buyer-whitespace",
+    "bucket": "findings",
+    "occurrence_index": 1,
+    "finding": {
+      "id": "BR-DE-15",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-DE-15] Das Element \"Buyer reference\" (BT-10) muss \u00fcbermittelt werden.",
+      "stage": "val-sch.2"
+    }
+  },
+  {
+    "ordinal": 9,
+    "id": "F02-buyer-duplicate",
+    "bucket": "structural_findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "cvc-complex-type.2.4.a",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": null,
+      "line": "117",
+      "column": "81",
+      "message": "Invalid content was found starting with element '{\"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":BuyerReference}'. One of '{\"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":SellerTradeParty, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":BuyerTradeParty, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":SalesAgentTradeParty, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":BuyerRequisitionerTradeParty, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":BuyerAssignedAccountantTradeParty, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":SellerAssignedAccountantTradeParty, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":BuyerTaxRepresentativeTradeParty, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":SellerTaxRepresentativeTradeParty, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":ProductEndUserTradeParty, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":ApplicableTradeDeliveryTerms, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":SellerOrderReferencedDocument, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":BuyerOrderReferencedDocument, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":QuotationReferencedDocument, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":OrderResponseReferencedDocument, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":ContractReferencedDocument, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":DemandForecastReferencedDocument, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":SupplyInstructionReferencedDocument, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":PromotionalDealReferencedDocument, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":PriceListReferencedDocument, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":AdditionalReferencedDocument, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":RequisitionerReferencedDocument, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":BuyerAgentTradeParty, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":PurchaseConditionsReferencedDocument, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":SpecifiedProcuringProject, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":UltimateCustomerOrderReferencedDocument}' is expected.",
+      "stage": "val-xsd"
+    }
+  },
+  {
+    "ordinal": 10,
+    "id": "F02-careof",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "CII-DT-093",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ApplicableHeaderTradeAgreement[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}SellerTradeParty[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}PostalTradeAddress[1]",
+      "line": null,
+      "column": null,
+      "message": "[CII-DT-093] - CareOf shall not be used.",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 11,
+    "id": "F02-issue-date-duplicate",
+    "bucket": "structural_findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "cvc-complex-type.2.4.a",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": null,
+      "line": "16",
+      "column": "44",
+      "message": "Invalid content was found starting with element '{\"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":IssueDateTime}'. One of '{\"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":CopyIndicator, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":Purpose, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":ControlRequirementIndicator, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":LanguageID, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":PurposeCode, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":RevisionDateTime, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":VersionID, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":GlobalID, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":RevisionID, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":PreviousRevisionID, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":CategoryCode, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":IncludedNote, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":EffectiveSpecifiedPeriod, \"urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100\":IssuerTradeParty}' is expected.",
+      "stage": "val-xsd"
+    }
+  },
+  {
+    "ordinal": 12,
+    "id": "F02-zero-lines",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "BR-16",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-16]-An Invoice shall have at least one Invoice line (BG-25).",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 12,
+    "id": "F02-zero-lines",
+    "bucket": "findings",
+    "occurrence_index": 1,
+    "finding": {
+      "id": "BR-S-08",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ApplicableHeaderTradeSettlement[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ApplicableTradeTax[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}CategoryCode[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-S-08]-For each different value of VAT category rate (BT-119) where the VAT category code (BT-118) is \"Standard rated\", the VAT category taxable amount (BT-116) in a VAT breakdown (BG-23) shall equal the sum of Invoice line net amounts (BT-131) plus the sum of document level charge amounts (BT-99) minus the sum of document level allowance amounts (BT-92) where the VAT category code (BT-151, BT-102, BT-95) is \"Standard rated\" and the VAT rate (BT-152, BT-103, BT-96) equals the VAT category rate (BT-119).",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 12,
+    "id": "F02-zero-lines",
+    "bucket": "findings",
+    "occurrence_index": 2,
+    "finding": {
+      "id": "BR-CO-10",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ApplicableHeaderTradeSettlement[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}SpecifiedTradeSettlementHeaderMonetarySummation[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-CO-10]-Sum of Invoice line net amount (BT-106) = \u03a3 Invoice line net amount (BT-131).",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 13,
+    "id": "F02-terms-duplicate",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "CII-SR-452",
+      "severity": "warning",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ApplicableHeaderTradeSettlement[1]",
+      "line": null,
+      "column": null,
+      "message": "[CII-SR-452] - Only one SpecifiedTradePaymentTerms should be present",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 13,
+    "id": "F02-terms-duplicate",
+    "bucket": "findings",
+    "occurrence_index": 1,
+    "finding": {
+      "id": "CII-SR-453",
+      "severity": "warning",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ApplicableHeaderTradeSettlement[1]",
+      "line": null,
+      "column": null,
+      "message": "[CII-SR-453] - Only one SpecifiedTradePaymentTerms Description should be present",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 14,
+    "id": "F02-tax-zero",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "BR-CO-04",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IncludedSupplyChainTradeLineItem[2]",
+      "line": null,
+      "column": null,
+      "message": "[BR-CO-04]-Each Invoice line (BG-25) shall be categorized with an Invoiced item VAT category code (BT-151).",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 14,
+    "id": "F02-tax-zero",
+    "bucket": "findings",
+    "occurrence_index": 1,
+    "finding": {
+      "id": "BR-S-08",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ApplicableHeaderTradeSettlement[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ApplicableTradeTax[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}CategoryCode[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-S-08]-For each different value of VAT category rate (BT-119) where the VAT category code (BT-118) is \"Standard rated\", the VAT category taxable amount (BT-116) in a VAT breakdown (BG-23) shall equal the sum of Invoice line net amounts (BT-131) plus the sum of document level charge amounts (BT-99) minus the sum of document level allowance amounts (BT-92) where the VAT category code (BT-151, BT-102, BT-95) is \"Standard rated\" and the VAT rate (BT-152, BT-103, BT-96) equals the VAT category rate (BT-119).",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 14,
+    "id": "F02-tax-zero",
+    "bucket": "findings",
+    "occurrence_index": 2,
+    "finding": {
+      "id": "CII-SR-454",
+      "severity": "warning",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IncludedSupplyChainTradeLineItem[2]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}SpecifiedLineTradeSettlement[1]",
+      "line": null,
+      "column": null,
+      "message": "[CII-SR-454] - Only one ApplicableTradeTax should be present",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 15,
+    "id": "F02-tax-two",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "CII-SR-454",
+      "severity": "warning",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IncludedSupplyChainTradeLineItem[2]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}SpecifiedLineTradeSettlement[1]",
+      "line": null,
+      "column": null,
+      "message": "[CII-SR-454] - Only one ApplicableTradeTax should be present",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 16,
+    "id": "F02-name-missing-2",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "BR-25",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IncludedSupplyChainTradeLineItem[2]",
+      "line": null,
+      "column": null,
+      "message": "[BR-25]-Each Invoice line (BG-25) shall contain the Item name (BT-153).",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 17,
+    "id": "F02-name-missing-3",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "BR-25",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IncludedSupplyChainTradeLineItem[3]",
+      "line": null,
+      "column": null,
+      "message": "[BR-25]-Each Invoice line (BG-25) shall contain the Item name (BT-153).",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 18,
+    "id": "F02-name-missing-2-3",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "BR-25",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IncludedSupplyChainTradeLineItem[2]",
+      "line": null,
+      "column": null,
+      "message": "[BR-25]-Each Invoice line (BG-25) shall contain the Item name (BT-153).",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 18,
+    "id": "F02-name-missing-2-3",
+    "bucket": "findings",
+    "occurrence_index": 1,
+    "finding": {
+      "id": "BR-25",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IncludedSupplyChainTradeLineItem[3]",
+      "line": null,
+      "column": null,
+      "message": "[BR-25]-Each Invoice line (BG-25) shall contain the Item name (BT-153).",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 19,
+    "id": "F02-name-missing-2-3-shifted",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "BR-25",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IncludedSupplyChainTradeLineItem[2]",
+      "line": null,
+      "column": null,
+      "message": "[BR-25]-Each Invoice line (BG-25) shall contain the Item name (BT-153).",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 19,
+    "id": "F02-name-missing-2-3-shifted",
+    "bucket": "findings",
+    "occurrence_index": 1,
+    "finding": {
+      "id": "BR-25",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IncludedSupplyChainTradeLineItem[3]",
+      "line": null,
+      "column": null,
+      "message": "[BR-25]-Each Invoice line (BG-25) shall contain the Item name (BT-153).",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 22,
+    "id": "F03-trailing-zero",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "BR-DEC-23",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IncludedSupplyChainTradeLineItem[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-DEC-23]-The allowed maximum number of decimals for the Invoice line net amount (BT-131) is 2.",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 23,
+    "id": "F03-exponent",
+    "bucket": "structural_findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "cvc-datatype-valid.1.2.1",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": null,
+      "line": "56",
+      "column": "63",
+      "message": "'1.92735E3' is not a valid value for 'decimal'.",
+      "stage": "val-xsd"
+    }
+  },
+  {
+    "ordinal": 23,
+    "id": "F03-exponent",
+    "bucket": "structural_findings",
+    "occurrence_index": 1,
+    "finding": {
+      "id": "cvc-complex-type.2.2",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": null,
+      "line": "56",
+      "column": "63",
+      "message": "Element 'ram:LineTotalAmount' must have no element [children], and the value must be valid.",
+      "stage": "val-xsd"
+    }
+  },
+  {
+    "ordinal": 24,
+    "id": "F03-magnitude",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "BR-S-08",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ApplicableHeaderTradeSettlement[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ApplicableTradeTax[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}CategoryCode[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-S-08]-For each different value of VAT category rate (BT-119) where the VAT category code (BT-118) is \"Standard rated\", the VAT category taxable amount (BT-116) in a VAT breakdown (BG-23) shall equal the sum of Invoice line net amounts (BT-131) plus the sum of document level charge amounts (BT-99) minus the sum of document level allowance amounts (BT-92) where the VAT category code (BT-151, BT-102, BT-95) is \"Standard rated\" and the VAT rate (BT-152, BT-103, BT-96) equals the VAT category rate (BT-119).",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 24,
+    "id": "F03-magnitude",
+    "bucket": "findings",
+    "occurrence_index": 1,
+    "finding": {
+      "id": "BR-CO-10",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ApplicableHeaderTradeSettlement[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}SpecifiedTradeSettlementHeaderMonetarySummation[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-CO-10]-Sum of Invoice line net amount (BT-106) = \u03a3 Invoice line net amount (BT-131).",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 24,
+    "id": "F03-magnitude",
+    "bucket": "findings",
+    "occurrence_index": 2,
+    "finding": {
+      "id": "PEPPOL-EN16931-R120",
+      "severity": "warning",
+      "effective_severity": "warning",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IncludedSupplyChainTradeLineItem[1]",
+      "line": null,
+      "column": null,
+      "message": "[PEPPOL-EN16931-R120]-Invoice line net amount MUST equal (Invoiced quantity * (Item net price/item price base quantity) + Sum of invoice line charge amount - sum of invoice line allowance amount",
+      "stage": "val-sch.2"
+    }
+  },
+  {
+    "ordinal": 25,
+    "id": "F03-negative-price",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "BR-27",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IncludedSupplyChainTradeLineItem[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-27]-The Item net price (BT-146) shall NOT be negative.",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 25,
+    "id": "F03-negative-price",
+    "bucket": "findings",
+    "occurrence_index": 1,
+    "finding": {
+      "id": "PEPPOL-EN16931-R120",
+      "severity": "warning",
+      "effective_severity": "warning",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IncludedSupplyChainTradeLineItem[1]",
+      "line": null,
+      "column": null,
+      "message": "[PEPPOL-EN16931-R120]-Invoice line net amount MUST equal (Invoiced quantity * (Item net price/item price base quantity) + Sum of invoice line charge amount - sum of invoice line allowance amount",
+      "stage": "val-sch.2"
+    }
+  },
+  {
+    "ordinal": 26,
+    "id": "F03-round-below",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "BR-DEC-23",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IncludedSupplyChainTradeLineItem[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-DEC-23]-The allowed maximum number of decimals for the Invoice line net amount (BT-131) is 2.",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 27,
+    "id": "F03-round-tie",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "BR-DEC-23",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IncludedSupplyChainTradeLineItem[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-DEC-23]-The allowed maximum number of decimals for the Invoice line net amount (BT-131) is 2.",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 27,
+    "id": "F03-round-tie",
+    "bucket": "findings",
+    "occurrence_index": 1,
+    "finding": {
+      "id": "BR-CO-10",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ApplicableHeaderTradeSettlement[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}SpecifiedTradeSettlementHeaderMonetarySummation[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-CO-10]-Sum of Invoice line net amount (BT-106) = \u03a3 Invoice line net amount (BT-131).",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 28,
+    "id": "F03-round-above",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "BR-DEC-23",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IncludedSupplyChainTradeLineItem[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-DEC-23]-The allowed maximum number of decimals for the Invoice line net amount (BT-131) is 2.",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 29,
+    "id": "F03-round-tie-lower-header",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "BR-DEC-23",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IncludedSupplyChainTradeLineItem[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-DEC-23]-The allowed maximum number of decimals for the Invoice line net amount (BT-131) is 2.",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 29,
+    "id": "F03-round-tie-lower-header",
+    "bucket": "findings",
+    "occurrence_index": 1,
+    "finding": {
+      "id": "BR-S-08",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ApplicableHeaderTradeSettlement[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ApplicableTradeTax[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}CategoryCode[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-S-08]-For each different value of VAT category rate (BT-119) where the VAT category code (BT-118) is \"Standard rated\", the VAT category taxable amount (BT-116) in a VAT breakdown (BG-23) shall equal the sum of Invoice line net amounts (BT-131) plus the sum of document level charge amounts (BT-99) minus the sum of document level allowance amounts (BT-92) where the VAT category code (BT-151, BT-102, BT-95) is \"Standard rated\" and the VAT rate (BT-152, BT-103, BT-96) equals the VAT category rate (BT-119).",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 30,
+    "id": "F03-precision-lines-2-3",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "BR-DEC-23",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IncludedSupplyChainTradeLineItem[2]",
+      "line": null,
+      "column": null,
+      "message": "[BR-DEC-23]-The allowed maximum number of decimals for the Invoice line net amount (BT-131) is 2.",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 30,
+    "id": "F03-precision-lines-2-3",
+    "bucket": "findings",
+    "occurrence_index": 1,
+    "finding": {
+      "id": "BR-DEC-23",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IncludedSupplyChainTradeLineItem[3]",
+      "line": null,
+      "column": null,
+      "message": "[BR-DEC-23]-The allowed maximum number of decimals for the Invoice line net amount (BT-131) is 2.",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 33,
+    "id": "F04-month-13",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "CII-DT-097",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}ExchangedDocument[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IssueDateTime[1]/Q{urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100}DateTimeString[1]",
+      "line": null,
+      "column": null,
+      "message": "[CII-DT-097] - Date time string with format attribute 102 shall be YYYYMMDD.",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 34,
+    "id": "F04-day-zero",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "CII-DT-097",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}ExchangedDocument[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IssueDateTime[1]/Q{urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100}DateTimeString[1]",
+      "line": null,
+      "column": null,
+      "message": "[CII-DT-097] - Date time string with format attribute 102 shall be YYYYMMDD.",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 35,
+    "id": "F04-hyphenated",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "CII-DT-097",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}ExchangedDocument[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IssueDateTime[1]/Q{urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100}DateTimeString[1]",
+      "line": null,
+      "column": null,
+      "message": "[CII-DT-097] - Date time string with format attribute 102 shall be YYYYMMDD.",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 35,
+    "id": "F04-hyphenated",
+    "bucket": "findings",
+    "occurrence_index": 1,
+    "finding": {
+      "id": "BR-TMP-7",
+      "severity": "warning",
+      "effective_severity": "warning",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}ExchangedDocument[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IssueDateTime[1]/Q{urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100}DateTimeString[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-TMP-7] Datumsangaben in UNCEFACT/CII m\u00fcssen das Attribut format=\"102\" tragen und im Format JJJJMMTT (YYYYMMDD) \u00fcbermittelt werden.",
+      "stage": "val-sch.2"
+    }
+  },
+  {
+    "ordinal": 36,
+    "id": "F04-format-203",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "BR-03",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-03]-An Invoice shall have an Invoice issue date (BT-2).",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 36,
+    "id": "F04-format-203",
+    "bucket": "findings",
+    "occurrence_index": 1,
+    "finding": {
+      "id": "BR-TMP-7",
+      "severity": "warning",
+      "effective_severity": "warning",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}ExchangedDocument[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IssueDateTime[1]/Q{urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100}DateTimeString[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-TMP-7] Datumsangaben in UNCEFACT/CII m\u00fcssen das Attribut format=\"102\" tragen und im Format JJJJMMTT (YYYYMMDD) \u00fcbermittelt werden.",
+      "stage": "val-sch.2"
+    }
+  },
+  {
+    "ordinal": 37,
+    "id": "F05-currency-case",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "BR-CO-15",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-CO-15]-Invoice total amount with VAT (BT-112) = Invoice total amount without VAT (BT-109) + Invoice total VAT amount (BT-110).",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 37,
+    "id": "F05-currency-case",
+    "bucket": "findings",
+    "occurrence_index": 1,
+    "finding": {
+      "id": "BR-CL-04",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ApplicableHeaderTradeSettlement[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}InvoiceCurrencyCode[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-CL-04]-Invoice currency code MUST be coded using ISO code list 4217 alpha-3",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 37,
+    "id": "F05-currency-case",
+    "bucket": "findings",
+    "occurrence_index": 2,
+    "finding": {
+      "id": "PEPPOL-EN16931-R054",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ApplicableHeaderTradeSettlement[1]",
+      "line": null,
+      "column": null,
+      "message": "[PEPPOL-EN16931-R054]-Only one tax total amount must be provided where currency id equals tax currency code, if tax currency code (BT-6) is provided.",
+      "stage": "val-sch.2"
+    }
+  },
+  {
+    "ordinal": 38,
+    "id": "F05-currency-space",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "BR-CO-15",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-CO-15]-Invoice total amount with VAT (BT-112) = Invoice total amount without VAT (BT-109) + Invoice total VAT amount (BT-110).",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 38,
+    "id": "F05-currency-space",
+    "bucket": "findings",
+    "occurrence_index": 1,
+    "finding": {
+      "id": "PEPPOL-EN16931-R054",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ApplicableHeaderTradeSettlement[1]",
+      "line": null,
+      "column": null,
+      "message": "[PEPPOL-EN16931-R054]-Only one tax total amount must be provided where currency id equals tax currency code, if tax currency code (BT-6) is provided.",
+      "stage": "val-sch.2"
+    }
+  },
+  {
+    "ordinal": 39,
+    "id": "F05-currency-outside",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "BR-CO-15",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-CO-15]-Invoice total amount with VAT (BT-112) = Invoice total amount without VAT (BT-109) + Invoice total VAT amount (BT-110).",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 39,
+    "id": "F05-currency-outside",
+    "bucket": "findings",
+    "occurrence_index": 1,
+    "finding": {
+      "id": "BR-CL-04",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ApplicableHeaderTradeSettlement[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}InvoiceCurrencyCode[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-CL-04]-Invoice currency code MUST be coded using ISO code list 4217 alpha-3",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 39,
+    "id": "F05-currency-outside",
+    "bucket": "findings",
+    "occurrence_index": 2,
+    "finding": {
+      "id": "PEPPOL-EN16931-R054",
+      "severity": "error",
+      "effective_severity": "error",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}ApplicableHeaderTradeSettlement[1]",
+      "line": null,
+      "column": null,
+      "message": "[PEPPOL-EN16931-R054]-Only one tax total amount must be provided where currency id equals tax currency code, if tax currency code (BT-6) is provided.",
+      "stage": "val-sch.2"
+    }
+  },
+  {
+    "ordinal": 40,
+    "id": "F05-unit-case",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "BR-CL-23",
+      "severity": "error",
+      "effective_severity": "warning",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IncludedSupplyChainTradeLineItem[2]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}SpecifiedLineTradeDelivery[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}BilledQuantity[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-CL-23]-Unit code MUST be coded according to the UN/ECE Recommendation 20 with Rec 21 extension",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 41,
+    "id": "F05-unit-lines-2-3",
+    "bucket": "findings",
+    "occurrence_index": 0,
+    "finding": {
+      "id": "BR-CL-23",
+      "severity": "error",
+      "effective_severity": "warning",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IncludedSupplyChainTradeLineItem[2]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}SpecifiedLineTradeDelivery[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}BilledQuantity[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-CL-23]-Unit code MUST be coded according to the UN/ECE Recommendation 20 with Rec 21 extension",
+      "stage": "val-sch.1"
+    }
+  },
+  {
+    "ordinal": 41,
+    "id": "F05-unit-lines-2-3",
+    "bucket": "findings",
+    "occurrence_index": 1,
+    "finding": {
+      "id": "BR-CL-23",
+      "severity": "error",
+      "effective_severity": "warning",
+      "location": "/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}CrossIndustryInvoice[1]/Q{urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100}SupplyChainTradeTransaction[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}IncludedSupplyChainTradeLineItem[3]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}SpecifiedLineTradeDelivery[1]/Q{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100}BilledQuantity[1]",
+      "line": null,
+      "column": null,
+      "message": "[BR-CL-23]-Unit code MUST be coded according to the UN/ECE Recommendation 20 with Rec 21 extension",
+      "stage": "val-sch.1"
+    }
+  }
+]

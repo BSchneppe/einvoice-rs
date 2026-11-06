@@ -1,0 +1,19 @@
+{
+  "name": "compile",
+  "argv": [
+    "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/javac",
+    "-encoding",
+    "UTF-8",
+    "-cp",
+    "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/family-run/snapshots/validator.jar",
+    "-d",
+    "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/family-run/classes",
+    "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/family-run/snapshots/Oracle.java",
+    "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/family-run/FamilyDriver.java"
+  ],
+  "cwd": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f",
+  "exit_code": 0,
+  "status": "exited",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

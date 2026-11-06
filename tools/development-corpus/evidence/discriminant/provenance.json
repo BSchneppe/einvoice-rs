@@ -1,0 +1,56 @@
+{
+  "artifact_lock_sha256": "5dec502919d8ee137cd2c1453be8c65c1176e8bc707e358f646cef3fb1f55175",
+  "artifacts": {
+    "validator.jar": {
+      "sha256": "799e64befca97d4080e03608c80b85dd5a5ecc5f4ae4f35d1116ec2855b9a7c9",
+      "version": "1.6.3",
+      "url": "https://github.com/itplr-kosit/validator/releases/download/v1.6.3/validator-1.6.3-standalone.jar"
+    },
+    "config.zip": {
+      "sha256": "2530cd107c414511c5d0462ec10f886910395abfca820db82e83d70bf01221a8",
+      "version": "2026-08-31",
+      "url": "https://github.com/itplr-kosit/validator-configuration-xrechnung/releases/download/v2026-08-31/xrechnung-3.0.2-validator-configuration-2026-08-31.zip"
+    },
+    "cen.zip": {
+      "sha256": "1cd53cb8a84d38aedc82c0caede217da983a7934dd663f793a092fd66443c561",
+      "version": "1.3.16",
+      "url": "https://github.com/ConnectingEurope/eInvoicing-EN16931/releases/download/validation-1.3.16/en16931-cii-1.3.16.zip"
+    }
+  },
+  "selected_source_members": {
+    "schematron/preprocessed/EN16931-CII-validation-preprocessed.sch": "54e0dc6d06cd7f17d268bb9696ff56f58d386ee28961c9bbef0a56718c400c89",
+    "schematron/CII/EN16931-CII-syntax.sch": "a2c3d977fbb1aaf7563bc4620baa6840885dd7fba29294d50d19a3ece35aae44",
+    "schematron/abstract/EN16931-CII-syntax.sch": "6b396a301786c00e7f3ba97e9bea2c25577b28fb5c3c60f6e6c05fc86b0aef0d"
+  },
+  "python": {
+    "invoked": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-5--45552c76f3d0fedb/tools/oracle/.cache/test-venv/bin/python",
+    "resolved": "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+    "version": "3.12.6",
+    "sha256": "69e6adfac00978215c4e5f3eaf63d262a5fb646b6dca1897b29f78872c4c5a26"
+  },
+  "jdk": {
+    "java": {
+      "invoked": "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/java",
+      "resolved": "/Users/bene/.local/share/mise/installs/java/corretto-27.0.1.0.11/bin/java",
+      "sha256": "346f29eee10a91d3d5012c27e08f2fe13d7977e10599084fba835f5bdb018800"
+    },
+    "javac": {
+      "invoked": "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/javac",
+      "resolved": "/Users/bene/.local/share/mise/installs/java/corretto-27.0.1.0.11/bin/javac",
+      "sha256": "ddc0e3c472717b1f2c579bf08c1cd7a8eed5c96224bb3e179232a18dc030164a"
+    },
+    "release_sha256": "bb9c7cae305c4a62cf9e2ac132984689869e78cff3f942f47a57bde3d82ce91a"
+  },
+  "bridge_sha256": "37565bfaba63f452018596d422a65a7d969f06245bbe33a134e95f92fe2cad3e",
+  "seed": {
+    "parent_path": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/dev-seed-smoke-01/development-seed.xml",
+    "sha256": "881f7bc3ff0513a6627a981301af2c0ec9bcdce2c9d1628d7858e581f4d8e91c",
+    "bytes": 11214,
+    "source": "Sinabis GmbH (2026), Sinabis Green Energy – 10k GoBD-compliant German E-Invoices",
+    "revision": "8d9ab205ab74f360fac344a50fcd54c35d0cd9ba",
+    "artifact_sha256": "f45674ce80b477a859c684c68e423f8bb52ad2c1647c97a9e29050f6519dee13",
+    "source_path": "zugferd/b2b_service_maintenance/0000/0000000_SRV-2025-47731.xml",
+    "license": "CC-BY-4.0",
+    "modifications": "Only explicit inserted byte sequences recorded in ledger; baseline unchanged."
+  }
+}

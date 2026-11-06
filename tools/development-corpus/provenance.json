@@ -1,0 +1,1633 @@
+{
+  "format": "bsc10-publication-discovery-provenance-v1",
+  "independent_of_unchanged_historical_manifest": true,
+  "source_manifest_sha256": "34924b22c0d9be1f6fe3d78fe6a2ee496793e466c27bddea7e20cd7946b68a26",
+  "python": {
+    "version": "3.12.6",
+    "executable_sha256": "69e6adfac00978215c4e5f3eaf63d262a5fb646b6dca1897b29f78872c4c5a26"
+  },
+  "sinabis": {
+    "upstream_url": "https://huggingface.co/datasets/sinabis-group/sinabis-10k-synthetic-zugferd-xrechnung",
+    "creator": "Sinabis GmbH",
+    "year": 2026,
+    "title": "Sinabis Green Energy – 10k GoBD-compliant German E-Invoices (XRechnung 3.0 / ZUGFeRD)",
+    "immutable_revision": "8d9ab205ab74f360fac344a50fcd54c35d0cd9ba",
+    "artifact": {
+      "file": "sinabis.parquet",
+      "version": "8d9ab205ab74f360fac344a50fcd54c35d0cd9ba",
+      "url": "https://huggingface.co/datasets/sinabis-group/sinabis-10k-synthetic-zugferd-xrechnung/resolve/8d9ab205ab74f360fac344a50fcd54c35d0cd9ba/data/train-00000-of-00001.parquet",
+      "sha256": "f45674ce80b477a859c684c68e423f8bb52ad2c1647c97a9e29050f6519dee13"
+    },
+    "dataset_card": {
+      "file": "sinabis-README.md",
+      "version": "8d9ab205ab74f360fac344a50fcd54c35d0cd9ba",
+      "url": "https://huggingface.co/datasets/sinabis-group/sinabis-10k-synthetic-zugferd-xrechnung/raw/8d9ab205ab74f360fac344a50fcd54c35d0cd9ba/README.md",
+      "sha256": "6b1e08d286eabc899addeebc0d9fd8e8595d671ad83e04668a5baed3e2830f83"
+    },
+    "dataset_card_read_only_check": {
+      "path": "tools/oracle/notices/Sinabis-dataset-card.md",
+      "bytes": 12425,
+      "sha256": "6b1e08d286eabc899addeebc0d9fd8e8595d671ad83e04668a5baed3e2830f83",
+      "matches_pinned_bytes": true,
+      "network_retrieval_repeated": false
+    },
+    "selector": {
+      "expression": "xml_file == 'zugferd/b2b_service_maintenance/0000/0000000_SRV-2025-47731.xml'",
+      "columns": [
+        "idx",
+        "xml_file",
+        "xml",
+        "sha256_xml",
+        "theme"
+      ],
+      "expected_unique_rows": 1,
+      "idx": 0,
+      "encoding_rule": "source['xml'].encode('utf-8'); no XML parse/reserialization/newline normalization",
+      "checks_in_original_script": [
+        "table.num_rows == 1",
+        "source.sha256_xml == selected manifest row.sha256",
+        "SHA256(encoded xml) == selected row.sha256",
+        "encoded byte length == selected row.bytes",
+        "source.theme == selected row.scenario",
+        "cached original seed bytes == encoded xml"
+      ],
+      "idx_check_scope": "idx=0 is a documented prior source fact; seed_smoke.py:63-108 selects by xml_file and does not explicitly assert source.idx==0. Future extraction should assert idx==0 in addition to those original checks."
+    },
+    "seed": {
+      "bytes": 11214,
+      "sha256": "881f7bc3ff0513a6627a981301af2c0ec9bcdce2c9d1628d7858e581f4d8e91c",
+      "independently_hashed_this_pass": true
+    },
+    "prior_extraction": {
+      "status": "Previously observed extraction verified; documentary closure in this pass, not independently reread Parquet",
+      "references": [
+        "corpus-discovery.md:108-138",
+        "seed_smoke.py:63-108"
+      ],
+      "parquet_read_this_pass": false
+    },
+    "license": "CC-BY-4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "modifications": "Baseline unchanged; all family and discriminant derivatives identified by exact retained versioned recipes. Superseded drafts retain their original status, not new labels.",
+    "s3_ruling": "Assembly cross-reference gap; exact upstream locator already exists in copied historical lock. New compact record links selected locator to external original selector. No acquisition required."
+  },
+  "dependencies": {
+    "validator.jar": {
+      "sha256": "799e64befca97d4080e03608c80b85dd5a5ecc5f4ae4f35d1116ec2855b9a7c9",
+      "version": "1.6.3",
+      "url": "https://github.com/itplr-kosit/validator/releases/download/v1.6.3/validator-1.6.3-standalone.jar",
+      "id": "validator.jar",
+      "shipped": false
+    },
+    "config.zip": {
+      "sha256": "2530cd107c414511c5d0462ec10f886910395abfca820db82e83d70bf01221a8",
+      "version": "2026-08-31",
+      "url": "https://github.com/itplr-kosit/validator-configuration-xrechnung/releases/download/v2026-08-31/xrechnung-3.0.2-validator-configuration-2026-08-31.zip",
+      "id": "config.zip",
+      "shipped": false
+    },
+    "cen.zip": {
+      "sha256": "1cd53cb8a84d38aedc82c0caede217da983a7934dd663f793a092fd66443c561",
+      "version": "1.3.16",
+      "url": "https://github.com/ConnectingEurope/eInvoicing-EN16931/releases/download/validation-1.3.16/en16931-cii-1.3.16.zip",
+      "id": "cen.zip",
+      "shipped": false
+    },
+    "xr.zip": {
+      "sha256": "ca5e07afd04e72cd283d581590ffff3a15f4aac9d2f40c993345d78e67ea22b4",
+      "url": "https://projekte.kosit.org/api/v4/projects/356/packages/maven/de/xeinkauf/xrechnung-3.0.2-schematron/2.6.0/xrechnung-3.0.2-schematron-2.6.0.zip",
+      "id": "xr.zip",
+      "shipped": false
+    },
+    "sinabis.parquet": {
+      "file": "sinabis.parquet",
+      "version": "8d9ab205ab74f360fac344a50fcd54c35d0cd9ba",
+      "url": "https://huggingface.co/datasets/sinabis-group/sinabis-10k-synthetic-zugferd-xrechnung/resolve/8d9ab205ab74f360fac344a50fcd54c35d0cd9ba/data/train-00000-of-00001.parquet",
+      "sha256": "f45674ce80b477a859c684c68e423f8bb52ad2c1647c97a9e29050f6519dee13",
+      "id": "sinabis.parquet",
+      "shipped": false,
+      "purpose": "acquisition provenance only; not a runtime replay dependency"
+    },
+    "sinabis-README.md": {
+      "file": "sinabis-README.md",
+      "version": "8d9ab205ab74f360fac344a50fcd54c35d0cd9ba",
+      "url": "https://huggingface.co/datasets/sinabis-group/sinabis-10k-synthetic-zugferd-xrechnung/raw/8d9ab205ab74f360fac344a50fcd54c35d0cd9ba/README.md",
+      "sha256": "6b1e08d286eabc899addeebc0d9fd8e8595d671ad83e04668a5baed3e2830f83",
+      "id": "sinabis-README.md",
+      "shipped": false,
+      "purpose": "acquisition provenance only; not a runtime replay dependency"
+    },
+    "historical-artifact-lock": {
+      "id": "historical-artifact-lock",
+      "shipped": false,
+      "repository_revision": "e89b2fd2f3bd3701197f18f76fd2c50c0422a99b",
+      "repository_path": "tools/oracle/artifacts.lock.json",
+      "bytes": 107626,
+      "sha256": "5dec502919d8ee137cd2c1453be8c65c1176e8bc707e358f646cef3fb1f55175",
+      "purpose": "Opaque historical execution-provenance commitment only, not a dependency of the new runner. Full contents include excluded entries and must not be copied into publication."
+    }
+  },
+  "external_members": [
+    {
+      "original_path": "discriminant/config/CHANGELOG.md",
+      "dependency": "config.zip",
+      "member": "CHANGELOG.md",
+      "sha256": "6b4f4f2f962e28f6adb455b6b5bbc356661f8d3bf8aa698aa2c5d1892d3c13e2",
+      "bytes": 14892
+    },
+    {
+      "original_path": "discriminant/config/EN16931-CII-validation.xsl",
+      "dependency": "config.zip",
+      "member": "EN16931-CII-validation.xsl",
+      "sha256": "0911e927f13f9ae2cdc7f973643f27bf0ad3c5da02483c04a5b8a47eb4822199",
+      "bytes": 934750
+    },
+    {
+      "original_path": "discriminant/config/EN16931-UBL-validation.xsl",
+      "dependency": "config.zip",
+      "member": "EN16931-UBL-validation.xsl",
+      "sha256": "759f2d2e830c7fd1d5a6e8b4f61e5dbafc7a7805862c4ae1c749eeac6adde698",
+      "bytes": 1082235
+    },
+    {
+      "original_path": "discriminant/config/README.md",
+      "dependency": "config.zip",
+      "member": "README.md",
+      "sha256": "5be65e76f189eba5a66ebf80e39a86c64f20f905afece10ece42f2b9c42a787f",
+      "bytes": 2025
+    },
+    {
+      "original_path": "discriminant/config/docs/usage.md",
+      "dependency": "config.zip",
+      "member": "docs/usage.md",
+      "sha256": "25996b75febd0e464bd7c51673cfa7d42faaf0b45940e54d0f806b80c7913825",
+      "bytes": 1990
+    },
+    {
+      "original_path": "discriminant/config/resources/cii/16b/xsd/CrossIndustryInvoice_100pD16B.xsd",
+      "dependency": "config.zip",
+      "member": "resources/cii/16b/xsd/CrossIndustryInvoice_100pD16B.xsd",
+      "sha256": "3baf143b90f289d62c5dfb086aa51fa183490a2d0b38a40c6b31dcae0760f2ba",
+      "bytes": 3078
+    },
+    {
+      "original_path": "discriminant/config/resources/cii/16b/xsd/CrossIndustryInvoice_QualifiedDataType_100pD16B.xsd",
+      "dependency": "config.zip",
+      "member": "resources/cii/16b/xsd/CrossIndustryInvoice_QualifiedDataType_100pD16B.xsd",
+      "sha256": "6649215914728652e883662bec1d3eab008c215e86a59f3bb417db9723ee8c5c",
+      "bytes": 36806
+    },
+    {
+      "original_path": "discriminant/config/resources/cii/16b/xsd/CrossIndustryInvoice_ReusableAggregateBusinessInformationEntity_100pD16B.xsd",
+      "dependency": "config.zip",
+      "member": "resources/cii/16b/xsd/CrossIndustryInvoice_ReusableAggregateBusinessInformationEntity_100pD16B.xsd",
+      "sha256": "1c42244298a863bcc0b5196983ff0a5d084fcabe58aea77ef82b242e7cd0ddfd",
+      "bytes": 99402
+    },
+    {
+      "original_path": "discriminant/config/resources/cii/16b/xsd/CrossIndustryInvoice_UnqualifiedDataType_100pD16B.xsd",
+      "dependency": "config.zip",
+      "member": "resources/cii/16b/xsd/CrossIndustryInvoice_UnqualifiedDataType_100pD16B.xsd",
+      "sha256": "04fce6f6f28521886731294be18a4e6bb5cb3003456457d99ad5c4d3e652f497",
+      "bytes": 6967
+    },
+    {
+      "original_path": "discriminant/config/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+      "dependency": "config.zip",
+      "member": "resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+      "sha256": "0911e927f13f9ae2cdc7f973643f27bf0ad3c5da02483c04a5b8a47eb4822199",
+      "bytes": 934750
+    },
+    {
+      "original_path": "discriminant/config/resources/default-report.xsl",
+      "dependency": "config.zip",
+      "member": "resources/default-report.xsl",
+      "sha256": "b40e53d6d170a1c482aedf09cb5d88ebc2e916db096237d6b3341457cd50e2d1",
+      "bytes": 32477
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/common/CCTS_CCT_SchemaModule-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/CCTS_CCT_SchemaModule-2.1.xsd",
+      "sha256": "dd546e4809df86b6445589f69f0d6c9df162840ae386574ddfc1da7638103e15",
+      "bytes": 45268
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/common/UBL-CommonAggregateComponents-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-CommonAggregateComponents-2.1.xsd",
+      "sha256": "580b5af6f68f7f556bd15945ba0e819cbf561442c81694f9b9468036ebedec4d",
+      "bytes": 256745
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/common/UBL-CommonBasicComponents-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-CommonBasicComponents-2.1.xsd",
+      "sha256": "a3b349bf92e5cff26e303d2f05b7e00c884dcafcfd9e12755fb80289abf5e22e",
+      "bytes": 219704
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/common/UBL-CommonExtensionComponents-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-CommonExtensionComponents-2.1.xsd",
+      "sha256": "ad7a4e490978adfbcfc5ec0bb20941cf11ac960ccf0c4de8791a7c731a8dbe87",
+      "bytes": 9491
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/common/UBL-CommonSignatureComponents-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-CommonSignatureComponents-2.1.xsd",
+      "sha256": "4fa9e2370100040fe14c43e135ef77e2eb66b21cb8dbfc2ffb8d82ae991fe92e",
+      "bytes": 3824
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/common/UBL-CoreComponentParameters-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-CoreComponentParameters-2.1.xsd",
+      "sha256": "8be3379dbdcbcc7802fafdd16bac72c48fff1c0bb364213a31a17911dd06100b",
+      "bytes": 3173
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/common/UBL-ExtensionContentDataType-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-ExtensionContentDataType-2.1.xsd",
+      "sha256": "fcee77a11870208e6377ea6311b9f2a050bca24bdad8606ea02d71e9f9e72f8d",
+      "bytes": 4314
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/common/UBL-QualifiedDataTypes-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-QualifiedDataTypes-2.1.xsd",
+      "sha256": "7dcb156e610239c97ae70940cf4653b88e48c3595bf5f56a2204a32e2893e6cf",
+      "bytes": 3590
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/common/UBL-SignatureAggregateComponents-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-SignatureAggregateComponents-2.1.xsd",
+      "sha256": "9234c2ca48dbfa9a22a786112bb075c5922a305170920eaab1e3c04fa0b7344b",
+      "bytes": 5059
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/common/UBL-SignatureBasicComponents-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-SignatureBasicComponents-2.1.xsd",
+      "sha256": "0fbe2d7afff0c1e11164b8ec83e13f18801021c3c87e390a9d76f9cf862f6a64",
+      "bytes": 4016
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/common/UBL-UnqualifiedDataTypes-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-UnqualifiedDataTypes-2.1.xsd",
+      "sha256": "09052d406b4293e2a5f9c2bfee6df10ad4d8d5f0b36e24a6349d7f7936d89eb6",
+      "bytes": 27300
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/common/UBL-XAdESv132-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-XAdESv132-2.1.xsd",
+      "sha256": "a4f726bcf8cc3f7d9ffa4dab99e005535a8e8b60dced1e5d94578d2e05afa96e",
+      "bytes": 21664
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/common/UBL-XAdESv141-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-XAdESv141-2.1.xsd",
+      "sha256": "1fa4625e9cefcb7a9abb5ac1b64315547450031eece8a55bd584e4ba4b79dbc1",
+      "bytes": 1316
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/common/UBL-xmldsig-core-schema-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-xmldsig-core-schema-2.1.xsd",
+      "sha256": "101909c9f06456d61ddcc4fb982f1d40dc357b439f393b1a2eb46e42acd60809",
+      "bytes": 10750
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-ApplicationResponse-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-ApplicationResponse-2.1.xsd",
+      "sha256": "4f2687198b983be2bd943df9470d798fdaed5fd61c58ba2688654e93d9f0057e",
+      "bytes": 5529
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-AttachedDocument-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-AttachedDocument-2.1.xsd",
+      "sha256": "41b906487c35bb2fc56777fd969671a63a2da18f6cb9b2076d47af15aed15819",
+      "bytes": 5821
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-AwardedNotification-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-AwardedNotification-2.1.xsd",
+      "sha256": "da28ca822d8927a4fcda609a7aa2c6de9e49864ac015198c1274c2ffd304cbfd",
+      "bytes": 5908
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-BillOfLading-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-BillOfLading-2.1.xsd",
+      "sha256": "fed697584ab4a3749e275fa1188ef5d391f5a28af6142d601b80ae539dfbbf49",
+      "bytes": 6322
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-CallForTenders-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-CallForTenders-2.1.xsd",
+      "sha256": "326c6f1d4f6e59e3075de710f0152ba97cd0e3e6f3be62163efb4812a28fd5f5",
+      "bytes": 6360
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-Catalogue-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-Catalogue-2.1.xsd",
+      "sha256": "70259d317cff115b9b87e6608b30cfffbdf656ebd59290788d78e710f115ff2a",
+      "bytes": 6449
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-CatalogueDeletion-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-CatalogueDeletion-2.1.xsd",
+      "sha256": "a9561ebd4317d8e12a31a82d9120447480fbfb155b8a31d6b016dcd23541d7cf",
+      "bytes": 6013
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-CatalogueItemSpecificationUpdate-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-CatalogueItemSpecificationUpdate-2.1.xsd",
+      "sha256": "dc9250b5a2857904ea1802fe4ba35df60c460ccf58d2559f9c7d843566d2a68e",
+      "bytes": 6500
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-CataloguePricingUpdate-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-CataloguePricingUpdate-2.1.xsd",
+      "sha256": "eb5d48ca4116494f5c4aa074556b1155541d11a998e6778ea42f0f458eb7e524",
+      "bytes": 6414
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-CatalogueRequest-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-CatalogueRequest-2.1.xsd",
+      "sha256": "8d2818b326dcd0e8afc410471c89e56dbe4c904c12d2f388ed50051fe12c04f4",
+      "bytes": 6664
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-CertificateOfOrigin-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-CertificateOfOrigin-2.1.xsd",
+      "sha256": "d6dadf63fee067fe2d7aba2ba2508752e7faeb261bb93d3c07657c4c89733cbc",
+      "bytes": 5841
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-ContractAwardNotice-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-ContractAwardNotice-2.1.xsd",
+      "sha256": "231cef9534ec089890e23d95ec26e2225a2dce3b1b4ff215f9c3afe367f994a4",
+      "bytes": 6328
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-ContractNotice-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-ContractNotice-2.1.xsd",
+      "sha256": "e926657b07d3d93630311a949c9dd803b7a750e88d9da06b066cb2a83a7403f2",
+      "bytes": 6069
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-CreditNote-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-CreditNote-2.1.xsd",
+      "sha256": "1e117b6c1ab713604b29b0d685442a81a0c78a82575445ee8c43e6050cda7454",
+      "bytes": 8738
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-DebitNote-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-DebitNote-2.1.xsd",
+      "sha256": "ad08761c0ac3c1343577105a71d8bbdcc7a020d47e35c8183a756a0a222fdb7f",
+      "bytes": 8520
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-DespatchAdvice-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-DespatchAdvice-2.1.xsd",
+      "sha256": "0910ea3205c29801f92a15dc12cac3c51cb04c0cc7e27387e3bb16911f593fbf",
+      "bytes": 6159
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-DocumentStatus-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-DocumentStatus-2.1.xsd",
+      "sha256": "ad787416c0862154af4721e80e0287dad754ed059e905ebdc74e59d7acf8a68a",
+      "bytes": 5486
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-DocumentStatusRequest-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-DocumentStatusRequest-2.1.xsd",
+      "sha256": "e72f794d6b2e7d8c7806a94313de3f3dd888b85e7ac9a7518f822b0b2841d903",
+      "bytes": 5470
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-ExceptionCriteria-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-ExceptionCriteria-2.1.xsd",
+      "sha256": "2a345070f72ee6a0293452af3d7676bf60a54cf0c9621a0e24efb340f7221aa7",
+      "bytes": 5776
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-ExceptionNotification-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-ExceptionNotification-2.1.xsd",
+      "sha256": "75d224271a8eaf5c384333c02446ac21bf70cda04856051f226deff7a2eae9b7",
+      "bytes": 5788
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-Forecast-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-Forecast-2.1.xsd",
+      "sha256": "9d6b4f332512056714765e3838a9d224ca27fce2aa19dc3b645286069fc8a492",
+      "bytes": 5937
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-ForecastRevision-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-ForecastRevision-2.1.xsd",
+      "sha256": "2860ab6a05ba36ff5c8e3816a8ba9da0a72514118573f98f770124f8bc25eaa2",
+      "bytes": 5983
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-ForwardingInstructions-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-ForwardingInstructions-2.1.xsd",
+      "sha256": "d4e33fa2452fa8f78b1d47dd41a82b0e06eabce89646b71fd582e1923d0e1adb",
+      "bytes": 6291
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-FreightInvoice-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-FreightInvoice-2.1.xsd",
+      "sha256": "99391b1bf8b9cada56400cf85efd6ccf96f71700f24eb35e5dbe744724b2f25b",
+      "bytes": 8286
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-FulfilmentCancellation-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-FulfilmentCancellation-2.1.xsd",
+      "sha256": "acc0457d336f1c0ebf65071904ecd27bfd2cb027b368875032693eb115d071fd",
+      "bytes": 6253
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-GoodsItemItinerary-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-GoodsItemItinerary-2.1.xsd",
+      "sha256": "d9374c7a0e77c8de4eeb5cd9491934ca7236dfeaf21946ac9aca6c53a82509e8",
+      "bytes": 6007
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-GuaranteeCertificate-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-GuaranteeCertificate-2.1.xsd",
+      "sha256": "de446304cd1be48ec46dff91731c63b9aeb48dc193819b774842954c515e10ca",
+      "bytes": 6181
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-InstructionForReturns-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-InstructionForReturns-2.1.xsd",
+      "sha256": "cf904f838b67cd5aaebfb82ac26456b6866ab3abe597ac1f040b22cd55478873",
+      "bytes": 5703
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-InventoryReport-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-InventoryReport-2.1.xsd",
+      "sha256": "165f789fb1c059f61e747959345841045c1aacf51947b7db25df741737b31db4",
+      "bytes": 5713
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-Invoice-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-Invoice-2.1.xsd",
+      "sha256": "3a5aacd823f0e5b8f25ae7b5191c2002d5333ba351d87de9371ed62dca2b2b0c",
+      "bytes": 8948
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-ItemInformationRequest-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-ItemInformationRequest-2.1.xsd",
+      "sha256": "a97592e0feee0e3641c26d22df2dc1383e69d02342484fc5485e444b8e38d58f",
+      "bytes": 5775
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-Order-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-Order-2.1.xsd",
+      "sha256": "683b73d884a715c15ae4d0851be03830e152b9e53514e12772dc64bd83b4fb93",
+      "bytes": 8141
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-OrderCancellation-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-OrderCancellation-2.1.xsd",
+      "sha256": "f9e020b7236ecb6eb8c3d19ed3959cc40055af789889834cdc0d84f21b3113b8",
+      "bytes": 5866
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-OrderChange-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-OrderChange-2.1.xsd",
+      "sha256": "79c58c00c92eee5aed0029a52ea9c24064e0ed7257e3b868bfb21dbe3190b9a1",
+      "bytes": 8030
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-OrderResponse-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-OrderResponse-2.1.xsd",
+      "sha256": "0d0fc04f2766f1b7dadfc8a3d97fc7c988221593538751b01b1e1df81ee19c98",
+      "bytes": 8488
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-OrderResponseSimple-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-OrderResponseSimple-2.1.xsd",
+      "sha256": "4322013e76b6b8ed1a3d1b5f45916e6b84c4069091b270501ef35b2ed5f8f546",
+      "bytes": 6188
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-PackingList-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-PackingList-2.1.xsd",
+      "sha256": "ca97e078d225831af08c3b47e56c86cd630bb06a7c3e8f31e81615f1c7ff4667",
+      "bytes": 5808
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-PriorInformationNotice-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-PriorInformationNotice-2.1.xsd",
+      "sha256": "31b595192f8055eaaac9d04923634d3ea8cb2802716d55edcaa03a3cf7eaaa6f",
+      "bytes": 6027
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-ProductActivity-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-ProductActivity-2.1.xsd",
+      "sha256": "fa58ee6edd5c24a243c0a98fdd5260b197f743526ce5c159d7ace2d324ec5b02",
+      "bytes": 5662
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-Quotation-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-Quotation-2.1.xsd",
+      "sha256": "cb04fe5ef1a7597a2feb1b927c078d0e984f420a8deaa79ede7de76fb0cfa803",
+      "bytes": 6663
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-ReceiptAdvice-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-ReceiptAdvice-2.1.xsd",
+      "sha256": "fd645952ba5b8575843054074166065cc3b10df50a53c824060099e41082bfa8",
+      "bytes": 6205
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-Reminder-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-Reminder-2.1.xsd",
+      "sha256": "d3e8cdee34bcc6c06b0f251715728fe1aae3b262e35b863955e5b3ddb3a49942",
+      "bytes": 7535
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-RemittanceAdvice-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-RemittanceAdvice-2.1.xsd",
+      "sha256": "4e1503bdedd21f21af17d38b5f9b09fbdef47a58c96c58ea702f215793735e76",
+      "bytes": 6572
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-RequestForQuotation-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-RequestForQuotation-2.1.xsd",
+      "sha256": "1005b1fe764750f7af0f7446d983d487ee4027c27cbf48c9575abbd2231de9e9",
+      "bytes": 6414
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-RetailEvent-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-RetailEvent-2.1.xsd",
+      "sha256": "a7b2112a853b582a8b30ce79ad2c74984d5698a6d5b2eb03d956009cd035e0fb",
+      "bytes": 6258
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-SelfBilledCreditNote-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-SelfBilledCreditNote-2.1.xsd",
+      "sha256": "97eb7e6cbc54718eae8444a53e2e101d55972b2b1266b6432b5f356f67e0f931",
+      "bytes": 8640
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-SelfBilledInvoice-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-SelfBilledInvoice-2.1.xsd",
+      "sha256": "3aa457bdcce6cd3e744b9729073ee7a5110ee8cef0dd0f9c9f8dcda0cc535431",
+      "bytes": 8684
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-Statement-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-Statement-2.1.xsd",
+      "sha256": "423c8c94f4306fd3f10d737908e7f15d14e9c5bf5d5c8c3a46571fa9164369a8",
+      "bytes": 6697
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-StockAvailabilityReport-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-StockAvailabilityReport-2.1.xsd",
+      "sha256": "c24b2e321681634aab928b4032e6ec3d13c8644a92d214772de8b83c9b03fa21",
+      "bytes": 5813
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-Tender-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-Tender-2.1.xsd",
+      "sha256": "f3e62379cfcc36616347ffd9e2e059763e436fe01fdd5391d80c9199b4d2a18f",
+      "bytes": 6033
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-TenderReceipt-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TenderReceipt-2.1.xsd",
+      "sha256": "764ea89a444d3c04a383e01bcc98763a72605d653466dbec50c785e427067098",
+      "bytes": 5714
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-TendererQualification-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TendererQualification-2.1.xsd",
+      "sha256": "33a5288724f8756cd45c04b164f39941d8a30e66b2328a462409b645a622a633",
+      "bytes": 5830
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-TendererQualificationResponse-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TendererQualificationResponse-2.1.xsd",
+      "sha256": "baa33ff9d978eed239a2053239e4694c075e5e58bf683ec85b08ccd61055bc43",
+      "bytes": 5836
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-TradeItemLocationProfile-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TradeItemLocationProfile-2.1.xsd",
+      "sha256": "72034eaa761fda709bbb590f4f25addc774da2492ccc88447386304543175bbd",
+      "bytes": 5818
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-TransportExecutionPlan-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TransportExecutionPlan-2.1.xsd",
+      "sha256": "3f35d8df511be17488212e5fc34416b7558d77de680abe41a20cb753736cfb73",
+      "bytes": 8035
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-TransportExecutionPlanRequest-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TransportExecutionPlanRequest-2.1.xsd",
+      "sha256": "8186d7e68b33ba79d97e4176a00d4bf371664c687a37c956b05829294775a263",
+      "bytes": 7566
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-TransportProgressStatus-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TransportProgressStatus-2.1.xsd",
+      "sha256": "e4d969a101b8870ac35ee3453e374bc7abde813a8fc59f48349381821b0839c0",
+      "bytes": 5806
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-TransportProgressStatusRequest-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TransportProgressStatusRequest-2.1.xsd",
+      "sha256": "eb4ecfe815c6a6c704170f207d7c05f3a6529afe103e69c1124f3d02ccb92c23",
+      "bytes": 5540
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-TransportServiceDescription-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TransportServiceDescription-2.1.xsd",
+      "sha256": "f931c0a7e4e6d291d1844c55131a74431fb00297f3e8364c1e8d325d8d9c5c65",
+      "bytes": 6016
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-TransportServiceDescriptionRequest-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TransportServiceDescriptionRequest-2.1.xsd",
+      "sha256": "33daa660cc3d9fd71fa3bd2af63aee0da345a40480a4a574b80b47bacb556487",
+      "bytes": 5725
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-TransportationStatus-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TransportationStatus-2.1.xsd",
+      "sha256": "3e4f40c8172381cbe81d8182d6c9db7c31ccd46db0c650512b9bbaf5350343f4",
+      "bytes": 6696
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-TransportationStatusRequest-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TransportationStatusRequest-2.1.xsd",
+      "sha256": "320fb1abe0eca59c934a256979d21efa89c7132018fe68dc5f263e3dd1fa9ba6",
+      "bytes": 6307
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-UnawardedNotification-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-UnawardedNotification-2.1.xsd",
+      "sha256": "8a81aff93ba92254140bcdf159b0a4292556fded3a98b223d10ff2b262a08b3b",
+      "bytes": 5856
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-UtilityStatement-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-UtilityStatement-2.1.xsd",
+      "sha256": "51a4a74a3db2440ef42f98b0d44b7e1cd900ce1ea9410220bc9d2710cf03fb2e",
+      "bytes": 6171
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsd/maindoc/UBL-Waybill-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-Waybill-2.1.xsd",
+      "sha256": "a847726f8c114480ad86a33c8edc534f63fa52e7fbe924e6340cad1e591e1e81",
+      "bytes": 6132
+    },
+    {
+      "original_path": "discriminant/config/resources/ubl/2.1/xsl/EN16931-UBL-validation.xsl",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsl/EN16931-UBL-validation.xsl",
+      "sha256": "759f2d2e830c7fd1d5a6e8b4f61e5dbafc7a7805862c4ae1c749eeac6adde698",
+      "bytes": 1082235
+    },
+    {
+      "original_path": "discriminant/config/resources/xrechnung/3.0.2/xsl/XRechnung-CII-validation.xsl",
+      "dependency": "config.zip",
+      "member": "resources/xrechnung/3.0.2/xsl/XRechnung-CII-validation.xsl",
+      "sha256": "ec54f662803a87f527ec606d1320bc404f1657a848af6a76f37f32905e4aac40",
+      "bytes": 189030
+    },
+    {
+      "original_path": "discriminant/config/resources/xrechnung/3.0.2/xsl/XRechnung-UBL-validation.xsl",
+      "dependency": "config.zip",
+      "member": "resources/xrechnung/3.0.2/xsl/XRechnung-UBL-validation.xsl",
+      "sha256": "e32d831668facbbd5136cc0119bf1dd6f92ac20738aa3b3f021586f5a305c738",
+      "bytes": 175293
+    },
+    {
+      "original_path": "discriminant/config/resources/xrechnung-report.xsl",
+      "dependency": "config.zip",
+      "member": "resources/xrechnung-report.xsl",
+      "sha256": "a2c9fa2272fb14667d70ed62f11c6ad6c7167f12f2abbe1b420915ccefd5af8c",
+      "bytes": 3457
+    },
+    {
+      "original_path": "discriminant/config/resources/xsd/report.xsd",
+      "dependency": "config.zip",
+      "member": "resources/xsd/report.xsd",
+      "sha256": "220719bac523fc7cf2ab983a3c1497af511aefe7138e434064425a5476e63f3e",
+      "bytes": 14674
+    },
+    {
+      "original_path": "discriminant/config/resources/xsd/scenarios.xsd",
+      "dependency": "config.zip",
+      "member": "resources/xsd/scenarios.xsd",
+      "sha256": "3990b4386b8939cb3bba92b96047238c9465402eaed10f2735fb7d9275525321",
+      "bytes": 5860
+    },
+    {
+      "original_path": "discriminant/config/scenarios.xml",
+      "dependency": "config.zip",
+      "member": "scenarios.xml",
+      "sha256": "3e8161a39dfaa6aea4d990b279aab848be4f4c6169e820f354a159bda7693fb0",
+      "bytes": 40562
+    },
+    {
+      "original_path": "family-run/config/CHANGELOG.md",
+      "dependency": "config.zip",
+      "member": "CHANGELOG.md",
+      "sha256": "6b4f4f2f962e28f6adb455b6b5bbc356661f8d3bf8aa698aa2c5d1892d3c13e2",
+      "bytes": 14892
+    },
+    {
+      "original_path": "family-run/config/EN16931-CII-validation.xsl",
+      "dependency": "config.zip",
+      "member": "EN16931-CII-validation.xsl",
+      "sha256": "0911e927f13f9ae2cdc7f973643f27bf0ad3c5da02483c04a5b8a47eb4822199",
+      "bytes": 934750
+    },
+    {
+      "original_path": "family-run/config/EN16931-UBL-validation.xsl",
+      "dependency": "config.zip",
+      "member": "EN16931-UBL-validation.xsl",
+      "sha256": "759f2d2e830c7fd1d5a6e8b4f61e5dbafc7a7805862c4ae1c749eeac6adde698",
+      "bytes": 1082235
+    },
+    {
+      "original_path": "family-run/config/README.md",
+      "dependency": "config.zip",
+      "member": "README.md",
+      "sha256": "5be65e76f189eba5a66ebf80e39a86c64f20f905afece10ece42f2b9c42a787f",
+      "bytes": 2025
+    },
+    {
+      "original_path": "family-run/config/docs/usage.md",
+      "dependency": "config.zip",
+      "member": "docs/usage.md",
+      "sha256": "25996b75febd0e464bd7c51673cfa7d42faaf0b45940e54d0f806b80c7913825",
+      "bytes": 1990
+    },
+    {
+      "original_path": "family-run/config/resources/cii/16b/xsd/CrossIndustryInvoice_100pD16B.xsd",
+      "dependency": "config.zip",
+      "member": "resources/cii/16b/xsd/CrossIndustryInvoice_100pD16B.xsd",
+      "sha256": "3baf143b90f289d62c5dfb086aa51fa183490a2d0b38a40c6b31dcae0760f2ba",
+      "bytes": 3078
+    },
+    {
+      "original_path": "family-run/config/resources/cii/16b/xsd/CrossIndustryInvoice_QualifiedDataType_100pD16B.xsd",
+      "dependency": "config.zip",
+      "member": "resources/cii/16b/xsd/CrossIndustryInvoice_QualifiedDataType_100pD16B.xsd",
+      "sha256": "6649215914728652e883662bec1d3eab008c215e86a59f3bb417db9723ee8c5c",
+      "bytes": 36806
+    },
+    {
+      "original_path": "family-run/config/resources/cii/16b/xsd/CrossIndustryInvoice_ReusableAggregateBusinessInformationEntity_100pD16B.xsd",
+      "dependency": "config.zip",
+      "member": "resources/cii/16b/xsd/CrossIndustryInvoice_ReusableAggregateBusinessInformationEntity_100pD16B.xsd",
+      "sha256": "1c42244298a863bcc0b5196983ff0a5d084fcabe58aea77ef82b242e7cd0ddfd",
+      "bytes": 99402
+    },
+    {
+      "original_path": "family-run/config/resources/cii/16b/xsd/CrossIndustryInvoice_UnqualifiedDataType_100pD16B.xsd",
+      "dependency": "config.zip",
+      "member": "resources/cii/16b/xsd/CrossIndustryInvoice_UnqualifiedDataType_100pD16B.xsd",
+      "sha256": "04fce6f6f28521886731294be18a4e6bb5cb3003456457d99ad5c4d3e652f497",
+      "bytes": 6967
+    },
+    {
+      "original_path": "family-run/config/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+      "dependency": "config.zip",
+      "member": "resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+      "sha256": "0911e927f13f9ae2cdc7f973643f27bf0ad3c5da02483c04a5b8a47eb4822199",
+      "bytes": 934750
+    },
+    {
+      "original_path": "family-run/config/resources/default-report.xsl",
+      "dependency": "config.zip",
+      "member": "resources/default-report.xsl",
+      "sha256": "b40e53d6d170a1c482aedf09cb5d88ebc2e916db096237d6b3341457cd50e2d1",
+      "bytes": 32477
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/common/CCTS_CCT_SchemaModule-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/CCTS_CCT_SchemaModule-2.1.xsd",
+      "sha256": "dd546e4809df86b6445589f69f0d6c9df162840ae386574ddfc1da7638103e15",
+      "bytes": 45268
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/common/UBL-CommonAggregateComponents-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-CommonAggregateComponents-2.1.xsd",
+      "sha256": "580b5af6f68f7f556bd15945ba0e819cbf561442c81694f9b9468036ebedec4d",
+      "bytes": 256745
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/common/UBL-CommonBasicComponents-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-CommonBasicComponents-2.1.xsd",
+      "sha256": "a3b349bf92e5cff26e303d2f05b7e00c884dcafcfd9e12755fb80289abf5e22e",
+      "bytes": 219704
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/common/UBL-CommonExtensionComponents-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-CommonExtensionComponents-2.1.xsd",
+      "sha256": "ad7a4e490978adfbcfc5ec0bb20941cf11ac960ccf0c4de8791a7c731a8dbe87",
+      "bytes": 9491
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/common/UBL-CommonSignatureComponents-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-CommonSignatureComponents-2.1.xsd",
+      "sha256": "4fa9e2370100040fe14c43e135ef77e2eb66b21cb8dbfc2ffb8d82ae991fe92e",
+      "bytes": 3824
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/common/UBL-CoreComponentParameters-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-CoreComponentParameters-2.1.xsd",
+      "sha256": "8be3379dbdcbcc7802fafdd16bac72c48fff1c0bb364213a31a17911dd06100b",
+      "bytes": 3173
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/common/UBL-ExtensionContentDataType-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-ExtensionContentDataType-2.1.xsd",
+      "sha256": "fcee77a11870208e6377ea6311b9f2a050bca24bdad8606ea02d71e9f9e72f8d",
+      "bytes": 4314
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/common/UBL-QualifiedDataTypes-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-QualifiedDataTypes-2.1.xsd",
+      "sha256": "7dcb156e610239c97ae70940cf4653b88e48c3595bf5f56a2204a32e2893e6cf",
+      "bytes": 3590
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/common/UBL-SignatureAggregateComponents-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-SignatureAggregateComponents-2.1.xsd",
+      "sha256": "9234c2ca48dbfa9a22a786112bb075c5922a305170920eaab1e3c04fa0b7344b",
+      "bytes": 5059
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/common/UBL-SignatureBasicComponents-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-SignatureBasicComponents-2.1.xsd",
+      "sha256": "0fbe2d7afff0c1e11164b8ec83e13f18801021c3c87e390a9d76f9cf862f6a64",
+      "bytes": 4016
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/common/UBL-UnqualifiedDataTypes-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-UnqualifiedDataTypes-2.1.xsd",
+      "sha256": "09052d406b4293e2a5f9c2bfee6df10ad4d8d5f0b36e24a6349d7f7936d89eb6",
+      "bytes": 27300
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/common/UBL-XAdESv132-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-XAdESv132-2.1.xsd",
+      "sha256": "a4f726bcf8cc3f7d9ffa4dab99e005535a8e8b60dced1e5d94578d2e05afa96e",
+      "bytes": 21664
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/common/UBL-XAdESv141-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-XAdESv141-2.1.xsd",
+      "sha256": "1fa4625e9cefcb7a9abb5ac1b64315547450031eece8a55bd584e4ba4b79dbc1",
+      "bytes": 1316
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/common/UBL-xmldsig-core-schema-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/common/UBL-xmldsig-core-schema-2.1.xsd",
+      "sha256": "101909c9f06456d61ddcc4fb982f1d40dc357b439f393b1a2eb46e42acd60809",
+      "bytes": 10750
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-ApplicationResponse-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-ApplicationResponse-2.1.xsd",
+      "sha256": "4f2687198b983be2bd943df9470d798fdaed5fd61c58ba2688654e93d9f0057e",
+      "bytes": 5529
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-AttachedDocument-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-AttachedDocument-2.1.xsd",
+      "sha256": "41b906487c35bb2fc56777fd969671a63a2da18f6cb9b2076d47af15aed15819",
+      "bytes": 5821
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-AwardedNotification-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-AwardedNotification-2.1.xsd",
+      "sha256": "da28ca822d8927a4fcda609a7aa2c6de9e49864ac015198c1274c2ffd304cbfd",
+      "bytes": 5908
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-BillOfLading-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-BillOfLading-2.1.xsd",
+      "sha256": "fed697584ab4a3749e275fa1188ef5d391f5a28af6142d601b80ae539dfbbf49",
+      "bytes": 6322
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-CallForTenders-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-CallForTenders-2.1.xsd",
+      "sha256": "326c6f1d4f6e59e3075de710f0152ba97cd0e3e6f3be62163efb4812a28fd5f5",
+      "bytes": 6360
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-Catalogue-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-Catalogue-2.1.xsd",
+      "sha256": "70259d317cff115b9b87e6608b30cfffbdf656ebd59290788d78e710f115ff2a",
+      "bytes": 6449
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-CatalogueDeletion-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-CatalogueDeletion-2.1.xsd",
+      "sha256": "a9561ebd4317d8e12a31a82d9120447480fbfb155b8a31d6b016dcd23541d7cf",
+      "bytes": 6013
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-CatalogueItemSpecificationUpdate-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-CatalogueItemSpecificationUpdate-2.1.xsd",
+      "sha256": "dc9250b5a2857904ea1802fe4ba35df60c460ccf58d2559f9c7d843566d2a68e",
+      "bytes": 6500
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-CataloguePricingUpdate-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-CataloguePricingUpdate-2.1.xsd",
+      "sha256": "eb5d48ca4116494f5c4aa074556b1155541d11a998e6778ea42f0f458eb7e524",
+      "bytes": 6414
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-CatalogueRequest-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-CatalogueRequest-2.1.xsd",
+      "sha256": "8d2818b326dcd0e8afc410471c89e56dbe4c904c12d2f388ed50051fe12c04f4",
+      "bytes": 6664
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-CertificateOfOrigin-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-CertificateOfOrigin-2.1.xsd",
+      "sha256": "d6dadf63fee067fe2d7aba2ba2508752e7faeb261bb93d3c07657c4c89733cbc",
+      "bytes": 5841
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-ContractAwardNotice-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-ContractAwardNotice-2.1.xsd",
+      "sha256": "231cef9534ec089890e23d95ec26e2225a2dce3b1b4ff215f9c3afe367f994a4",
+      "bytes": 6328
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-ContractNotice-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-ContractNotice-2.1.xsd",
+      "sha256": "e926657b07d3d93630311a949c9dd803b7a750e88d9da06b066cb2a83a7403f2",
+      "bytes": 6069
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-CreditNote-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-CreditNote-2.1.xsd",
+      "sha256": "1e117b6c1ab713604b29b0d685442a81a0c78a82575445ee8c43e6050cda7454",
+      "bytes": 8738
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-DebitNote-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-DebitNote-2.1.xsd",
+      "sha256": "ad08761c0ac3c1343577105a71d8bbdcc7a020d47e35c8183a756a0a222fdb7f",
+      "bytes": 8520
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-DespatchAdvice-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-DespatchAdvice-2.1.xsd",
+      "sha256": "0910ea3205c29801f92a15dc12cac3c51cb04c0cc7e27387e3bb16911f593fbf",
+      "bytes": 6159
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-DocumentStatus-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-DocumentStatus-2.1.xsd",
+      "sha256": "ad787416c0862154af4721e80e0287dad754ed059e905ebdc74e59d7acf8a68a",
+      "bytes": 5486
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-DocumentStatusRequest-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-DocumentStatusRequest-2.1.xsd",
+      "sha256": "e72f794d6b2e7d8c7806a94313de3f3dd888b85e7ac9a7518f822b0b2841d903",
+      "bytes": 5470
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-ExceptionCriteria-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-ExceptionCriteria-2.1.xsd",
+      "sha256": "2a345070f72ee6a0293452af3d7676bf60a54cf0c9621a0e24efb340f7221aa7",
+      "bytes": 5776
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-ExceptionNotification-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-ExceptionNotification-2.1.xsd",
+      "sha256": "75d224271a8eaf5c384333c02446ac21bf70cda04856051f226deff7a2eae9b7",
+      "bytes": 5788
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-Forecast-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-Forecast-2.1.xsd",
+      "sha256": "9d6b4f332512056714765e3838a9d224ca27fce2aa19dc3b645286069fc8a492",
+      "bytes": 5937
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-ForecastRevision-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-ForecastRevision-2.1.xsd",
+      "sha256": "2860ab6a05ba36ff5c8e3816a8ba9da0a72514118573f98f770124f8bc25eaa2",
+      "bytes": 5983
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-ForwardingInstructions-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-ForwardingInstructions-2.1.xsd",
+      "sha256": "d4e33fa2452fa8f78b1d47dd41a82b0e06eabce89646b71fd582e1923d0e1adb",
+      "bytes": 6291
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-FreightInvoice-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-FreightInvoice-2.1.xsd",
+      "sha256": "99391b1bf8b9cada56400cf85efd6ccf96f71700f24eb35e5dbe744724b2f25b",
+      "bytes": 8286
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-FulfilmentCancellation-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-FulfilmentCancellation-2.1.xsd",
+      "sha256": "acc0457d336f1c0ebf65071904ecd27bfd2cb027b368875032693eb115d071fd",
+      "bytes": 6253
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-GoodsItemItinerary-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-GoodsItemItinerary-2.1.xsd",
+      "sha256": "d9374c7a0e77c8de4eeb5cd9491934ca7236dfeaf21946ac9aca6c53a82509e8",
+      "bytes": 6007
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-GuaranteeCertificate-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-GuaranteeCertificate-2.1.xsd",
+      "sha256": "de446304cd1be48ec46dff91731c63b9aeb48dc193819b774842954c515e10ca",
+      "bytes": 6181
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-InstructionForReturns-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-InstructionForReturns-2.1.xsd",
+      "sha256": "cf904f838b67cd5aaebfb82ac26456b6866ab3abe597ac1f040b22cd55478873",
+      "bytes": 5703
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-InventoryReport-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-InventoryReport-2.1.xsd",
+      "sha256": "165f789fb1c059f61e747959345841045c1aacf51947b7db25df741737b31db4",
+      "bytes": 5713
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-Invoice-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-Invoice-2.1.xsd",
+      "sha256": "3a5aacd823f0e5b8f25ae7b5191c2002d5333ba351d87de9371ed62dca2b2b0c",
+      "bytes": 8948
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-ItemInformationRequest-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-ItemInformationRequest-2.1.xsd",
+      "sha256": "a97592e0feee0e3641c26d22df2dc1383e69d02342484fc5485e444b8e38d58f",
+      "bytes": 5775
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-Order-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-Order-2.1.xsd",
+      "sha256": "683b73d884a715c15ae4d0851be03830e152b9e53514e12772dc64bd83b4fb93",
+      "bytes": 8141
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-OrderCancellation-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-OrderCancellation-2.1.xsd",
+      "sha256": "f9e020b7236ecb6eb8c3d19ed3959cc40055af789889834cdc0d84f21b3113b8",
+      "bytes": 5866
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-OrderChange-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-OrderChange-2.1.xsd",
+      "sha256": "79c58c00c92eee5aed0029a52ea9c24064e0ed7257e3b868bfb21dbe3190b9a1",
+      "bytes": 8030
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-OrderResponse-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-OrderResponse-2.1.xsd",
+      "sha256": "0d0fc04f2766f1b7dadfc8a3d97fc7c988221593538751b01b1e1df81ee19c98",
+      "bytes": 8488
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-OrderResponseSimple-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-OrderResponseSimple-2.1.xsd",
+      "sha256": "4322013e76b6b8ed1a3d1b5f45916e6b84c4069091b270501ef35b2ed5f8f546",
+      "bytes": 6188
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-PackingList-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-PackingList-2.1.xsd",
+      "sha256": "ca97e078d225831af08c3b47e56c86cd630bb06a7c3e8f31e81615f1c7ff4667",
+      "bytes": 5808
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-PriorInformationNotice-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-PriorInformationNotice-2.1.xsd",
+      "sha256": "31b595192f8055eaaac9d04923634d3ea8cb2802716d55edcaa03a3cf7eaaa6f",
+      "bytes": 6027
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-ProductActivity-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-ProductActivity-2.1.xsd",
+      "sha256": "fa58ee6edd5c24a243c0a98fdd5260b197f743526ce5c159d7ace2d324ec5b02",
+      "bytes": 5662
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-Quotation-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-Quotation-2.1.xsd",
+      "sha256": "cb04fe5ef1a7597a2feb1b927c078d0e984f420a8deaa79ede7de76fb0cfa803",
+      "bytes": 6663
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-ReceiptAdvice-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-ReceiptAdvice-2.1.xsd",
+      "sha256": "fd645952ba5b8575843054074166065cc3b10df50a53c824060099e41082bfa8",
+      "bytes": 6205
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-Reminder-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-Reminder-2.1.xsd",
+      "sha256": "d3e8cdee34bcc6c06b0f251715728fe1aae3b262e35b863955e5b3ddb3a49942",
+      "bytes": 7535
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-RemittanceAdvice-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-RemittanceAdvice-2.1.xsd",
+      "sha256": "4e1503bdedd21f21af17d38b5f9b09fbdef47a58c96c58ea702f215793735e76",
+      "bytes": 6572
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-RequestForQuotation-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-RequestForQuotation-2.1.xsd",
+      "sha256": "1005b1fe764750f7af0f7446d983d487ee4027c27cbf48c9575abbd2231de9e9",
+      "bytes": 6414
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-RetailEvent-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-RetailEvent-2.1.xsd",
+      "sha256": "a7b2112a853b582a8b30ce79ad2c74984d5698a6d5b2eb03d956009cd035e0fb",
+      "bytes": 6258
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-SelfBilledCreditNote-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-SelfBilledCreditNote-2.1.xsd",
+      "sha256": "97eb7e6cbc54718eae8444a53e2e101d55972b2b1266b6432b5f356f67e0f931",
+      "bytes": 8640
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-SelfBilledInvoice-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-SelfBilledInvoice-2.1.xsd",
+      "sha256": "3aa457bdcce6cd3e744b9729073ee7a5110ee8cef0dd0f9c9f8dcda0cc535431",
+      "bytes": 8684
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-Statement-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-Statement-2.1.xsd",
+      "sha256": "423c8c94f4306fd3f10d737908e7f15d14e9c5bf5d5c8c3a46571fa9164369a8",
+      "bytes": 6697
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-StockAvailabilityReport-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-StockAvailabilityReport-2.1.xsd",
+      "sha256": "c24b2e321681634aab928b4032e6ec3d13c8644a92d214772de8b83c9b03fa21",
+      "bytes": 5813
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-Tender-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-Tender-2.1.xsd",
+      "sha256": "f3e62379cfcc36616347ffd9e2e059763e436fe01fdd5391d80c9199b4d2a18f",
+      "bytes": 6033
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-TenderReceipt-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TenderReceipt-2.1.xsd",
+      "sha256": "764ea89a444d3c04a383e01bcc98763a72605d653466dbec50c785e427067098",
+      "bytes": 5714
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-TendererQualification-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TendererQualification-2.1.xsd",
+      "sha256": "33a5288724f8756cd45c04b164f39941d8a30e66b2328a462409b645a622a633",
+      "bytes": 5830
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-TendererQualificationResponse-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TendererQualificationResponse-2.1.xsd",
+      "sha256": "baa33ff9d978eed239a2053239e4694c075e5e58bf683ec85b08ccd61055bc43",
+      "bytes": 5836
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-TradeItemLocationProfile-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TradeItemLocationProfile-2.1.xsd",
+      "sha256": "72034eaa761fda709bbb590f4f25addc774da2492ccc88447386304543175bbd",
+      "bytes": 5818
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-TransportExecutionPlan-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TransportExecutionPlan-2.1.xsd",
+      "sha256": "3f35d8df511be17488212e5fc34416b7558d77de680abe41a20cb753736cfb73",
+      "bytes": 8035
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-TransportExecutionPlanRequest-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TransportExecutionPlanRequest-2.1.xsd",
+      "sha256": "8186d7e68b33ba79d97e4176a00d4bf371664c687a37c956b05829294775a263",
+      "bytes": 7566
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-TransportProgressStatus-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TransportProgressStatus-2.1.xsd",
+      "sha256": "e4d969a101b8870ac35ee3453e374bc7abde813a8fc59f48349381821b0839c0",
+      "bytes": 5806
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-TransportProgressStatusRequest-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TransportProgressStatusRequest-2.1.xsd",
+      "sha256": "eb4ecfe815c6a6c704170f207d7c05f3a6529afe103e69c1124f3d02ccb92c23",
+      "bytes": 5540
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-TransportServiceDescription-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TransportServiceDescription-2.1.xsd",
+      "sha256": "f931c0a7e4e6d291d1844c55131a74431fb00297f3e8364c1e8d325d8d9c5c65",
+      "bytes": 6016
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-TransportServiceDescriptionRequest-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TransportServiceDescriptionRequest-2.1.xsd",
+      "sha256": "33daa660cc3d9fd71fa3bd2af63aee0da345a40480a4a574b80b47bacb556487",
+      "bytes": 5725
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-TransportationStatus-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TransportationStatus-2.1.xsd",
+      "sha256": "3e4f40c8172381cbe81d8182d6c9db7c31ccd46db0c650512b9bbaf5350343f4",
+      "bytes": 6696
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-TransportationStatusRequest-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-TransportationStatusRequest-2.1.xsd",
+      "sha256": "320fb1abe0eca59c934a256979d21efa89c7132018fe68dc5f263e3dd1fa9ba6",
+      "bytes": 6307
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-UnawardedNotification-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-UnawardedNotification-2.1.xsd",
+      "sha256": "8a81aff93ba92254140bcdf159b0a4292556fded3a98b223d10ff2b262a08b3b",
+      "bytes": 5856
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-UtilityStatement-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-UtilityStatement-2.1.xsd",
+      "sha256": "51a4a74a3db2440ef42f98b0d44b7e1cd900ce1ea9410220bc9d2710cf03fb2e",
+      "bytes": 6171
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsd/maindoc/UBL-Waybill-2.1.xsd",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsd/maindoc/UBL-Waybill-2.1.xsd",
+      "sha256": "a847726f8c114480ad86a33c8edc534f63fa52e7fbe924e6340cad1e591e1e81",
+      "bytes": 6132
+    },
+    {
+      "original_path": "family-run/config/resources/ubl/2.1/xsl/EN16931-UBL-validation.xsl",
+      "dependency": "config.zip",
+      "member": "resources/ubl/2.1/xsl/EN16931-UBL-validation.xsl",
+      "sha256": "759f2d2e830c7fd1d5a6e8b4f61e5dbafc7a7805862c4ae1c749eeac6adde698",
+      "bytes": 1082235
+    },
+    {
+      "original_path": "family-run/config/resources/xrechnung/3.0.2/xsl/XRechnung-CII-validation.xsl",
+      "dependency": "config.zip",
+      "member": "resources/xrechnung/3.0.2/xsl/XRechnung-CII-validation.xsl",
+      "sha256": "ec54f662803a87f527ec606d1320bc404f1657a848af6a76f37f32905e4aac40",
+      "bytes": 189030
+    },
+    {
+      "original_path": "family-run/config/resources/xrechnung/3.0.2/xsl/XRechnung-UBL-validation.xsl",
+      "dependency": "config.zip",
+      "member": "resources/xrechnung/3.0.2/xsl/XRechnung-UBL-validation.xsl",
+      "sha256": "e32d831668facbbd5136cc0119bf1dd6f92ac20738aa3b3f021586f5a305c738",
+      "bytes": 175293
+    },
+    {
+      "original_path": "family-run/config/resources/xrechnung-report.xsl",
+      "dependency": "config.zip",
+      "member": "resources/xrechnung-report.xsl",
+      "sha256": "a2c9fa2272fb14667d70ed62f11c6ad6c7167f12f2abbe1b420915ccefd5af8c",
+      "bytes": 3457
+    },
+    {
+      "original_path": "family-run/config/resources/xsd/report.xsd",
+      "dependency": "config.zip",
+      "member": "resources/xsd/report.xsd",
+      "sha256": "220719bac523fc7cf2ab983a3c1497af511aefe7138e434064425a5476e63f3e",
+      "bytes": 14674
+    },
+    {
+      "original_path": "family-run/config/resources/xsd/scenarios.xsd",
+      "dependency": "config.zip",
+      "member": "resources/xsd/scenarios.xsd",
+      "sha256": "3990b4386b8939cb3bba92b96047238c9465402eaed10f2735fb7d9275525321",
+      "bytes": 5860
+    },
+    {
+      "original_path": "family-run/config/scenarios.xml",
+      "dependency": "config.zip",
+      "member": "scenarios.xml",
+      "sha256": "3e8161a39dfaa6aea4d990b279aab848be4f4c6169e820f354a159bda7693fb0",
+      "bytes": 40562
+    },
+    {
+      "original_path": "discriminant/source/schematron/CII/EN16931-CII-syntax.sch",
+      "dependency": "cen.zip",
+      "member": "schematron/CII/EN16931-CII-syntax.sch",
+      "sha256": "a2c3d977fbb1aaf7563bc4620baa6840885dd7fba29294d50d19a3ece35aae44",
+      "bytes": 57641
+    },
+    {
+      "original_path": "discriminant/source/schematron/abstract/EN16931-CII-syntax.sch",
+      "dependency": "cen.zip",
+      "member": "schematron/abstract/EN16931-CII-syntax.sch",
+      "sha256": "6b396a301786c00e7f3ba97e9bea2c25577b28fb5c3c60f6e6c05fc86b0aef0d",
+      "bytes": 77269
+    },
+    {
+      "original_path": "discriminant/source/schematron/preprocessed/EN16931-CII-validation-preprocessed.sch",
+      "dependency": "cen.zip",
+      "member": "schematron/preprocessed/EN16931-CII-validation-preprocessed.sch",
+      "sha256": "54e0dc6d06cd7f17d268bb9696ff56f58d386ee28961c9bbef0a56718c400c89",
+      "bytes": 240038
+    }
+  ],
+  "source_member_pins": {
+    "cen-codes": {
+      "archive": "cen.zip",
+      "archive_sha256": "1cd53cb8a84d38aedc82c0caede217da983a7934dd663f793a092fd66443c561",
+      "bytes": 34078,
+      "member": "schematron/codelist/EN16931-CII-codes.sch",
+      "sha256": "c260c325dbccbbfdace9b049180aa4c708e45d84e03469a86bdf399b07a7b799"
+    },
+    "cen-model": {
+      "archive": "cen.zip",
+      "archive_sha256": "1cd53cb8a84d38aedc82c0caede217da983a7934dd663f793a092fd66443c561",
+      "bytes": 61284,
+      "member": "schematron/CII/EN16931-CII-model.sch",
+      "sha256": "4fd7b27479aa31d464f977a6abb3ba9d29263c17f7ec49e54e0a77b02d2a751b"
+    },
+    "cen-syntax": {
+      "archive": "cen.zip",
+      "archive_sha256": "1cd53cb8a84d38aedc82c0caede217da983a7934dd663f793a092fd66443c561",
+      "bytes": 57641,
+      "member": "schematron/CII/EN16931-CII-syntax.sch",
+      "sha256": "a2c3d977fbb1aaf7563bc4620baa6840885dd7fba29294d50d19a3ece35aae44"
+    },
+    "cii-xsd": {
+      "archive": "config.zip",
+      "archive_sha256": "2530cd107c414511c5d0462ec10f886910395abfca820db82e83d70bf01221a8",
+      "bytes": 3078,
+      "member": "resources/cii/16b/xsd/CrossIndustryInvoice_100pD16B.xsd",
+      "sha256": "3baf143b90f289d62c5dfb086aa51fa183490a2d0b38a40c6b31dcae0760f2ba"
+    },
+    "ram-xsd": {
+      "archive": "config.zip",
+      "archive_sha256": "2530cd107c414511c5d0462ec10f886910395abfca820db82e83d70bf01221a8",
+      "bytes": 99402,
+      "member": "resources/cii/16b/xsd/CrossIndustryInvoice_ReusableAggregateBusinessInformationEntity_100pD16B.xsd",
+      "sha256": "1c42244298a863bcc0b5196983ff0a5d084fcabe58aea77ef82b242e7cd0ddfd"
+    },
+    "udt-xsd": {
+      "archive": "config.zip",
+      "archive_sha256": "2530cd107c414511c5d0462ec10f886910395abfca820db82e83d70bf01221a8",
+      "bytes": 6967,
+      "member": "resources/cii/16b/xsd/CrossIndustryInvoice_UnqualifiedDataType_100pD16B.xsd",
+      "sha256": "04fce6f6f28521886731294be18a4e6bb5cb3003456457d99ad5c4d3e652f497"
+    },
+    "xr-cii": {
+      "archive": "xr.zip",
+      "archive_sha256": "ca5e07afd04e72cd283d581590ffff3a15f4aac9d2f40c993345d78e67ea22b4",
+      "bytes": 54795,
+      "member": "schematron/cii/XRechnung-CII-validation.sch",
+      "sha256": "53bb5c0664fc603bbaaddeed26eb59525a05d3359d1a63f148876b2f2eedde1d"
+    }
+  },
+  "runtime_pins": {
+    "python": {
+      "path": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-5--45552c76f3d0fedb/tools/oracle/.cache/test-venv/bin/python",
+      "realpath": "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+      "bytes": 152096,
+      "sha256": "69e6adfac00978215c4e5f3eaf63d262a5fb646b6dca1897b29f78872c4c5a26",
+      "version": "3.12.6"
+    },
+    "jdk": {
+      "java": {
+        "path": "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/java",
+        "realpath": "/Users/bene/.local/share/mise/installs/java/corretto-27.0.1.0.11/bin/java",
+        "bytes": 69600,
+        "sha256": "346f29eee10a91d3d5012c27e08f2fe13d7977e10599084fba835f5bdb018800"
+      },
+      "javac": {
+        "path": "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/javac",
+        "realpath": "/Users/bene/.local/share/mise/installs/java/corretto-27.0.1.0.11/bin/javac",
+        "bytes": 69520,
+        "sha256": "ddc0e3c472717b1f2c579bf08c1cd7a8eed5c96224bb3e179232a18dc030164a"
+      },
+      "release": {
+        "path": "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/release",
+        "realpath": "/Users/bene/.local/share/mise/installs/java/corretto-27.0.1.0.11/release",
+        "bytes": 1182,
+        "sha256": "bb9c7cae305c4a62cf9e2ac132984689869e78cff3f942f47a57bde3d82ce91a"
+      }
+    },
+    "bridge_sha256": "37565bfaba63f452018596d422a65a7d969f06245bbe33a134e95f92fe2cad3e",
+    "runtime_transitive_attestation": false
+  },
+  "notices_for_proposed_published_material": [
+    {
+      "material": "Exact Sinabis seed and all derived XML bytes",
+      "notice": "Include exact pinned dataset card, creator/title/year/upstream URL/revision, CC-BY-4.0 URL, explicit unchanged baseline/modifications indication and recipe lineage.",
+      "evidence": "tools/oracle/notices/Sinabis-dataset-card.md (verified pin), family-design/sources.md"
+    },
+    {
+      "material": "Authored scripts, drivers and report documentation",
+      "notice": "Retain repository copyright and MIT permission text from LICENSE; do not describe upstream inputs or source excerpts as MIT-relicensed.",
+      "evidence": "LICENSE"
+    },
+    {
+      "material": "Retained CEN rule expressions/quoted nodes/messages in source-nodes.json and historical reports, even with complete CEN members external",
+      "notice": "Identify ConnectingEurope EN16931 1.3.16, exact archive/member pins and EUPL-1.2 notice. The selected CEN member has the EUPL-1.2 header. Include a small appropriate notice/license-text artifact independently of runtime archive distribution.",
+      "evidence": "discriminant/source/schematron/CII/EN16931-CII-syntax.sch header; family-design/sources.md"
+    },
+    {
+      "material": "XR and UN/CEFACT cited expressions/type descriptions in retained authored history",
+      "notice": "Keep XR source attribution and Apache-2.0 identification recorded by historical sources.md; keep UN/CEFACT attribution from original configured XSD headers for reproduced source material. Whole original XR/CEN/config members are external. This pass does not independently verify an XR license text or make legal conclusions.",
+      "evidence": "family-design/sources.md; selected member pins; xr-citations.json"
+    }
+  ],
+  "not_shipped": [
+    "validator.jar",
+    "config.zip",
+    "cen.zip",
+    "xr.zip",
+    "Parquet",
+    "complete upstream source trees",
+    "JDK",
+    "full artifacts.lock.json",
+    "unrelated planning handoffs"
+  ],
+  "limits": [
+    "No new upstream acquisition or Parquet extraction",
+    "No Java/native/oracle rerun",
+    "No source authority decision",
+    "Static XR check is separately recorded in xr-citations.json",
+    "License identification/notice assembly facts only, no legal-approval conclusion"
+  ]
+}

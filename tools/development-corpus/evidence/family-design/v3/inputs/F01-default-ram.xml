@@ -1,0 +1,223 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rsm:CrossIndustryInvoice xmlns:rsm="urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100" xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:100" xmlns="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100">
+  <rsm:ExchangedDocumentContext>
+    <BusinessProcessSpecifiedDocumentContextParameter>
+      <ID>urn:fdc:peppol.eu:2017:poacc:billing:01.0</ID>
+    </BusinessProcessSpecifiedDocumentContextParameter>
+    <GuidelineSpecifiedDocumentContextParameter>
+      <ID>urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0</ID>
+    </GuidelineSpecifiedDocumentContextParameter>
+  </rsm:ExchangedDocumentContext>
+  <rsm:ExchangedDocument>
+    <ID>SRV-2025-47731</ID>
+    <TypeCode>380</TypeCode>
+    <IssueDateTime>
+      <udt:DateTimeString format="102">20251206</udt:DateTimeString>
+    </IssueDateTime>
+    <IncludedNote>
+      <Content>Elektronische Dienstleistungsrechnung gemäß § 14 UStG und EN 16931.</Content>
+    </IncludedNote>
+    <IncludedNote>
+      <Content>Leistungszeitraum: 03.12.2025. Leistungsnachweise liegen bei.</Content>
+    </IncludedNote>
+    <IncludedNote>
+      <Content>Abnahme durch den Betriebsleiter erfolgte ohne Vorbehalte.</Content>
+    </IncludedNote>
+    <IncludedNote>
+      <Content>Geschäftsführer: Sabine Schreiber; HRB 68670, Amtsgericht Cologne; Steuernummer: 05/619/36198</Content>
+      <SubjectCode>REG</SubjectCode>
+    </IncludedNote>
+  </rsm:ExchangedDocument>
+  <rsm:SupplyChainTradeTransaction>
+    <IncludedSupplyChainTradeLineItem>
+      <AssociatedDocumentLineDocument>
+        <LineID>1</LineID>
+      </AssociatedDocumentLineDocument>
+      <SpecifiedTradeProduct>
+        <SellerAssignedID>SRV-DRN-THERM</SellerAssignedID>
+        <Name>Drohnengestützte Thermografie-Befliegung (PV-Park)</Name>
+        <Description>Infrarot-Hotspot-Analyse inklusive Messbericht und Geo-Tagging</Description>
+      </SpecifiedTradeProduct>
+      <SpecifiedLineTradeAgreement>
+        <NetPriceProductTradePrice>
+          <ChargeAmount>1927.35</ChargeAmount>
+        </NetPriceProductTradePrice>
+      </SpecifiedLineTradeAgreement>
+      <SpecifiedLineTradeDelivery>
+        <BilledQuantity unitCode="C62">1.00</BilledQuantity>
+      </SpecifiedLineTradeDelivery>
+      <SpecifiedLineTradeSettlement>
+        <ApplicableTradeTax>
+          <TypeCode>VAT</TypeCode>
+          <CategoryCode>S</CategoryCode>
+          <RateApplicablePercent>19.00</RateApplicablePercent>
+        </ApplicableTradeTax>
+        <SpecifiedTradeSettlementLineMonetarySummation>
+          <LineTotalAmount>1927.35</LineTotalAmount>
+        </SpecifiedTradeSettlementLineMonetarySummation>
+      </SpecifiedLineTradeSettlement>
+    </IncludedSupplyChainTradeLineItem>
+    <IncludedSupplyChainTradeLineItem>
+      <AssociatedDocumentLineDocument>
+        <LineID>2</LineID>
+      </AssociatedDocumentLineDocument>
+      <SpecifiedTradeProduct>
+        <SellerAssignedID>SRV-CALIB-SENS</SellerAssignedID>
+        <Name>Sensorkalibrierung &amp; Pyranometer-Prüfung</Name>
+        <Description>Präzisionsabgleich Einstrahlungssensoren vor Ort</Description>
+      </SpecifiedTradeProduct>
+      <SpecifiedLineTradeAgreement>
+        <NetPriceProductTradePrice>
+          <ChargeAmount>91.05</ChargeAmount>
+        </NetPriceProductTradePrice>
+      </SpecifiedLineTradeAgreement>
+      <SpecifiedLineTradeDelivery>
+        <BilledQuantity unitCode="HUR">8.00</BilledQuantity>
+      </SpecifiedLineTradeDelivery>
+      <SpecifiedLineTradeSettlement>
+        <ApplicableTradeTax>
+          <TypeCode>VAT</TypeCode>
+          <CategoryCode>S</CategoryCode>
+          <RateApplicablePercent>19.00</RateApplicablePercent>
+        </ApplicableTradeTax>
+        <SpecifiedTradeSettlementLineMonetarySummation>
+          <LineTotalAmount>728.40</LineTotalAmount>
+        </SpecifiedTradeSettlementLineMonetarySummation>
+      </SpecifiedLineTradeSettlement>
+    </IncludedSupplyChainTradeLineItem>
+    <IncludedSupplyChainTradeLineItem>
+      <AssociatedDocumentLineDocument>
+        <LineID>3</LineID>
+      </AssociatedDocumentLineDocument>
+      <SpecifiedTradeProduct>
+        <SellerAssignedID>SRV-PROT-EXPERT</SellerAssignedID>
+        <Name>Sachverständigen-Abnahmegutachten BESS-Speicher</Name>
+        <Description>Prüfung Brandschutz, Not-Aus-Matrix und Netzkonformität VDE 4110</Description>
+      </SpecifiedTradeProduct>
+      <SpecifiedLineTradeAgreement>
+        <NetPriceProductTradePrice>
+          <ChargeAmount>2503.78</ChargeAmount>
+        </NetPriceProductTradePrice>
+      </SpecifiedLineTradeAgreement>
+      <SpecifiedLineTradeDelivery>
+        <BilledQuantity unitCode="C62">1.00</BilledQuantity>
+      </SpecifiedLineTradeDelivery>
+      <SpecifiedLineTradeSettlement>
+        <ApplicableTradeTax>
+          <TypeCode>VAT</TypeCode>
+          <CategoryCode>S</CategoryCode>
+          <RateApplicablePercent>19.00</RateApplicablePercent>
+        </ApplicableTradeTax>
+        <SpecifiedTradeSettlementLineMonetarySummation>
+          <LineTotalAmount>2503.78</LineTotalAmount>
+        </SpecifiedTradeSettlementLineMonetarySummation>
+      </SpecifiedLineTradeSettlement>
+    </IncludedSupplyChainTradeLineItem>
+    <ApplicableHeaderTradeAgreement>
+      <BuyerReference>TICKET-283008</BuyerReference>
+      <SellerTradeParty>
+        <Name>Rheinaue Kabeltechnik GmbH</Name>
+        <SpecifiedLegalOrganization>
+          <ID>HRB 68670, Amtsgericht Cologne</ID>
+        </SpecifiedLegalOrganization>
+        <DefinedTradeContact>
+          <PersonName>Finn Vogel</PersonName>
+          <TelephoneUniversalCommunication>
+            <CompleteNumber>+49 15 5550 9449</CompleteNumber>
+          </TelephoneUniversalCommunication>
+          <EmailURIUniversalCommunication>
+            <URIID>billing@rheinaue-kabeltechnik.example</URIID>
+          </EmailURIUniversalCommunication>
+        </DefinedTradeContact>
+        <PostalTradeAddress>
+          <PostcodeCode>58770</PostcodeCode>
+          <LineOne>Bornwaldanger 267</LineOne>
+          <CityName>Köln</CityName>
+          <CountryID>DE</CountryID>
+        </PostalTradeAddress>
+        <URIUniversalCommunication>
+          <URIID schemeID="EM">billing@rheinaue-kabeltechnik.example</URIID>
+        </URIUniversalCommunication>
+        <SpecifiedTaxRegistration>
+          <ID schemeID="VA">DE535809207</ID>
+        </SpecifiedTaxRegistration>
+        <SpecifiedTaxRegistration>
+          <ID schemeID="FC">05/619/36198</ID>
+        </SpecifiedTaxRegistration>
+      </SellerTradeParty>
+      <BuyerTradeParty>
+        <Name>Sinabis Green Energy Deutschland GmbH</Name>
+        <DefinedTradeContact>
+          <PersonName>Miriam Albers</PersonName>
+          <TelephoneUniversalCommunication>
+            <CompleteNumber>+49 421 5550 1000</CompleteNumber>
+          </TelephoneUniversalCommunication>
+          <EmailURIUniversalCommunication>
+            <URIID>rechnungswesen@sinabis-green.example</URIID>
+          </EmailURIUniversalCommunication>
+        </DefinedTradeContact>
+        <PostalTradeAddress>
+          <PostcodeCode>28217</PostcodeCode>
+          <LineOne>Am Solarhafen 12</LineOne>
+          <CityName>Bremen</CityName>
+          <CountryID>DE</CountryID>
+        </PostalTradeAddress>
+        <URIUniversalCommunication>
+          <URIID schemeID="EM">rechnungswesen@sinabis-green.example</URIID>
+        </URIUniversalCommunication>
+        <SpecifiedTaxRegistration>
+          <ID schemeID="VA">DE664267744</ID>
+        </SpecifiedTaxRegistration>
+      </BuyerTradeParty>
+      <BuyerOrderReferencedDocument>
+        <IssuerAssignedID>WO-2025-903</IssuerAssignedID>
+      </BuyerOrderReferencedDocument>
+      <ContractReferencedDocument>
+        <IssuerAssignedID>SLA-2025-75</IssuerAssignedID>
+      </ContractReferencedDocument>
+    </ApplicableHeaderTradeAgreement>
+    <ApplicableHeaderTradeDelivery>
+      <ActualDeliverySupplyChainEvent>
+        <OccurrenceDateTime>
+          <udt:DateTimeString format="102">20251203</udt:DateTimeString>
+        </OccurrenceDateTime>
+      </ActualDeliverySupplyChainEvent>
+    </ApplicableHeaderTradeDelivery>
+    <ApplicableHeaderTradeSettlement>
+      <PaymentReference>SRV-2025-47731</PaymentReference>
+      <InvoiceCurrencyCode>EUR</InvoiceCurrencyCode>
+      <SpecifiedTradeSettlementPaymentMeans>
+        <TypeCode>58</TypeCode>
+        <Information>SEPA-Überweisung</Information>
+        <PayeePartyCreditorFinancialAccount>
+          <IBANID>DE71741734262882224463</IBANID>
+          <AccountName>Rheinaue Kabeltechnik GmbH</AccountName>
+        </PayeePartyCreditorFinancialAccount>
+        <PayeeSpecifiedCreditorFinancialInstitution>
+          <BICID>HQGZDEPT</BICID>
+        </PayeeSpecifiedCreditorFinancialInstitution>
+      </SpecifiedTradeSettlementPaymentMeans>
+      <ApplicableTradeTax>
+        <CalculatedAmount>980.31</CalculatedAmount>
+        <TypeCode>VAT</TypeCode>
+        <BasisAmount>5159.53</BasisAmount>
+        <CategoryCode>S</CategoryCode>
+        <RateApplicablePercent>19.00</RateApplicablePercent>
+      </ApplicableTradeTax>
+      <SpecifiedTradePaymentTerms>
+        <Description>Zahlbar innerhalb von 21 Tagen ohne Abzug.</Description>
+        <DueDateDateTime>
+          <udt:DateTimeString format="102">20251227</udt:DateTimeString>
+        </DueDateDateTime>
+      </SpecifiedTradePaymentTerms>
+      <SpecifiedTradeSettlementHeaderMonetarySummation>
+        <LineTotalAmount>5159.53</LineTotalAmount>
+        <TaxBasisTotalAmount>5159.53</TaxBasisTotalAmount>
+        <TaxTotalAmount currencyID="EUR">980.31</TaxTotalAmount>
+        <GrandTotalAmount>6139.84</GrandTotalAmount>
+        <TotalPrepaidAmount>0.00</TotalPrepaidAmount>
+        <DuePayableAmount>6139.84</DuePayableAmount>
+      </SpecifiedTradeSettlementHeaderMonetarySummation>
+    </ApplicableHeaderTradeSettlement>
+  </rsm:SupplyChainTradeTransaction>
+</rsm:CrossIndustryInvoice>

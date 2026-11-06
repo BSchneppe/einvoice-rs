@@ -1,0 +1,203 @@
+{
+  "status": "39_opaque_file_digests_verified",
+  "reviewed_revision": "87e0a0a0c7095412faf23efad7aa8f0710328d03",
+  "lock_sha256": "07bba584efbda8a8ac7433bd332fea5222c5f6f92e698bd97c8586bf5d090524",
+  "files": [
+    {
+      "path": ".github/workflows/oracle.yml",
+      "bytes": 2331,
+      "sha256": "a80fb10e94cfeca283250dccdbeebe53234d158b86725728df3c6833aec3dfab"
+    },
+    {
+      "path": "tools/oracle/.gitattributes",
+      "bytes": 127,
+      "sha256": "58f33b3971e3771a5345b74105824b64786dada95256a00ab9cf103780d1e4ec"
+    },
+    {
+      "path": "tools/oracle/.gitignore",
+      "bytes": 61,
+      "sha256": "43b9fa3e2a0c6a74ee831d688f3777720d343efd75a306b923997add7b1a1b2e"
+    },
+    {
+      "path": "tools/oracle/README.md",
+      "bytes": 12202,
+      "sha256": "c5da3170ad05d0c358b6e2d62df43ca46ab015278b95891a41dfca1f906b6f1a"
+    },
+    {
+      "path": "tools/oracle/artifacts.lock.json",
+      "bytes": 107626,
+      "sha256": "5dec502919d8ee137cd2c1453be8c65c1176e8bc707e358f646cef3fb1f55175"
+    },
+    {
+      "path": "tools/oracle/corpus/initial.jsonl",
+      "bytes": 17867,
+      "sha256": "ae21afa50aa6516d61b87c9f2e67088444f25c7495f111567801f5661242b315"
+    },
+    {
+      "path": "tools/oracle/corpus/sinabis.jsonl",
+      "bytes": 4445666,
+      "sha256": "b480d8bc0e1f171c383da7516017f07df0043509621d14d3e0378eefae2a20f8"
+    },
+    {
+      "path": "tools/oracle/corpus/split.json",
+      "bytes": 1014,
+      "sha256": "83dd3f9ca21c77a1eaefef6b3f44b71b4953ad44d26103f1ede85b08e7a2e4ea"
+    },
+    {
+      "path": "tools/oracle/java/Oracle.java",
+      "bytes": 9434,
+      "sha256": "37565bfaba63f452018596d422a65a7d969f06245bbe33a134e95f92fe2cad3e"
+    },
+    {
+      "path": "tools/oracle/java/ScopedOracle.java",
+      "bytes": 3196,
+      "sha256": "35adcd67c65f3450c584f8cd56de98f9fbe77351ab3696ebcea32caa49c0dd48"
+    },
+    {
+      "path": "tools/oracle/java/XPathProbe.java",
+      "bytes": 1502,
+      "sha256": "dcd3f32efe0a9db68cc51a61c589090ea834498d1f8b03849831df45129f1160"
+    },
+    {
+      "path": "tools/oracle/notices/CEN-LICENSE.txt",
+      "bytes": 13871,
+      "sha256": "fc22ec1dcd8bee4636a395fb332e2308cde870fb3fdc71a2e260b919877cdef5"
+    },
+    {
+      "path": "tools/oracle/notices/KoSIT-configuration-LICENSE",
+      "bytes": 12845,
+      "sha256": "73f2898ad26e1fcb9ec4649cdf8466ea0bda47644b7c12efc10a703bdfb94a9f"
+    },
+    {
+      "path": "tools/oracle/notices/KoSIT-jar-NOTICE",
+      "bytes": 8524,
+      "sha256": "d864516bb5b6aeb67440c4ba24b28f3208b9fe85e17baa3f3096fed66f68c4e2"
+    },
+    {
+      "path": "tools/oracle/notices/KoSIT-validator-LICENSE",
+      "bytes": 10173,
+      "sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9"
+    },
+    {
+      "path": "tools/oracle/notices/Sinabis-dataset-card.md",
+      "bytes": 12425,
+      "sha256": "6b1e08d286eabc899addeebc0d9fd8e8595d671ad83e04668a5baed3e2830f83"
+    },
+    {
+      "path": "tools/oracle/notices/XRechnung-LICENSE",
+      "bytes": 12850,
+      "sha256": "57e93bb611b8aeb93ff0f23b271a23291217b0016f6e66297dfd5e9467538a5f"
+    },
+    {
+      "path": "tools/oracle/oracle.py",
+      "bytes": 21031,
+      "sha256": "5de78991c1bb14b28d60afb4ec34822119b879c2e5be87608688f64dccd98a6a"
+    },
+    {
+      "path": "tools/oracle/outcome.schema.json",
+      "bytes": 2567,
+      "sha256": "e29acb623e7e4c5b26c91eb15fc6f6585bc83bb99f5a67d711ecefa26c8edb03"
+    },
+    {
+      "path": "tools/oracle/probes.py",
+      "bytes": 2019,
+      "sha256": "07c2de60b2ed709ac21f68908fca0be80406ac21e6c03b8da6321ab269a388a5"
+    },
+    {
+      "path": "tools/oracle/probes/xpath/Cargo.lock",
+      "bytes": 54675,
+      "sha256": "f56ca96d2dbcacc78512d0dca452f0873155d8c0f03135dbf5076dae98fe63f1"
+    },
+    {
+      "path": "tools/oracle/probes/xpath/Cargo.toml",
+      "bytes": 230,
+      "sha256": "d19fac5ae05714a9046706737484437867530fbe0421b6e73bf5ea5c8a9d3463"
+    },
+    {
+      "path": "tools/oracle/probes/xpath/cases.json",
+      "bytes": 2859,
+      "sha256": "c89a99cb7630a735bbc9491481e3f37d92ac32af83e677f1eeed961cc818ad6f"
+    },
+    {
+      "path": "tools/oracle/probes/xpath/src/main.rs",
+      "bytes": 1331,
+      "sha256": "548ba66a5f580a86bcac26c126141dfeb7f56c6a7244f7e0cd68475af8cd8f1b"
+    },
+    {
+      "path": "tools/oracle/probes/xsd/Cargo.lock",
+      "bytes": 21624,
+      "sha256": "66471989e43e580ab91cfd6fb0d1df9b3983afaa620a064d9f40fec5aedfaf17"
+    },
+    {
+      "path": "tools/oracle/probes/xsd/Cargo.toml",
+      "bytes": 128,
+      "sha256": "dc3ba27425b050571e1db58647518b95457bfb5230447bf0b4dc3a3614e0ede7"
+    },
+    {
+      "path": "tools/oracle/probes/xsd/src/main.rs",
+      "bytes": 5751,
+      "sha256": "f9ba1a3fd732c8095ec4b9ca166794d68cc5771dea108958396d9326def6315e"
+    },
+    {
+      "path": "tools/oracle/requirements-test.txt",
+      "bytes": 39,
+      "sha256": "7a1240cd7c9c96ad731362e57e6e1f7891894f2673354404390610a396385cf0"
+    },
+    {
+      "path": "tools/oracle/requirements.txt",
+      "bytes": 77,
+      "sha256": "19e7b10ce3869379f5523bce613ceb16cb1e5b37f0f8ac1e16b10133a7ecd65c"
+    },
+    {
+      "path": "tools/oracle/results/benchmark-smoke.json",
+      "bytes": 134270,
+      "sha256": "d1c208e061475ca64bfeb0a014ee97be2f16d098222bc1e4f7a9254dc1d383a9"
+    },
+    {
+      "path": "tools/oracle/results/initial.jsonl",
+      "bytes": 30801,
+      "sha256": "ecdf3994a46c314353683b97375df5eff20f8fd409e50cfa2cf2619085e848e1"
+    },
+    {
+      "path": "tools/oracle/results/initial.jsonl.metadata.json",
+      "bytes": 2022,
+      "sha256": "e7324d54e5c7220b9a187653c3511433fc40d32a3cb7191bd49db559e7154acb"
+    },
+    {
+      "path": "tools/oracle/results/scoped.jsonl",
+      "bytes": 52617,
+      "sha256": "50a80205eb07bda7674ce4fe814baa3a9df306778879870b385a8f13ec892aaf"
+    },
+    {
+      "path": "tools/oracle/results/sinabis.jsonl",
+      "bytes": 5639500,
+      "sha256": "903450856e9d2bc7d879f6860cc9262a6db8841e9945fdca99cd121e5dc2d8f6"
+    },
+    {
+      "path": "tools/oracle/results/sinabis.jsonl.metadata.json",
+      "bytes": 240737,
+      "sha256": "2ef1c13d946637a89fc960c2bb3a85b1469d81a678f75157cc1996148c283e97"
+    },
+    {
+      "path": "tools/oracle/results/xpath.json",
+      "bytes": 7575,
+      "sha256": "de3e7c3ee5017695d6145d6ca9c338f3ef0d4c388191e0f33c6961fcee164e15"
+    },
+    {
+      "path": "tools/oracle/results/xsd-probe.json",
+      "bytes": 766,
+      "sha256": "880d19c27d726f2aa34d7047b6af92bdeb520be838bce91bd8319205dcc8fc60"
+    },
+    {
+      "path": "tools/oracle/tests/test_oracle.py",
+      "bytes": 10751,
+      "sha256": "0caf93b1bc0b27be0c817cbe61014aade0ccabf4a7f161cf98c2eb38842668a7"
+    },
+    {
+      "path": "tools/oracle/workload.json",
+      "bytes": 1217,
+      "sha256": "ffa42ec1df119033c86a6614d48b6f84aa79b2eb263d5a843e84361c2738fb71"
+    }
+  ],
+  "label_deserialization": false
+}

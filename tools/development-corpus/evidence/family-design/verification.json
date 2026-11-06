@@ -1,0 +1,32 @@
+{
+  "checks_do_not_establish_schema_business_or_native_validity": true,
+  "current": {
+    "all_verdicts": "unknown",
+    "candidates": 59,
+    "family_counts": {
+      "F01": 5,
+      "F02": 14,
+      "F03": 11,
+      "F04": 6,
+      "F05": 5,
+      "F06": 18
+    },
+    "oracle_runs": 0,
+    "source_archives_read_only": true,
+    "status": "recipe_and_synthetic_checks_passed",
+    "xml11_synthetic_parse_skipped": 6
+  },
+  "current_batch_input_count": 59,
+  "distinct_historical_input_hashes": 63,
+  "empty_delivery_pair_same_expanded_name_and_zero_children": true,
+  "modified_input_as_ancestor_refused": 59,
+  "oracle_runs": 0,
+  "predecessor_ledger_hash_chain_verified": true,
+  "python": "3.12.6",
+  "retained_v1_script_hash_bound": true,
+  "retained_v2_script_hash_bound": true,
+  "schema_or_business_evaluated": false,
+  "scope": "synthetic recipe, byte-form and syntax/count QA only",
+  "xml10_xml11_nel_ls_literal_reference_bytes_checked": true,
+  "xml11_nel_attribute_pair_bytes_checked": true
+}
