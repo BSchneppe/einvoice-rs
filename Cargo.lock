@@ -183,6 +183,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "einvoice-numeric"
+version = "0.1.0"
+dependencies = [
+ "num-bigint",
+ "num-traits",
+]
+
+[[package]]
 name = "einvoice_deps_yaserde"
 version = "0.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -368,6 +376,25 @@ name = "memchr"
 version = "2.7.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "32a282da65faaf38286cf3be983213fcf1d2e2a58700e808f83f4ea9a4804bc0"
+
+[[package]]
+name = "num-bigint"
+version = "0.4.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c89e69e7e0f03bea5ef08013795c25018e101932225a656383bd384495ecc367"
+dependencies = [
+ "num-integer",
+ "num-traits",
+]
+
+[[package]]
+name = "num-integer"
+version = "0.1.47"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7ce2d95d4b3734dc35aa2f45e1aa22cd416814592a4f9d9205e11affd5b8e10b"
+dependencies = [
+ "num-traits",
+]
 
 [[package]]
 name = "num-traits"
