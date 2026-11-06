@@ -1,0 +1,28 @@
+{
+  "format": 1,
+  "themes": {
+    "b2b_service_maintenance": "development",
+    "b2b_hardware_delivery": "development",
+    "municipal_epc_milestone": "held_out",
+    "utility_energy_feedin": "development",
+    "reverse_charge_subcontractor": "held_out",
+    "credit_note_correction": "held_out"
+  },
+  "mutation_families": {
+    "extra-attribute": "development",
+    "unknown-element": "held_out",
+    "duplicate-context": "held_out",
+    "invalid-decimal": "development",
+    "missing-line-total": "development",
+    "equivalent-prefix": "development",
+    "wrong-namespace": "held_out",
+    "malformed-xml": "held_out",
+    "large-text": "held_out",
+    "deep-unknown": "held_out",
+    "severity-override": "development",
+    "severity-escalation": "held_out"
+  },
+  "policy": "Whole themes and mutation families, never random adjacent rows. Official examples and rule families held out. Shared mutation seed is public; no held-out label-guided optimization.",
+  "dataset_rows": 10000,
+  "initial_cases": 43
+}

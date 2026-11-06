@@ -1,0 +1,11 @@
+[package]
+name = "einvoice-xpath-probe"
+version = "0.1.0"
+edition = "2021"
+[dependencies]
+xee-xpath = "=0.1.5"
+xee-xpath-ast = "=0.1.4"
+serde_json = "1"
+
+# Deliberately independent from the shipping library workspace.
+[workspace]

@@ -1,0 +1,32 @@
+{
+  "format": 1,
+  "adapter": "xsd-schema 0.3.0",
+  "cases": [
+    "valid-0",
+    "valid-1",
+    "valid-2",
+    "valid-3",
+    "valid-4",
+    "valid-5",
+    "valid-6",
+    "valid-7",
+    "valid-8",
+    "valid-9",
+    "valid-10",
+    "valid-11",
+    "business-invalid-xsd-valid",
+    "extra-attribute",
+    "unknown-element",
+    "duplicate-context",
+    "invalid-decimal",
+    "malformed-truncated",
+    "namespace-prefix-renamed",
+    "namespace-wrong-uri",
+    "bounded-depth"
+  ],
+  "passed": 21,
+  "failed": 0,
+  "source_sha256": "f9ba1a3fd732c8095ec4b9ca166794d68cc5771dea108958396d9326def6315e",
+  "cargo_lock_sha256": "66471989e43e580ab91cfd6fb0d1df9b3983afaa620a064d9f40fec5aedfaf17",
+  "scope": "Structural feasibility only; not full business validation"
+}
