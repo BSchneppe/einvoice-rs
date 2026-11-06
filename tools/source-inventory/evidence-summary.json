@@ -1,0 +1,565 @@
+{
+  "archives": {
+    "cen.zip": {
+      "member_set_verified": true,
+      "selected_members": 7,
+      "sha256": "1cd53cb8a84d38aedc82c0caede217da983a7934dd663f793a092fd66443c561"
+    },
+    "config.zip": {
+      "member_set_verified": true,
+      "selected_members": 7,
+      "sha256": "2530cd107c414511c5d0462ec10f886910395abfca820db82e83d70bf01221a8"
+    },
+    "xr.zip": {
+      "member_set_verified": true,
+      "selected_members": 2,
+      "sha256": "ca5e07afd04e72cd283d581590ffff3a15f4aac9d2f40c993345d78e67ea22b4"
+    }
+  },
+  "artifact_lock_sha256": "5dec502919d8ee137cd2c1453be8c65c1176e8bc707e358f646cef3fb1f55175",
+  "claims": {
+    "conformance": false,
+    "native_attestation": false,
+    "native_tested_coverage": "unavailable",
+    "release_evidence": false,
+    "resource_attestation": false,
+    "runtime_coverage": "unavailable",
+    "semantic_equivalence": "unavailable"
+  },
+  "comparisons": [
+    {
+      "configured": "config.zip!resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+      "fields": {
+        "context": {
+          "boundary_whitespace_only": 98,
+          "exact": 708
+        },
+        "flag": {
+          "exact": 806
+        },
+        "role": {
+          "exact": 806
+        },
+        "test": {
+          "boundary_whitespace_only": 4,
+          "different": 1,
+          "exact": 801
+        }
+      },
+      "non_whitespace_differences": [
+        {
+          "candidate_controls": [
+            [
+              {
+                "attributes": {
+                  "version": "2.0"
+                },
+                "kind": "transform",
+                "node": 0
+              },
+              {
+                "attributes": {
+                  "match": "/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement ",
+                  "mode": "d17e41",
+                  "priority": "40"
+                },
+                "kind": "template",
+                "node": 3369
+              },
+              {
+                "attributes": {},
+                "kind": "choose",
+                "node": 3371
+              },
+              {
+                "attributes": {},
+                "kind": "otherwise",
+                "node": 3382,
+                "preceding_when_branches": [
+                  {
+                    "attributes": {
+                      "test": "$schxslt:patterns-matched[. = 'd17e848']"
+                    },
+                    "node": 3372
+                  }
+                ]
+              },
+              {
+                "attributes": {
+                  "test": "not(not(ram:BuyerTaxRepresentativeTradeParty))"
+                },
+                "kind": "if",
+                "node": 3629
+              }
+            ]
+          ],
+          "candidate_emitters": [
+            3630
+          ],
+          "emitter_kind_agrees": true,
+          "fields": {
+            "context": {
+              "comparison": "boundary_whitespace_only",
+              "configured": "/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement ",
+              "source": "/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement"
+            },
+            "flag": {
+              "comparison": "exact",
+              "configured": "warning",
+              "source": "warning"
+            },
+            "role": {
+              "comparison": "exact",
+              "configured": null,
+              "source": null
+            },
+            "test": {
+              "comparison": "different",
+              "configured": "not(ram:BuyerTaxRepresentativeTradeParty)",
+              "source": "not(ram:SellerTaxRepresentativeTradeParty/ram:ID)"
+            }
+          },
+          "original_id": "CII-SR-282",
+          "source_node": 576,
+          "source_site_id": "5d71331275bda14ba68e58772ef03d0ec171b356dc93ecdf63ca195a2e27019e",
+          "status": "unique_raw_id"
+        }
+      ],
+      "source": "cen.zip!schematron/preprocessed/EN16931-CII-validation-preprocessed.sch",
+      "statuses": {
+        "unique_raw_id": 806
+      },
+      "unassociated_emitters": [],
+      "unknown_id_emitters": []
+    },
+    {
+      "configured": "config.zip!resources/xrechnung/3.0.2/xsl/XRechnung-CII-validation.xsl",
+      "fields": {
+        "context": {
+          "exact": 74
+        },
+        "flag": {
+          "exact": 74
+        },
+        "role": {
+          "exact": 74
+        },
+        "test": {
+          "exact": 74
+        }
+      },
+      "non_whitespace_differences": [],
+      "source": "xr.zip!schematron/cii/XRechnung-CII-validation.sch",
+      "statuses": {
+        "unique_raw_id": 74
+      },
+      "unassociated_emitters": [],
+      "unknown_id_emitters": []
+    }
+  ],
+  "denominators": {
+    "configured_emitters": {
+      "active-pattern": 10,
+      "failed-assert": 880,
+      "fired-rule": 156,
+      "suppressed-rule": 156
+    },
+    "original_declarations": {
+      "assert": 880,
+      "report": 0,
+      "rule": 156
+    },
+    "selected_source_sites": {
+      "assert": 880,
+      "report": 0,
+      "rule": 156
+    }
+  },
+  "format": "bsc10-source-inventory-v1-summary",
+  "inspector_sha256": "ccd04ae27602a169fbb582133968143fbf37a56eecb66be1889f9e4b89b828d5",
+  "members": {
+    "cen.zip!schematron/CII/EN16931-CII-model.sch": {
+      "bytes": 61284,
+      "declarations": {
+        "active": 0,
+        "assert": 0,
+        "param": 259,
+        "pattern": 1,
+        "phase": 0,
+        "report": 0,
+        "rule": 0
+      },
+      "duplicate_parameters": [],
+      "representation": "original_schematron",
+      "sha256": "4fd7b27479aa31d464f977a6abb3ba9d29263c17f7ec49e54e0a77b02d2a751b",
+      "xml_declaration": {
+        "encoding": null,
+        "standalone": -1,
+        "version": "1.0"
+      }
+    },
+    "cen.zip!schematron/CII/EN16931-CII-syntax.sch": {
+      "bytes": 57641,
+      "declarations": {
+        "active": 0,
+        "assert": 0,
+        "param": 615,
+        "pattern": 1,
+        "phase": 0,
+        "report": 0,
+        "rule": 0
+      },
+      "duplicate_parameters": [
+        {
+          "name": "CII-SR-282",
+          "occurrences": [
+            {
+              "attributes": {
+                "name": "CII-SR-282",
+                "value": "not(ram:BuyerTaxRepresentativeTradeParty)"
+              },
+              "site_id": "cbbbd1444eada34b5550adcc159e91cf3a69ef916968f18877d6e6ee5e856af5"
+            },
+            {
+              "attributes": {
+                "name": "CII-SR-282",
+                "value": "not(ram:SellerTaxRepresentativeTradeParty/ram:ID)"
+              },
+              "site_id": "d7a2b0e96ed9bdb875652cba6b669122fc76cb4d92242516568e7a26b6bdf9fa"
+            }
+          ]
+        }
+      ],
+      "representation": "original_schematron",
+      "sha256": "a2c3d977fbb1aaf7563bc4620baa6840885dd7fba29294d50d19a3ece35aae44",
+      "xml_declaration": {
+        "encoding": "ISO-8859-1",
+        "standalone": -1,
+        "version": "1.0"
+      }
+    },
+    "cen.zip!schematron/EN16931-CII-validation.sch": {
+      "bytes": 1982,
+      "declarations": {
+        "active": 3,
+        "assert": 0,
+        "param": 0,
+        "pattern": 0,
+        "phase": 3,
+        "report": 0,
+        "rule": 0
+      },
+      "duplicate_parameters": [],
+      "representation": "original_schematron",
+      "sha256": "7f3dc5e824cb945f4d630f4b93915166eb61b2bc5fd358f7bd0e5c2f22cd0741",
+      "xml_declaration": {
+        "encoding": "UTF-8",
+        "standalone": -1,
+        "version": "1.0"
+      }
+    },
+    "cen.zip!schematron/abstract/EN16931-CII-model.sch": {
+      "bytes": 52306,
+      "declarations": {
+        "active": 0,
+        "assert": 200,
+        "param": 0,
+        "pattern": 1,
+        "phase": 0,
+        "report": 0,
+        "rule": 59
+      },
+      "duplicate_parameters": [],
+      "representation": "original_schematron",
+      "sha256": "76de06cee20664c374032fa8b763e1f510551b9e9cc0e6fdd3e104964c85231b",
+      "xml_declaration": {
+        "encoding": null,
+        "standalone": -1,
+        "version": "1.0"
+      }
+    },
+    "cen.zip!schematron/abstract/EN16931-CII-syntax.sch": {
+      "bytes": 77269,
+      "declarations": {
+        "active": 0,
+        "assert": 583,
+        "param": 0,
+        "pattern": 1,
+        "phase": 0,
+        "report": 0,
+        "rule": 31
+      },
+      "duplicate_parameters": [],
+      "representation": "original_schematron",
+      "sha256": "6b396a301786c00e7f3ba97e9bea2c25577b28fb5c3c60f6e6c05fc86b0aef0d",
+      "xml_declaration": {
+        "encoding": null,
+        "standalone": -1,
+        "version": "1.0"
+      }
+    },
+    "cen.zip!schematron/codelist/EN16931-CII-codes.sch": {
+      "bytes": 34078,
+      "declarations": {
+        "active": 0,
+        "assert": 23,
+        "param": 0,
+        "pattern": 1,
+        "phase": 0,
+        "report": 0,
+        "rule": 23
+      },
+      "duplicate_parameters": [],
+      "representation": "original_schematron",
+      "sha256": "c260c325dbccbbfdace9b049180aa4c708e45d84e03469a86bdf399b07a7b799",
+      "xml_declaration": {
+        "encoding": "ISO-8859-1",
+        "standalone": -1,
+        "version": "1.0"
+      }
+    },
+    "cen.zip!schematron/preprocessed/EN16931-CII-validation-preprocessed.sch": {
+      "bytes": 240038,
+      "declarations": {
+        "active": 3,
+        "assert": 806,
+        "param": 0,
+        "pattern": 3,
+        "phase": 3,
+        "report": 0,
+        "rule": 113
+      },
+      "duplicate_parameters": [],
+      "representation": "preprocessed_schematron",
+      "sha256": "54e0dc6d06cd7f17d268bb9696ff56f58d386ee28961c9bbef0a56718c400c89",
+      "xml_declaration": {
+        "encoding": "UTF-8",
+        "standalone": -1,
+        "version": "1.0"
+      }
+    },
+    "config.zip!resources/cii/16b/xsd/CrossIndustryInvoice_100pD16B.xsd": {
+      "bytes": 3078,
+      "declarations": {
+        "active": 0,
+        "assert": 0,
+        "param": 0,
+        "pattern": 0,
+        "phase": 0,
+        "report": 0,
+        "rule": 0
+      },
+      "duplicate_parameters": [],
+      "representation": "invoice_xsd",
+      "sha256": "3baf143b90f289d62c5dfb086aa51fa183490a2d0b38a40c6b31dcae0760f2ba",
+      "xml_declaration": {
+        "encoding": "UTF-8",
+        "standalone": -1,
+        "version": "1.0"
+      }
+    },
+    "config.zip!resources/cii/16b/xsd/CrossIndustryInvoice_QualifiedDataType_100pD16B.xsd": {
+      "bytes": 36806,
+      "declarations": {
+        "active": 0,
+        "assert": 0,
+        "param": 0,
+        "pattern": 0,
+        "phase": 0,
+        "report": 0,
+        "rule": 0
+      },
+      "duplicate_parameters": [],
+      "representation": "invoice_xsd",
+      "sha256": "6649215914728652e883662bec1d3eab008c215e86a59f3bb417db9723ee8c5c",
+      "xml_declaration": {
+        "encoding": "UTF-8",
+        "standalone": -1,
+        "version": "1.0"
+      }
+    },
+    "config.zip!resources/cii/16b/xsd/CrossIndustryInvoice_ReusableAggregateBusinessInformationEntity_100pD16B.xsd": {
+      "bytes": 99402,
+      "declarations": {
+        "active": 0,
+        "assert": 0,
+        "param": 0,
+        "pattern": 0,
+        "phase": 0,
+        "report": 0,
+        "rule": 0
+      },
+      "duplicate_parameters": [],
+      "representation": "invoice_xsd",
+      "sha256": "1c42244298a863bcc0b5196983ff0a5d084fcabe58aea77ef82b242e7cd0ddfd",
+      "xml_declaration": {
+        "encoding": "UTF-8",
+        "standalone": -1,
+        "version": "1.0"
+      }
+    },
+    "config.zip!resources/cii/16b/xsd/CrossIndustryInvoice_UnqualifiedDataType_100pD16B.xsd": {
+      "bytes": 6967,
+      "declarations": {
+        "active": 0,
+        "assert": 0,
+        "param": 0,
+        "pattern": 0,
+        "phase": 0,
+        "report": 0,
+        "rule": 0
+      },
+      "duplicate_parameters": [],
+      "representation": "invoice_xsd",
+      "sha256": "04fce6f6f28521886731294be18a4e6bb5cb3003456457d99ad5c4d3e652f497",
+      "xml_declaration": {
+        "encoding": "UTF-8",
+        "standalone": -1,
+        "version": "1.0"
+      }
+    },
+    "config.zip!resources/cii/16b/xsl/EN16931-CII-validation.xsl": {
+      "bytes": 934750,
+      "declarations": {
+        "active": 0,
+        "assert": 0,
+        "param": 0,
+        "pattern": 0,
+        "phase": 0,
+        "report": 0,
+        "rule": 0
+      },
+      "duplicate_parameters": [],
+      "representation": "configured_xslt",
+      "sha256": "0911e927f13f9ae2cdc7f973643f27bf0ad3c5da02483c04a5b8a47eb4822199",
+      "xml_declaration": {
+        "encoding": "UTF-8",
+        "standalone": -1,
+        "version": "1.0"
+      }
+    },
+    "config.zip!resources/xrechnung/3.0.2/xsl/XRechnung-CII-validation.xsl": {
+      "bytes": 189030,
+      "declarations": {
+        "active": 0,
+        "assert": 0,
+        "param": 0,
+        "pattern": 0,
+        "phase": 0,
+        "report": 0,
+        "rule": 0
+      },
+      "duplicate_parameters": [],
+      "representation": "configured_xslt",
+      "sha256": "ec54f662803a87f527ec606d1320bc404f1657a848af6a76f37f32905e4aac40",
+      "xml_declaration": {
+        "encoding": "UTF-8",
+        "standalone": -1,
+        "version": "1.0"
+      }
+    },
+    "config.zip!scenarios.xml": {
+      "bytes": 40562,
+      "declarations": {
+        "active": 0,
+        "assert": 0,
+        "param": 0,
+        "pattern": 0,
+        "phase": 0,
+        "report": 0,
+        "rule": 0
+      },
+      "duplicate_parameters": [],
+      "representation": "configuration",
+      "sha256": "3e8161a39dfaa6aea4d990b279aab848be4f4c6169e820f354a159bda7693fb0",
+      "xml_declaration": {
+        "encoding": "UTF-8",
+        "standalone": -1,
+        "version": "1.0"
+      }
+    },
+    "xr.zip!schematron/cii/XRechnung-CII-validation.sch": {
+      "bytes": 54795,
+      "declarations": {
+        "active": 7,
+        "assert": 74,
+        "param": 0,
+        "pattern": 6,
+        "phase": 1,
+        "report": 0,
+        "rule": 43
+      },
+      "duplicate_parameters": [],
+      "representation": "original_schematron",
+      "sha256": "53bb5c0664fc603bbaaddeed26eb59525a05d3359d1a63f148876b2f2eedde1d",
+      "xml_declaration": {
+        "encoding": "UTF-8",
+        "standalone": -1,
+        "version": "1.0"
+      }
+    },
+    "xr.zip!schematron/common.sch": {
+      "bytes": 4614,
+      "declarations": {
+        "active": 0,
+        "assert": 0,
+        "param": 0,
+        "pattern": 1,
+        "phase": 0,
+        "report": 0,
+        "rule": 0
+      },
+      "duplicate_parameters": [],
+      "representation": "original_schematron",
+      "sha256": "7443d2f4c12d3e1ffa6b38f7f83cea89a9b03343f31f726083018d8985492a12",
+      "xml_declaration": {
+        "encoding": "UTF-8",
+        "standalone": -1,
+        "version": "1.0"
+      }
+    }
+  },
+  "policy_sha256": "a6913cd2b5317659bb5f1e29c42dc177a22c92f5423cf12281ed169605c873c7",
+  "relations": {
+    "cycle_back_edges": [],
+    "statuses": {
+      "declared_phase": 7,
+      "selected": 12,
+      "unexpanded_parameter_occurrence": 874,
+      "unresolved_static_candidates": 15
+    },
+    "xsd_import_namespace_checks": [
+      {
+        "declared": "urn:un:unece:uncefact:data:standard:QualifiedDataType:100",
+        "equal": true,
+        "target": "urn:un:unece:uncefact:data:standard:QualifiedDataType:100"
+      },
+      {
+        "declared": "urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100",
+        "equal": true,
+        "target": "urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100"
+      },
+      {
+        "declared": "urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100",
+        "equal": true,
+        "target": "urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100"
+      },
+      {
+        "declared": "urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100",
+        "equal": true,
+        "target": "urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100"
+      },
+      {
+        "declared": "urn:un:unece:uncefact:data:standard:QualifiedDataType:100",
+        "equal": true,
+        "target": "urn:un:unece:uncefact:data:standard:QualifiedDataType:100"
+      },
+      {
+        "declared": "urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100",
+        "equal": true,
+        "target": "urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100"
+      }
+    ]
+  },
+  "report_sha256": "7c0f418e3d36c78653877572d0d21368bbae67d83c22ca215b9db72e542265ad"
+}
