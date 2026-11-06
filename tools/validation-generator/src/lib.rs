@@ -1,10 +1,12 @@
 //! Offline maintainer frontend. Inspection is deliberately non-executable.
 pub mod bundle;
 pub mod emit;
+mod resolution;
 pub mod schema;
 pub mod schematron;
 pub mod source;
 pub mod xpath;
+pub use resolution::{compile_candidate, CandidateInspection};
 use std::fmt;
 pub use validation_ir as ir;
 #[derive(Debug)]

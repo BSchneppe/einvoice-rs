@@ -1,0 +1,5 @@
+<references xmlns="urn:authored:comparison">
+  <release id="release">Opaque release comparison.</release>
+  <configured id="configured"><condition id="condition">Opaque configured comparison.</condition></configured>
+  <scenario id="scenario">Opaque policy comparison.</scenario>
+</references>

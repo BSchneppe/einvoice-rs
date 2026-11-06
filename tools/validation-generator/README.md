@@ -209,3 +209,84 @@ cargo +1.83.0 fmt --manifest-path tools/validation-generator/Cargo.toml --all --
 cargo +1.83.0 clippy --manifest-path tools/validation-generator/Cargo.toml --workspace --all-targets --all-features --locked --offline -- -D warnings
 RUSTDOCFLAGS='-D warnings' cargo +1.83.0 doc --manifest-path tools/validation-generator/Cargo.toml --workspace --no-deps --document-private-items --all-features --locked --offline --examples
 ```
+
+## Bounded original-source candidate
+
+`resolve-candidate` accepts the same five explicit archive arguments and empty
+`--out` directory as `inspect`. It emits a **non-executable** materialized
+`einvoice-resolved-candidate/1` envelope. The compiler owns the fixed
+`source-resolution.lock.json`; there is no caller manifest, selector, replacement
+expression, capability flag or arbitrary raw-package constructor.
+
+The single CII-SR-282 decision reads the existing original concrete
+`sch:param/@value` at the guarded buyer site. A separate bounded reader verifies
+the original entry includes, concrete `is-a`/abstract pattern linkage, unique
+assertion/context linkage, exact complete ordered duplicate pair, source and
+attribute ranges/hashes, full ancestry, namespace map, message, flags, severities
+and unchanged policy. It parses both occurrences and the source context with the
+existing XPath parser. No general abstract instantiation or first-wins duplicate
+policy is added. Unknown decisions/fields, duplicate JSON keys, unused guards,
+source drift and unexplained materialization differences fail compilation.
+
+Output layout:
+
+- `raw/`: unchanged raw IR and 31 original resources, with current generator metadata.
+- `resolved-candidate.json`: effective Package, original Site/Expression/context,
+  effective Expression, both parameter occurrences and complete source lineage.
+- `source-resolution.lock.json`: exact fixed decision manifest bytes.
+- `candidate-resources/`: original entry/abstract/concrete syntax documents and
+  original release XSLT comparison bytes. XSLT is reference evidence only.
+- `resolved-manifest.json`: exact candidate/effective-package/raw/decision digests,
+  all emitted file hashes, generator source fingerprint and pending audit/backend.
+
+The candidate adds only its selected predicate and explicit source resources/edges
+(and any mechanically discovered requirements). A private compiler check compares
+all candidate fields with source-derived expectations; any second predicate,
+context, helper, message, policy or AST/source/provenance change fails. Serde
+roundtrips are inspection data, **not** verified compiler values or runtime
+admission. Runtime consumes the materialized Package and never applies an overlay
+or chooses source authority.
+
+Raw IR retains SHA-256
+`8882e1e0550e0f45db2aa6e55ec28de0cc120b51983bba79f2bb175c5b02bed6`.
+The raw manifest changes when compiler code/contract/fixed-manifest fingerprint
+changes. `SOURCE-ACCOUNTING.json` protects raw bytes; separate
+`CANDIDATE-ACCOUNTING.json` protects candidate outputs. Neither file certifies
+semantics. Reproduce and check both expectations with:
+
+```sh
+python3 tools/validation-generator/scripts/generate.py \
+  --archives tools/validation-generator/.cache/archives \
+  --out tools/validation-generator/.cache/resolution-reproduction \
+  --check-accounting tools/validation-generator/SOURCE-ACCOUNTING.json \
+  --check-candidate-accounting tools/validation-generator/CANDIDATE-ACCOUNTING.json
+```
+
+This generates raw and candidate outputs twice with reversed archive arguments,
+compares complete output trees, runs the real-source compiler/serde/provenance
+roundtrip, independently checks source ranges/hashes/materialized deltas and runs
+the existing source accounting and 24 corruption tests. Four additional candidate
+test groups cover a positive control and eight coordinated mutations (including
+selected AST axes/functions/namespaces and added resource identities/roles) after
+recomputing outer hashes. The checker compares the selected AST with an independently
+authored tree and the fixed AST digest, and resource metadata with source pins.
+These tests strengthen compiler evidence; they are not runtime admission. The real-source Rust test
+is explicitly ignored in cache-free unit runs and obligatorily enabled by this
+script after acquisition; `VALIDATION_GENERATOR_ARCHIVES` supplies its explicit
+archive directory. Authored source-only fixtures exercise deeper guards after
+fixture archive/member pins are refreshed. No invoice or BSC-10 control is used.
+
+Full predicate/context/helper/message/policy correspondence remains pending.
+Backend and policy execution remain `Unavailable`; `runnable` still errors before
+creating output. The local decision does not certify undiscovered differences,
+BSC-10 evidence, native parity, complete source resolution, protected attestation,
+AOT or performance. Independent review of this compiler pass is still required.
+
+Root regression checks (the generator remains isolated from that workspace):
+
+```sh
+cargo +1.83.0 test --workspace --all-features --locked --offline
+cargo +1.83.0 fmt --all -- --check
+cargo +1.83.0 clippy --workspace --all-targets --all-features --locked --offline -- -D warnings
+RUSTDOCFLAGS='-D warnings' cargo +1.83.0 doc --workspace --no-deps --document-private-items --all-features --locked --offline --examples
+```
