@@ -1,0 +1,48 @@
+name: Benchmark preparation
+
+on:
+  pull_request:
+    paths:
+      - 'tools/benchmark/**'
+      - 'tools/oracle/workload.json'
+      - 'tools/oracle/corpus/initial.jsonl'
+      - 'tools/oracle/corpus/split.json'
+      - 'tools/oracle/oracle.py'
+      - 'tools/oracle/java/Oracle.java'
+      - 'tools/oracle/artifacts.lock.json'
+      - '.github/workflows/benchmark-preflight.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-preparation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Offline integrity and fail-closed tests
+        run: python3.12 -B -m unittest discover -s tools/benchmark/tests -v
+      - name: Linux collector smoke (no validation or timing authorization)
+        shell: bash
+        run: |
+          python3.12 -B tools/benchmark/preflight.py prepare --output "$RUNNER_TEMP/bsc11-prepare"
+          python3.12 -B tools/benchmark/preflight.py compare "$RUNNER_TEMP/bsc11-prepare" "$RUNNER_TEMP/bsc11-prepare" --output "$RUNNER_TEMP/bsc11-compare"
+          python3.12 -B - "$RUNNER_TEMP/bsc11-prepare" "$RUNNER_TEMP/bsc11-compare" <<'PY'
+          import json
+          from pathlib import Path
+          import sys
+          preparation = Path(sys.argv[1])
+          raw = json.loads((preparation / 'resources.json').read_bytes())
+          assert raw['platform'] == 'Linux'
+          assert raw['origin'] == 'live_self_process'
+          for snapshot in (raw['before'], raw['after']):
+              assert snapshot['affinity']
+              assert snapshot['ancestors']
+          for bundle in (preparation, Path(sys.argv[2])):
+              report = json.loads((bundle / 'report.json').read_bytes())
+              assert report['release_gate_eligible'] is False
+              for key in ('effective_budget', 'execution', 'enforcement', 'exclusivity', 'correctness', 'timing'):
+                  assert report[key] == 'UNPROVEN'
+          PY
