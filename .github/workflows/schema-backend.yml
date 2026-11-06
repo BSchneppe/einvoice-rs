@@ -39,7 +39,6 @@ jobs:
         shell: bash
     env:
       CARGO_TARGET_DIR: ${{ github.workspace }}/tools/schema-backend/target
-      XSD_UPSTREAM_ARCHIVE: ${{ runner.temp }}/xsd-schema-0.3.0.crate
     steps:
       # Preserve the published LF and CRLF bytes on every platform. The package
       # inventory deliberately includes upstream files with both line endings.
@@ -51,6 +50,8 @@ jobs:
           python-version: '3.12'
       - name: Install Rust 1.83
         run: rustup toolchain install 1.83.0 --profile minimal --component rustfmt --component clippy
+      - name: Set archive path
+        run: echo "XSD_UPSTREAM_ARCHIVE=$RUNNER_TEMP/xsd-schema-0.3.0.crate" >> "$GITHUB_ENV"
       - name: Supply pinned upstream archive
         run: |
           python -c 'import os, pathlib, urllib.request; pathlib.Path(os.environ["XSD_UPSTREAM_ARCHIVE"]).write_bytes(urllib.request.urlopen("https://crates.io/api/v1/crates/xsd-schema/0.3.0/download").read())'
