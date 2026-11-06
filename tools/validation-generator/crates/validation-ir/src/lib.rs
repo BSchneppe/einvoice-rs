@@ -1,4 +1,5 @@
 //! Backend-independent inspection contract. No parser, archive ingestion, or execution API.
+pub mod resolved;
 use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, BTreeSet};
 
@@ -16,6 +17,7 @@ impl Name {
     }
 }
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct Location {
     pub resource: String,
     /// Raw UTF-8 XML element/attribute range, never a decoded XPath range.

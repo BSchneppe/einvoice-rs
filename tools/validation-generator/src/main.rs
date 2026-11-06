@@ -1,11 +1,13 @@
 //! Thin maintainer-only CLI; archive input is always explicit and offline.
 use std::{collections::BTreeMap, path::PathBuf};
-use validation_generator::{bundle, emit, source, Error, Result};
+use validation_generator::{bundle, compile_candidate, emit, source, Error, Result};
 fn run() -> Result<()> {
     let mut args = std::env::args().skip(1);
-    let command = args.next().ok_or_else(||Error::new("usage: validation-generator inspect|runnable --out DIR --archive NAME=PATH (all five locked archives)"))?;
-    if command != "inspect" && command != "runnable" {
-        return Err(Error::new("unknown command; only inspect or runnable"));
+    let command = args.next().ok_or_else(||Error::new("usage: validation-generator inspect|resolve-candidate|runnable --out DIR --archive NAME=PATH (all five locked archives)"))?;
+    if !["inspect", "resolve-candidate", "runnable"].contains(&command.as_str()) {
+        return Err(Error::new(
+            "unknown command; only inspect, resolve-candidate or runnable",
+        ));
     }
     let mut paths = BTreeMap::new();
     let mut out = None;
@@ -36,6 +38,14 @@ fn run() -> Result<()> {
     }
     let directory = out.ok_or_else(|| Error::new("missing --out"))?;
     let sources = source::Sources::load(&paths)?;
+    if command == "resolve-candidate" {
+        let candidate = compile_candidate(&sources)?;
+        println!(
+            "non-executable resolved candidate sha256 {}",
+            emit::candidate(&candidate, &directory)?
+        );
+        return Ok(());
+    }
     let inspection = bundle::compile(&sources)?;
     if command == "runnable" {
         emit::runnable(&inspection, &directory)?;

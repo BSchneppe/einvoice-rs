@@ -69,3 +69,34 @@ matrix; it cannot be manufactured by passing a supported Boolean or arbitrary
 caller callback. Current `runnable` always rejects and exposes no evidence API.
 Backend/lowering integration can extend this contract under review; changing AST
 or policy semantics requires a new format instead of silently reinterpreting v1.
+
+`resolved` adds a separate `einvoice-resolved-candidate/1` serde envelope. Raw
+Package serialization stays unchanged. The envelope contains one materialized
+effective Package and preserves the original Site/test/context, effective test,
+complete duplicate occurrences, source selectors/ranges/attribute and ancestry
+hashes, namespace map, decision reason/authority and comparison-only lineage.
+It binds raw IR and fixed decision-manifest digests. Additional source closure and
+edges are explicit. Select exact candidate **content identity** in addition to
+target/source-package; the raw `select` helper does not admit candidates or choose
+between raw and effective generations.
+
+This is non-executable inspection data. Deserializing a candidate does not prove
+its source/AST pairing, its format string, compiler validation or execution
+eligibility. Only the fixed generator constructs its private compiler-owned
+emission object; there is no public candidate admission verifier in this slice.
+The only audit state is pending full predicate/context/helper/message/policy
+correspondence, and backend/policy execution remain Unavailable. One local
+source-origin decision cannot certify unknown configured-target differences.
+
+The pinned backend profile also needs explicit focus, demand and error-boundary
+tests. A helper binding's `lexical-dynamic-context` does not inherit the caller's
+matched-node focus: stylesheet function entry has absent focus. Globals use
+document-root focus when demanded. Unused typed arguments/globals and consumers
+of a sequence prefix must not be assumed eager. At the pinned match-pattern
+boundary, recoverable XPath dynamic/type failures become nonmatches with warnings;
+the same faults in site evaluation propagate. Fatal resource, capability,
+cancellation and internal failures must never enter that recovery path. These are
+backend obligations, not behavior executed or certified by this source resolver.
+Full regex/casing Unicode semantics and their table identities likewise belong in
+the backend's exact-package evidence. None changes the raw AST or grants execution
+eligibility to this candidate.
