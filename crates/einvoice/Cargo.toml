@@ -4,6 +4,8 @@ version = "0.1.0"
 edition = "2021"
 license-file = "../../LICENSE"
 description = "Immutable invoice documents and explicit, version-pinned validation reports"
+# BSC-12 enables publication after validation, builder and release gates pass.
+publish = false
 repository = "https://github.com/BSchneppe/einvoice-rs"
 
 [dependencies]
