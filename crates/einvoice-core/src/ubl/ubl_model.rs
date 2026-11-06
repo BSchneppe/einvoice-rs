@@ -1,5 +1,4 @@
-use crate::UniffiCustomTypeConverter;
-use chrono::{DateTime, NaiveDate, NaiveTime, TimeZone, Utc};
+use chrono::NaiveDate;
 use einvoice_deps_yaserde::__xml::attribute::OwnedAttribute;
 use einvoice_deps_yaserde::__xml::name::OwnedName;
 use einvoice_deps_yaserde::__xml::namespace::Namespace;
@@ -9,29 +8,12 @@ use einvoice_deps_yaserde::de::Deserializer;
 use einvoice_deps_yaserde::ser::Serializer;
 use einvoice_deps_yaserde::{YaDeserialize, YaSerialize};
 use einvoice_deps_yaserde_derive::{YaDeserialize, YaSerialize};
-use rust_decimal::prelude::ToPrimitive;
 use rust_decimal::Decimal;
 use std::io::Read;
 use std::str::FromStr;
-use std::time::SystemTime;
 
-#[derive(Debug)]
-pub struct Iso8601Date(NaiveDate);
-uniffi::custom_type!(Iso8601Date, SystemTime);
-impl UniffiCustomTypeConverter for Iso8601Date {
-    type Builtin = SystemTime;
-
-    fn into_custom(val: Self::Builtin) -> uniffi::Result<Self> {
-        let naive_date: DateTime<Utc> = val.into();
-        Ok(Iso8601Date(naive_date.naive_utc().date()))
-    }
-
-    fn from_custom(obj: Self) -> Self::Builtin {
-        let naive_date_time = obj.0.and_time(NaiveTime::default());
-        let utc_date_time: DateTime<Utc> = Utc.from_utc_datetime(&naive_date_time);
-        utc_date_time.into()
-    }
-}
+#[derive(Debug, Copy, Clone, Default)]
+pub struct Iso8601Date(pub(crate) NaiveDate);
 
 impl YaSerialize for Iso8601Date {
     fn serialize<W: std::io::Write>(&self, writer: &mut Serializer<W>) -> Result<(), String> {
@@ -75,7 +57,7 @@ impl YaDeserialize for Iso8601Date {
     }
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 default_namespace = "",
 prefix = "",
@@ -158,7 +140,7 @@ pub struct UblInvoice {
     pub cac_invoice_line: Vec<InvoiceLine>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -182,33 +164,7 @@ pub struct Payment {
     pub cbc_instruction_id: Option<Identifier>,
 }
 
-#[derive(uniffi::Record, Debug)]
-pub struct MoneyDecimal {
-    pub as_integer: i64,
-    pub scale: u32,
-}
-impl MoneyDecimal {
-    pub fn as_decimal(&self) -> f64 {
-        self.as_integer as f64 / 10f64.powi(self.scale as i32)
-    }
-}
-
-uniffi::custom_type!(Decimal, MoneyDecimal);
-impl UniffiCustomTypeConverter for Decimal {
-    type Builtin = MoneyDecimal;
-
-    fn into_custom(val: Self::Builtin) -> uniffi::Result<Self> {
-        Ok(Decimal::new(val.as_integer, val.scale))
-    }
-
-    fn from_custom(obj: Self) -> Self::Builtin {
-        MoneyDecimal {
-            as_integer: obj.to_i64().unwrap(),
-            scale: obj.scale(),
-        }
-    }
-}
-#[derive(uniffi::Record, Debug)]
+#[derive(Debug)]
 pub struct Amount {
     pub value: Option<Decimal>,
     pub currency_id: Option<String>,
@@ -287,7 +243,7 @@ impl YaDeserialize for Amount {
     }
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -313,7 +269,7 @@ pub struct Period {
     pub cbc_description: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -341,7 +297,7 @@ pub struct Identifier {
     pub scheme_uri: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -387,7 +343,7 @@ pub struct Party {
     pub cac_financial_account: Option<FinancialAccount>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -433,7 +389,7 @@ pub struct CacPerson {
     pub cac_residence_address: Option<Address>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -461,7 +417,7 @@ pub struct CacPowerOfAttorney {
     pub cac_mandate_document_reference: Vec<CacDocumentReference>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -487,7 +443,7 @@ pub struct PartyTaxScheme {
     pub cac_tax_scheme: Option<TaxScheme>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -523,7 +479,7 @@ pub struct Location {
     pub cac_location_coordinate: Vec<LocationCoordinate>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -585,7 +541,7 @@ pub struct Address {
     pub cac_location_coordinate: Vec<LocationCoordinate>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -613,7 +569,7 @@ pub struct LocationCoordinate {
     pub cbc_altitude_measure: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -629,7 +585,7 @@ pub struct CacCountry {
     pub cbc_name: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -643,7 +599,7 @@ pub struct CacAddressLine {
     pub cbc_line: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -657,7 +613,7 @@ pub struct PartyIdentification {
     pub cbc_id: Option<Identifier>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "cbc" = "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
@@ -670,7 +626,7 @@ pub struct Language {
     pub cbc_name: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "cbc" = "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
@@ -681,7 +637,7 @@ pub struct PartyName {
     pub cbc_name: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -699,7 +655,7 @@ pub struct CacOrderReference {
     pub cbc_sales_order_id: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -715,7 +671,7 @@ pub struct CacBillingReference {
     pub cac_invoice_document_reference: Option<CacDocumentReference>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -733,7 +689,7 @@ pub struct CacAttachment {
     pub cac_external_reference: Option<CacExternalReference>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -751,7 +707,7 @@ pub struct CbcEmbeddedDocumentBinaryObject {
     pub text: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -767,7 +723,7 @@ pub struct CacExternalReference {
     pub cbc_uri: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -783,7 +739,7 @@ pub struct CacProjectReference {
     pub cbc_id: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -799,7 +755,7 @@ pub struct CacAccountingSupplierParty {
     pub cac_party: Option<Party>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -815,7 +771,7 @@ pub struct CacAccountingSupplierPartyCacPartyCacPostalAddressCacCountry {
     pub cbc_identification_code: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -833,7 +789,7 @@ pub struct CacAccountingSupplierPartyCacPartyCacPartyTaxScheme {
     pub cac_tax_scheme: Option<CacAccountingSupplierPartyCacPartyCacPartyTaxSchemeCacTaxScheme>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -849,7 +805,7 @@ pub struct CacAccountingSupplierPartyCacPartyCacPartyTaxSchemeCacTaxScheme {
     pub cbc_id: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -869,7 +825,7 @@ pub struct PartyLegalEntity {
     pub cbc_company_legal_form: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -885,7 +841,7 @@ pub struct CompanyId {
     pub text: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -905,7 +861,7 @@ pub struct Contact {
     pub cbc_electronic_mail: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -921,7 +877,7 @@ pub struct CacAccountingCustomerParty {
     pub cac_party: Option<Party>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -937,7 +893,7 @@ pub struct InvoiceCacTaxRepresentativePartyCacPartyTaxSchemeCacTaxScheme {
     pub cbc_id: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -957,7 +913,7 @@ pub struct CacDelivery {
     pub cac_delivery_party: Option<Party>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -975,7 +931,7 @@ pub struct CacDeliveryLocation {
     pub cac_address: Option<CacAddress>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1003,7 +959,7 @@ pub struct CacAddress {
     pub cac_country: Option<CacCountry>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1019,7 +975,7 @@ pub struct CacDeliveryParty {
     pub cac_party_name: Option<CacDeliveryCacDeliveryPartyCacPartyName>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1035,7 +991,7 @@ pub struct CacDeliveryCacDeliveryPartyCacPartyName {
     pub cbc_name: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1069,7 +1025,7 @@ pub struct PaymentMeans {
     pub cac_payment_mandate: Option<PaymentMandate>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1101,7 +1057,7 @@ pub struct PaymentMandate {
     pub cac_clause: Vec<Clause>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1117,7 +1073,7 @@ pub struct Clause {
     pub cbc_content: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1151,7 +1107,7 @@ pub struct CardAccount {
     pub cbc_holder_name: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1167,7 +1123,7 @@ pub struct CbcPaymentMeansCode {
     pub text: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1187,7 +1143,7 @@ pub struct FinancialAccount {
     pub cac_financial_institution_branch: Option<CacFinancialInstitutionBranch>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1203,7 +1159,7 @@ pub struct CacFinancialInstitutionBranch {
     pub cbc_id: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1227,7 +1183,7 @@ pub struct CacPaymentTerms {
     pub cac_validity_period: Option<Period>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1255,7 +1211,7 @@ pub struct ExchangeRate {
     pub cbc_date: Option<Iso8601Date>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1297,7 +1253,7 @@ pub struct CacAllowanceCharge {
     pub cac_payment_means: Vec<PaymentMeans>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1315,7 +1271,7 @@ pub struct CacTaxTotal {
     pub cac_tax_subtotal: Vec<CacTaxSubtotal>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1335,7 +1291,7 @@ pub struct CacTaxSubtotal {
     pub cac_tax_category: Option<TaxCategory>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1366,7 +1322,7 @@ pub struct TaxCategory {
     #[yaserde(rename = "TaxScheme", prefix = "cac")]
     pub cac_tax_scheme: Option<TaxScheme>,
 }
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1388,7 +1344,7 @@ pub struct TaxScheme {
     pub cac_jurisdiction_region_address: Vec<Address>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1412,7 +1368,7 @@ pub struct CacTaxSubtotalCacTaxCategory {
     pub cac_tax_scheme: Option<CacTaxTotalCacTaxSubtotalCacTaxCategoryCacTaxScheme>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1428,7 +1384,7 @@ pub struct CacTaxTotalCacTaxSubtotalCacTaxCategoryCacTaxScheme {
     pub cbc_id: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1458,7 +1414,7 @@ pub struct LegalMonetaryTotal {
     pub payable_amount: Option<Amount>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1494,7 +1450,7 @@ pub struct InvoiceLine {
     pub cac_sub_invoice_line: Vec<SubInvoiceLine>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1530,7 +1486,7 @@ pub struct SubInvoiceLine {
     pub cac_sub_invoice_line: Vec<SubSubInvoiceLine>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1566,7 +1522,7 @@ pub struct SubSubInvoiceLine {
     pub cac_sub_invoice_line: Vec<SubSubSubInvoiceLine>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1600,7 +1556,7 @@ pub struct SubSubSubInvoiceLine {
     pub cac_price: Option<CacPrice>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1616,7 +1572,7 @@ pub struct CbcInvoicedQuantity {
     pub text: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1648,7 +1604,7 @@ pub struct CacItem {
     pub cac_additional_item_property: Vec<CacAdditionalItemProperty>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1668,7 +1624,7 @@ pub struct CacClassifiedTaxCategory {
     pub cac_tax_scheme: Option<CacInvoiceLineCacItemCacClassifiedTaxCategoryCacTaxScheme>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1684,7 +1640,7 @@ pub struct CacInvoiceLineCacItemCacClassifiedTaxCategoryCacTaxScheme {
     pub cbc_id: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1702,7 +1658,7 @@ pub struct CacAdditionalItemProperty {
     pub cbc_value: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1718,7 +1674,7 @@ pub struct CacSellersItemIdentification {
     pub cbc_id: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1734,7 +1690,7 @@ pub struct CacOriginCountry {
     pub cbc_identification_code: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1750,7 +1706,7 @@ pub struct CacStandardItemIdentification {
     pub cbc_id: Option<InvoiceCacInvoiceLineCacItemCacStandardItemIdentificationCbcId>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1766,7 +1722,7 @@ pub struct InvoiceCacInvoiceLineCacItemCacStandardItemIdentificationCbcId {
     pub text: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1782,7 +1738,7 @@ pub struct CacBuyersItemIdentification {
     pub cbc_id: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1798,7 +1754,7 @@ pub struct CacCommodityClassification {
     pub cbc_item_classification_code: Option<CbcItemClassificationCode>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1816,7 +1772,7 @@ pub struct CbcItemClassificationCode {
     pub text: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1836,7 +1792,7 @@ pub struct CacPrice {
     pub cac_allowance_charge: Option<CacAllowanceCharge>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1852,7 +1808,7 @@ pub struct CbcBaseQuantity {
     pub text: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1868,7 +1824,7 @@ pub struct CacOrderLineReference {
     pub cbc_line_id: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
@@ -1902,7 +1858,7 @@ pub struct CacDocumentReference {
     pub cac_result_of_verification: Option<CacResultOfVerification>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "" = "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",

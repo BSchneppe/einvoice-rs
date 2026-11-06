@@ -1,5 +1,6 @@
 use einvoice_deps_yaserde_derive::{YaDeserialize, YaSerialize};
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 default_namespace = "",
 prefix = "rsm",
@@ -21,7 +22,7 @@ pub struct CrossIndustryInvoice {
     pub rsm_supply_chain_trade_transaction: Option<RsmSupplyChainTradeTransaction>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -44,7 +45,7 @@ pub struct RsmExchangedDocumentContext {
         Option<RamGuidelineSpecifiedDocumentContextParameter>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -60,7 +61,7 @@ pub struct RamBusinessProcessSpecifiedDocumentContextParameter {
     pub ram_id: Option<IdType>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -76,7 +77,7 @@ pub struct RamGuidelineSpecifiedDocumentContextParameter {
     pub id: Option<IdType>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -98,7 +99,7 @@ pub struct RsmExchangedDocument {
     pub ram_included_note: Vec<RsmExchangedDocumentRamIncludedNote>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -114,7 +115,7 @@ pub struct RamIssueDateTime {
     pub udt_date_time_string: Option<DateTimeString>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -130,7 +131,7 @@ pub struct DateTimeString {
     pub text: String,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -148,7 +149,7 @@ pub struct RsmExchangedDocumentRamIncludedNote {
     pub ram_subject_code: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -170,7 +171,7 @@ pub struct RsmSupplyChainTradeTransaction {
     pub ram_applicable_header_trade_settlement: Option<RamApplicableHeaderTradeSettlement>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -194,7 +195,7 @@ pub struct RamIncludedSupplyChainTradeLineItem {
     pub ram_specified_line_trade_settlement: Option<RamSpecifiedLineTradeSettlement>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -212,7 +213,7 @@ pub struct RamAssociatedDocumentLineDocument {
     pub ram_included_note: Option<RamAssociatedDocumentLineDocumentRamIncludedNote>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -228,7 +229,7 @@ pub struct RamAssociatedDocumentLineDocumentRamIncludedNote {
     pub ram_content: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -258,7 +259,7 @@ pub struct RamSpecifiedTradeProduct {
     pub ram_origin_trade_country: Option<RamOriginTradeCountry>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -274,7 +275,7 @@ pub struct RamOriginTradeCountry {
     pub ram_id: Option<IdType>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -290,7 +291,7 @@ pub struct IdType {
     pub id: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -308,7 +309,7 @@ pub struct RamApplicableProductCharacteristic {
     pub ram_value: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -324,7 +325,7 @@ pub struct RamDesignatedProductClassification {
     pub ram_class_code: Option<RamClassCode>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -342,7 +343,7 @@ pub struct RamClassCode {
     pub text: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -361,7 +362,7 @@ pub struct RamSpecifiedLineTradeAgreement {
     pub ram_net_price_product_trade_price: Option<RamNetPriceProductTradePrice>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -379,7 +380,7 @@ pub struct RamNetPriceProductTradePrice {
     pub ram_basis_quantity: Option<RamBasisQuantity>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -399,7 +400,7 @@ pub struct RamGrossPriceProductTradePrice {
     pub ram_applied_trade_allowance_charge: Option<RamAppliedTradeAllowanceCharge>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -415,7 +416,7 @@ pub struct RamBasisQuantity {
     pub text: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -434,7 +435,7 @@ pub struct RamAppliedTradeAllowanceCharge {
     pub ram_actual_amount: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -450,7 +451,7 @@ pub struct RamGrossPriceProductTradePriceRamAppliedTradeAllowanceChargeRamCharge
     pub udt_indicator: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -466,7 +467,7 @@ pub struct RamSpecifiedLineTradeAgreementRamBuyerOrderReferencedDocument {
     pub ram_line_id: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -482,7 +483,7 @@ pub struct RamSpecifiedLineTradeDelivery {
     pub ram_billed_quantity: Option<RamBilledQuantity>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -498,7 +499,7 @@ pub struct RamBilledQuantity {
     pub text: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -532,7 +533,7 @@ pub struct RamSpecifiedLineTradeSettlement {
         Option<RamSpecifiedLineTradeSettlementRamReceivableSpecifiedTradeAccountingAccount>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -548,7 +549,7 @@ pub struct RamSpecifiedTradeSettlementLineMonetarySummation {
     pub ram_line_total_amount: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -564,7 +565,7 @@ pub struct RamSpecifiedLineTradeSettlementRamReceivableSpecifiedTradeAccountingA
     pub ram_id: Option<IdType>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -584,7 +585,7 @@ pub struct RamSpecifiedLineTradeSettlementRamAdditionalReferencedDocument {
     pub ram_reference_type_code: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -611,7 +612,7 @@ pub struct RamSpecifiedLineTradeSettlementRamSpecifiedTradeAllowanceCharge {
     pub ram_reason: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -627,7 +628,7 @@ pub struct RamSpecifiedLineTradeSettlementRamSpecifiedTradeAllowanceChargeRamCha
     pub udt_indicator: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -647,7 +648,7 @@ pub struct RamSpecifiedLineTradeSettlementRamBillingSpecifiedPeriod {
         Option<RamSpecifiedLineTradeSettlementRamBillingSpecifiedPeriodRamEndDateTime>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -663,7 +664,7 @@ pub struct RamSpecifiedLineTradeSettlementRamBillingSpecifiedPeriodRamStartDateT
     pub udt_date_time_string: Option<DateTimeString>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -679,7 +680,7 @@ pub struct RamSpecifiedLineTradeSettlementRamBillingSpecifiedPeriodRamEndDateTim
     pub udt_date_time_string: Option<DateTimeString>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -713,7 +714,7 @@ pub struct RamApplicableHeaderTradeAgreement {
     pub ram_specified_procuring_project: Option<RamSpecifiedProcuringProject>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -745,7 +746,7 @@ pub struct TradeParty {
     pub ram_specified_tax_registration: Vec<SpecifiedTaxRegistration>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -761,7 +762,7 @@ pub struct GlobalId {
     pub text: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -779,7 +780,7 @@ pub struct SpecifiedLegalOrganization {
     pub ram_trading_business_name: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -795,7 +796,7 @@ pub struct RamSellerTradePartyRamSpecifiedLegalOrganizationRamId {
     pub text: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -819,7 +820,7 @@ pub struct DefinedTradeContact {
         Option<RamSellerTradePartyRamDefinedTradeContactRamEmailUriuniversalCommunication>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -835,7 +836,7 @@ pub struct RamSellerTradePartyRamDefinedTradeContactRamTelephoneUniversalCommuni
     pub ram_complete_number: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -851,7 +852,7 @@ pub struct RamSellerTradePartyRamDefinedTradeContactRamEmailUriuniversalCommunic
     pub ram_uriid: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -879,7 +880,7 @@ pub struct PostalTradeAddress {
     pub ram_country_sub_division_name: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -897,7 +898,7 @@ pub struct UriUniversalCommunication {
     >,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -914,7 +915,7 @@ pub struct RamApplicableHeaderTradeAgreementRamSellerTradePartyRamUriuniversalCo
     pub text: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -930,7 +931,7 @@ pub struct SpecifiedTaxRegistration {
     pub ram_id: Option<RamSellerTradePartyRamSpecifiedTaxRegistrationRamId>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -946,7 +947,7 @@ pub struct RamSellerTradePartyRamSpecifiedTaxRegistrationRamId {
     pub text: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -974,7 +975,7 @@ pub struct RamBuyerTradeParty {
     pub ram_specified_tax_registration: Option<RamBuyerTradePartyRamSpecifiedTaxRegistration>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -992,7 +993,7 @@ pub struct RamBuyerTradePartyRamSpecifiedLegalOrganization {
     pub ram_trading_business_name: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1008,7 +1009,7 @@ pub struct RamBuyerTradePartyRamSpecifiedLegalOrganizationRamId {
     pub text: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1030,7 +1031,7 @@ pub struct RamBuyerTradePartyRamDefinedTradeContact {
         Option<RamBuyerTradePartyRamDefinedTradeContactRamEmailUriuniversalCommunication>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1046,7 +1047,7 @@ pub struct RamBuyerTradePartyRamDefinedTradeContactRamTelephoneUniversalCommunic
     pub ram_complete_number: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1062,7 +1063,7 @@ pub struct RamBuyerTradePartyRamDefinedTradeContactRamEmailUriuniversalCommunica
     pub ram_uriid: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1090,7 +1091,7 @@ pub struct RamBuyerTradePartyRamPostalTradeAddress {
     pub ram_country_sub_division_name: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1108,7 +1109,7 @@ pub struct RamBuyerTradePartyRamUriuniversalCommunication {
     >,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1124,7 +1125,7 @@ pub struct RamApplicableHeaderTradeAgreementRamBuyerTradePartyRamUriuniversalCom
     pub text: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1140,7 +1141,7 @@ pub struct RamBuyerTradePartyRamSpecifiedTaxRegistration {
     pub ram_id: Option<RamBuyerTradePartyRamSpecifiedTaxRegistrationRamId>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1156,7 +1157,7 @@ pub struct RamBuyerTradePartyRamSpecifiedTaxRegistrationRamId {
     pub text: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1177,7 +1178,7 @@ pub struct RamSellerTaxRepresentativeTradeParty {
         Option<RamSellerTaxRepresentativeTradePartyRamSpecifiedTaxRegistration>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1205,7 +1206,7 @@ pub struct RamSellerTaxRepresentativeTradePartyRamPostalTradeAddress {
     pub ram_country_sub_division_name: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1221,7 +1222,7 @@ pub struct RamSellerTaxRepresentativeTradePartyRamSpecifiedTaxRegistration {
     pub ram_id: Option<RamSellerTaxRepresentativeTradePartyRamSpecifiedTaxRegistrationRamId>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1237,7 +1238,7 @@ pub struct RamSellerTaxRepresentativeTradePartyRamSpecifiedTaxRegistrationRamId 
     pub text: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1253,7 +1254,7 @@ pub struct RamSellerOrderReferencedDocument {
     pub ram_issuer_assigned_id: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1269,7 +1270,7 @@ pub struct RamApplicableHeaderTradeAgreementRamBuyerOrderReferencedDocument {
     pub ram_issuer_assigned_id: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1285,7 +1286,7 @@ pub struct RamContractReferencedDocument {
     pub ram_issuer_assigned_id: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1307,7 +1308,7 @@ pub struct RamApplicableHeaderTradeAgreementRamAdditionalReferencedDocument {
     pub ram_attachment_binary_object: Option<RamAttachmentBinaryObject>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1325,7 +1326,7 @@ pub struct RamAttachmentBinaryObject {
     pub text: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1343,7 +1344,7 @@ pub struct RamSpecifiedProcuringProject {
     pub ram_name: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1365,7 +1366,7 @@ pub struct RamApplicableHeaderTradeDelivery {
     pub ram_receiving_advice_referenced_document: Option<RamReceivingAdviceReferencedDocument>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1381,7 +1382,7 @@ pub struct RamActualDeliverySupplyChainEvent {
     pub ram_occurrence_date_time: Option<RamOccurrenceDateTime>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1397,7 +1398,7 @@ pub struct RamOccurrenceDateTime {
     pub udt_date_time_string: Option<DateTimeString>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1413,7 +1414,7 @@ pub struct RamDespatchAdviceReferencedDocument {
     pub ram_issuer_assigned_id: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1429,7 +1430,7 @@ pub struct RamReceivingAdviceReferencedDocument {
     pub ram_issuer_assigned_id: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1476,7 +1477,7 @@ pub struct RamApplicableHeaderTradeSettlement {
         Option<RamApplicableHeaderTradeSettlementRamReceivableSpecifiedTradeAccountingAccount>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1504,7 +1505,7 @@ pub struct RamSpecifiedTradeSettlementPaymentMeans {
         Option<RamApplicableTradeSettlementFinancialCard>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1520,7 +1521,7 @@ pub struct RamApplicableTradeSettlementFinancialCard {
     pub ram_cardholder_name: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1540,7 +1541,7 @@ pub struct RamPayeePartyCreditorFinancialAccount {
     pub ram_proprietary_id: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1556,7 +1557,7 @@ pub struct RamPayeeSpecifiedCreditorFinancialInstitution {
     pub ram_bicid: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1588,7 +1589,7 @@ pub struct ApplicableTradeTax {
     pub ram_rate_applicable_percent: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1604,7 +1605,7 @@ pub struct RamTaxPointDate {
     pub udt_date_string: Option<DateString>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1620,7 +1621,7 @@ pub struct DateString {
     pub text: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1640,7 +1641,7 @@ pub struct RamApplicableHeaderTradeSettlementRamBillingSpecifiedPeriod {
         Option<RamApplicableHeaderTradeSettlementRamBillingSpecifiedPeriodRamEndDateTime>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1656,7 +1657,7 @@ pub struct RamApplicableHeaderTradeSettlementRamBillingSpecifiedPeriodRamStartDa
     pub udt_date_time_string: Option<DateTimeString>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1672,7 +1673,7 @@ pub struct RamApplicableHeaderTradeSettlementRamBillingSpecifiedPeriodRamEndDate
     pub udt_date_time_string: Option<DateTimeString>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1702,7 +1703,7 @@ pub struct RamApplicableHeaderTradeSettlementRamSpecifiedTradeAllowanceCharge {
     pub ram_category_trade_tax: Option<RamCategoryTradeTax>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1718,7 +1719,7 @@ pub struct RamApplicableHeaderTradeSettlementRamSpecifiedTradeAllowanceChargeRam
     pub udt_indicator: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1738,7 +1739,7 @@ pub struct RamCategoryTradeTax {
     pub ram_rate_applicable_percent: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1758,7 +1759,7 @@ pub struct RamSpecifiedTradePaymentTerms {
     pub ram_direct_debit_mandate_id: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1774,7 +1775,7 @@ pub struct RamDueDateDateTime {
     pub udt_date_time_string: Option<DateTimeString>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1806,7 +1807,7 @@ pub struct RamSpecifiedTradeSettlementHeaderMonetarySummation {
     pub ram_due_payable_amount: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1822,7 +1823,7 @@ pub struct RamTaxTotalAmount {
     pub text: Option<String>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1840,7 +1841,7 @@ pub struct RamInvoiceReferencedDocument {
     pub ram_formatted_issue_date_time: Option<RamFormattedIssueDateTime>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
@@ -1856,7 +1857,7 @@ pub struct RamFormattedIssueDateTime {
     pub qdt_date_time_string: Option<DateTimeString>,
 }
 
-#[derive(YaSerialize, YaDeserialize, uniffi::Record)]
+#[derive(YaSerialize, YaDeserialize)]
 #[yaserde(
 namespaces = {
     "rsm" = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",

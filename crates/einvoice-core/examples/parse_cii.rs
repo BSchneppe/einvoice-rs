@@ -1,4 +1,4 @@
-use einvoice::{validate_invoice, InvoiceError, InvoiceStandard};
+use einvoice_core::{parse_invoice, InvoiceError, InvoiceStandard};
 
 fn main() {
     let xml = r#"
@@ -16,9 +16,9 @@ fn main() {
     </rsm:ExchangedDocumentContext>
    </rsm:CrossIndustryInvoice> 
 "#;
-    let invalid_invoice: Result<InvoiceStandard, InvoiceError> = validate_invoice(xml);
-    match invalid_invoice {
-        Ok(_) => println!("Invoice is valid"),
-        Err(e) => println!("Invoice is invalid: {:?}", e),
+    let parsed_invoice: Result<InvoiceStandard, InvoiceError> = parse_invoice(xml);
+    match parsed_invoice {
+        Ok(_) => println!("XML parsed; invoice conformance has not been checked"),
+        Err(e) => println!("XML parsing failed: {:?}", e),
     }
 }
