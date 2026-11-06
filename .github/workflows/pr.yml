@@ -48,7 +48,7 @@ jobs:
           profile: minimal
           override: true
       - name: Fetch committed workspace dependencies
-        run: cargo fetch --locked
+        run: cargo +1.83.0 fetch --locked
       - name: Archive source dependencies outside the checkout
         id: archive
         shell: bash
@@ -63,14 +63,15 @@ jobs:
         working-directory: ${{ steps.archive.outputs.directory }}
         # Core is absent: prune the extracted lock while retaining locked registry
         # versions. Original manifests and the lock inside source.tar stay intact.
-        run: cargo update --workspace --offline
+        # The checkout's rustup override does not apply to this external path.
+        run: cargo +1.83.0 update --workspace --offline
       # The numeric path dependency is unpublished. This checks source closure,
       # not Cargo package inclusion/normalization, registry or release readiness.
       - name: Test and run the source dependency archive offline
         working-directory: ${{ steps.archive.outputs.directory }}
         run: |
-          cargo test --locked --offline --all-features -p einvoice -p einvoice-numeric
-          cargo run --locked --offline -p einvoice --example workflows
+          cargo +1.83.0 test --locked --offline --all-features -p einvoice -p einvoice-numeric
+          cargo +1.83.0 run --locked --offline -p einvoice --example workflows
 
   check-format:
     name: Check formatting
