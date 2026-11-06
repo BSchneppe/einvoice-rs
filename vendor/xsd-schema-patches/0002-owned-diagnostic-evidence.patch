@@ -1,0 +1,722 @@
+--- a/src/validation/errors.rs
++++ b/src/validation/errors.rs
+@@ -430,6 +430,8 @@
+ /// without either.
+ #[derive(Debug, Clone, Default)]
+ pub(crate) struct DiagnosticItem {
++    /// Optional owned evidence, allocated only for diagnostics that have it.
++    evidence: Option<Box<DiagnosticEvidence>>,
+     subject: Option<ValidationSubject>,
+     instance_path: Option<InstancePath>,
+     /// Set when the local-name element path is the element part of
+@@ -504,6 +506,61 @@
+ impl std::error::Error for ValidationError {}
+
+ impl ValidationError {
++    /// Owned native evidence, when captured at the failing branch. `None` means
++    /// unavailable; neither codes nor messages are parsed to reconstruct it.
++    pub fn evidence(&self) -> Option<&DiagnosticEvidence> {
++        self.item
++            .as_deref()
++            .and_then(|item| item.evidence.as_deref())
++    }
++
++    fn evidence_mut(&mut self) -> &mut DiagnosticEvidence {
++        self.item
++            .get_or_insert_with(Default::default)
++            .evidence
++            .get_or_insert_with(Default::default)
++    }
++
++    /// Attach a native cause without changing the raw diagnostic fields.
++    pub fn with_native_cause(mut self, cause: NativeCause) -> Self {
++        self.evidence_mut().cause = Some(cause);
++        self
++    }
++
++    /// Record a governing type and the innermost observed validation dispatch.
++    /// This source identifies the resolved type, not the declaration of an
++    /// inherited effective facet (which remains unavailable).
++    pub(crate) fn with_type_context(
++        mut self,
++        key: crate::ids::TypeKey,
++        schema: &crate::schema::SchemaSet,
++    ) -> Self {
++        let component = SchemaComponent::for_type(key, schema);
++        let evidence = self.evidence_mut();
++        if evidence.actual_type.is_none() {
++            evidence.actual_type = component.clone();
++        }
++        evidence.governing_type = component;
++        self
++    }
++
++    pub(crate) fn with_xsi_types(
++        mut self,
++        governing: crate::ids::TypeKey,
++        actual: crate::ids::TypeKey,
++        schema: &crate::schema::SchemaSet,
++    ) -> Self {
++        let evidence = self.evidence_mut();
++        evidence.governing_type = SchemaComponent::for_type(governing, schema);
++        evidence.actual_type = SchemaComponent::for_type(actual, schema);
++        self
++    }
++
++    pub(crate) fn with_component(mut self, component: Option<SchemaComponent>) -> Self {
++        self.evidence_mut().component = component;
++        self
++    }
++
+     /// Set the source location.
+     pub fn with_location(mut self, location: SourceLocation) -> Self {
+         self.location = Some(location);
+@@ -617,6 +674,7 @@
+         element_path: None,
+         item: None,
+     }
++    .with_native_cause(NativeCause::Value(err))
+ }
+
+ /// Convert a type validation error using its default cvc-* constraint code.
+@@ -648,6 +706,7 @@
+         element_path: None,
+         item: None,
+     }
++    .with_native_cause(NativeCause::Facet(err))
+ }
+
+ /// Map a FacetError variant to its specific cvc-* constraint code
+@@ -965,3 +1024,200 @@
+         assert!(val_err.message.contains("invalid decimal"));
+     }
+ }
++
++/// Evidence copied while the backend's typed state is available. All members
++/// are owned; no arena keys, document IDs or worker-local name IDs escape.
++#[derive(Debug, Clone, Default)]
++pub struct DiagnosticEvidence {
++    /// Cause captured at the emission site, or unavailable.
++    pub cause: Option<NativeCause>,
++    /// Outermost type governing the failed validation operation.
++    pub governing_type: Option<SchemaComponent>,
++    /// Innermost type dispatch observed on the failing path. For atomic types
++    /// this can equal the governing type even when a primitive/facet is inherited.
++    pub actual_type: Option<SchemaComponent>,
++    /// Specific declaration involved, when the branch has one.
++    pub component: Option<SchemaComponent>,
++    /// Exact effective-facet origin; currently unavailable. A type source must
++    /// never be mistaken for the ancestor that supplied an effective facet.
++    pub facet_origin: Option<SchemaComponent>,
++}
++
++/// Component kind recorded from a resolved schema component.
++#[derive(Debug, Clone, Copy, PartialEq, Eq)]
++pub enum ComponentKind {
++    /// Simple type definition.
++    SimpleType,
++    /// Complex type definition.
++    ComplexType,
++    /// Attribute declaration.
++    Attribute,
++    /// Element declaration.
++    Element,
++}
++
++/// Owned schema origin, translated from `SourceRef`, never an invoice span.
++/// A local name is descriptive, not a globally unique component identity.
++#[derive(Debug, Clone)]
++pub struct SchemaComponent {
++    /// Actual component kind.
++    pub kind: ComponentKind,
++    /// Actual declared name; `None` for anonymous types.
++    pub name: Option<ExpandedName>,
++    /// Whether a declaration is global; not applicable to type definitions.
++    pub global: Option<bool>,
++    /// Schema document URI, if its recorded source document is available.
++    pub document_uri: Option<String>,
++    /// Recorded schema span (often only the start tag), not a declaration range.
++    pub schema_span: Option<(usize, usize)>,
++}
++
++impl SchemaComponent {
++    fn new(
++        kind: ComponentKind,
++        name: Option<ExpandedName>,
++        global: Option<bool>,
++        source: Option<&crate::parser::location::SourceRef>,
++        schema: &crate::schema::SchemaSet,
++    ) -> Self {
++        Self {
++            kind,
++            name,
++            global,
++            document_uri: source.and_then(|s| {
++                schema
++                    .documents
++                    .iter()
++                    .find(|d| d.id == s.doc_id)
++                    .map(|d| d.base_uri.clone())
++            }),
++            schema_span: source.map(|s| (s.span.start, s.span.end)),
++        }
++    }
++
++    pub(crate) fn for_type(
++        key: crate::ids::TypeKey,
++        schema: &crate::schema::SchemaSet,
++    ) -> Option<Self> {
++        let (kind, local, ns, source) = match key {
++            crate::ids::TypeKey::Simple(k) => {
++                let t = schema.arenas.simple_types.get(k)?;
++                (
++                    ComponentKind::SimpleType,
++                    t.name,
++                    t.target_namespace,
++                    t.source.as_ref(),
++                )
++            }
++            crate::ids::TypeKey::Complex(k) => {
++                let t = schema.arenas.complex_types.get(k)?;
++                (
++                    ComponentKind::ComplexType,
++                    t.name,
++                    t.target_namespace,
++                    t.source.as_ref(),
++                )
++            }
++        };
++        let names = &schema.name_table;
++        let name = local.map(|local| {
++            ExpandedName::new(ns.map(|n| names.resolve_ref(n)), names.resolve_ref(local))
++        });
++        Some(Self::new(kind, name, None, source, schema))
++    }
++
++    pub(crate) fn for_attribute(
++        key: crate::ids::AttributeKey,
++        schema: &crate::schema::SchemaSet,
++    ) -> Option<Self> {
++        let d = schema.arenas.attributes.get(key)?;
++        let names = &schema.name_table;
++        Some(Self::new(
++            ComponentKind::Attribute,
++            d.name.map(|name| {
++                ExpandedName::new(
++                    d.target_namespace.map(|n| names.resolve_ref(n)),
++                    names.resolve_ref(name),
++                )
++            }),
++            d.name
++                .map(|name| schema.lookup_attribute(d.target_namespace, name) == Some(key)),
++            d.source.as_ref(),
++            schema,
++        ))
++    }
++
++    pub(crate) fn for_element(
++        key: crate::ids::ElementKey,
++        schema: &crate::schema::SchemaSet,
++    ) -> Option<Self> {
++        let d = schema.arenas.elements.get(key)?;
++        let names = &schema.name_table;
++        Some(Self::new(
++            ComponentKind::Element,
++            d.name.map(|name| {
++                ExpandedName::new(
++                    d.target_namespace.map(|n| names.resolve_ref(n)),
++                    names.resolve_ref(name),
++                )
++            }),
++            d.name
++                .map(|name| schema.lookup_element(d.target_namespace, name) == Some(key)),
++            d.source.as_ref(),
++            schema,
++        ))
++    }
++}
++
++/// Native failure causes. These are backend observations, not reference-engine
++/// subcodes or a complete classification of all schema diagnostics.
++#[derive(Debug, Clone)]
++pub enum NativeCause {
++    /// Original typed value-validation error, including its facet payload.
++    Value(TypeValidationError),
++    /// Original facet error.
++    Facet(FacetError),
++    /// Parent content model rejected this expanded child name.
++    UnexpectedChild {
++        /// Triggering child; raw diagnostic still names its parent.
++        found: ExpandedName,
++    },
++    /// Popped element's content model could not finish.
++    IncompleteContent,
++    /// Required attribute absent on the existing owner element.
++    MissingRequiredAttribute {
++        /// Actual required expanded name.
++        name: ExpandedName,
++    },
++    /// Prohibited attribute (no exact use-component captured).
++    ProhibitedAttribute,
++    /// No allowed attribute use or effective wildcard matched.
++    AttributeNotAllowed,
++    /// Attribute fixed-value comparison failed.
++    AttributeFixedValue {
++        /// Actual fixed constraint.
++        expected: String,
++        /// Actual instance lexical value.
++        actual: String,
++    },
++    /// No element declaration found under strict assessment.
++    UndeclaredElement,
++    /// `xsi:nil` present on a non-nillable declaration.
++    NilNotAllowed,
++    /// Nilled element also has a fixed constraint.
++    NilWithFixedValue,
++    /// Nilled element has prohibited child content.
++    NilWithContent,
++    /// `xsi:type` QName could not be parsed/resolved.
++    XsiTypeUnresolved {
++        /// Original lexical value.
++        value: String,
++    },
++    /// Resolved `xsi:type` failed derivation or substitution checks.
++    XsiTypeDerivation {
++        /// Original lexical value.
++        value: String,
++        /// True for substitution blocked by `block`.
++        blocked: bool,
++    },
++}
+--- a/src/validation/runtime.rs
++++ b/src/validation/runtime.rs
+@@ -2274,10 +2274,20 @@
+             // §3.3.4.3 clause 3.2.3.1, "E has no character or element
+             // information item [children]".
+             self.invalidate_current();
+-            self.report_error("cvc-elt.3.2.1", msg);
++            self.report_native_error("cvc-elt.3.2.1", msg, errors::NativeCause::NilWithContent);
+         }
+         if let Some(msg) = content_model_error {
+-            self.report_error("cvc-complex-type.2.4", msg);
++            let names = &self.schema_set.name_table;
++            let found = ExpandedName::new(
++                namespace.map(|n| names.resolve_ref(n)),
++                names.resolve_ref(local_name),
++            );
++            let mut err = errors::error("cvc-complex-type.2.4", msg, self.current_location.clone())
++                .with_native_cause(errors::NativeCause::UnexpectedChild { found });
++            if let Some(key) = self.validation_stack.last().and_then(|s| s.schema_type) {
++                err = err.with_type_context(key, self.schema_set);
++            }
++            self.report_validation_error(err);
+         }
+         ParentAdvanceOutcome::Advanced(ParentAdvance {
+             match_info,
+@@ -2470,7 +2480,7 @@
+         xsi_type: Option<&str>,
+         process_contents: ContentProcessing,
+         ns_context: &NamespaceContextSnapshot,
+-        deferred_errors: &mut Vec<(&'static str, String)>,
++        deferred_errors: &mut Vec<ValidationError>,
+     ) {
+         if let Some(mut type_key) = matched_type {
+             // PATH B1: xsi:type override for local elements with resolved type
+@@ -2831,9 +2841,10 @@
+                 self.push_element(ev_state);
+                 // Report error AFTER push so code lands on the child, not parent
+                 let elem_name = self.schema_set.name_table.resolve(local_name);
+-                self.report_error(
++                self.report_native_error(
+                     "cvc-elt.1",
+                     format!("Element '{}' is not declared", elem_name),
++                    errors::NativeCause::UndeclaredElement,
+                 );
+                 self.advance_constraints_start_element(local_name, namespace, None);
+                 #[cfg(feature = "xsd11")]
+@@ -2858,7 +2869,7 @@
+         xsi_type: Option<&str>,
+         xsi_nil: Option<&str>,
+         ns_context: &NamespaceContextSnapshot,
+-        deferred_errors: &mut Vec<(&'static str, String)>,
++        deferred_errors: &mut Vec<ValidationError>,
+     ) -> DeclaredElementBinding {
+         let elem_data = &self.schema_set.arenas.elements[elem_key];
+
+@@ -3037,22 +3048,24 @@
+         }
+         if nillable_violation {
+             let elem_name = self.schema_set.name_table.resolve(local_name);
+-            self.report_error(
++            self.report_native_error(
+                 "cvc-elt.3.1",
+                 format!(
+                     "Element '{}' is not nillable but xsi:nil was specified",
+                     elem_name,
+                 ),
++                errors::NativeCause::NilNotAllowed,
+             );
+         }
+         if nil_fixed_violation {
+             let elem_name = self.schema_set.name_table.resolve(local_name);
+-            self.report_error(
++            self.report_native_error(
+                 "cvc-elt.3.2.2",
+                 format!(
+                     "Element '{}' has xsi:nil=\"true\" but its declaration has a fixed value",
+                     elem_name,
+                 ),
++                errors::NativeCause::NilWithFixedValue,
+             );
+         }
+         if has_deferred_type_error {
+@@ -4028,12 +4041,20 @@
+         );
+         self.default_attributes = defaults;
+         if !missing.is_empty() {
+-            for (_ns, name) in missing {
++            for (ns, name) in missing {
+                 let name_str = self.schema_set.name_table.resolve(name);
+-                self.report_error(
++                let name = ExpandedName::new(
++                    ns.map(|n| self.schema_set.name_table.resolve_ref(n)),
++                    &name_str,
++                );
++                let err = errors::error(
+                     "cvc-complex-type.4",
+                     format!("Required attribute '{}' is missing", name_str),
+-                );
++                    self.current_location.clone(),
++                )
++                .with_native_cause(errors::NativeCause::MissingRequiredAttribute { name })
++                .with_type_context(TypeKey::Complex(ct_key), self.schema_set);
++                self.report_validation_error(err);
+             }
+             self.mark_current_invalid();
+         }
+@@ -4252,7 +4273,8 @@
+         }
+
+         // Collect errors first to avoid borrow conflicts
+-        let mut pending_errors: Vec<(&'static str, String)> = Vec::new();
++        let mut pending_errors: Vec<(&'static str, String, Option<errors::NativeCause>)> =
++            Vec::new();
+         let has_non_ws = !text.trim().is_empty();
+
+         if let Some(ev_state) = self.validation_stack.last_mut() {
+@@ -4271,6 +4293,7 @@
+                                 "Element '{}' has empty content type but text was found",
+                                 elem_name,
+                             ),
++                            None,
+                         ));
+                     }
+                     Some(ContentType::ElementOnly) => {
+@@ -4285,6 +4308,7 @@
+                                 "Element '{}' has element-only content but non-whitespace text was found",
+                                 elem_name,
+                             ),
++                    None,
+                         ));
+                     }
+                     _ => {}
+@@ -4311,6 +4335,7 @@
+                         "Element '{}' is nilled but has non-empty content",
+                         elem_name,
+                     ),
++                    Some(errors::NativeCause::NilWithContent),
+                 ));
+             }
+
+@@ -4329,8 +4354,11 @@
+         if !pending_errors.is_empty() {
+             self.invalidate_current();
+         }
+-        for (constraint, message) in pending_errors {
+-            self.report_error(constraint, message);
++        for (constraint, message, cause) in pending_errors {
++            match cause {
++                Some(cause) => self.report_native_error(constraint, message, cause),
++                None => self.report_error(constraint, message),
++            }
+         }
+
+         // Forward text to assertion fragment builder (XSD 1.1)
+@@ -4425,7 +4453,7 @@
+             self.report_error("cvc-complex-type.2.1", msg);
+         }
+         if let Some(msg) = nil_violation {
+-            self.report_error("cvc-elt.3.2.1", msg);
++            self.report_native_error("cvc-elt.3.2.1", msg, errors::NativeCause::NilWithContent);
+         }
+
+         // Forward whitespace to assertion fragment builder (XSD 1.1)
+@@ -4605,6 +4633,10 @@
+                         ),
+                         self.current_location.clone(),
+                     );
++                    let mut err = err.with_native_cause(errors::NativeCause::IncompleteContent);
++                    if let Some(key) = ev_state.schema_type {
++                        err = err.with_type_context(key, self.schema_set);
++                    }
+                     self.report_validation_error_to(err, &mut ev_state.error_codes);
+                     ev_state.validity = SchemaValidity::Invalid;
+                 }
+@@ -6027,6 +6059,26 @@
+         }
+     }
+
++    fn report_native_error(
++        &mut self,
++        constraint: &'static str,
++        message: impl Into<String>,
++        cause: errors::NativeCause,
++    ) {
++        let mut err = errors::error(constraint, message, self.current_location.clone())
++            .with_native_cause(cause);
++        if let Some(ev) = self.validation_stack.last() {
++            if let Some(key) = ev.schema_type {
++                err = err.with_type_context(key, self.schema_set);
++            }
++            if let Some(key) = ev.element_decl {
++                err =
++                    err.with_component(errors::SchemaComponent::for_element(key, self.schema_set));
++            }
++        }
++        self.report_validation_error(err);
++    }
++
+     fn report_error(&mut self, constraint: &'static str, message: impl Into<String>) {
+         let err = errors::error(constraint, message, self.current_location.clone());
+         let err = self.with_current_context_and_path(err);
+@@ -7053,9 +7105,10 @@
+             }
+             AttributeLookup::Prohibited => {
+                 let attr_name = self.schema_set.name_table.resolve(local_name);
+-                self.report_error(
++                self.report_native_error(
+                     "cvc-complex-type.3.2.2",
+                     format!("Attribute '{}' is prohibited", attr_name),
++                    errors::NativeCause::ProhibitedAttribute,
+                 );
+                 self.mark_current_invalid();
+                 SchemaInfo::invalid()
+@@ -7187,6 +7240,11 @@
+                 {
+                     used_fast_path = true;
+                     if let Err(err) = res {
++                        let err = err
++                            .with_type_context(type_key, self.schema_set)
++                            .with_component(attr_key.and_then(|k| {
++                                errors::SchemaComponent::for_attribute(k, self.schema_set)
++                            }));
+                         self.report_validation_error(err);
+                         attr_validity = SchemaValidity::Invalid;
+                         self.mark_current_invalid();
+@@ -7207,6 +7265,11 @@
+                     }
+                     Err(err) => {
+                         self.report_expression_warnings(raised);
++                        let err = err
++                            .with_type_context(type_key, self.schema_set)
++                            .with_component(attr_key.and_then(|k| {
++                                errors::SchemaComponent::for_attribute(k, self.schema_set)
++                            }));
+                         self.report_validation_error(err);
+                         attr_validity = SchemaValidity::Invalid;
+                         self.mark_current_invalid();
+@@ -7243,13 +7306,27 @@
+             };
+             if !matches {
+                 let attr_name = self.schema_set.name_table.resolve(local_name);
+-                self.report_error(
++                let err = errors::error(
+                     "cvc-attribute.4",
+                     format!(
+                         "Attribute '{}' has fixed value '{}' but got '{}'",
+                         attr_name, fixed, value
+                     ),
++                    self.current_location.clone(),
++                )
++                .with_native_cause(errors::NativeCause::AttributeFixedValue {
++                    expected: fixed,
++                    actual: value.to_owned(),
++                })
++                .with_component(
++                    attr_key
++                        .and_then(|k| errors::SchemaComponent::for_attribute(k, self.schema_set)),
+                 );
++                let err = match attr_type {
++                    Some(key) => err.with_type_context(key, self.schema_set),
++                    None => err,
++                };
++                self.report_validation_error(err);
+                 self.mark_current_invalid();
+             }
+         }
+@@ -7358,9 +7435,10 @@
+         }
+
+         let attr_name = self.schema_set.name_table.resolve(local_name);
+-        self.report_error(
++        self.report_native_error(
+             "cvc-complex-type.3.2.2",
+             format!("Attribute '{}' is not allowed for this element", attr_name),
++            errors::NativeCause::AttributeNotAllowed,
+         );
+         self.mark_current_invalid();
+         SchemaInfo::invalid()
+@@ -7810,7 +7888,7 @@
+         declared_type: Option<TypeKey>,
+         block: DerivationSet,
+         ns_context: &NamespaceContextSnapshot,
+-        deferred_errors: &mut Vec<(&'static str, String)>,
++        deferred_errors: &mut Vec<ValidationError>,
+     ) -> XsiTypeOutcome {
+         // Parse and validate the QName using shared parsing logic
+         let qname = match parse_qname_with_snapshot(
+@@ -7830,7 +7908,11 @@
+                     }
+                     _ => format!("Invalid xsi:type value '{}': {}", xsi_type_str, e),
+                 };
+-                deferred_errors.push(("cvc-elt.4.1", msg));
++                deferred_errors.push(errors::error("cvc-elt.4.1", msg, None).with_native_cause(
++                    errors::NativeCause::XsiTypeUnresolved {
++                        value: xsi_type_str.to_owned(),
++                    },
++                ));
+                 return XsiTypeOutcome::Unresolved;
+             }
+         };
+@@ -7848,13 +7930,25 @@
+                         declared,
+                         DerivationSet::empty(),
+                     ) {
+-                        deferred_errors.push((
+-                            "cvc-elt.4.2",
+-                            format!(
+-                                "xsi:type '{}' does not derive from the declared type",
+-                                xsi_type_str
++                        deferred_errors.push(
++                            errors::error(
++                                "cvc-elt.4.2",
++                                format!(
++                                    "xsi:type '{}' does not derive from the declared type",
++                                    xsi_type_str
++                                ),
++                                None,
++                            )
++                            .with_native_cause(errors::NativeCause::XsiTypeDerivation {
++                                value: xsi_type_str.to_owned(),
++                                blocked: false,
++                            })
++                            .with_xsi_types(
++                                declared,
++                                type_key,
++                                self.schema_set,
+                             ),
+-                        ));
++                        );
+                         return XsiTypeOutcome::InvalidDerivation;
+                     }
+                     // cvc-elt.4.3: validly substitutable — combine the element's
+@@ -7873,40 +7967,61 @@
+                             .schema_set
+                             .is_type_derived_from(type_key, declared, combined_block)
+                     {
+-                        deferred_errors.push((
+-                            "cvc-elt.4.3",
+-                            format!(
++                        deferred_errors.push(
++                            errors::error(
++                                "cvc-elt.4.3",
++                                format!(
+                                 "xsi:type '{}' is not validly substitutable for the declared type \
+                                  (blocked by 'block' attribute)",
+                                 xsi_type_str
+                             ),
+-                        ));
++                                None,
++                            )
++                            .with_native_cause(errors::NativeCause::XsiTypeDerivation {
++                                value: xsi_type_str.to_owned(),
++                                blocked: true,
++                            })
++                            .with_xsi_types(
++                                declared,
++                                type_key,
++                                self.schema_set,
++                            ),
++                        );
+                         return XsiTypeOutcome::InvalidDerivation;
+                     }
+                 }
+                 XsiTypeOutcome::Applied(type_key)
+             }
+             None => {
+-                deferred_errors.push((
+-                    "cvc-elt.4.1",
+-                    format!(
+-                        "Type '{}' specified in xsi:type is not declared",
+-                        xsi_type_str
++                deferred_errors.push(
++                    errors::error(
++                        "cvc-elt.4.1",
++                        format!(
++                            "Type '{}' specified in xsi:type is not declared",
++                            xsi_type_str
++                        ),
++                        None,
++                    )
++                    .with_native_cause(
++                        errors::NativeCause::XsiTypeUnresolved {
++                            value: xsi_type_str.to_owned(),
++                        },
+                     ),
+-                ));
++                );
+                 XsiTypeOutcome::Unresolved
+             }
+         }
+     }
+
+     /// Emit deferred xsi:type errors (collected by [`resolve_xsi_type`]).
+-    fn emit_deferred_xsi_type_errors(&mut self, errors: Vec<(&'static str, String)>) {
+-        for (constraint, message) in errors {
++    fn emit_deferred_xsi_type_errors(&mut self, errors: Vec<ValidationError>) {
++        for err in errors {
++            let constraint = err.constraint;
+             if constraint == "cvc-elt.4.1" {
+                 self.xsi_type_unresolved_reported =
+                     self.validation_stack.last().map(|ev| ev.element_serial);
+             }
+-            self.report_error(constraint, message);
++            self.report_validation_error(err);
+         }
+     }
+
+--- a/src/validation/simple.rs
++++ b/src/validation/simple.rs
+@@ -1245,7 +1245,7 @@
+     Some(())
+ }
+
+-fn validate_simple_type_inner(
++fn validate_simple_type_impl(
+     value: &str,
+     type_key: TypeKey,
+     schema_set: &SchemaSet,
+@@ -3736,3 +3736,13 @@
+         assert_eq!(refused_with(xsd), "as-props-correct");
+     }
+ }
++
++fn validate_simple_type_inner(
++    value: &str,
++    type_key: TypeKey,
++    schema_set: &SchemaSet,
++    resolver: Option<PrefixResolver<'_>>,
++) -> Result<SimpleTypeResult, ValidationError> {
++    validate_simple_type_impl(value, type_key, schema_set, resolver)
++        .map_err(|err| err.with_type_context(type_key, schema_set))
++}

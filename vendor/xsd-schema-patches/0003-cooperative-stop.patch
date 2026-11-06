@@ -1,0 +1,459 @@
+--- a/src/validation/runtime.rs
++++ b/src/validation/runtime.rs
+@@ -1695,6 +1695,9 @@
+         ev_state: &mut ElementValidationState,
+     ) {
+         for err in assertion_errors {
++            if !self.continue_run() {
++                return;
++            }
+             self.report_validation_error_to(err, &mut ev_state.error_codes);
+             ev_state.validity = SchemaValidity::Invalid;
+         }
+@@ -1716,12 +1719,15 @@
+         location: &Option<SourceLocation>,
+     ) {
+         for err in assertion_errors {
++            if !self.continue_run() {
++                return;
++            }
+             let err = context.attach(err, true);
+             let err = match location {
+                 Some(loc) => err.with_location(loc.clone()),
+                 None => err,
+             };
+-            self.sink.on_error(err);
++            self.dispatch_error(err);
+         }
+     }
+
+@@ -1778,6 +1784,9 @@
+         xsi_nil: Option<&str>,
+         ns_context: &NamespaceContextSnapshot,
+     ) -> SchemaInfo {
++        if !self.continue_run() {
++            return SchemaInfo::invalid();
++        }
+         let name_id = self.schema_set.name_table.add(local_name);
+         let ns_id = if namespace_uri.is_empty() {
+             None
+@@ -1854,6 +1863,9 @@
+         xsi_nil: Option<&str>,
+         ns_context: &NamespaceContextSnapshot,
+     ) {
++        if !self.continue_run() {
++            return;
++        }
+         let name_id = self.schema_set.name_table.add(local_name);
+         let ns_id = if namespace_uri.is_empty() {
+             None
+@@ -1951,6 +1963,9 @@
+             ParentAdvanceOutcome::Settled(outcome) => return outcome,
+             ParentAdvanceOutcome::Advanced(advance) => advance,
+         };
++        if !self.continue_run() {
++            return ElementStartOutcome::Invalid;
++        }
+
+         // 2b. A validation root: the run's mode (Structures §5.2) decides how
+         //     it is assessed. Every other element: as its parent decided.
+@@ -2137,7 +2152,7 @@
+     /// [`AssertionSource`] invariant. Returns `false` when the caller must
+     /// abandon the start with [`ElementStartOutcome::Invalid`].
+     fn check_element_start_preconditions(&mut self) -> bool {
+-        if self.operational_failure.is_some() {
++        if !self.continue_run() {
+             return false;
+         }
+         // The parent's attributes are behind; none of them is this element's.
+@@ -3085,6 +3100,9 @@
+         namespace_uri: &str,
+         value: &str,
+     ) -> SchemaInfo {
++        if !self.continue_run() {
++            return SchemaInfo::invalid();
++        }
+         let name_id = self.schema_set.name_table.add(local_name);
+         let ns_id = if namespace_uri.is_empty() {
+             None
+@@ -3166,6 +3184,9 @@
+         namespace_uri: &str,
+         value: &str,
+     ) -> SchemaInfo {
++        if !self.continue_run() {
++            return SchemaInfo::invalid();
++        }
+         let name_id = self.schema_set.name_table.add(local_name);
+         let ns_id = if namespace_uri.is_empty() {
+             None
+@@ -3194,7 +3215,7 @@
+         namespace: Option<NameId>,
+         value: &str,
+     ) -> SchemaInfo {
+-        if self.operational_failure.is_some() {
++        if !self.continue_run() {
+             return SchemaInfo::invalid();
+         }
+         if !self.current_state.can_validate_attribute() {
+@@ -3307,7 +3328,7 @@
+         namespace: Option<NameId>,
+         value: &str,
+     ) -> SchemaInfo {
+-        if self.operational_failure.is_some() {
++        if !self.continue_run() {
+             return SchemaInfo::invalid();
+         }
+         // 1. State machine check
+@@ -3807,7 +3828,7 @@
+     /// `collect_defaults`, the defaulted attributes go to
+     /// `self.default_attributes`.
+     fn end_of_attributes_inner(&mut self, collect_defaults: bool) -> EndOfAttributesOutcome {
+-        if self.operational_failure.is_some() {
++        if !self.continue_run() {
+             return EndOfAttributesOutcome::Invalid;
+         }
+         if !self.current_state.can_end_attributes() {
+@@ -4042,6 +4063,9 @@
+         self.default_attributes = defaults;
+         if !missing.is_empty() {
+             for (ns, name) in missing {
++                if !self.continue_run() {
++                    return;
++                }
+                 let name_str = self.schema_set.name_table.resolve(name);
+                 let name = ExpandedName::new(
+                     ns.map(|n| self.schema_set.name_table.resolve_ref(n)),
+@@ -4258,7 +4282,7 @@
+
+     /// Validate a text content event
+     pub fn validate_text(&mut self, text: &str) {
+-        if self.operational_failure.is_some() {
++        if !self.continue_run() {
+             return;
+         }
+         if !self.current_state.can_validate_text() {
+@@ -4355,6 +4379,9 @@
+             self.invalidate_current();
+         }
+         for (constraint, message, cause) in pending_errors {
++            if !self.continue_run() {
++                return;
++            }
+             match cause {
+                 Some(cause) => self.report_native_error(constraint, message, cause),
+                 None => self.report_error(constraint, message),
+@@ -4376,7 +4403,7 @@
+     ///
+     /// Whitespace is always allowed in element-only content (it is insignificant).
+     pub fn validate_whitespace(&mut self, text: &str) {
+-        if self.operational_failure.is_some() {
++        if !self.continue_run() {
+             return;
+         }
+         if !self.current_state.can_validate_text() {
+@@ -4477,7 +4504,7 @@
+     /// call was out of sequence / the stack was empty (the caller then returns
+     /// its own invalid sentinel, matching the previous inline behaviour).
+     fn finish_top_element(&mut self) -> Option<FinishedElement> {
+-        if self.operational_failure.is_some() {
++        if !self.continue_run() {
+             return None;
+         }
+         if !self.current_state.can_end_element() {
+@@ -4504,9 +4531,15 @@
+
+         // 1. Content model completion (NFA accept-state check, expected-element errors)
+         self.finish_content_model(&mut ev_state);
++        if !self.continue_run() {
++            return None;
++        }
+
+         // 2. Simple-content / text validation (typed value, fixed/default)
+         self.finish_simple_content(&mut ev_state);
++        if !self.continue_run() {
++            return None;
++        }
+
+         // 2c. Assertion evaluation (XSD 1.1)
+         #[cfg(feature = "xsd11")]
+@@ -4514,6 +4547,9 @@
+
+         // 3. Identity-constraint scope teardown (field values, scope exit, keyref retry)
+         self.finish_identity_constraints(&mut ev_state);
++        if !self.continue_run() {
++            return None;
++        }
+
+         // 4. ID/IDREF/ENTITY bookkeeping
+         self.finish_id_bindings(&mut ev_state);
+@@ -5540,6 +5576,7 @@
+     ///
+     /// Checks that the validation stack is empty and performs IDREF validation.
+     pub fn end_validation(&mut self) -> Result<(), ValidationError> {
++        self.continue_run();
+         // An operational failure is terminal: report it as the completion
+         // error regardless of the state machine (the run was abandoned where
+         // it happened, so the stack is not expected to be empty).
+@@ -5569,8 +5606,13 @@
+             ));
+         }
+
+-        // IDREF validation (cvc-id.1): check all pending IDREFs resolve
+-        for (idref_value, location, context) in &self.pending_idrefs {
++        // IDREF validation (cvc-id.1). Check before every iteration and after
++        // each callback: the first refusal must stop even this deferred batch.
++        for index in 0..self.pending_idrefs.len() {
++            if !self.continue_run() {
++                return Err(self.operational_failure.clone().expect("terminal stop"));
++            }
++            let (idref_value, location, context) = &self.pending_idrefs[index];
+             if !self.id_values.contains_key(idref_value) {
+                 let err = errors::error(
+                     "cvc-id.1",
+@@ -5580,7 +5622,11 @@
+                     ),
+                     location.clone(),
+                 );
+-                self.sink.on_error(context.attach(err, true));
++                let err = context.attach(err, true);
++                self.dispatch_error(err);
++                if let Some(err) = self.operational_failure.clone() {
++                    return Err(err);
++                }
+             }
+         }
+
+@@ -5983,34 +6029,68 @@
+     /// Emit a validation error: record its constraint code on the current
+     /// element's `error_codes` list and dispatch to the sink.
+     fn emit_error(&mut self, err: ValidationError) {
++        if !self.continue_run() {
++            return;
++        }
+         let err = self.with_current_context(err);
+         if let Some(ev) = self.validation_stack.last_mut() {
+             ev.error_codes.push(err.constraint);
+         }
+-        self.sink.on_error(err);
++        self.dispatch_error(err);
+     }
+
+     /// Emit a validation error recording the code on an explicit target
+     /// instead of the stack top. Used during `validate_end_element` where
+     /// the element has already been popped.
+     fn emit_error_to(&mut self, err: ValidationError, codes: &mut Vec<&'static str>) {
++        if !self.continue_run() {
++            return;
++        }
+         let err = self.with_current_context(err);
+         codes.push(err.constraint);
+-        self.sink.on_error(err);
+-    }
+-
+-    /// Report a validation error through the sink
+-    /// Record a terminal operational failure. The first failure wins: it is
+-    /// reported to the sink once (with the current location and element path)
+-    /// and stored so that [`end_validation`](Self::end_validation) fails and
+-    /// every later push call is inert.
++        self.dispatch_error(err);
++    }
++
++    /// Record a terminal operational failure out of band. It is not a document
++    /// error and must never be offered to an exhausted or cancelled sink.
+     fn fail_operational(&mut self, constraint: &'static str, message: String) {
++        if self.operational_failure.is_none() {
++            self.operational_failure = Some(self.enrich(errors::error(constraint, message, None)));
++        }
++    }
++
++    /// Abandon this run for an operational reason. The first failure wins;
++    /// all later diagnostic callbacks and push operations are inert, and
++    /// `end_validation` returns the recorded failure. Existing findings remain
++    /// in the sink. This does not declare the document schema-invalid.
++    pub fn abort_run(&mut self, message: impl Into<String>) {
++        self.fail_operational("validation-aborted", message.into());
++    }
++
++    /// Check cooperative control without reporting a diagnostic to the sink.
++    fn continue_run(&mut self) -> bool {
+         if self.operational_failure.is_some() {
+-            return;
+-        }
+-        let err = self.enrich(errors::error(constraint, message, None));
+-        self.emit_error(err.clone());
+-        self.operational_failure = Some(err);
++            return false;
++        }
++        if self.sink.stop_requested() {
++            self.abort_run("Validation stopped at the sink's request");
++            return false;
++        }
++        true
++    }
++
++    fn dispatch_error(&mut self, err: ValidationError) {
++        if self.continue_run() {
++            self.sink.on_error(err);
++            self.continue_run();
++        }
++    }
++
++    fn dispatch_warning(&mut self, warning: ValidationWarning) {
++        if self.continue_run() {
++            self.sink.on_warning(warning);
++            self.continue_run();
++        }
+     }
+
+     /// The terminal operational failure recorded for this run, if any.
+@@ -6018,7 +6098,7 @@
+     /// Operational failures — a counted content model exceeding an execution
+     /// limit (`validation-resource-limit`, see
+     /// [`ContentModelLimitExceeded`](crate::compiler::ContentModelLimitExceeded))
+-    /// or a content model that could not be prepared at load time
++    /// cooperative sink/adapter cancellation (`validation-aborted`), or a content model that could not be prepared at load time
+     /// (`validation-preparation-failed`) — abort assessment. They are not
+     /// validity verdicts: the driver returns an error from completion instead
+     /// of a `DriveOutcome`, and direct push callers get `Err` from
+@@ -6142,7 +6222,7 @@
+             crate::types::exact_decimal::DECIMAL_CAPACITY_WARNING,
+             message,
+         );
+-        self.sink.on_warning(warning);
++        self.dispatch_warning(warning);
+     }
+
+     /// Report [`SECONDS_CAPACITY_WARNING`](crate::types::validators::SECONDS_CAPACITY_WARNING)
+@@ -6177,7 +6257,7 @@
+         );
+         let warning =
+             self.warning_here(crate::types::validators::SECONDS_CAPACITY_WARNING, message);
+-        self.sink.on_warning(warning);
++        self.dispatch_warning(warning);
+     }
+
+     /// Run `validate` — a value's validation, or an assertion's or a type
+@@ -6207,12 +6287,15 @@
+             message,
+         } in warnings
+         {
++            if !self.continue_run() {
++                return;
++            }
+             let at = match self.current_element_path() {
+                 Some(path) => format!(" ({})", path.local_name_path()),
+                 None => String::new(),
+             };
+             let warning = self.warning_here(code, format!("{source}{at}: {message}"));
+-            self.sink.on_warning(warning);
++            self.dispatch_warning(warning);
+         }
+     }
+
+@@ -6232,6 +6315,9 @@
+             message,
+         } in warnings
+         {
++            if !self.continue_run() {
++                return;
++            }
+             let at = match &context.item {
+                 Some((_, path)) => format!(" ({})", path.local_name_path()),
+                 None => String::new(),
+@@ -6244,7 +6330,7 @@
+                     .with_instance_path(path.clone()),
+                 None => warning,
+             };
+-            self.sink.on_warning(warning);
++            self.dispatch_warning(warning);
+         }
+     }
+
+@@ -6604,6 +6690,9 @@
+     /// Lazily compile an identity constraint and cache it.
+     /// Returns `true` if compilation succeeded (constraint is usable).
+     fn ensure_compiled(&mut self, ic_key: IdentityConstraintKey) -> bool {
++        if !self.continue_run() {
++            return false;
++        }
+         if let Some(cached) = self.compiled_constraints.get(&ic_key) {
+             return cached.is_some();
+         }
+@@ -6638,7 +6727,7 @@
+                             );
+                             // About the schema, not an instance item: no
+                             // location, subject or path.
+-                            self.sink.on_warning(ValidationWarning::new(
++                            self.dispatch_warning(ValidationWarning::new(
+                                 "cvc-identity-constraint",
+                                 format!(
+                                     "Keyref '{}': could not resolve refer target '{}'",
+@@ -6656,7 +6745,7 @@
+                 let name = self.schema_set.name_table.resolve(ic_name);
+                 // About the schema, not an instance item: no location,
+                 // subject or path.
+-                self.sink.on_warning(ValidationWarning::new(
++                self.dispatch_warning(ValidationWarning::new(
+                     "cvc-identity-constraint",
+                     format!(
+                         "Identity constraint '{}': XPath compilation failed: {}",
+@@ -6723,6 +6812,9 @@
+                 // The element was pushed before this call: it is the stack top.
+                 let owner_depth = self.validation_stack.len().saturating_sub(1);
+                 for ic_key in ic_keys {
++                    if !self.continue_run() {
++                        return;
++                    }
+                     if self.ensure_compiled(ic_key) {
+                         let compiled = self.compiled_constraints[&ic_key].as_ref().unwrap();
+                         let mut cs = ConstraintStruct::new(compiled);
+@@ -6779,6 +6871,9 @@
+             }
+             if !ic_errors.is_empty() {
+                 for (err, owner_depth) in ic_errors {
++                    if !self.continue_run() {
++                        return;
++                    }
+                     // The placeholder `""` becomes the current element's path.
+                     let err = if err.element_path() == Some("") {
+                         self.with_current_context_and_path(err)
+@@ -6898,6 +6993,9 @@
+                     invalidate(validity);
+                 }
+                 for err in errs {
++                    if !self.continue_run() {
++                        return;
++                    }
+                     self.emit_error_to(err, error_codes);
+                 }
+             }
+@@ -8016,6 +8114,9 @@
+     /// Emit deferred xsi:type errors (collected by [`resolve_xsi_type`]).
+     fn emit_deferred_xsi_type_errors(&mut self, errors: Vec<ValidationError>) {
+         for err in errors {
++            if !self.continue_run() {
++                return;
++            }
+             let constraint = err.constraint;
+             if constraint == "cvc-elt.4.1" {
+                 self.xsi_type_unresolved_reported =
+--- a/src/validation/validator.rs
++++ b/src/validation/validator.rs
+@@ -27,6 +27,17 @@
+     fn on_error(&mut self, error: ValidationError);
+     /// Report a validation warning
+     fn on_warning(&mut self, warning: ValidationWarning);
++
++    /// Cooperatively stop this run, e.g. after refusing a diagnostic or on
++    /// cancellation. Checked before and after each sink callback and at push
++    /// entry/finalization. The default preserves existing sink behavior.
++    /// A true response is terminal and reported out of band through
++    /// `ValidationRuntime::operational_failure` and `end_validation`, never
++    /// by recursively sending an error to this sink. This does not interrupt
++    /// an in-progress regex, type validator or native content-model operation.
++    fn stop_requested(&self) -> bool {
++        false
++    }
+ }
+
+ /// A validation warning (non-fatal)

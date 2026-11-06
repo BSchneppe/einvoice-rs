@@ -1,0 +1,20 @@
+[package]
+name = "einvoice-schema-backend"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.83"
+publish = false
+
+[workspace]
+resolver = "2"
+
+[dependencies]
+xsd-schema = { version = "=0.3.0", default-features = true }
+
+[dev-dependencies]
+roxmltree = "=0.19.0"
+# Already in the locked backend graph; used by unchanged upstream test suites.
+rust_decimal = "=1.43.0"
+
+[patch.crates-io]
+xsd-schema = { path = "../../vendor/xsd-schema" }
