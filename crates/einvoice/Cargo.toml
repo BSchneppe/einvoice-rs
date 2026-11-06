@@ -9,6 +9,7 @@ publish = false
 repository = "https://github.com/BSchneppe/einvoice-rs"
 
 [dependencies]
+einvoice-numeric = { path = "../einvoice-numeric" }
 # Error classification and parser provenance are tied to this exact version.
 xml-rs = "=0.8.28"
 # Retain lexical namespace declarations that xml-rs collapses into a map.

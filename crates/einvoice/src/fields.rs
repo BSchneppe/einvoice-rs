@@ -22,7 +22,16 @@ pub struct BuildDiagnostic {
 }
 
 pub(crate) fn diagnose(draft: &InvoiceDraft) -> Vec<BuildDiagnostic> {
-    let mut checks = Checks::default();
+    let mut diagnostics = crate::calculation_bounds::Diagnostics::unbounded();
+    collect(draft, &mut diagnostics);
+    diagnostics.into_values()
+}
+
+pub(crate) fn collect(
+    draft: &InvoiceDraft,
+    diagnostics: &mut crate::calculation_bounds::Diagnostics,
+) {
+    let mut checks = Checks { diagnostics };
     checks.required(draft.invoice_number(), "invoice_number", &["BR-02"]);
     checks.required(draft.currency(), "currency", &["BR-05"]);
     checks.required(&draft.invoice_type, "invoice_type", &["BR-04"]);
@@ -197,22 +206,15 @@ pub(crate) fn diagnose(draft: &InvoiceDraft) -> Vec<BuildDiagnostic> {
     ] {
         checks.optional(value, &format!("expected.{name}"));
     }
-    checks.diagnostics
 }
 
-#[derive(Default)]
-struct Checks {
-    diagnostics: Vec<BuildDiagnostic>,
+struct Checks<'a> {
+    diagnostics: &'a mut crate::calculation_bounds::Diagnostics,
 }
 
-impl Checks {
+impl Checks<'_> {
     fn push(&mut self, code: &'static str, path: &str, message: &str, rules: &[&'static str]) {
-        self.diagnostics.push(BuildDiagnostic {
-            code,
-            path: path.into(),
-            message: message.into(),
-            rule_ids: rules.to_vec(),
-        });
+        self.diagnostics.push(code, path, message, rules);
     }
 
     fn missing(&mut self, path: &str, rules: &[&'static str]) {
