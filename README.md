@@ -1,18 +1,19 @@
 # einvoice-rs
 
-An experimental native Rust library for European e-invoices. The workspace currently contains `crates/einvoice-core`, with typed CII and UBL XML parsing and serialization.
+An experimental native Rust library for European e-invoices. The workspace contains an immutable document/report facade alongside experimental typed CII and UBL XML parsing and serialization.
 
 > [!CAUTION]
-> Not ready for production use. Parsing does not establish invoice conformance. The incomplete business-rule validators (mostly stubs, with some real checks) and UniFFI/Kotlin bindings have been removed. The workspace crate is not publishable yet.
+> Not ready for production use. Parsing does not establish invoice conformance. The incomplete business-rule validators (mostly stubs, with some real checks) and UniFFI/Kotlin bindings have been removed. The experimental core crate is not publishable yet.
 
 ## Direction
 
 The first release targets XRechnung CII XML: complete in-process validation against a pinned ruleset, immutable received documents, and a limited builder for ordinary VAT invoices. PDF/ZUGFeRD containers, language bindings and additional formats come later.
 
-The current plan and backlog live in [Linear](https://linear.app/bschneppe/project/rust-e-invoice-library-0bad68cfeaeb). The existing schema-shaped models are experimental. The public business API, validator, builder and conversion support are separate follow-up work.
+The current plan and backlog live in [Linear](https://linear.app/bschneppe/project/rust-e-invoice-library-0bad68cfeaeb). The existing schema-shaped models are experimental. The initial public facade is available below; complete validation, invoice creation and conversion support remain follow-up work.
 
 ## Workspace
 
+- [`crates/einvoice`](crates/einvoice/README.md): immutable XML imports, explicit pinned targets, and validation reports. Native conformance validation and invoice generation are **not available yet**; the facade reports that explicitly.
 - `crates/einvoice-core`: existing XML models, parser, serialization.
 
 ## Parsing example

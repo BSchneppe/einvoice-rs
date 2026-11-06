@@ -1,0 +1,14 @@
+[package]
+name = "einvoice"
+version = "0.1.0"
+edition = "2021"
+license-file = "../../LICENSE"
+description = "Immutable invoice documents and explicit, version-pinned validation reports"
+repository = "https://github.com/BSchneppe/einvoice-rs"
+
+[dependencies]
+# Error classification and parser provenance are tied to this exact version.
+xml-rs = "=0.8.28"
+# Retain lexical namespace declarations that xml-rs collapses into a map.
+xmlparser = "=0.13.6"
+thiserror = "2.0.11"
