@@ -1,0 +1,51 @@
+{
+  "status": "complete",
+  "requested": 60,
+  "observed": 60,
+  "unobserved": 0,
+  "execution_process": {
+    "name": "evaluate60",
+    "argv": [
+      "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/java",
+      "-Xms256m",
+      "-Xmx1024m",
+      "-XX:ActiveProcessorCount=1",
+      "-XX:+UseSerialGC",
+      "-Dorg.slf4j.simpleLogger.defaultLogLevel=error",
+      "-cp",
+      "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/family-run/classes:/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/family-run/snapshots/validator.jar",
+      "FamilyDriver",
+      "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/family-run",
+      "032fab116803f7703bdb419bffc1b709d372b355dd96b394047262b96e2f1895",
+      "31a211c7e10a783e260df2c1a099ad3875dfae46a5f2eee9d4cb4a2487e841fb",
+      "e2d8275974c59a96a6dff1b000a684d75abd2dc61f3e1331e1d593c1a228c2ae",
+      "60ae574a2908a3f8b40e79bf1dde1b37d116cd7809814623a4a72408f2baf7eb",
+      "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home"
+    ],
+    "cwd": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f",
+    "exit_code": 0,
+    "status": "exited",
+    "stdout_sha256": "df0a97ce63d543ec666cc63f7fafcb0217b9739a244dce13521b5bcbea0ba338",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "all_requested_observed": true,
+  "all_processing_completed": true,
+  "consumed_closure_pre_post_verified": true,
+  "acceptance_counts": {
+    "accepted": 28,
+    "rejected": 32
+  },
+  "processing_counts": {
+    "completed": 60
+  },
+  "contract_errors": [],
+  "execution_failures": [],
+  "stdout_bridge_lines": 60,
+  "stdout_other_lines": 0,
+  "finding_occurrences": 60,
+  "freeze_sha256": "e2d8275974c59a96a6dff1b000a684d75abd2dc61f3e1331e1d593c1a228c2ae",
+  "ledger_sha256": "60ae574a2908a3f8b40e79bf1dde1b37d116cd7809814623a4a72408f2baf7eb",
+  "timing_measurements": false,
+  "original_prelabel_expectations_unchanged": true,
+  "no_expected_verdict_assertions": true
+}

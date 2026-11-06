@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/java",
+    "-Xms256m",
+    "-Xmx1024m",
+    "-XX:ActiveProcessorCount=1",
+    "-XX:+UseSerialGC",
+    "-Dorg.slf4j.simpleLogger.defaultLogLevel=error",
+    "-cp",
+    "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/family-run/classes:/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/family-run/snapshots/validator.jar",
+    "FamilyDriver",
+    "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/family-run",
+    "032fab116803f7703bdb419bffc1b709d372b355dd96b394047262b96e2f1895",
+    "31a211c7e10a783e260df2c1a099ad3875dfae46a5f2eee9d4cb4a2487e841fb",
+    "e2d8275974c59a96a6dff1b000a684d75abd2dc61f3e1331e1d593c1a228c2ae",
+    "60ae574a2908a3f8b40e79bf1dde1b37d116cd7809814623a4a72408f2baf7eb",
+    "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home"
+  ],
+  "cwd": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f",
+  "timeout_seconds": 600
+}

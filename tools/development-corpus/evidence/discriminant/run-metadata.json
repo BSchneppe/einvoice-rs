@@ -1,0 +1,160 @@
+{
+  "ledger_sha256": "8496eb001e6bfea360d40565cbebec1d95c955dfb5f732888af22c9af1c4f099",
+  "script_sha256": "caf2a89860d5a8815b849a696f1d1005af5e0457f1b96420e74d0ed9ddd9c954",
+  "python": {
+    "invoked": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-5--45552c76f3d0fedb/tools/oracle/.cache/test-venv/bin/python",
+    "resolved": "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+    "version": "3.12.6",
+    "sha256": "69e6adfac00978215c4e5f3eaf63d262a5fb646b6dca1897b29f78872c4c5a26"
+  },
+  "removed_environment_override_names": [],
+  "java_home": "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home",
+  "processes": [
+    {
+      "process": "java-version",
+      "argv": [
+        "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/java",
+        "-version"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e9b974c646ce3c53bdb2ca76c9fd1fcffd73d3ee00aaf73a57ccde4bdcbd1751",
+      "cwd": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f"
+    },
+    {
+      "process": "javac-version",
+      "argv": [
+        "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/javac",
+        "-version"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "95e1ca704b55c6572df1f3a7261822c2ab0bf8f69968cad7c43ebecd93be2eb0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cwd": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f"
+    },
+    {
+      "process": "javac",
+      "argv": [
+        "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/javac",
+        "-encoding",
+        "UTF-8",
+        "-cp",
+        "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/discriminant/snapshots/validator.jar",
+        "-d",
+        "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/discriminant/classes",
+        "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/discriminant/snapshots/Oracle.java",
+        "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/discriminant/DiscriminantDriver.java"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cwd": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f"
+    },
+    {
+      "process": "baseline",
+      "argv": [
+        "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/java",
+        "-Xms256m",
+        "-Xmx1024m",
+        "-XX:ActiveProcessorCount=1",
+        "-XX:+UseSerialGC",
+        "-Dorg.slf4j.simpleLogger.defaultLogLevel=error",
+        "-cp",
+        "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/discriminant/classes:/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/discriminant/snapshots/validator.jar",
+        "DiscriminantDriver",
+        "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/discriminant",
+        "runtime-closure.tsv",
+        "bf67e82cb72d022c2807ef2aa7c4c3aaf708b033c85ca70f1088beb2f8ceb1de",
+        "bsc10-development-baseline",
+        "inputs/baseline.xml",
+        "881f7bc3ff0513a6627a981301af2c0ec9bcdce2c9d1628d7858e581f4d8e91c",
+        "processes/baseline.receipt.json",
+        "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home"
+      ],
+      "exit_code": 1,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "3b93aa6378a8e4e9e6d3f11c582f0f55f66044f74e3db163175b9df28c73b2bf",
+      "cwd": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f"
+    },
+    {
+      "process": "seller",
+      "argv": [
+        "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/java",
+        "-Xms256m",
+        "-Xmx1024m",
+        "-XX:ActiveProcessorCount=1",
+        "-XX:+UseSerialGC",
+        "-Dorg.slf4j.simpleLogger.defaultLogLevel=error",
+        "-cp",
+        "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/discriminant/classes:/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/discriminant/snapshots/validator.jar",
+        "DiscriminantDriver",
+        "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/discriminant",
+        "runtime-closure.tsv",
+        "bf67e82cb72d022c2807ef2aa7c4c3aaf708b033c85ca70f1088beb2f8ceb1de",
+        "bsc10-development-seller",
+        "inputs/seller.xml",
+        "5b497fed620cc394630caafdfa2f57bdf69f02577b9bd2d9d07824d5dd99c3b9",
+        "processes/seller.receipt.json",
+        "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home"
+      ],
+      "exit_code": 1,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "3b93aa6378a8e4e9e6d3f11c582f0f55f66044f74e3db163175b9df28c73b2bf",
+      "cwd": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f"
+    },
+    {
+      "process": "buyer",
+      "argv": [
+        "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/java",
+        "-Xms256m",
+        "-Xmx1024m",
+        "-XX:ActiveProcessorCount=1",
+        "-XX:+UseSerialGC",
+        "-Dorg.slf4j.simpleLogger.defaultLogLevel=error",
+        "-cp",
+        "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/discriminant/classes:/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/discriminant/snapshots/validator.jar",
+        "DiscriminantDriver",
+        "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/discriminant",
+        "runtime-closure.tsv",
+        "bf67e82cb72d022c2807ef2aa7c4c3aaf708b033c85ca70f1088beb2f8ceb1de",
+        "bsc10-development-buyer",
+        "inputs/buyer.xml",
+        "e5741e2fc511ea60e8500457d46b65bba8a96581ed175233b8e84e6cbf1891a7",
+        "processes/buyer.receipt.json",
+        "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home"
+      ],
+      "exit_code": 1,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "3b93aa6378a8e4e9e6d3f11c582f0f55f66044f74e3db163175b9df28c73b2bf",
+      "cwd": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f"
+    },
+    {
+      "process": "combined",
+      "argv": [
+        "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/java",
+        "-Xms256m",
+        "-Xmx1024m",
+        "-XX:ActiveProcessorCount=1",
+        "-XX:+UseSerialGC",
+        "-Dorg.slf4j.simpleLogger.defaultLogLevel=error",
+        "-cp",
+        "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/discriminant/classes:/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/discriminant/snapshots/validator.jar",
+        "DiscriminantDriver",
+        "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/discriminant",
+        "runtime-closure.tsv",
+        "bf67e82cb72d022c2807ef2aa7c4c3aaf708b033c85ca70f1088beb2f8ceb1de",
+        "bsc10-development-combined",
+        "inputs/combined.xml",
+        "3c5b59ed20b1cdf49c9d5030c1c3cb1a7b4ac942779dfe3dd48b1b8d88838431",
+        "processes/combined.receipt.json",
+        "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home"
+      ],
+      "exit_code": 1,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "3b93aa6378a8e4e9e6d3f11c582f0f55f66044f74e3db163175b9df28c73b2bf",
+      "cwd": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f"
+    }
+  ],
+  "timing_measurements": false,
+  "benchmark_loops": false
+}

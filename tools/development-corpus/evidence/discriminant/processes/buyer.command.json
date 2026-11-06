@@ -1,0 +1,19 @@
+[
+  "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/java",
+  "-Xms256m",
+  "-Xmx1024m",
+  "-XX:ActiveProcessorCount=1",
+  "-XX:+UseSerialGC",
+  "-Dorg.slf4j.simpleLogger.defaultLogLevel=error",
+  "-cp",
+  "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/discriminant/classes:/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/discriminant/snapshots/validator.jar",
+  "DiscriminantDriver",
+  "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/discriminant",
+  "runtime-closure.tsv",
+  "bf67e82cb72d022c2807ef2aa7c4c3aaf708b033c85ca70f1088beb2f8ceb1de",
+  "bsc10-development-buyer",
+  "inputs/buyer.xml",
+  "e5741e2fc511ea60e8500457d46b65bba8a96581ed175233b8e84e6cbf1891a7",
+  "processes/buyer.receipt.json",
+  "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home"
+]

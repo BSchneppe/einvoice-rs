@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/java",
+    "-version"
+  ],
+  "cwd": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f",
+  "timeout_seconds": 30
+}

@@ -1,0 +1,27 @@
+{
+  "frozen_before": {
+    "files": 39,
+    "status": "opaque_bytes_verified",
+    "lock_sha256": "07bba584efbda8a8ac7433bd332fea5222c5f6f92e698bd97c8586bf5d090524"
+  },
+  "frozen_after": {
+    "files": 39,
+    "status": "opaque_bytes_verified",
+    "lock_sha256": "07bba584efbda8a8ac7433bd332fea5222c5f6f92e698bd97c8586bf5d090524"
+  },
+  "artifact_lock_sha256": "5dec502919d8ee137cd2c1453be8c65c1176e8bc707e358f646cef3fb1f55175",
+  "ledger_sha256": "8496eb001e6bfea360d40565cbebec1d95c955dfb5f732888af22c9af1c4f099",
+  "revision_sha256": "d827a710d6d9a2c4afb81a620e45156afd4b0eaf298e72b5894463e01e85c668",
+  "runtime_closure_sha256": "d399d7b5470563d3c1ef43849bd4f39aad79602062eb193e741c4868a576d5e3",
+  "runtime_closure_entries_verified": 103,
+  "all_four_exact_insertion_lineages_verified": true,
+  "complete_attempts_retained": 8,
+  "oracle_evaluate_completed": 4,
+  "native_execution": false,
+  "runtime_coverage": "unavailable",
+  "conformance_claim": false,
+  "resource_claim": false,
+  "attestation_claim": false,
+  "release_claim": false,
+  "report_generator_sha256": "2d2498339cb1e10c2a8dd4810dc161901452a3f6db58a9fd15e79b76445d9b49"
+}

@@ -1,0 +1,85 @@
+{
+  "attempt": 1,
+  "processes": [
+    {
+      "name": "java-version",
+      "argv": [
+        "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/java",
+        "-version"
+      ],
+      "cwd": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f",
+      "exit_code": 0,
+      "status": "exited",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e9b974c646ce3c53bdb2ca76c9fd1fcffd73d3ee00aaf73a57ccde4bdcbd1751"
+    },
+    {
+      "name": "javac-version",
+      "argv": [
+        "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/javac",
+        "-version"
+      ],
+      "cwd": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f",
+      "exit_code": 0,
+      "status": "exited",
+      "stdout_sha256": "95e1ca704b55c6572df1f3a7261822c2ab0bf8f69968cad7c43ebecd93be2eb0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "compile",
+      "argv": [
+        "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/javac",
+        "-encoding",
+        "UTF-8",
+        "-cp",
+        "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/family-run/snapshots/validator.jar",
+        "-d",
+        "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/family-run/classes",
+        "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/family-run/snapshots/Oracle.java",
+        "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/family-run/FamilyDriver.java"
+      ],
+      "cwd": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f",
+      "exit_code": 0,
+      "status": "exited",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "evaluate60",
+      "argv": [
+        "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/java",
+        "-Xms256m",
+        "-Xmx1024m",
+        "-XX:ActiveProcessorCount=1",
+        "-XX:+UseSerialGC",
+        "-Dorg.slf4j.simpleLogger.defaultLogLevel=error",
+        "-cp",
+        "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/family-run/classes:/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/family-run/snapshots/validator.jar",
+        "FamilyDriver",
+        "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/family-run",
+        "032fab116803f7703bdb419bffc1b709d372b355dd96b394047262b96e2f1895",
+        "31a211c7e10a783e260df2c1a099ad3875dfae46a5f2eee9d4cb4a2487e841fb",
+        "e2d8275974c59a96a6dff1b000a684d75abd2dc61f3e1331e1d593c1a228c2ae",
+        "60ae574a2908a3f8b40e79bf1dde1b37d116cd7809814623a4a72408f2baf7eb",
+        "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home"
+      ],
+      "cwd": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f",
+      "exit_code": 0,
+      "status": "exited",
+      "stdout_sha256": "df0a97ce63d543ec666cc63f7fafcb0217b9739a244dce13521b5bcbea0ba338",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "failures": [],
+  "execution_declaration_sha256": "17ed068cc39bb9362f75da04eb394c58cf2688fcf1e9825b6e278b6658d0dce2",
+  "python": {
+    "path": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-5--45552c76f3d0fedb/tools/oracle/.cache/test-venv/bin/python",
+    "realpath": "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+    "bytes": 152096,
+    "sha256": "69e6adfac00978215c4e5f3eaf63d262a5fb646b6dca1897b29f78872c4c5a26",
+    "version": "3.12.6"
+  },
+  "removed_environment_override_names": [],
+  "timing_measurements": false,
+  "reruns": 0
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "case": "baseline",
+    "status": "process_failed",
+    "exit_code": 1
+  },
+  {
+    "case": "seller",
+    "status": "process_failed",
+    "exit_code": 1
+  },
+  {
+    "case": "buyer",
+    "status": "process_failed",
+    "exit_code": 1
+  },
+  {
+    "case": "combined",
+    "status": "process_failed",
+    "exit_code": 1
+  }
+]

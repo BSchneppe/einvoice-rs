@@ -1,0 +1,336 @@
+{
+  "archives": {
+    "cen.zip": {
+      "sha256": "1cd53cb8a84d38aedc82c0caede217da983a7934dd663f793a092fd66443c561",
+      "url": "https://github.com/ConnectingEurope/eInvoicing-EN16931/releases/download/validation-1.3.16/en16931-cii-1.3.16.zip"
+    },
+    "config.zip": {
+      "sha256": "2530cd107c414511c5d0462ec10f886910395abfca820db82e83d70bf01221a8",
+      "url": "https://github.com/itplr-kosit/validator-configuration-xrechnung/releases/download/v2026-08-31/xrechnung-3.0.2-validator-configuration-2026-08-31.zip"
+    },
+    "xr.zip": {
+      "sha256": "ca5e07afd04e72cd283d581590ffff3a15f4aac9d2f40c993345d78e67ea22b4",
+      "url": "https://projekte.kosit.org/api/v4/projects/356/packages/maven/de/xeinkauf/xrechnung-3.0.2-schematron/2.6.0/xrechnung-3.0.2-schematron-2.6.0.zip"
+    }
+  },
+  "citations": {
+    "amount-xsd": {
+      "line_end_1based": 23,
+      "line_start_1based": 16,
+      "locator": "AmountType extends xsd:decimal",
+      "member_ref": "udt-xsd",
+      "utf8_excerpt_sha256": "703dd176386cb65e7447b669ce3ee9f37cf9c4e49971ee803eb30accddac9ea9"
+    },
+    "buyer-cardinality": {
+      "line_end_1based": 316,
+      "line_start_1based": 311,
+      "locator": "HeaderTradeAgreementType/BuyerReference default maxOccurs=1",
+      "member_ref": "ram-xsd",
+      "utf8_excerpt_sha256": "96feacc622ee7f4b7e3373cf1a7bda503d53157af37ec03411d96a853ecf89d9"
+    },
+    "buyer-reference": {
+      "line_end_1based": 338,
+      "line_start_1based": 336,
+      "locator": "BR-DE-15",
+      "member_ref": "xr-cii",
+      "utf8_excerpt_sha256": "c7caba6a15048c669ff359e5b7f40ae4509ac1260930439d6dbc644f424ee5f0"
+    },
+    "careof-forbidden": {
+      "line_end_1based": 810,
+      "line_start_1based": 806,
+      "locator": "CII-DT-093",
+      "member_ref": "cen-syntax",
+      "utf8_excerpt_sha256": "1ad9350028493b1e5ae1d7795bbeca09d0ab84f62a12f4015a87ecb955a1f15b"
+    },
+    "careof-position": {
+      "line_end_1based": 948,
+      "line_start_1based": 925,
+      "locator": "TradeAddressType/CareOf after CountryID",
+      "member_ref": "ram-xsd",
+      "utf8_excerpt_sha256": "dd6e7ada87096d3877537978413ce6b317212211206b052006728007f48cc0e9"
+    },
+    "currency-code": {
+      "line_end_1based": 26,
+      "line_start_1based": 22,
+      "locator": "BR-CL-04",
+      "member_ref": "cen-codes",
+      "utf8_excerpt_sha256": "b29ef19a833e63ebd4cff752f02c2c0723c8e76e5c70c7189cb6e3df5d729323"
+    },
+    "date-cardinality": {
+      "line_end_1based": 246,
+      "line_start_1based": 229,
+      "locator": "ExchangedDocumentType/IssueDateTime",
+      "member_ref": "ram-xsd",
+      "utf8_excerpt_sha256": "2a00a653bb9e5bf07cb0259a453f7c62dee702e95e5060c463615383d6db2626"
+    },
+    "date-required": {
+      "line_end_1based": 11,
+      "line_start_1based": 11,
+      "locator": "BR-03 format=102 selector",
+      "member_ref": "cen-model",
+      "utf8_excerpt_sha256": "53600dee453732a32f5385bde5e8c740ad4566b857316628c097aca95544c29f"
+    },
+    "date-shape": {
+      "line_end_1based": 813,
+      "line_start_1based": 811,
+      "locator": "CII-DT-097",
+      "member_ref": "cen-syntax",
+      "utf8_excerpt_sha256": "7a718f6c8c859f0e7ef3a298f6ccead4855fbb82f73818c0b6cfd0771d12a135"
+    },
+    "date-string": {
+      "line_end_1based": 64,
+      "line_start_1based": 51,
+      "locator": "DateTimeType/DateTimeString xsd:string",
+      "member_ref": "udt-xsd",
+      "utf8_excerpt_sha256": "20e6fcb58f91926bf3e4174a832b9a0d83a7989dba8d9d237343dbd381c13eeb"
+    },
+    "empty": {
+      "line_end_1based": 299,
+      "line_start_1based": 296,
+      "locator": "PEPPOL-EN16931-R008 lexical name() context",
+      "member_ref": "xr-cii",
+      "utf8_excerpt_sha256": "180161b6c17719775ea643b81cae537e4c99bf874c657faa02050dd6e9d79367"
+    },
+    "grandtotal-round": {
+      "line_end_1based": 119,
+      "line_start_1based": 92,
+      "locator": "BR-CO-15/16",
+      "member_ref": "cen-model",
+      "utf8_excerpt_sha256": "113657a80d4234c905e95821091e2619a07d94b2dfd90e7a30a72759c4046b45"
+    },
+    "line-arithmetic": {
+      "line_end_1based": 257,
+      "line_start_1based": 239,
+      "locator": "PEPPOL-EN16931-R120 and operand lets",
+      "member_ref": "xr-cii",
+      "utf8_excerpt_sha256": "23a274462a288f1ccb831e8f0ec5d82225597bc674f8eb667f586e22e7a5deee"
+    },
+    "line-precision": {
+      "line_end_1based": 253,
+      "line_start_1based": 253,
+      "locator": "BR-DEC-23",
+      "member_ref": "cen-model",
+      "utf8_excerpt_sha256": "5c21df5b74bbd47edb4c93c97ccd673d061dfe2344febafa50af72f8e2d53ba9"
+    },
+    "line-sum-round": {
+      "line_end_1based": 76,
+      "line_start_1based": 76,
+      "locator": "BR-CO-10",
+      "member_ref": "cen-model",
+      "utf8_excerpt_sha256": "b6da4c9078162867ad857e62acabf694e1949f03e735eeb21bb0974a034f219b"
+    },
+    "line-tax-count": {
+      "line_end_1based": 314,
+      "line_start_1based": 313,
+      "locator": "CII-SR-454",
+      "member_ref": "cen-syntax",
+      "utf8_excerpt_sha256": "7e9d8616a6c3af0b00881c6151627a62be60ec0079c0cddeb0b0d2400b242250"
+    },
+    "line-tax-position": {
+      "line_end_1based": 488,
+      "line_start_1based": 476,
+      "locator": "LineTradeSettlementType/ApplicableTradeTax",
+      "member_ref": "ram-xsd",
+      "utf8_excerpt_sha256": "a718d99134093f187de4f035e3836ed4516d89b4f7d52e2f07a664d5350d4a79"
+    },
+    "lines-required": {
+      "line_end_1based": 24,
+      "line_start_1based": 24,
+      "locator": "BR-16",
+      "member_ref": "cen-model",
+      "utf8_excerpt_sha256": "5c80bf17124be99fb9089877aa310c91990649ad418e4da07827bd6ffff87518"
+    },
+    "lines-xsd": {
+      "line_end_1based": 908,
+      "line_start_1based": 901,
+      "locator": "SupplyChainTradeTransactionType",
+      "member_ref": "ram-xsd",
+      "utf8_excerpt_sha256": "fd6045ff8cd9ece1978dd6eea54eee6292628a7d3cb661ba8ca9899561296619"
+    },
+    "namespace": {
+      "line_end_1based": 24,
+      "line_start_1based": 15,
+      "locator": "qualified namespace and root sequence",
+      "member_ref": "cii-xsd",
+      "utf8_excerpt_sha256": "3b92d248e52b63270175f800ab6684ec8778d441a4fab2227a68b8ced15068f1"
+    },
+    "note-content": {
+      "line_end_1based": 574,
+      "line_start_1based": 566,
+      "locator": "NoteType/Content udt:TextType",
+      "member_ref": "ram-xsd",
+      "utf8_excerpt_sha256": "66db5a273da6ead73461621f08c71c5cc8a2c6d03070d25933ea86d6cb526312"
+    },
+    "price-sign": {
+      "line_end_1based": 35,
+      "line_start_1based": 35,
+      "locator": "BR-27",
+      "member_ref": "cen-model",
+      "utf8_excerpt_sha256": "d1217d38cb8365ea002a600fccad8201313cab525a45c1cfb772fbb407f1dcfb"
+    },
+    "product-required": {
+      "line_end_1based": 35,
+      "line_start_1based": 29,
+      "locator": "BR-21/BR-25/BR-27",
+      "member_ref": "cen-model",
+      "utf8_excerpt_sha256": "4c7a2c5986e7236721fa296d4fb57000fc584bfa2c015877aaf58e2840531e30"
+    },
+    "product-xsd": {
+      "line_end_1based": 1124,
+      "line_start_1based": 1115,
+      "locator": "TradeProductType/Name",
+      "member_ref": "ram-xsd",
+      "utf8_excerpt_sha256": "6c888f14373500b2910055c311c30c4ef4723f38ea0512538a581385fc09d8d1"
+    },
+    "slack": {
+      "line_end_1based": 33,
+      "line_start_1based": 32,
+      "locator": "slackValue, not an acceptance policy",
+      "member_ref": "xr-cii",
+      "utf8_excerpt_sha256": "1659ae471a4b2937ca872def6f9fda87568961713ceae527f44c082ee7d63aef"
+    },
+    "taxbasis-round": {
+      "line_end_1based": 83,
+      "line_start_1based": 79,
+      "locator": "BR-CO-13/14",
+      "member_ref": "cen-model",
+      "utf8_excerpt_sha256": "1c1ca246b3447f1ba5af524af0db4271f8dc236e0d1d35f1c56c20b2b26c33a2"
+    },
+    "terms-count": {
+      "line_end_1based": 646,
+      "line_start_1based": 645,
+      "locator": "CII-SR-452/453",
+      "member_ref": "cen-syntax",
+      "utf8_excerpt_sha256": "cac0c4f6f0b6d060f054037e9ac7719927f00b9bd779161ec96c3dcd14a6aa79"
+    },
+    "terms-position": {
+      "line_end_1based": 391,
+      "line_start_1based": 384,
+      "locator": "HeaderTradeSettlementType/SpecifiedTradePaymentTerms",
+      "member_ref": "ram-xsd",
+      "utf8_excerpt_sha256": "1cc338bdfc6672c3f6f66ce72031a1223eacbc6a9180789f3f9e05f0affac898"
+    },
+    "text-attributes": {
+      "line_end_1based": 152,
+      "line_start_1based": 145,
+      "locator": "TextType attributes xsd:token; later schema whitespace processing may erase XML-layer differences",
+      "member_ref": "udt-xsd",
+      "utf8_excerpt_sha256": "7ca808583c5be2682bd092e3f2fa66b59223cd6fed91c406a8e72ac2f4a4ebd9"
+    },
+    "unit-code": {
+      "line_end_1based": 152,
+      "line_start_1based": 148,
+      "locator": "BR-CL-23",
+      "member_ref": "cen-codes",
+      "utf8_excerpt_sha256": "1094ba81f3e32ce946b6a19962d698651cb7408493bbac3b51433af7d69d313b"
+    }
+  },
+  "members": {
+    "cen-codes": {
+      "archive": "cen.zip",
+      "archive_sha256": "1cd53cb8a84d38aedc82c0caede217da983a7934dd663f793a092fd66443c561",
+      "bytes": 34078,
+      "member": "schematron/codelist/EN16931-CII-codes.sch",
+      "sha256": "c260c325dbccbbfdace9b049180aa4c708e45d84e03469a86bdf399b07a7b799"
+    },
+    "cen-model": {
+      "archive": "cen.zip",
+      "archive_sha256": "1cd53cb8a84d38aedc82c0caede217da983a7934dd663f793a092fd66443c561",
+      "bytes": 61284,
+      "member": "schematron/CII/EN16931-CII-model.sch",
+      "sha256": "4fd7b27479aa31d464f977a6abb3ba9d29263c17f7ec49e54e0a77b02d2a751b"
+    },
+    "cen-syntax": {
+      "archive": "cen.zip",
+      "archive_sha256": "1cd53cb8a84d38aedc82c0caede217da983a7934dd663f793a092fd66443c561",
+      "bytes": 57641,
+      "member": "schematron/CII/EN16931-CII-syntax.sch",
+      "sha256": "a2c3d977fbb1aaf7563bc4620baa6840885dd7fba29294d50d19a3ece35aae44"
+    },
+    "cii-xsd": {
+      "archive": "config.zip",
+      "archive_sha256": "2530cd107c414511c5d0462ec10f886910395abfca820db82e83d70bf01221a8",
+      "bytes": 3078,
+      "member": "resources/cii/16b/xsd/CrossIndustryInvoice_100pD16B.xsd",
+      "sha256": "3baf143b90f289d62c5dfb086aa51fa183490a2d0b38a40c6b31dcae0760f2ba"
+    },
+    "ram-xsd": {
+      "archive": "config.zip",
+      "archive_sha256": "2530cd107c414511c5d0462ec10f886910395abfca820db82e83d70bf01221a8",
+      "bytes": 99402,
+      "member": "resources/cii/16b/xsd/CrossIndustryInvoice_ReusableAggregateBusinessInformationEntity_100pD16B.xsd",
+      "sha256": "1c42244298a863bcc0b5196983ff0a5d084fcabe58aea77ef82b242e7cd0ddfd"
+    },
+    "udt-xsd": {
+      "archive": "config.zip",
+      "archive_sha256": "2530cd107c414511c5d0462ec10f886910395abfca820db82e83d70bf01221a8",
+      "bytes": 6967,
+      "member": "resources/cii/16b/xsd/CrossIndustryInvoice_UnqualifiedDataType_100pD16B.xsd",
+      "sha256": "04fce6f6f28521886731294be18a4e6bb5cb3003456457d99ad5c4d3e652f497"
+    },
+    "xr-cii": {
+      "archive": "xr.zip",
+      "archive_sha256": "ca5e07afd04e72cd283d581590ffff3a15f4aac9d2f40c993345d78e67ea22b4",
+      "bytes": 54795,
+      "member": "schematron/cii/XRechnung-CII-validation.sch",
+      "sha256": "53bb5c0664fc603bbaaddeed26eb59525a05d3359d1a63f148876b2f2eedde1d"
+    }
+  },
+  "normative_reads": {
+    "names": {
+      "basis": "Prefix scope and defaults determine expanded element names. Unprefixed attributes have no namespace.",
+      "read": "2026-11-06",
+      "section": "6.1/6.2",
+      "url": "https://www.w3.org/TR/2009/REC-xml-names-20091208/#scoping"
+    },
+    "xml10-attr": {
+      "basis": "Literal whitespace becomes space after line-end processing; a character reference contributes its referenced character. No DTD is introduced.",
+      "read": "2026-11-06",
+      "section": "3.3.3",
+      "url": "https://www.w3.org/TR/2008/REC-xml-20081126/#AVNormalize"
+    },
+    "xml10-comments": {
+      "basis": "A fixed comment changes source positions without adding element occurrences.",
+      "read": "2026-11-06",
+      "section": "2.5",
+      "url": "https://www.w3.org/TR/2008/REC-xml-20081126/#sec-comments"
+    },
+    "xml10-encoding": {
+      "basis": "UTF-8 may have a BOM; UTF-16 requires one. Encoding declarations and actual bytes must agree.",
+      "read": "2026-11-06",
+      "section": "4.3.3",
+      "url": "https://www.w3.org/TR/2008/REC-xml-20081126/#charencoding"
+    },
+    "xml10-eol": {
+      "basis": "Literal CRLF and CR are normalized to LF before parsing. NEL and LS are outside this list.",
+      "read": "2026-11-06",
+      "section": "2.11",
+      "url": "https://www.w3.org/TR/2008/REC-xml-20081126/#sec-line-ends"
+    },
+    "xml10-ref": {
+      "basis": "Numeric character references supply the specified characters.",
+      "read": "2026-11-06",
+      "section": "4.1",
+      "url": "https://www.w3.org/TR/2008/REC-xml-20081126/#sec-references"
+    },
+    "xml11-attr": {
+      "basis": "Attribute processing follows line-end normalization. Literal NEL therefore enters as LF and becomes space; a numeric NEL reference contributes NEL.",
+      "read": "2026-11-06",
+      "section": "3.3.3",
+      "url": "https://www.w3.org/TR/2006/REC-xml11-20060816/#AVNormalize"
+    },
+    "xml11-eol": {
+      "basis": "Literal NEL and LS join the line-end normalization set; references are a separate source form.",
+      "read": "2026-11-06",
+      "section": "2.11",
+      "url": "https://www.w3.org/TR/2006/REC-xml11-20060816/#sec-line-ends"
+    },
+    "xml11-version": {
+      "basis": "The document entity declaration selects the document version. Backend capability remains unobserved.",
+      "read": "2026-11-06",
+      "section": "4.3.4",
+      "url": "https://www.w3.org/TR/2006/REC-xml11-20060816/#sec-entity-version"
+    }
+  },
+  "source_use": "static intent only; no assertion execution or predicted full verdict"
+}

@@ -1,0 +1,223 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rsm:CrossIndustryInvoice xmlns:rsm="urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100" xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:100" xmlns:b="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100">
+  <rsm:ExchangedDocumentContext>
+    <b:BusinessProcessSpecifiedDocumentContextParameter>
+      <b:ID>urn:fdc:peppol.eu:2017:poacc:billing:01.0</b:ID>
+    </b:BusinessProcessSpecifiedDocumentContextParameter>
+    <b:GuidelineSpecifiedDocumentContextParameter>
+      <b:ID>urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0</b:ID>
+    </b:GuidelineSpecifiedDocumentContextParameter>
+  </rsm:ExchangedDocumentContext>
+  <rsm:ExchangedDocument>
+    <b:ID>SRV-2025-47731</b:ID>
+    <b:TypeCode>380</b:TypeCode>
+    <b:IssueDateTime>
+      <udt:DateTimeString format="102">20251206</udt:DateTimeString>
+    </b:IssueDateTime>
+    <b:IncludedNote>
+      <b:Content>Elektronische Dienstleistungsrechnung gemäß § 14 UStG und EN 16931.</b:Content>
+    </b:IncludedNote>
+    <b:IncludedNote>
+      <b:Content>Leistungszeitraum: 03.12.2025. Leistungsnachweise liegen bei.</b:Content>
+    </b:IncludedNote>
+    <b:IncludedNote>
+      <b:Content>Abnahme durch den Betriebsleiter erfolgte ohne Vorbehalte.</b:Content>
+    </b:IncludedNote>
+    <b:IncludedNote>
+      <b:Content>Geschäftsführer: Sabine Schreiber; HRB 68670, Amtsgericht Cologne; Steuernummer: 05/619/36198</b:Content>
+      <b:SubjectCode>REG</b:SubjectCode>
+    </b:IncludedNote>
+  </rsm:ExchangedDocument>
+  <rsm:SupplyChainTradeTransaction>
+    <b:IncludedSupplyChainTradeLineItem>
+      <b:AssociatedDocumentLineDocument>
+        <b:LineID>1</b:LineID>
+      </b:AssociatedDocumentLineDocument>
+      <b:SpecifiedTradeProduct>
+        <b:SellerAssignedID>SRV-DRN-THERM</b:SellerAssignedID>
+        <b:Name>Drohnengestützte Thermografie-Befliegung (PV-Park)</b:Name>
+        <b:Description>Infrarot-Hotspot-Analyse inklusive Messbericht und Geo-Tagging</b:Description>
+      </b:SpecifiedTradeProduct>
+      <b:SpecifiedLineTradeAgreement>
+        <b:NetPriceProductTradePrice>
+          <b:ChargeAmount>1927.35</b:ChargeAmount>
+        </b:NetPriceProductTradePrice>
+      </b:SpecifiedLineTradeAgreement>
+      <b:SpecifiedLineTradeDelivery>
+        <b:BilledQuantity unitCode="C62">1.00</b:BilledQuantity>
+      </b:SpecifiedLineTradeDelivery>
+      <b:SpecifiedLineTradeSettlement>
+        <b:ApplicableTradeTax>
+          <b:TypeCode>VAT</b:TypeCode>
+          <b:CategoryCode>S</b:CategoryCode>
+          <b:RateApplicablePercent>19.00</b:RateApplicablePercent>
+        </b:ApplicableTradeTax>
+        <b:SpecifiedTradeSettlementLineMonetarySummation>
+          <b:LineTotalAmount>1927.35</b:LineTotalAmount>
+        </b:SpecifiedTradeSettlementLineMonetarySummation>
+      </b:SpecifiedLineTradeSettlement>
+    </b:IncludedSupplyChainTradeLineItem>
+    <b:IncludedSupplyChainTradeLineItem>
+      <b:AssociatedDocumentLineDocument>
+        <b:LineID>2</b:LineID>
+      </b:AssociatedDocumentLineDocument>
+      <b:SpecifiedTradeProduct>
+        <b:SellerAssignedID>SRV-CALIB-SENS</b:SellerAssignedID>
+        <b:Name>Sensorkalibrierung &amp; Pyranometer-Prüfung</b:Name>
+        <b:Description>Präzisionsabgleich Einstrahlungssensoren vor Ort</b:Description>
+      </b:SpecifiedTradeProduct>
+      <b:SpecifiedLineTradeAgreement>
+        <b:NetPriceProductTradePrice>
+          <b:ChargeAmount>91.05</b:ChargeAmount>
+        </b:NetPriceProductTradePrice>
+      </b:SpecifiedLineTradeAgreement>
+      <b:SpecifiedLineTradeDelivery>
+        <b:BilledQuantity unitCode="HUR">8.00</b:BilledQuantity>
+      </b:SpecifiedLineTradeDelivery>
+      <b:SpecifiedLineTradeSettlement>
+        <b:ApplicableTradeTax>
+          <b:TypeCode>VAT</b:TypeCode>
+          <b:CategoryCode>S</b:CategoryCode>
+          <b:RateApplicablePercent>19.00</b:RateApplicablePercent>
+        </b:ApplicableTradeTax>
+        <b:SpecifiedTradeSettlementLineMonetarySummation>
+          <b:LineTotalAmount>728.40</b:LineTotalAmount>
+        </b:SpecifiedTradeSettlementLineMonetarySummation>
+      </b:SpecifiedLineTradeSettlement>
+    </b:IncludedSupplyChainTradeLineItem>
+    <b:IncludedSupplyChainTradeLineItem>
+      <b:AssociatedDocumentLineDocument>
+        <b:LineID>3</b:LineID>
+      </b:AssociatedDocumentLineDocument>
+      <b:SpecifiedTradeProduct>
+        <b:SellerAssignedID>SRV-PROT-EXPERT</b:SellerAssignedID>
+        <b:Name>Sachverständigen-Abnahmegutachten BESS-Speicher</b:Name>
+        <b:Description>Prüfung Brandschutz, Not-Aus-Matrix und Netzkonformität VDE 4110</b:Description>
+      </b:SpecifiedTradeProduct>
+      <b:SpecifiedLineTradeAgreement>
+        <b:NetPriceProductTradePrice>
+          <b:ChargeAmount>2503.78</b:ChargeAmount>
+        </b:NetPriceProductTradePrice>
+      </b:SpecifiedLineTradeAgreement>
+      <b:SpecifiedLineTradeDelivery>
+        <b:BilledQuantity unitCode="C62">1.00</b:BilledQuantity>
+      </b:SpecifiedLineTradeDelivery>
+      <b:SpecifiedLineTradeSettlement>
+        <b:ApplicableTradeTax>
+          <b:TypeCode>VAT</b:TypeCode>
+          <b:CategoryCode>S</b:CategoryCode>
+          <b:RateApplicablePercent>19.00</b:RateApplicablePercent>
+        </b:ApplicableTradeTax>
+        <b:SpecifiedTradeSettlementLineMonetarySummation>
+          <b:LineTotalAmount>2503.78</b:LineTotalAmount>
+        </b:SpecifiedTradeSettlementLineMonetarySummation>
+      </b:SpecifiedLineTradeSettlement>
+    </b:IncludedSupplyChainTradeLineItem>
+    <b:ApplicableHeaderTradeAgreement>
+      <b:BuyerReference>TICKET-283008</b:BuyerReference>
+      <b:SellerTradeParty>
+        <b:Name>Rheinaue Kabeltechnik GmbH</b:Name>
+        <b:SpecifiedLegalOrganization>
+          <b:ID>HRB 68670, Amtsgericht Cologne</b:ID>
+        </b:SpecifiedLegalOrganization>
+        <b:DefinedTradeContact>
+          <b:PersonName>Finn Vogel</b:PersonName>
+          <b:TelephoneUniversalCommunication>
+            <b:CompleteNumber>+49 15 5550 9449</b:CompleteNumber>
+          </b:TelephoneUniversalCommunication>
+          <b:EmailURIUniversalCommunication>
+            <b:URIID>billing@rheinaue-kabeltechnik.example</b:URIID>
+          </b:EmailURIUniversalCommunication>
+        </b:DefinedTradeContact>
+        <b:PostalTradeAddress>
+          <b:PostcodeCode>58770</b:PostcodeCode>
+          <b:LineOne>Bornwaldanger 267</b:LineOne>
+          <b:CityName>Köln</b:CityName>
+          <b:CountryID>DE</b:CountryID>
+        </b:PostalTradeAddress>
+        <b:URIUniversalCommunication>
+          <b:URIID schemeID="EM">billing@rheinaue-kabeltechnik.example</b:URIID>
+        </b:URIUniversalCommunication>
+        <b:SpecifiedTaxRegistration>
+          <b:ID schemeID="VA">DE535809207</b:ID>
+        </b:SpecifiedTaxRegistration>
+        <b:SpecifiedTaxRegistration>
+          <b:ID schemeID="FC">05/619/36198</b:ID>
+        </b:SpecifiedTaxRegistration>
+      </b:SellerTradeParty>
+      <b:BuyerTradeParty>
+        <b:Name>Sinabis Green Energy Deutschland GmbH</b:Name>
+        <b:DefinedTradeContact>
+          <b:PersonName>Miriam Albers</b:PersonName>
+          <b:TelephoneUniversalCommunication>
+            <b:CompleteNumber>+49 421 5550 1000</b:CompleteNumber>
+          </b:TelephoneUniversalCommunication>
+          <b:EmailURIUniversalCommunication>
+            <b:URIID>rechnungswesen@sinabis-green.example</b:URIID>
+          </b:EmailURIUniversalCommunication>
+        </b:DefinedTradeContact>
+        <b:PostalTradeAddress>
+          <b:PostcodeCode>28217</b:PostcodeCode>
+          <b:LineOne>Am Solarhafen 12</b:LineOne>
+          <b:CityName>Bremen</b:CityName>
+          <b:CountryID>DE</b:CountryID>
+        </b:PostalTradeAddress>
+        <b:URIUniversalCommunication>
+          <b:URIID schemeID="EM">rechnungswesen@sinabis-green.example</b:URIID>
+        </b:URIUniversalCommunication>
+        <b:SpecifiedTaxRegistration>
+          <b:ID schemeID="VA">DE664267744</b:ID>
+        </b:SpecifiedTaxRegistration>
+      </b:BuyerTradeParty>
+      <b:BuyerOrderReferencedDocument>
+        <b:IssuerAssignedID>WO-2025-903</b:IssuerAssignedID>
+      </b:BuyerOrderReferencedDocument>
+      <b:ContractReferencedDocument>
+        <b:IssuerAssignedID>SLA-2025-75</b:IssuerAssignedID>
+      </b:ContractReferencedDocument>
+    </b:ApplicableHeaderTradeAgreement>
+    <b:ApplicableHeaderTradeDelivery>
+      <b:ActualDeliverySupplyChainEvent>
+        <b:OccurrenceDateTime>
+          <udt:DateTimeString format="102">20251203</udt:DateTimeString>
+        </b:OccurrenceDateTime>
+      </b:ActualDeliverySupplyChainEvent>
+    </b:ApplicableHeaderTradeDelivery>
+    <b:ApplicableHeaderTradeSettlement>
+      <b:PaymentReference>SRV-2025-47731</b:PaymentReference>
+      <b:InvoiceCurrencyCode>EUR</b:InvoiceCurrencyCode>
+      <b:SpecifiedTradeSettlementPaymentMeans>
+        <b:TypeCode>58</b:TypeCode>
+        <b:Information>SEPA-Überweisung</b:Information>
+        <b:PayeePartyCreditorFinancialAccount>
+          <b:IBANID>DE71741734262882224463</b:IBANID>
+          <b:AccountName>Rheinaue Kabeltechnik GmbH</b:AccountName>
+        </b:PayeePartyCreditorFinancialAccount>
+        <b:PayeeSpecifiedCreditorFinancialInstitution>
+          <b:BICID>HQGZDEPT</b:BICID>
+        </b:PayeeSpecifiedCreditorFinancialInstitution>
+      </b:SpecifiedTradeSettlementPaymentMeans>
+      <b:ApplicableTradeTax>
+        <b:CalculatedAmount>980.31</b:CalculatedAmount>
+        <b:TypeCode>VAT</b:TypeCode>
+        <b:BasisAmount>5159.53</b:BasisAmount>
+        <b:CategoryCode>S</b:CategoryCode>
+        <b:RateApplicablePercent>19.00</b:RateApplicablePercent>
+      </b:ApplicableTradeTax>
+      <b:SpecifiedTradePaymentTerms>
+        <b:Description>Zahlbar innerhalb von 21 Tagen ohne Abzug.</b:Description>
+        <b:DueDateDateTime>
+          <udt:DateTimeString format="102">20251227</udt:DateTimeString>
+        </b:DueDateDateTime>
+      </b:SpecifiedTradePaymentTerms>
+      <b:SpecifiedTradeSettlementHeaderMonetarySummation>
+        <b:LineTotalAmount>5159.53</b:LineTotalAmount>
+        <b:TaxBasisTotalAmount>5159.53</b:TaxBasisTotalAmount>
+        <b:TaxTotalAmount currencyID="EUR">980.31</b:TaxTotalAmount>
+        <b:GrandTotalAmount>6139.84</b:GrandTotalAmount>
+        <b:TotalPrepaidAmount>0.00</b:TotalPrepaidAmount>
+        <b:DuePayableAmount>6139.84</b:DuePayableAmount>
+      </b:SpecifiedTradeSettlementHeaderMonetarySummation>
+    </b:ApplicableHeaderTradeSettlement>
+  </rsm:SupplyChainTradeTransaction>
+</rsm:CrossIndustryInvoice>

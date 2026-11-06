@@ -1,0 +1,26 @@
+{
+  "process": "combined",
+  "argv": [
+    "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/java",
+    "-Xms256m",
+    "-Xmx1024m",
+    "-XX:ActiveProcessorCount=1",
+    "-XX:+UseSerialGC",
+    "-Dorg.slf4j.simpleLogger.defaultLogLevel=error",
+    "-cp",
+    "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/discriminant/attempt-02/classes:/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/discriminant/snapshots/validator.jar",
+    "DiscriminantDriverV2",
+    "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f/.scratch/bsc10/expansion/discriminant",
+    "attempt-02/runtime-closure.tsv",
+    "d399d7b5470563d3c1ef43849bd4f39aad79602062eb193e741c4868a576d5e3",
+    "bsc10-development-combined",
+    "inputs/combined.xml",
+    "3c5b59ed20b1cdf49c9d5030c1c3cb1a7b4ac942779dfe3dd48b1b8d88838431",
+    "attempt-02/processes/combined.receipt.json",
+    "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home"
+  ],
+  "exit_code": 0,
+  "stdout_sha256": "991a7ae698422bf2e23f0cd28c6add13c40497226c42af41a3dbb039789dde14",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "cwd": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f"
+}
