@@ -22,6 +22,8 @@
 //! # Ok::<(), einvoice::ParseError>(())
 //! ```
 
+mod calculation;
+mod calculation_bounds;
 mod document;
 mod domain;
 mod draft;
@@ -30,6 +32,11 @@ mod report;
 mod syntax;
 mod target;
 
+pub use calculation::{
+    CalculatedInvoice, CalculatedLine, CalculatedTotals, CalculatedVatGroup, CalculationError,
+    CalculationFailure, CalculationResource,
+};
+pub use calculation_bounds::CalculationLimits;
 pub use document::{Document, Limits, ParseError, ResourceLimit};
 pub use domain::{
     AccountIdentifier, Contact, ContactPoint, ElectronicAddress, Identifier, InvoiceExpectations,
