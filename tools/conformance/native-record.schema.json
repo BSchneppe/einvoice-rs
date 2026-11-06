@@ -1,0 +1,213 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:einvoice:conformance:native-record:1",
+  "type": "object",
+  "properties": {
+    "format": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "scope": {
+      "const": "complete"
+    },
+    "split": {
+      "enum": [
+        "development",
+        "held_out"
+      ]
+    },
+    "engine": {
+      "const": "native"
+    },
+    "target": {
+      "const": "xrechnung-3.0.2-cii-2026-08-31"
+    },
+    "processing": {
+      "enum": [
+        "completed",
+        "failed"
+      ]
+    },
+    "processing_errors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "schema": {
+      "enum": [
+        "valid",
+        "invalid",
+        "not_evaluated"
+      ]
+    },
+    "business": {
+      "enum": [
+        "evaluated",
+        "not_evaluated"
+      ]
+    },
+    "stages": {
+      "type": "object",
+      "properties": {
+        "val-xml": {
+          "enum": [
+            "valid",
+            "invalid"
+          ]
+        },
+        "val-xsd": {
+          "enum": [
+            "valid",
+            "invalid"
+          ]
+        },
+        "val-sch.1": {
+          "enum": [
+            "valid",
+            "invalid"
+          ]
+        },
+        "val-sch.2": {
+          "enum": [
+            "valid",
+            "invalid"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "target_matched": {
+      "type": "boolean"
+    },
+    "scenario": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/diagnostic"
+      }
+    },
+    "structural_findings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/diagnostic"
+      }
+    },
+    "reference_acceptance": {
+      "enum": [
+        "acceptable",
+        "reject",
+        "undefined"
+      ]
+    },
+    "acceptance": {
+      "enum": [
+        "accepted",
+        "rejected",
+        "indeterminate"
+      ]
+    }
+  },
+  "required": [
+    "format",
+    "id",
+    "sha256",
+    "scope",
+    "split",
+    "engine",
+    "target",
+    "processing",
+    "processing_errors",
+    "schema",
+    "business",
+    "stages",
+    "target_matched",
+    "scenario",
+    "findings",
+    "structural_findings",
+    "reference_acceptance",
+    "acceptance"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "diagnostic": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "severity": {
+          "enum": [
+            "error",
+            "warning",
+            "information",
+            null
+          ]
+        },
+        "effective_severity": {
+          "enum": [
+            "error",
+            "warning",
+            "information",
+            null
+          ]
+        },
+        "location": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "line": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "column": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "message": {
+          "type": "string"
+        },
+        "stage": {
+          "enum": [
+            "val-xml",
+            "val-xsd",
+            "val-sch.1",
+            "val-sch.2"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "severity",
+        "effective_severity",
+        "location",
+        "line",
+        "column",
+        "message",
+        "stage"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

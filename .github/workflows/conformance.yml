@@ -1,0 +1,29 @@
+name: Offline conformance consumer
+on:
+  pull_request:
+    paths:
+      - 'tools/conformance/**'
+      - 'tools/oracle/**'
+      - '.github/workflows/oracle.yml'
+      - '.github/workflows/conformance.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  frozen-consumer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned schema tooling
+        run: python -m pip install -r tools/conformance/requirements.txt
+      # Neither step executes Java, downloads corpus inputs or regenerates labels.
+      - name: Exercise adversarial harness and frozen integration
+        run: python -B -m unittest discover -s tools/conformance/tests -v
+      - name: Verify frozen evidence offline (cache explicitly unavailable)
+        run: python -B tools/conformance/evaluate.py verify
+      - name: Ensure verification wrote no evidence
+        run: git diff --exit-code -- tools/oracle tools/conformance

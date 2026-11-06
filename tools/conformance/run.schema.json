@@ -1,0 +1,726 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:einvoice:conformance:run:1",
+  "type": "object",
+  "properties": {
+    "format": {
+      "const": 1
+    },
+    "contract": {
+      "const": "bsc10-native-v1"
+    },
+    "kind": {
+      "enum": [
+        "native",
+        "harness_fixture"
+      ]
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "output_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "request_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "evaluator_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "evidence_lock_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "artifact_lock_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "requested_target": {
+      "const": "xrechnung-3.0.2-cii-d16b-kosit-2026-08-31"
+    },
+    "wire_target": {
+      "const": "xrechnung-3.0.2-cii-2026-08-31"
+    },
+    "target_projection": {
+      "const": "bsc10-target-v1"
+    },
+    "implementation": {
+      "type": "object",
+      "properties": {
+        "facade": {
+          "$ref": "#/$defs/identity"
+        },
+        "serializer": {
+          "$ref": "#/$defs/identity"
+        },
+        "backend": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/capabilityIdentity"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "generator": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/identity"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "package": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/capabilityIdentity"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "revision": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "tree_sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "artifact_lock_sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "revision",
+                "tree_sha256",
+                "artifact_lock_sha256"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "build": {
+          "type": "object",
+          "properties": {
+            "revision": {
+              "type": "string",
+              "minLength": 1
+            },
+            "dirty": {
+              "type": "boolean"
+            },
+            "profile": {
+              "type": "string",
+              "minLength": 1
+            },
+            "rustc": {
+              "type": "string",
+              "minLength": 1
+            },
+            "target": {
+              "type": "string",
+              "minLength": 1
+            },
+            "executable_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "revision",
+            "dirty",
+            "profile",
+            "rustc",
+            "target",
+            "executable_sha256"
+          ],
+          "additionalProperties": false
+        },
+        "unavailable_reasons": {
+          "type": "object",
+          "properties": {
+            "backend": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "generator": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "package": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "source": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "backend",
+            "generator",
+            "package",
+            "source"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "facade",
+        "serializer",
+        "backend",
+        "generator",
+        "package",
+        "source",
+        "build",
+        "unavailable_reasons"
+      ],
+      "additionalProperties": false
+    },
+    "completion": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "completed",
+            "failed"
+          ]
+        },
+        "exit_code": {
+          "type": "integer"
+        },
+        "record_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "status",
+        "exit_code",
+        "record_count"
+      ],
+      "additionalProperties": false
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "failure": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "document",
+                      "engine",
+                      "timeout",
+                      "crash",
+                      "unsupported",
+                      "limit"
+                    ]
+                  },
+                  "code": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "kind",
+                  "code",
+                  "message"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "stages": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "stage": {
+                  "enum": [
+                    "xml_syntax",
+                    "target_selection",
+                    "xsd",
+                    "cen_rules",
+                    "xrechnung_rules",
+                    "acceptance"
+                  ]
+                },
+                "status": {
+                  "enum": [
+                    "completed",
+                    "failed",
+                    "skipped"
+                  ]
+                },
+                "verdict": {
+                  "enum": [
+                    "valid",
+                    "invalid",
+                    null
+                  ]
+                },
+                "reason": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "stage",
+                "status",
+                "verdict",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "diagnostic_details": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "array": {
+                  "enum": [
+                    "findings",
+                    "structural_findings"
+                  ]
+                },
+                "ordinal": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "raw_code": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "raw_message": {
+                  "type": "string"
+                },
+                "raw_flag": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "raw_role": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "constraint": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/typedEvidence"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "type": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/typedEvidence"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "component": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/typedEvidence"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "cause": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/typedEvidence"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "relationship": {
+                  "enum": [
+                    "primary",
+                    "collateral",
+                    "unclassified"
+                  ]
+                },
+                "parent": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/diagnosticReference"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "span": {
+                      "anyOf": [
+                        {
+                          "$ref": "#/$defs/sourceSpan"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "unavailable_reason": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "span",
+                    "unavailable_reason"
+                  ],
+                  "additionalProperties": false
+                },
+                "typed_unavailable_reasons": {
+                  "type": "object",
+                  "properties": {
+                    "constraint": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "type": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "component": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "cause": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "constraint",
+                    "type",
+                    "component",
+                    "cause"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "array",
+                "ordinal",
+                "raw_code",
+                "raw_message",
+                "raw_flag",
+                "raw_role",
+                "constraint",
+                "type",
+                "component",
+                "cause",
+                "relationship",
+                "parent",
+                "source",
+                "typed_unavailable_reasons"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "backend_notices": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "message": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "code",
+                "message"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "id",
+          "failure",
+          "stages",
+          "diagnostic_details",
+          "backend_notices"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "coverage": {
+      "$ref": "#/$defs/unavailable"
+    },
+    "resources": {
+      "$ref": "#/$defs/unavailable"
+    },
+    "release_gate_eligible": {
+      "const": false
+    }
+  },
+  "required": [
+    "format",
+    "contract",
+    "kind",
+    "run_id",
+    "output_sha256",
+    "request_sha256",
+    "evaluator_sha256",
+    "evidence_lock_sha256",
+    "artifact_lock_sha256",
+    "requested_target",
+    "wire_target",
+    "target_projection",
+    "implementation",
+    "completion",
+    "documents",
+    "coverage",
+    "resources",
+    "release_gate_eligible"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "identity": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "capabilityIdentity": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "capabilities_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "sha256",
+        "capabilities_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "typedEvidence": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "namespace": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "kind",
+        "namespace",
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "diagnosticReference": {
+      "type": "object",
+      "properties": {
+        "array": {
+          "enum": [
+            "findings",
+            "structural_findings"
+          ]
+        },
+        "ordinal": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "array",
+        "ordinal"
+      ],
+      "additionalProperties": false
+    },
+    "sourceSpan": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "enum": [
+            "utf8_byte",
+            "unicode_scalar"
+          ]
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "subject": {
+          "enum": [
+            "exact_node",
+            "owner_element"
+          ]
+        },
+        "line": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "column": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        }
+      },
+      "required": [
+        "unit",
+        "start",
+        "end",
+        "subject",
+        "line",
+        "column"
+      ],
+      "additionalProperties": false
+    },
+    "unavailable": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "unavailable"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "status",
+        "reason"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
