@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:einvoice:conformance:scoped:1",
+  "type": "object",
+  "properties": {
+    "format": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "const": "rule_test_fragment"
+    },
+    "rule_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "schema": {
+      "const": "not_evaluated"
+    },
+    "acceptance": {
+      "const": "not_applicable"
+    },
+    "processing": {
+      "enum": [
+        "completed",
+        "failed"
+      ]
+    },
+    "expectations_met": {
+      "type": "boolean"
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "severity": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "location": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "severity",
+          "location",
+          "message"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "format",
+    "id",
+    "scope",
+    "rule_ids",
+    "schema",
+    "acceptance",
+    "processing",
+    "expectations_met",
+    "findings"
+  ],
+  "additionalProperties": false
+}
