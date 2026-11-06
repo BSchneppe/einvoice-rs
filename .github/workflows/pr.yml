@@ -36,7 +36,7 @@ jobs:
           args: "--locked --all-features --workspace"
 
   facade-package:
-    name: Test facade archive
+    name: Test facade source dependency archive
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -47,25 +47,30 @@ jobs:
           toolchain: 1.83.0
           profile: minimal
           override: true
-      - name: Package and extract the facade outside the checkout
+      - name: Fetch committed workspace dependencies
+        run: cargo fetch --locked
+      - name: Archive source dependencies outside the checkout
         id: archive
         shell: bash
         run: |
-          package_dir="$(mktemp -d)"
+          bundle_dir="$(mktemp -d)"
           archive_dir="$(mktemp -d)"
-          cargo package -p einvoice --locked --no-verify --target-dir "$package_dir"
-          tar -xzf "$package_dir"/package/einvoice-*.crate -C "$archive_dir"
-          cd "$archive_dir"/einvoice-*
-          echo "directory=$PWD" >> "$GITHUB_OUTPUT"
-      - name: Fetch archived package dependencies
+          git archive --format=tar --output="$bundle_dir/source.tar" HEAD -- \
+            Cargo.toml Cargo.lock LICENSE crates/einvoice crates/einvoice-numeric
+          tar -xf "$bundle_dir/source.tar" -C "$archive_dir"
+          echo "directory=$archive_dir" >> "$GITHUB_OUTPUT"
+      - name: Project the lock onto the source dependency workspace
         working-directory: ${{ steps.archive.outputs.directory }}
-        run: cargo fetch --locked
-      # This checks archive closure, not native conformance or release readiness.
-      - name: Test and run the archived facade offline
+        # Core is absent: prune the extracted lock while retaining locked registry
+        # versions. Original manifests and the lock inside source.tar stay intact.
+        run: cargo update --workspace --offline
+      # The numeric path dependency is unpublished. This checks source closure,
+      # not Cargo package inclusion/normalization, registry or release readiness.
+      - name: Test and run the source dependency archive offline
         working-directory: ${{ steps.archive.outputs.directory }}
         run: |
-          cargo test --locked --offline --all-features
-          cargo run --locked --offline --example workflows
+          cargo test --locked --offline --all-features -p einvoice -p einvoice-numeric
+          cargo run --locked --offline -p einvoice --example workflows
 
   check-format:
     name: Check formatting
