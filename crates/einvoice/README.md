@@ -113,13 +113,33 @@ assert_eq!(draft.invoice_number(), "INV-2026-001");
 assert!(matches!(target.encode(&draft), Err(BuildError::Unavailable { .. })));
 ```
 
-This is an intentionally incomplete draft, not an invoice ready to submit. It
-records only invoice number and currency. BSC-9 owns parties, multiple lines,
-standard VAT rates, bank transfer, exact decimal calculations and optional expected
-amounts. No `f64`, rounding, zero substitution, totals, or XML generation are
-implemented here. That ticket must validate the actual newly encoded bytes with the
-same target before returning successful output. Imports remain a separate immutable
-path; there is no lossless editing or complete conversion promise.
+The constructor creates an incomplete draft. Its public business fields hold
+seller/buyer details, addresses, electronic endpoints, contacts, references,
+bank-transfer accounts, ordered lines and optional amount expectations. Required
+business information has no invented default. Contact points distinguish a person
+from a department; account identifiers distinguish IBAN from proprietary accounts.
+Due date and payment terms remain optional for this exact pinned target.
+
+`draft.field_diagnostics()` collects missing or inconsistent required fields,
+unsupported invoice types/VAT categories/payment means, and API text/date findings.
+Each finding has a stable API code, field path, message and supporting rule IDs
+where applicable. Those IDs are source references, not evidence of native rule
+execution. Seller identity and tax identification are separate obligations: local
+tax registration alone needs an additional seller identifier or legal registration.
+Supplied text is preserved, including original decimal spellings and expectations.
+
+**An empty field-diagnostic list does not establish invoice validity.** This helper
+does not parse numeric inputs, check code lists, calculate or compare amounts,
+generate XML, or run native validation. It scans caller-owned input and collects
+findings without a resource budget. Numeric preparation and generation remain
+unimplemented, and `Target::encode` still returns `BuildError::Unavailable` even
+for a populated draft. No `f64` or malformed-to-zero path exists.
+
+The creation model has no fields for allowances, charges, prepayments, payable
+adjustments or structured cash discounts. It supports no credit-note generation,
+PDF workflow or import editing. Incoming validation keeps its full target scope.
+BSC-9 must validate actual fresh bytes with the same native target and independent
+KoSIT before successful creation. Imports remain a separate immutable path.
 
 ## Verification and remaining dependencies
 

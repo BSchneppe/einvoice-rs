@@ -23,13 +23,22 @@
 //! ```
 
 mod document;
+mod domain;
 mod draft;
+mod fields;
 mod report;
 mod syntax;
 mod target;
 
 pub use document::{Document, Limits, ParseError, ResourceLimit};
+pub use domain::{
+    AccountIdentifier, Contact, ContactPoint, ElectronicAddress, Identifier, InvoiceExpectations,
+    InvoiceLineDraft, InvoiceReferences, LineVat, NetPrice, PartyDraft, PaymentInstructions,
+    PaymentMeans, PaymentTerms, PostalAddress, PriceBasis, Quantity, SellerDraft,
+    TaxRepresentativeDraft, TransferAccount, VatGroupExpectation,
+};
 pub use draft::{BuildError, InvoiceDraft};
+pub use fields::BuildDiagnostic;
 pub use report::{
     Diagnostic, EngineFailure, Severity, SkipReason, SourceLocation, Stage, StageResult,
     StageStatus, ValidationFailure, ValidationOutcome, ValidationReport,
