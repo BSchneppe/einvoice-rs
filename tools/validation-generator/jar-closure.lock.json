@@ -1,0 +1,20 @@
+{
+  "format": 1,
+  "parent_archive": "validator.jar",
+  "parent_sha256": "799e64befca97d4080e03608c80b85dd5a5ecc5f4ae4f35d1116ec2855b9a7c9",
+  "members": {
+    "LICENSE.validator": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9",
+    "META-INF/NOTICE": "d864516bb5b6aeb67440c4ba24b28f3208b9fe85e17baa3f3096fed66f68c4e2",
+    "de/kosit/validationtool/impl/ContentRepository.class": "b52bee9dd948399f568faf2c73d12000edf8909dd33c0057497c06ce4d2a17f9",
+    "de/kosit/validationtool/impl/DefaultCheck.class": "bf7e161ca87118c5ec78cec9b73c9f9812c42c0aca95ed71f592dff380da3f7d",
+    "de/kosit/validationtool/impl/SchemaProvider.class": "982906d56ac79dc98485f16ca0d600f8b9ca06174a605a6624fedea6a577f65f",
+    "de/kosit/validationtool/impl/tasks/ComputeAcceptanceAction.class": "bd68dbc6283be2d42732d1080b5bc85409f1d8620c10bb7aaea4ebaa871d8ddd",
+    "de/kosit/validationtool/impl/tasks/ScenarioSelectionAction.class": "b57abc10b55630e98fc84294b667c4709d498abae71cb9846c82fbc65308720c",
+    "de/kosit/validationtool/impl/tasks/SchematronValidationAction.class": "c5c62c28c6568647a961ec6fa41ff8de59502a4991b61efc27c35db02f4924d2",
+    "transform/identity.xsl": "cacbff8cd3ad97c3164d919cfdee3664042610d7ad61f9ecebc4858a369002cc",
+    "xsd/createReportInput.xsd": "73fb6e16c6f015e403f580722e83acad23c478aab0d46fd8469f9d45425ba2d9",
+    "xsd/scenarios.xsd": "3990b4386b8939cb3bba92b96047238c9465402eaed10f2735fb7d9275525321",
+    "xsd/svrl-kosit.xsd": "4612bb8731fedaaacd50173b0966cccff0cc521e6eb4488222d7758642e146ad",
+    "xsd/xml.xsd": "a0149f651e68f4b81399b3125a8168198b4acbedfa3268461c0ba4e6d517c400"
+  }
+}

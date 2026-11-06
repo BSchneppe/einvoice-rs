@@ -1,0 +1,148 @@
+{
+  "artifact_kind": "non-executable-inspection; cannot install or run",
+  "determinism": true,
+  "expressions": 1108,
+  "files": {
+    "ir.json": {
+      "sha256": "8882e1e0550e0f45db2aa6e55ec28de0cc120b51983bba79f2bb175c5b02bed6",
+      "size": 5846836
+    },
+    "manifest.json": {
+      "sha256": "ea83ff6612390909dbef01a2c789453cfd99ba89172270632e9d048939551ff8",
+      "size": 1198826
+    },
+    "resources/cen-source.zip/eInvoicing-EN16931-validation-1.3.16/LICENSE.txt": {
+      "sha256": "281eed0c9d46e36be532978deb16e6351025c6ff32d97fe24e8cb190e4e0d923",
+      "size": 14065
+    },
+    "resources/cen.zip/schematron/codelist/EN16931-CII-codes.sch": {
+      "sha256": "c260c325dbccbbfdace9b049180aa4c708e45d84e03469a86bdf399b07a7b799",
+      "size": 34078
+    },
+    "resources/cen.zip/schematron/preprocessed/EN16931-CII-validation-preprocessed.sch": {
+      "sha256": "54e0dc6d06cd7f17d268bb9696ff56f58d386ee28961c9bbef0a56718c400c89",
+      "size": 240038
+    },
+    "resources/config.zip/resources/cii/16b/xsd/CrossIndustryInvoice_100pD16B.xsd": {
+      "sha256": "3baf143b90f289d62c5dfb086aa51fa183490a2d0b38a40c6b31dcae0760f2ba",
+      "size": 3078
+    },
+    "resources/config.zip/resources/cii/16b/xsd/CrossIndustryInvoice_QualifiedDataType_100pD16B.xsd": {
+      "sha256": "6649215914728652e883662bec1d3eab008c215e86a59f3bb417db9723ee8c5c",
+      "size": 36806
+    },
+    "resources/config.zip/resources/cii/16b/xsd/CrossIndustryInvoice_ReusableAggregateBusinessInformationEntity_100pD16B.xsd": {
+      "sha256": "1c42244298a863bcc0b5196983ff0a5d084fcabe58aea77ef82b242e7cd0ddfd",
+      "size": 99402
+    },
+    "resources/config.zip/resources/cii/16b/xsd/CrossIndustryInvoice_UnqualifiedDataType_100pD16B.xsd": {
+      "sha256": "04fce6f6f28521886731294be18a4e6bb5cb3003456457d99ad5c4d3e652f497",
+      "size": 6967
+    },
+    "resources/config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl": {
+      "sha256": "0911e927f13f9ae2cdc7f973643f27bf0ad3c5da02483c04a5b8a47eb4822199",
+      "size": 934750
+    },
+    "resources/config.zip/resources/default-report.xsl": {
+      "sha256": "b40e53d6d170a1c482aedf09cb5d88ebc2e916db096237d6b3341457cd50e2d1",
+      "size": 32477
+    },
+    "resources/config.zip/resources/xrechnung-report.xsl": {
+      "sha256": "a2c9fa2272fb14667d70ed62f11c6ad6c7167f12f2abbe1b420915ccefd5af8c",
+      "size": 3457
+    },
+    "resources/config.zip/resources/xrechnung/3.0.2/xsl/XRechnung-CII-validation.xsl": {
+      "sha256": "ec54f662803a87f527ec606d1320bc404f1657a848af6a76f37f32905e4aac40",
+      "size": 189030
+    },
+    "resources/config.zip/resources/xsd/report.xsd": {
+      "sha256": "220719bac523fc7cf2ab983a3c1497af511aefe7138e434064425a5476e63f3e",
+      "size": 14674
+    },
+    "resources/config.zip/resources/xsd/scenarios.xsd": {
+      "sha256": "3990b4386b8939cb3bba92b96047238c9465402eaed10f2735fb7d9275525321",
+      "size": 5860
+    },
+    "resources/config.zip/scenarios.xml": {
+      "sha256": "3e8161a39dfaa6aea4d990b279aab848be4f4c6169e820f354a159bda7693fb0",
+      "size": 40562
+    },
+    "resources/standalone/config-LICENSE": {
+      "sha256": "73f2898ad26e1fcb9ec4649cdf8466ea0bda47644b7c12efc10a703bdfb94a9f",
+      "size": 12845
+    },
+    "resources/validator.jar/LICENSE.validator": {
+      "sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9",
+      "size": 10173
+    },
+    "resources/validator.jar/META-INF/NOTICE": {
+      "sha256": "d864516bb5b6aeb67440c4ba24b28f3208b9fe85e17baa3f3096fed66f68c4e2",
+      "size": 8524
+    },
+    "resources/validator.jar/de/kosit/validationtool/impl/ContentRepository.class": {
+      "sha256": "b52bee9dd948399f568faf2c73d12000edf8909dd33c0057497c06ce4d2a17f9",
+      "size": 15977
+    },
+    "resources/validator.jar/de/kosit/validationtool/impl/DefaultCheck.class": {
+      "sha256": "bf7e161ca87118c5ec78cec9b73c9f9812c42c0aca95ed71f592dff380da3f7d",
+      "size": 16389
+    },
+    "resources/validator.jar/de/kosit/validationtool/impl/SchemaProvider.class": {
+      "sha256": "982906d56ac79dc98485f16ca0d600f8b9ca06174a605a6624fedea6a577f65f",
+      "size": 3669
+    },
+    "resources/validator.jar/de/kosit/validationtool/impl/tasks/ComputeAcceptanceAction.class": {
+      "sha256": "bd68dbc6283be2d42732d1080b5bc85409f1d8620c10bb7aaea4ebaa871d8ddd",
+      "size": 6072
+    },
+    "resources/validator.jar/de/kosit/validationtool/impl/tasks/ScenarioSelectionAction.class": {
+      "sha256": "b57abc10b55630e98fc84294b667c4709d498abae71cb9846c82fbc65308720c",
+      "size": 3371
+    },
+    "resources/validator.jar/de/kosit/validationtool/impl/tasks/SchematronValidationAction.class": {
+      "sha256": "c5c62c28c6568647a961ec6fa41ff8de59502a4991b61efc27c35db02f4924d2",
+      "size": 8616
+    },
+    "resources/validator.jar/transform/identity.xsl": {
+      "sha256": "cacbff8cd3ad97c3164d919cfdee3664042610d7ad61f9ecebc4858a369002cc",
+      "size": 1062
+    },
+    "resources/validator.jar/xsd/createReportInput.xsd": {
+      "sha256": "73fb6e16c6f015e403f580722e83acad23c478aab0d46fd8469f9d45425ba2d9",
+      "size": 7596
+    },
+    "resources/validator.jar/xsd/scenarios.xsd": {
+      "sha256": "3990b4386b8939cb3bba92b96047238c9465402eaed10f2735fb7d9275525321",
+      "size": 5860
+    },
+    "resources/validator.jar/xsd/svrl-kosit.xsd": {
+      "sha256": "4612bb8731fedaaacd50173b0966cccff0cc521e6eb4488222d7758642e146ad",
+      "size": 7455
+    },
+    "resources/validator.jar/xsd/xml.xsd": {
+      "sha256": "a0149f651e68f4b81399b3125a8168198b4acbedfa3268461c0ba4e6d517c400",
+      "size": 1152
+    },
+    "resources/xr.zip/LICENSE": {
+      "sha256": "57e93bb611b8aeb93ff0f23b271a23291217b0016f6e66297dfd5e9467538a5f",
+      "size": 12850
+    },
+    "resources/xr.zip/schematron/cii/XRechnung-CII-validation.sch": {
+      "sha256": "53bb5c0664fc603bbaaddeed26eb59525a05d3359d1a63f148876b2f2eedde1d",
+      "size": 54795
+    },
+    "resources/xr.zip/schematron/common.sch": {
+      "sha256": "7443d2f4c12d3e1ffa6b38f7f83cea89a9b03343f31f726083018d8985492a12",
+      "size": 4614
+    }
+  },
+  "format": "einvoice-frontend-source-accounting/1",
+  "helpers": 14,
+  "ir_format": "einvoice-validation-ir/1",
+  "ir_sha256": "8882e1e0550e0f45db2aa6e55ec28de0cc120b51983bba79f2bb175c5b02bed6",
+  "resources": 31,
+  "rules": 156,
+  "sites": 880,
+  "source_package": "sha256:bca50f12540ef24d181159a4daa77976ee4ebbd1f76927b650b9448471d8f62f",
+  "target": "xrechnung-3.0.2-cii-d16b-kosit-2026-08-31"
+}

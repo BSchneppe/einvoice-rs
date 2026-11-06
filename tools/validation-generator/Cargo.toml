@@ -1,0 +1,18 @@
+[workspace]
+members = ["crates/validation-ir"]
+resolver = "2"
+
+[package]
+name = "validation-generator"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.83"
+publish = false
+
+[dependencies]
+validation-ir = { path = "crates/validation-ir" }
+serde = { version = "=1.0.228", features = ["derive"] }
+serde_json = "=1.0.145"
+roxmltree = "=0.20.0"
+sha2 = "=0.10.9"
+zip = { version = "=0.6.6", default-features = false, features = ["deflate"] }
