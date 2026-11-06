@@ -16,10 +16,22 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - uses: actions/setup-java@v4
+      # Corretto's setup-java selector accepts only major versions. Install the
+      # exact release archive instead, retaining the runtime used for frozen labels.
+      # SHA-256: https://github.com/corretto/corretto-27/releases/tag/27.0.1.0.11
+      - name: Download pinned Corretto runtime
+        env:
+          CORRETTO_URL: https://corretto.aws/downloads/resources/27.0.1.0.11/amazon-corretto-27.0.1.0.11-linux-x64.tar.gz
+          CORRETTO_SHA256: 2a8a5a833ec1b2e6e66bcf8a530438f471ebbbc928be90ab153b2985cdeac8e8
+        run: |
+          curl --fail --location --retry 3 --output "$RUNNER_TEMP/corretto.tar.gz" "$CORRETTO_URL"
+          echo "$CORRETTO_SHA256  $RUNNER_TEMP/corretto.tar.gz" | sha256sum --check --strict
+      - uses: actions/setup-java@v5
         with:
-          distribution: corretto
+          distribution: jdkfile
+          jdk-file: ${{ runner.temp }}/corretto.tar.gz
           java-version: '27.0.1'
+          architecture: x64
       - uses: dtolnay/rust-toolchain@stable
       - name: Install corpus reader
         run: pip install -r tools/oracle/requirements-test.txt

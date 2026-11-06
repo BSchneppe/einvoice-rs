@@ -16,7 +16,9 @@ Planning authority: [BSC-5](https://linear.app/bschneppe/issue/BSC-5/pin-xrechnu
 Run from the repository root, with Python 3.12 and Corretto 27.0.1 for the
 frozen outcomes (also used in CI), and Rust for the optional native probes.
 Other JDK versions can change JAXP limits and diagnostics; record/review those
-differences rather than silently replacing the frozen reference:
+differences rather than silently replacing the frozen reference. CI downloads
+the exact Corretto `27.0.1.0.11` Linux x64 archive and checks Amazon's published
+SHA-256 before installation; it does not resolve a floating major version:
 
 ```sh
 python3 -m venv tools/oracle/.cache/venv
