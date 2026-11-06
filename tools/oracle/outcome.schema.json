@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:einvoice:development:oracle-outcome:1",
+  "title": "Full-document KoSIT oracle outcome (scoped fragments have a separate contract)",
+  "type": "object",
+  "required": ["format", "id", "sha256", "scope", "split", "processing", "processing_errors", "schema", "business", "findings", "structural_findings", "acceptance", "reference_acceptance"],
+  "properties": {
+    "format": {"const": 1},
+    "id": {"type": "string"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "scope": {"const": "complete"},
+    "split": {"enum": ["development", "held_out"]},
+    "processing": {"enum": ["completed", "failed"]},
+    "processing_errors": {"type": "array", "items": {"type": "string"}},
+    "schema": {"enum": ["valid", "invalid", "not_evaluated"]},
+    "business": {"enum": ["evaluated", "not_evaluated"]},
+    "stages": {"type": "object", "additionalProperties": {"enum": ["valid", "invalid"]}},
+    "target_matched": {"type": "boolean"},
+    "scenario": {"type": ["string", "null"]},
+    "findings": {"type": "array", "items": {"$ref": "#/$defs/diagnostic"}},
+    "structural_findings": {"type": "array", "items": {"$ref": "#/$defs/diagnostic"}},
+    "reference_acceptance": {"enum": ["acceptable", "reject", "undefined"]},
+    "acceptance": {"enum": ["accepted", "rejected", "indeterminate"]}
+  },
+  "allOf": [
+    {"if": {"properties": {"processing": {"const": "failed"}}}, "then": {"properties": {"acceptance": {"const": "indeterminate"}}}},
+    {"if": {"properties": {"acceptance": {"const": "accepted"}}}, "then": {
+      "required": ["target_matched", "stages"],
+      "properties": {
+        "processing": {"const": "completed"}, "target_matched": {"const": true},
+        "schema": {"const": "valid"}, "business": {"const": "evaluated"},
+        "reference_acceptance": {"const": "acceptable"},
+        "stages": {"required": ["val-xml", "val-xsd", "val-sch.1", "val-sch.2"]}
+      }
+    }}
+  ],
+  "$defs": {
+    "diagnostic": {
+      "type": "object",
+      "required": ["id", "severity", "effective_severity", "location", "line", "column", "message", "stage"],
+      "properties": {
+        "id": {"type": ["string", "null"]},
+        "severity": {"type": ["string", "null"]},
+        "effective_severity": {"type": ["string", "null"]},
+        "location": {"type": ["string", "null"]},
+        "line": {"type": ["string", "null"]},
+        "column": {"type": ["string", "null"]},
+        "message": {"type": "string"}, "stage": {"type": "string"}
+      }
+    }
+  }
+}

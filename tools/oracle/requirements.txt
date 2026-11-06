@@ -1,0 +1,2 @@
+# Only corpus extraction needs a third-party Python package.
+pyarrow==21.0.0

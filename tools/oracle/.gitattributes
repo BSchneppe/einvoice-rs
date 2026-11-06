@@ -1,0 +1,2 @@
+# Preserve upstream notices byte-for-byte, including original line endings.
+notices/* -text whitespace=-blank-at-eof,cr-at-eol

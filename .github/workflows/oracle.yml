@@ -1,0 +1,53 @@
+name: Reference oracle
+on:
+  pull_request:
+    paths:
+      - 'tools/oracle/**'
+      - '.github/workflows/oracle.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  reference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      # Corretto's setup-java selector accepts only major versions. Install the
+      # exact release archive instead, retaining the runtime used for frozen labels.
+      # SHA-256: https://github.com/corretto/corretto-27/releases/tag/27.0.1.0.11
+      - name: Download pinned Corretto runtime
+        env:
+          CORRETTO_URL: https://corretto.aws/downloads/resources/27.0.1.0.11/amazon-corretto-27.0.1.0.11-linux-x64.tar.gz
+          CORRETTO_SHA256: 2a8a5a833ec1b2e6e66bcf8a530438f471ebbbc928be90ab153b2985cdeac8e8
+        run: |
+          curl --fail --location --retry 3 --output "$RUNNER_TEMP/corretto.tar.gz" "$CORRETTO_URL"
+          echo "$CORRETTO_SHA256  $RUNNER_TEMP/corretto.tar.gz" | sha256sum --check --strict
+      - uses: actions/setup-java@v5
+        with:
+          distribution: jdkfile
+          jdk-file: ${{ runner.temp }}/corretto.tar.gz
+          java-version: '27.0.1'
+          architecture: x64
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Install corpus reader
+        run: pip install -r tools/oracle/requirements-test.txt
+      - name: Fetch checksum-pinned development inputs
+        run: python3 tools/oracle/oracle.py fetch
+      - name: Reproduce corpus and verify frozen inventory
+        run: |
+          python3 tools/oracle/oracle.py corpus
+          git diff --exit-code -- tools/oracle/corpus tools/oracle/workload.json
+      - name: Test public tooling behavior against KoSIT
+        run: python3 -m unittest discover -s tools/oracle/tests -v
+      - name: Fetch locked native probe dependencies
+        run: |
+          cargo fetch --locked --manifest-path tools/oracle/probes/xpath/Cargo.toml
+          cargo fetch --locked --manifest-path tools/oracle/probes/xsd/Cargo.toml
+      - name: Reproduce semantic counterexamples offline
+        run: |
+          python3 tools/oracle/probes.py
+          cargo run --locked --offline --manifest-path tools/oracle/probes/xsd/Cargo.toml -- tools/oracle/.cache

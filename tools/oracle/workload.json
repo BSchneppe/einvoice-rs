@@ -1,0 +1,29 @@
+{
+  "format": 1,
+  "manifest": "corpus/initial.jsonl",
+  "groups": {
+    "b2b_hardware_delivery": 0.05263157894736842,
+    "b2b_service_maintenance": 0.05263157894736842,
+    "credit_note_correction": 0.05263157894736842,
+    "municipal_epc_milestone": 0.05263157894736842,
+    "mutation-deep-unknown": 0.05263157894736842,
+    "mutation-duplicate-context": 0.05263157894736842,
+    "mutation-equivalent-prefix": 0.05263157894736842,
+    "mutation-extra-attribute": 0.05263157894736842,
+    "mutation-invalid-decimal": 0.05263157894736842,
+    "mutation-large-text": 0.05263157894736842,
+    "mutation-malformed-xml": 0.05263157894736842,
+    "mutation-missing-line-total": 0.05263157894736842,
+    "mutation-severity-escalation": 0.05263157894736842,
+    "mutation-severity-override": 0.05263157894736842,
+    "mutation-unknown-element": 0.05263157894736842,
+    "mutation-wrong-namespace": 0.05263157894736842,
+    "official-complete": 0.05263157894736842,
+    "reverse_charge_subcontractor": 0.05263157894736842,
+    "utility_energy_feedin": 0.05263157894736842
+  },
+  "warmup_passes": 20,
+  "runs": 5,
+  "repeats": 10,
+  "aggregation": "1 / sum(group_weight * mean_latency_seconds); report every group and run"
+}

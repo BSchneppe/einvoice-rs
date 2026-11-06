@@ -1,0 +1,253 @@
+{
+  "format": 1,
+  "saxon": "HE 12.9 (KoSIT 1.6.3)",
+  "xee": "xee-xpath 0.1.5; xee-interpreter 0.2.0 (Cargo.lock)",
+  "results": [
+    {
+      "id": "decimal_round",
+      "expression": "(round(xs:decimal(\"1.005\") * 100) div 100, round(xs:decimal(\"-1.005\") * 100) div 100,round-half-to-even(xs:decimal(\"1.005\"),2))",
+      "saxon": {
+        "id": "decimal_round",
+        "value": "1.01|-1|1",
+        "error": false
+      },
+      "xee": {
+        "error": false,
+        "id": "decimal_round",
+        "value": "1.01|-1|1"
+      },
+      "match": true
+    },
+    {
+      "id": "decimal_sum",
+      "expression": "sum((xs:decimal(\"0.1\"),xs:decimal(\"0.2\"))) = xs:decimal(\"0.3\")",
+      "saxon": {
+        "id": "decimal_sum",
+        "value": "true",
+        "error": false
+      },
+      "xee": {
+        "error": false,
+        "id": "decimal_sum",
+        "value": "true"
+      },
+      "match": true
+    },
+    {
+      "id": "general_comparison",
+      "expression": "((1,2) = (2,3), (1,2) != (1,2))",
+      "saxon": {
+        "id": "general_comparison",
+        "value": "true|true",
+        "error": false
+      },
+      "xee": {
+        "error": false,
+        "id": "general_comparison",
+        "value": "true|true"
+      },
+      "match": true
+    },
+    {
+      "id": "quantified",
+      "expression": "(every $x in (1,2,3) satisfies $x > 0, some $x in (1,2,3) satisfies $x = 2, every $x in () satisfies false())",
+      "saxon": {
+        "id": "quantified",
+        "value": "true|true|true",
+        "error": false
+      },
+      "xee": {
+        "error": false,
+        "id": "quantified",
+        "value": "true|true|true"
+      },
+      "match": true
+    },
+    {
+      "id": "namespace_parent",
+      "expression": "/root/r:a/r:b/../@n/string()",
+      "saxon": {
+        "id": "namespace_parent",
+        "value": "1",
+        "error": false
+      },
+      "xee": {
+        "error": false,
+        "id": "namespace_parent",
+        "value": "1"
+      },
+      "match": true
+    },
+    {
+      "id": "xml_regex",
+      "expression": "(matches(\"abc\", \"^[a-z-[aeiou]]+$\"),matches(\"bcd\", \"^[a-z-[aeiou]]+$\"),matches(\"Name_1\", \"^\\i\\c*$\"))",
+      "saxon": {
+        "id": "xml_regex",
+        "value": "false|true|true",
+        "error": false
+      },
+      "xee": {
+        "error": false,
+        "id": "xml_regex",
+        "value": "false|true|true"
+      },
+      "match": true
+    },
+    {
+      "id": "regex_flags",
+      "expression": "matches(\"a\nb\", \"a.b\", \"s\")",
+      "saxon": {
+        "id": "regex_flags",
+        "value": "true",
+        "error": false
+      },
+      "xee": {
+        "error": false,
+        "id": "regex_flags",
+        "value": "true"
+      },
+      "match": true
+    },
+    {
+      "id": "large_integer",
+      "expression": "xs:integer(\"370400440532013000131489\") mod 97",
+      "saxon": {
+        "id": "large_integer",
+        "value": "1",
+        "error": false
+      },
+      "xee": {
+        "error": false,
+        "id": "large_integer",
+        "value": "1"
+      },
+      "match": true
+    },
+    {
+      "id": "integer_66_digits",
+      "expression": "xs:integer(\"999999999999999999999999999999999999999999999999999999999999999999\") mod 97",
+      "saxon": {
+        "id": "integer_66_digits",
+        "value": "7",
+        "error": false
+      },
+      "xee": {
+        "error": false,
+        "id": "integer_66_digits",
+        "value": "7"
+      },
+      "match": true
+    },
+    {
+      "id": "invalid_decimal",
+      "expression": "xs:decimal(\"not-a-number\")",
+      "saxon": {
+        "id": "invalid_decimal",
+        "value": null,
+        "error": true,
+        "detail": "Cannot convert string \"not-a-number\" to xs:decimal: invalid character 'n'"
+      },
+      "xee": {
+        "detail": "SpannedError { error: FORG0001, span: Some(SourceSpan(13, 39)) }",
+        "error": true,
+        "id": "invalid_decimal",
+        "value": null
+      },
+      "match": true
+    },
+    {
+      "id": "custom_function_unregistered",
+      "expression": "u:slack(1.00, 1.01, 0.02)",
+      "saxon": {
+        "id": "custom_function_unregistered",
+        "value": null,
+        "error": true,
+        "detail": "Cannot find a 3-argument function named Q{utils}slack()"
+      },
+      "xee": {
+        "detail": "SpannedError { error: XPST0017, span: Some(SourceSpan(13, 38)) }",
+        "error": true,
+        "id": "custom_function_unregistered",
+        "value": null
+      },
+      "match": true
+    },
+    {
+      "id": "inline_helper",
+      "expression": "let $slack := function($exp as xs:decimal,$val as xs:decimal,$slack as xs:decimal) as xs:boolean { xs:decimal($exp + $slack) >= $val and xs:decimal($exp - $slack) <= $val } return $slack(1.00, 1.01, 0.02)",
+      "saxon": {
+        "id": "inline_helper",
+        "value": "true",
+        "error": false
+      },
+      "xee": {
+        "error": false,
+        "id": "inline_helper",
+        "value": "true"
+      },
+      "match": true
+    },
+    {
+      "id": "iban_DE89370400440532013000",
+      "expression": "let $iban := 'DE89370400440532013000', $XR-IBAN-REGEX := '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}$', $normalizedIban := normalize-space(replace($iban, '([\\s])', '')) return matches($normalizedIban, $XR-IBAN-REGEX) and                           xs:integer(string-join(for $cp in string-to-codepoints(concat(substring($normalizedIban,5),upper-case(substring($normalizedIban,1,2)),substring($normalizedIban,3,2))) return (if($cp > 64) then string($cp - 55) else string($cp - 48)),'')) mod 97 = 1",
+      "saxon": {
+        "id": "iban_DE89370400440532013000",
+        "value": "true",
+        "error": false
+      },
+      "xee": {
+        "error": false,
+        "id": "iban_DE89370400440532013000",
+        "value": "true"
+      },
+      "match": true
+    },
+    {
+      "id": "iban_DE89370400440532013001",
+      "expression": "let $iban := 'DE89370400440532013001', $XR-IBAN-REGEX := '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}$', $normalizedIban := normalize-space(replace($iban, '([\\s])', '')) return matches($normalizedIban, $XR-IBAN-REGEX) and                           xs:integer(string-join(for $cp in string-to-codepoints(concat(substring($normalizedIban,5),upper-case(substring($normalizedIban,1,2)),substring($normalizedIban,3,2))) return (if($cp > 64) then string($cp - 55) else string($cp - 48)),'')) mod 97 = 1",
+      "saxon": {
+        "id": "iban_DE89370400440532013001",
+        "value": "false",
+        "error": false
+      },
+      "xee": {
+        "error": false,
+        "id": "iban_DE89370400440532013001",
+        "value": "false"
+      },
+      "match": true
+    },
+    {
+      "id": "decimal_30_digits",
+      "expression": "xs:decimal(\"123456789012345678901234567890\")",
+      "saxon": {
+        "id": "decimal_30_digits",
+        "value": "123456789012345678901234567890",
+        "error": false
+      },
+      "xee": {
+        "detail": "SpannedError { error: FORG0001, span: Some(SourceSpan(13, 57)) }",
+        "error": true,
+        "id": "decimal_30_digits",
+        "value": null
+      },
+      "match": false
+    },
+    {
+      "id": "decimal_29_fraction_digits",
+      "expression": "xs:decimal(\"0.12345678901234567890123456789\")",
+      "saxon": {
+        "id": "decimal_29_fraction_digits",
+        "value": "0.12345678901234567890123456789",
+        "error": false
+      },
+      "xee": {
+        "error": false,
+        "id": "decimal_29_fraction_digits",
+        "value": "0.1234567890123456789012345679"
+      },
+      "match": false
+    }
+  ],
+  "conformant": false
+}
