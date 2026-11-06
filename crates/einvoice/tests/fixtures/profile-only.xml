@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?fixture preserve-original-bytes?>
+<!-- Test-authored profile/immutability input, not a conformant invoice. -->
+<rsm:CrossIndustryInvoice xmlns:rsm="urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100"
+ xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100"
+ xmlns:test="urn:einvoice:test" test:last='2' test:first="1">
+ <rsm:ExchangedDocumentContext>
+  <ram:GuidelineSpecifiedDocumentContextParameter>
+   <ram:ID>urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0</ram:ID>
+  </ram:GuidelineSpecifiedDocumentContextParameter>
+ </rsm:ExchangedDocumentContext>
+ <test:note>Keep &#65; &amp; <![CDATA[<literal>]]> exactly.</test:note>
+</rsm:CrossIndustryInvoice>
