@@ -1,0 +1,39 @@
+name: Immutable XML source
+on:
+  pull_request:
+    paths: ['crates/einvoice-source/**', 'vendor/xml-rs/**', 'vendor/xml-rs.*', 'vendor/xml-rs-maintenance.md', 'Cargo.toml', 'Cargo.lock', '.github/workflows/source-runtime.yml']
+  push:
+    branches: [main]
+    paths: ['crates/einvoice-source/**', 'vendor/xml-rs/**', 'vendor/xml-rs.*', 'vendor/xml-rs-maintenance.md', 'Cargo.toml', 'Cargo.lock', '.github/workflows/source-runtime.yml']
+permissions:
+  contents: read
+jobs:
+  parser:
+    name: Maintained XML parser (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-15]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Rust 1.83
+        run: rustup toolchain install 1.83.0 --profile minimal
+      - name: Authenticate parser and replay the patch
+        run: |
+          python -c 'import os,pathlib,urllib.request; pathlib.Path(os.environ["RUNNER_TEMP"], "xml-rs.crate").write_bytes(urllib.request.urlopen("https://crates.io/api/v1/crates/xml-rs/0.8.28/download").read())'
+          python crates/einvoice-source/tools/verify_parser.py --archive "$RUNNER_TEMP/xml-rs.crate"
+          python -m unittest discover -s crates/einvoice-source/tools -p 'test_*.py' -v
+      - name: Unchanged upstream parser tests
+        run: |
+          parser_work=$(mktemp -d)
+          cp -R vendor/xml-rs/. "$parser_work/"
+          cargo +1.83.0 test --offline --manifest-path "$parser_work/Cargo.toml"
+      - name: Source semantics and pre-admission regressions
+        run: cargo +1.83.0 test --locked -p einvoice-source
