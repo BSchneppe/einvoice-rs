@@ -16,7 +16,7 @@ chrono = "0.4.39"
 rust_decimal = { version = "1.36.0", features = ["c-repr"] }
 
 [dev-dependencies]
-rstest = "0.24.0"
+rstest = "0.28.0"
 xmltree = { version = "0.11.0", features = ["attribute-order"] }
 regex = "1.11.1"
 
