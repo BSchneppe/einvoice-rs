@@ -32,7 +32,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-latest
+          # Python 3.12.6 has a published build for this fixed runner image.
+          - os: ubuntu-24.04
             target: x86_64-unknown-linux-gnu
           - os: windows-latest
             target: x86_64-pc-windows-msvc

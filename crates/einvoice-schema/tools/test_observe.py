@@ -52,16 +52,26 @@ class ProducerIO(unittest.TestCase):
     def test_failed_child_preserves_both_streams_and_status(self):
         with self.assertRaises(RuntimeError):
             observe.run([sys.executable, '-c', 'import sys; print("partial"); print("specific error", file=sys.stderr); sys.exit(7)'], self.root, 'failure')
-        self.assertEqual((self.root / 'failure.stdout').read_bytes(), b'partial\n')
-        self.assertEqual((self.root / 'failure.stderr').read_bytes(), b'specific error\n')
+        self.assertEqual((self.root / 'failure.stdout').read_bytes(), b'partial' + os.linesep.encode())
+        self.assertEqual((self.root / 'failure.stderr').read_bytes(), b'specific error' + os.linesep.encode())
         self.assertEqual(self.status('failure')['returncode'], 7)
         self.assertEqual(self.status('failure')['truncated'], [False, False])
         self.assertFalse((self.root / 'receipt.json').exists())
 
     def test_success_without_observation(self):
         result = observe.run([sys.executable, '-c', 'print("tool identity")'], self.root, 'identity')
-        self.assertEqual(result.stdout, b'tool identity\n')
+        self.assertEqual(result.stdout, b'tool identity' + os.linesep.encode())
         self.assertEqual(self.status('identity')['returncode'], 0)
+
+    def test_raw_child_line_endings_are_preserved_without_normalization(self):
+        payload = b'CRLF\r\nLF\nCR\rEND'
+        code = f'import sys; sys.stdout.buffer.write({payload!r}); sys.stderr.buffer.write({payload!r})'
+        result = observe.run([sys.executable, '-c', code], self.root, 'raw-endings')
+        self.assertEqual(result.stdout, payload)
+        self.assertEqual(result.stderr, payload)
+        for stream in ['stdout', 'stderr']:
+            self.assertEqual((self.root / ('raw-endings.' + stream)).read_bytes(), payload)
+            self.assertEqual(self.status('raw-endings')[stream]['sha256'], observe.digest(payload))
 
     def test_late_real_read_cannot_turn_incomplete_capture_into_success(self):
         payload = b'direct-child-real-bytes\n'
