@@ -6,6 +6,13 @@ It does not run a validator, a benchmark, an enforcement canary or an arbitrary
 command. It has no adapter, correctness evaluator, container integration, network
 operation, refresh command or release override.
 
+The separate [expected schedule and exact synthetic reducer](PROTOCOL.md)
+predeclares the frozen BSC-11 schedule, pooled arithmetic and conditional
+lifecycle bound. `protocol.py schedule` and `protocol.py reduce-fixture INPUT`
+emit JSON to stdout only. They accept synthetic fixtures, provide no execution
+or attestation evidence and always keep release eligibility false. The fixture
+utility does not resolve the full BSC-11 acceptance gate.
+
 ```sh
 python3.12 -B tools/benchmark/preflight.py prepare --output NEW_DIRECTORY
 python3.12 -B tools/benchmark/preflight.py compare LEFT_BUNDLE RIGHT_BUNDLE --output NEW_DIRECTORY
@@ -241,10 +248,13 @@ shuffle using the same seed. Any schedule reconstruction or new reference captur
 boundary requires independent verification and review.
 
 Keep the unchanged within-run aggregate `1e9 / sum(weight * mean_ns)` and every
-frozen group weight. Preserve all raw samples, groups and runs. The cross-run
-Rust/reference reducer, uncertainty/repetition policy and lifecycle-cost
-allocation remain undecided: justify and predeclare them **before timing**, then
-do not choose a favorable reducer from results. Timed work includes fresh
+frozen group weight. Preserve all raw samples, groups and runs.
+[PROTOCOL.md](PROTOCOL.md) predeclares pooled cross-run arithmetic, a conditional
+sufficient-only lifecycle bound and the future ten-pair collection design.
+Actual capture and lifecycle premises remain unproven, and reviewed BSC-8/BSC-10
+interfaces remain open. If the bound is inconclusive, a faithful lifecycle
+measurement protocol still requires prospective review and predeclaration.
+Do not choose a favorable reducer from results. Timed work includes fresh
 per-document parsing/DOM/globals/diagnostics, all XSD/CEN/XR/policy evaluation,
 full diagnostic extraction and JSON serialization. Worker epoch retirement and
 prepared-schema recompilation count toward warmed lifecycle work, including
