@@ -76,7 +76,7 @@ class CorrespondenceTests(unittest.TestCase):
         self.assertEqual(self.summary["denominator"], 12571)
         self.assertEqual(
             self.summary["counts"],
-            {"mapped-exact": 12253, "different": 24, "ambiguous": 3, "unsupported": 27, "unexamined": 264},
+            {"mapped-exact": 12334, "different": 24, "ambiguous": 3, "unsupported": 27, "unexamined": 183},
         )
 
     def test_moved_assertion_to_another_rule(self):
@@ -204,27 +204,57 @@ class CorrespondenceTests(unittest.TestCase):
 
         self.changed(edit, "binding declaration/initializer")
 
-    def test_wrong_variable_reference_binding_id(self):
-        def edit(value):
-            def walk(item):
-                if isinstance(item, dict):
-                    if item.get("kind") == "variable" and "binding" in item:
-                        yield item
-                    for child in item.values():
-                        yield from walk(child)
-                elif isinstance(item, list):
-                    for child in item:
-                        yield from walk(child)
+    def test_binding_facets_reject_candidate_mutants(self):
+        def objects(x):
+            if isinstance(x, dict):
+                yield x
+                for child in x.values():
+                    yield from objects(child)
+            elif isinstance(x, list):
+                for child in x:
+                    yield from objects(child)
 
-            expression = next(
-                e
-                for e in all_expressions(value["effective_package"])
-                if e["source"]["attribute"] == "value" and any(walk(e["tree"]))
-            )
-            next(walk(expression["tree"]))["binding"] += "/wrong"
-
-        # The full AST remains unexamined, but its exact evidence cannot drift.
-        self.changed(edit, "expression AST:value", "unexamined", "unexamined")
+        admitted = [r for r in self.rows if r["status"] == "mapped-exact" and r["evidence"].get("references")]
+        declarations = [x for x in objects(self.value["effective_package"])
+                        if "declared_owner" in x and "id" in x]
+        value, cases, used = copy.deepcopy(self.value), [], set()
+        for label in ["wrong declaration ID", "same-name other scope", "range declaration ID"]:
+            for row in admitted:
+                pointer = row["candidate_locations"][0]
+                if pointer in used:
+                    continue
+                nodes = list(objects(audit.resolve_pointer(value, pointer)))
+                if label == "range declaration ID":
+                    target = next((x for x in nodes if x.get("kind") == "bind"), None)
+                    if target is None:
+                        continue
+                    old = target["bindings"][0]["id"]
+                    target["bindings"][0]["id"] += "/wrong"
+                    # Coordinated mutation remains self-consistent but must fail.
+                    for ref in nodes:
+                        if ref.get("kind") == "variable" and ref["binding"] == old:
+                            ref["binding"] += "/wrong"
+                else:
+                    ref = next(x for x in nodes if x.get("kind") == "variable")
+                    others = [d for d in declarations if d["id"] != ref["binding"] and d["name"] == ref["name"]]
+                    if label == "same-name other scope" and not others:
+                        continue
+                    ref["binding"] = others[0]["id"] if label == "same-name other scope" else "wrong-declaration-id"
+                used.add(pointer)
+                cases.append((label, row["obligation_id"]))
+                break
+            else:
+                self.fail("missing real-source mutant witness: " + label)
+        rows, _, _ = audit.enumerate_obligations(value, self.docs, self.payload, self.ident)
+        after = {r["obligation_id"]: r for r in rows}
+        for label, identity in cases:
+            with self.subTest(mutant=label, obligation=identity):
+                self.assertEqual(after[identity]["status"], "different")
+                self.assertNotEqual(after[identity]["evidence"]["source_tree"], after[identity]["evidence"]["candidate_tree"])
+        self.assertEqual([r for r in rows if "expression lexical:" in r["facet"]],
+                         [r for r in self.rows if "expression lexical:" in r["facet"]])
+        with self.assertRaisesRegex(ValueError, "accounting changed"):
+            audit.check_accounting(self.summarize(rows), self.summary)
 
     def test_structure_facets_reject_candidate_mutants(self):
         def objects(x):
@@ -277,9 +307,8 @@ class CorrespondenceTests(unittest.TestCase):
             used.add(pointer)
             cases.append((label, row["obligation_id"], pointer, predicate, mutate))
 
-        # The pinned decimal source references $documentCurrencyCode and remains
-        # pending. Seed two variable-free in-memory source/candidate fixtures at
-        # distinct real expression facets to exercise numeric admission end to end.
+        # The pinned decimal also exercises binding identity. Seed variable-free
+        # fixtures at distinct real facets to exercise numeric admission end to end.
         for label, mutate in [("numeric lexeme", lambda x: x.update(lexeme=".02")),
                               ("numeric kind", lambda x: x.update(lexical_kind="double"))]:
             row = next(r for r in self.rows if r["facet"] == "expression AST:value"
@@ -310,12 +339,87 @@ class CorrespondenceTests(unittest.TestCase):
         self.assertEqual([r for r in baseline if "expression lexical:" in r["facet"]],
                          [r for r in changed if "expression lexical:" in r["facet"]])
 
-    def test_binding_facets_remain_pending(self):
-        pending = [r for r in self.rows if "expression AST:" in r["facet"] and r["status"] == "unexamined"]
-        self.assertEqual(len(pending), 81)
-        self.assertTrue(all(r["reason"] == "binding identity requires independent resolution" for r in pending))
-        decimal = next(r for r in pending if "0.02" in r["evidence"]["source"])
+    def test_binding_facets_and_pattern_visibility_remain_separate(self):
+        binding_rows = [r for r in self.rows if "references" in r["evidence"]]
+        admitted = [r for r in binding_rows if r["evidence"]["resolved"]]
+        pending = [r for r in binding_rows if "effective_common_global" in r["evidence"]]
+        self.assertEqual(len(binding_rows), 81)
+        self.assertEqual(len(admitted), 64)
+        self.assertEqual(sum(len(r["evidence"]["references"]) for r in binding_rows), 191)
+        self.assertEqual({r["obligation_id"] for r in pending}, {
+            "b329f14a8cb36ac93be9", "eccccc0efee5a982a454", "4036fc85c968d975885d",
+            "b98070b51f0f74c6e430", "dd0b100db042bed2fbed", "28bf9a8f1bb20eb518f6",
+            "0d37ce538f348307174f", "3131bb804852f7674cbe", "8893d4623ff18b30cee0",
+            "f339b7d99262eddbea6f", "cda00b50e2279dec3dc3", "5b052493cceaf9eb75ed",
+            "341313d310e334a46da1", "5d967cd0080a6ad08a9a", "bf3353c69e4a4d7ca129",
+            "cd9a050eb0b8c88b5de6", "f2f5d148c3ca6930100c",
+        })
+        for row in pending:
+            self.assertEqual(row["status"], "mapped-exact")
+            self.assertFalse(row["evidence"]["resolved"])
+            self.assertTrue(row["evidence"]["effective_common_global"]["matching"])
+            for ref in row["evidence"]["references"]:
+                if ref["strict_pattern_local"] == "unresolvable":
+                    proof = ref["effective"]["source_declaration"]["effective_scope_proof"]
+                    self.assertEqual(proof["rule"], "COMMON_GLOBAL")
+                    for occurrence in [proof["comment"], proof["configured_variable"]]:
+                        key = occurrence["archive"] + "!" + occurrence["member"]
+                        lo, hi = occurrence["raw_span"]
+                        self.assertEqual(audit.sha(self.payload[key][lo:hi]), occurrence["raw_sha256"])
+        for row in admitted:
+            self.assertTrue(row["evidence"]["matching"])
+            self.assertTrue(all(ref["matching"] and ref["source_declaration"] and ref["candidate_binding_id"]
+                                for ref in row["evidence"]["references"]))
+        decimal = next(r for r in admitted if "0.02" in r["evidence"]["source"])
         self.assertEqual(decimal["obligation_id"], "181157d697cc95badd84")
+
+    def test_common_global_missing_proof_and_wrong_candidate(self):
+        import xpath_bindings as xb
+        from xpath_structure import Parser
+        promoted = [r for r in self.rows if "effective_common_global" in r["evidence"]]
+        self.assertEqual(len(promoted), 17)
+        for mutation in ["remove-comment", "alter-comment", "remove-witness", "wrong-owner", "wrong-candidate"]:
+            docs = copy.deepcopy(self.docs)
+            if mutation == "remove-comment":
+                docs[xb.COMMON]["comments"] = []
+            elif mutation == "alter-comment":
+                docs[xb.COMMON]["comments"][0]["text"] += "."
+            elif mutation == "wrong-owner":
+                docs[xb.COMMON]["nodes"][0]["attributes"]["id"] = "another-pattern"
+            elif mutation == "remove-witness":
+                for n in docs[xb.CONFIGURED]["nodes"]:
+                    if n["parent"] == 0 and n["name"] == [audit.X, "variable"]:
+                        n["name"] = [audit.X, "param"]
+            scopes = xb.SourceScopes(docs)
+            for row in promoted:
+                source = row["source"]
+                key = source["archive"] + "!" + source["member"]
+                attr = row["facet"].split(":", 1)[1]
+                text = row["evidence"]["source"]
+                candidate = copy.deepcopy(row["evidence"]["candidate"])
+                if mutation == "wrong-candidate":
+                    def change(v):
+                        if isinstance(v, dict):
+                            if v.get("kind") == "variable":
+                                name = v["name"]["local"]
+                                other = next((d["id"] for d in scopes.declarations.values()
+                                              if d["name"]["local"] == name and d["id"] != v["binding"]), None)
+                                if other:
+                                    v["binding"] = other
+                                    return True
+                            return any(change(c) for c in v.values())
+                        return isinstance(v, list) and any(change(c) for c in v)
+                    # A real same-name declaration in another scope, when available.
+                    if not change(candidate):
+                        continue
+                callback = lambda tree, effective=False: scopes.resolve(
+                    tree, key, source["node_index"], attr, text, effective)
+                status, reason, _ = audit.classify_expression(text, candidate, lambda: {}, {}, callback)
+                self.assertEqual(status, "different" if mutation == "wrong-candidate" else "unexamined",
+                                 (mutation, row["obligation_id"]))
+                if mutation != "wrong-candidate":
+                    self.assertEqual(reason, "unresolved source binding" if mutation == "wrong-owner"
+                                     else "missing independent proof for common-global binding")
 
     def test_reordered_name_value_of_and_text_message_parts(self):
         def edit(value):

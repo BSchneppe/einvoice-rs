@@ -295,7 +295,7 @@ both generation orders byte for byte, and checks the reviewed
 There is no dependency on discovery snapshots or source-inventory output.
 
 The complete denominator is 12,571 source occurrence/facet obligations:
-12,253 mapped-exact, 24 different, 3 ambiguous, 27 unsupported and 264
+12,334 mapped-exact, 24 different, 3 ambiguous, 27 unsupported and 183
 unexamined. Ordered ownership, source ranges/hashes, exact expression strings,
 phase activation, binding declarations, helper constructors, message parts and
 nine severity overrides are compared. Original, preprocessed and configured
@@ -319,9 +319,23 @@ and order, axes and node tests, calls and ordered arguments, string values,
 numeric kind and exact lexeme, and sequence order. Required call/if parentheses
 are delimiters. Source XML/Schematron/scenario declarations supply namespaces.
 Each distinct expression is parsed once per inventory. Unsupported syntax or
-static context produces an explicit unsupported row. The 81 facets with variable
-references/binders remain unexamined: binding identity requires independent
-resolution. These comparisons prove syntactic structure only, not evaluation.
+static context produces an explicit unsupported row.
+
+`tests/xpath_bindings.py` independently constructs source XML scopes and resolves
+variable references, for/some/every ranges, schema/pattern/rule lets and helper
+parameters/locals. Initializers exclude their own declarations; inner bindings
+shadow outer ones. Full trees include source-derived declaration IDs, with each
+reference recording its source declaration occurrence and candidate binding ID.
+This admits all 81 binding AST facets: 64 under strict pattern-local visibility,
+and 17 using the settled effective-global scope of common.sch variable-pattern
+lets while preserving their declared pattern owner. The source-only
+`COMMON_GLOBAL` rule requires the exact global-variable comment in that pinned
+member and an independent same-name top-level variable in the pinned configured
+XRechnung CII stylesheet. Per-reference evidence retains the strict unresolvable
+result and effective result, with archive/member, byte span and SHA-256 for both
+proof occurrences. Missing proof leaves a facet unexamined. This introduces no
+new authority choice.
+These checks prove bounded syntax and binding identity, without evaluating XPath.
 
 The summary binds the exact candidate, both source locks, all source members and
 the complete ordered obligation list. Mapped-exact rows are bound by a canonical
