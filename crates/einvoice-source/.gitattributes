@@ -1,3 +1,5 @@
 # Authored XML evidence intentionally contains literal CRLF and attribute tabs.
 # Preserve exact input bytes on every checkout; display it as binary in diffs.
 tests/evidence/paths.xml -text -diff
+# Captured reference output is compared byte-for-byte, including LF separators.
+tests/evidence/saxon-18.txt -text
