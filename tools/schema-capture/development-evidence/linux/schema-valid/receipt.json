@@ -1,0 +1,137 @@
+{
+  "archive": {
+    "bytes": 499607,
+    "sha256": "2530cd107c414511c5d0462ec10f886910395abfca820db82e83d70bf01221a8"
+  },
+  "backend_build_artifact": {
+    "executable": null,
+    "features": [
+      "default",
+      "unicode-normalization"
+    ],
+    "filenames": [
+      "/home/runner/work/_temp/schema-consumer-target/debug/deps/libxsd_schema-a9671b36b097ace5.rlib",
+      "/home/runner/work/_temp/schema-consumer-target/debug/deps/libxsd_schema-a9671b36b097ace5.rmeta"
+    ],
+    "fresh": true,
+    "manifest_path": "/home/runner/work/einvoice-rs/einvoice-rs/vendor/xsd-schema/Cargo.toml",
+    "package_id": "path+file:///home/runner/work/einvoice-rs/einvoice-rs/vendor/xsd-schema#0.3.0",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 2,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2021",
+      "kind": [
+        "lib"
+      ],
+      "name": "xsd_schema",
+      "src_path": "/home/runner/work/einvoice-rs/einvoice-rs/vendor/xsd-schema/src/lib.rs",
+      "test": true
+    }
+  },
+  "backend_consumed_source_identity": "11311b0c8933256f0bf854cdf546526162ebfeda37973b0e00f7d62e6cc79582",
+  "backend_features": [
+    "default",
+    "unicode-normalization"
+  ],
+  "build_command": [
+    "cargo",
+    "+1.83.0",
+    "build",
+    "--offline",
+    "--locked",
+    "--all-features",
+    "-p",
+    "einvoice-schema",
+    "--example",
+    "cii-observe",
+    "--message-format=json"
+  ],
+  "build_stderr": {
+    "bytes": 72,
+    "sha256": "8c233a54790c4800d3dd585436af679aa838da259bfdb129412e2d51cdb75cdc"
+  },
+  "build_stdout": {
+    "bytes": 57908,
+    "sha256": "695589c5551a3a73ecc614840fe2423ed5b7697dbff4a67e3bbd2756dbcf2216"
+  },
+  "cargo": "cargo 1.83.0 (5ffbef321 2024-10-29)\n",
+  "cargo_metadata": {
+    "bytes": 465491,
+    "sha256": "d5198ff4b439a743fb9bb1cf9e69ae0b969c54c3a8662485d88d1209b794b5e0"
+  },
+  "complete_command": [
+    "/home/runner/work/_temp/schema-consumer-target/debug/examples/cii-observe",
+    "/home/runner/work/_temp/schema-valid/original-resources",
+    "/home/runner/work/_temp/schema-valid/input.xml",
+    "1000"
+  ],
+  "complete_output": {
+    "bytes": 2770,
+    "sha256": "287e6f5cd70f7b8ed7defc9f79e60576b494ccf5ae11d57fce88939097694c9a"
+  },
+  "executable": {
+    "bytes": 63035424,
+    "path": "/home/runner/work/_temp/schema-consumer-target/debug/examples/cii-observe",
+    "sha256": "3a77ee94ae4c2881567b398bac4945681ba1360db84afaa01f546c8eb8080d9f"
+  },
+  "generator_accounting": {
+    "bytes": 6451,
+    "sha256": "52ce9e0b84ab762393cbfee3f0da62dfb2dd82c2ef89442726f14b162c212be9"
+  },
+  "git_head": "890d1582ecb831e83c54b4e6cb817d1c3a7703d6",
+  "git_status_porcelain": "",
+  "input": {
+    "bytes": 840,
+    "sha256": "96b5b33ecc580dd139e9c8a28f6ccd67804d97eecab4262d94262cf381c0f708"
+  },
+  "input_snapshot": "input.xml",
+  "kind": "schema-only-development-reproduction; no execution attestation",
+  "limits": "example has explicit demonstration allowances; no RSS/hard-deadline claim",
+  "loaded_schema_bytes": {
+    "resources/cii/16b/xsd/CrossIndustryInvoice_100pD16B.xsd": {
+      "bytes": 3078,
+      "sha256": "3baf143b90f289d62c5dfb086aa51fa183490a2d0b38a40c6b31dcae0760f2ba"
+    },
+    "resources/cii/16b/xsd/CrossIndustryInvoice_QualifiedDataType_100pD16B.xsd": {
+      "bytes": 36806,
+      "sha256": "6649215914728652e883662bec1d3eab008c215e86a59f3bb417db9723ee8c5c"
+    },
+    "resources/cii/16b/xsd/CrossIndustryInvoice_ReusableAggregateBusinessInformationEntity_100pD16B.xsd": {
+      "bytes": 99402,
+      "sha256": "1c42244298a863bcc0b5196983ff0a5d084fcabe58aea77ef82b242e7cd0ddfd"
+    },
+    "resources/cii/16b/xsd/CrossIndustryInvoice_UnqualifiedDataType_100pD16B.xsd": {
+      "bytes": 6967,
+      "sha256": "04fce6f6f28521886731294be18a4e6bb5cb3003456457d99ad5c4d3e652f497"
+    }
+  },
+  "partial_command": [
+    "/home/runner/work/_temp/schema-consumer-target/debug/examples/cii-observe",
+    "/home/runner/work/_temp/schema-valid/original-resources",
+    "/home/runner/work/_temp/schema-valid/input.xml",
+    "1000",
+    "11270"
+  ],
+  "partial_output": {
+    "bytes": 3190,
+    "sha256": "c3fd73dc32c7a7972986627ddc0f97877c97b5cafbc8e966de552b3d156e89da"
+  },
+  "rustc": "rustc 1.83.0 (90b35a623 2024-11-26)\nbinary: rustc\ncommit-hash: 90b35a6239c3d8bdabc530a6a0816f7ff89a0aaf\ncommit-date: 2024-11-26\nhost: x86_64-unknown-linux-gnu\nrelease: 1.83.0\nLLVM version: 19.1.1\n",
+  "source_inventory": {
+    "bytes": 62942,
+    "sha256": "dbd62b8a6cebee197223c68d173cc720520887b079923e7fda61535cda116904"
+  },
+  "source_unchanged_during_build_and_run": true,
+  "target_directory": "/home/runner/work/_temp/schema-consumer-target"
+}

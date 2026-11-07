@@ -1,0 +1,141 @@
+{
+  "format": "einvoice-schema-development/1-draft",
+  "scope": "schema-only; no native-v1, package capability, rule execution or attestation",
+  "schemas": [
+    {
+      "member": "resources/cii/16b/xsd/CrossIndustryInvoice_100pD16B.xsd",
+      "backend_uri": "bsc8://cii/resources/cii/16b/xsd/CrossIndustryInvoice_100pD16B.xsd",
+      "bytes": 3078,
+      "sha256": "3baf143b90f289d62c5dfb086aa51fa183490a2d0b38a40c6b31dcae0760f2ba"
+    },
+    {
+      "member": "resources/cii/16b/xsd/CrossIndustryInvoice_QualifiedDataType_100pD16B.xsd",
+      "backend_uri": "bsc8://cii/resources/cii/16b/xsd/CrossIndustryInvoice_QualifiedDataType_100pD16B.xsd",
+      "bytes": 36806,
+      "sha256": "6649215914728652e883662bec1d3eab008c215e86a59f3bb417db9723ee8c5c"
+    },
+    {
+      "member": "resources/cii/16b/xsd/CrossIndustryInvoice_ReusableAggregateBusinessInformationEntity_100pD16B.xsd",
+      "backend_uri": "bsc8://cii/resources/cii/16b/xsd/CrossIndustryInvoice_ReusableAggregateBusinessInformationEntity_100pD16B.xsd",
+      "bytes": 99402,
+      "sha256": "1c42244298a863bcc0b5196983ff0a5d084fcabe58aea77ef82b242e7cd0ddfd"
+    },
+    {
+      "member": "resources/cii/16b/xsd/CrossIndustryInvoice_UnqualifiedDataType_100pD16B.xsd",
+      "backend_uri": "bsc8://cii/resources/cii/16b/xsd/CrossIndustryInvoice_UnqualifiedDataType_100pD16B.xsd",
+      "bytes": 6967,
+      "sha256": "04fce6f6f28521886731294be18a4e6bb5cb3003456457d99ad5c4d3e652f497"
+    }
+  ],
+  "configured_limits": {
+    "input_bytes": 16777216,
+    "nodes": 500000,
+    "depth": 128,
+    "attributes_per_element": 1024,
+    "declarations_per_element": 256,
+    "namespaces_per_element": 1024,
+    "name_bytes": 4096,
+    "uri_bytes": 16384,
+    "value_bytes": 16777216,
+    "temporary_bytes": 1048576,
+    "work": 100000000,
+    "diagnostic_count": 1000,
+    "diagnostic_bytes": 16777216,
+    "terminal_bytes": 1048576
+  },
+  "observation": {
+    "input_sha256": "294f0e86b9c8db0973be57b7b83ae32624a63a22b18825a7dc981f04f50ba346",
+    "input_bytes": 8,
+    "encoding": "UTF-8",
+    "bom_bytes": 0,
+    "validated_root": {
+      "Utf8Bytes": {
+        "start": 0,
+        "end": 8
+      }
+    },
+    "validated_root_reference": {
+      "Node": {
+        "preorder": 1
+      }
+    },
+    "assessment": "Invalid",
+    "root_validity": "Invalid",
+    "events": [
+      {
+        "ordinal": 0,
+        "severity": "Error",
+        "code": "cvc-elt.1",
+        "message": "Element 'alpha' is not declared",
+        "raw_location": null,
+        "subject": {
+          "Element": {
+            "namespace": null,
+            "local": "alpha"
+          }
+        },
+        "path": [
+          {
+            "Element": {
+              "name": {
+                "namespace": null,
+                "local": "alpha"
+              },
+              "position": 1
+            }
+          }
+        ],
+        "element_path": "/alpha",
+        "evidence": {
+          "cause": "UndeclaredElement",
+          "governing_type": null,
+          "actual_type": null,
+          "component": null,
+          "facet_origin": null
+        },
+        "evidence_availability": "Captured",
+        "source": {
+          "owner": {
+            "Utf8Bytes": {
+              "start": 0,
+              "end": 8
+            }
+          },
+          "owner_reference": {
+            "Node": {
+              "preorder": 1
+            }
+          },
+          "subject_reference": {
+            "Node": {
+              "preorder": 1
+            }
+          },
+          "subject": {
+            "Utf8Bytes": {
+              "start": 0,
+              "end": 8
+            }
+          },
+          "attribute_value": null,
+          "line": 1,
+          "column": 1
+        },
+        "triggering_occurrence": null,
+        "causal_parent": null
+      }
+    ],
+    "failure": null,
+    "finalization_attempted": true,
+    "finalization_succeeded": true,
+    "finalization_error": null,
+    "operational_failure": null,
+    "terminal_capture_failure": null,
+    "work": 1939,
+    "retained_diagnostic_bytes": 1808,
+    "observed_callbacks": 1
+  },
+  "epoch_retired": false,
+  "epoch_remaining_requests": 1,
+  "build_receipt": "external receipt required; expected pins do not identify this executable"
+}

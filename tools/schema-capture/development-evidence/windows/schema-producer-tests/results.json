@@ -1,0 +1,88 @@
+[
+  {
+    "scenario": "unchanged",
+    "failure": null,
+    "actual_child_calls": [
+      {
+        "stage": "complete",
+        "command": [
+          "D:\\a\\_temp\\schema-consumer-target\\debug\\examples\\cii-observe.exe",
+          "D:\\a\\_temp\\schema-producer-tests\\unchanged\\original-resources",
+          "D:\\a\\_temp\\schema-producer-tests\\unchanged\\input.xml",
+          "1000"
+        ],
+        "actual_input": "294f0e86b9c8db0973be57b7b83ae32624a63a22b18825a7dc981f04f50ba346"
+      },
+      {
+        "stage": "partial",
+        "command": [
+          "D:\\a\\_temp\\schema-consumer-target\\debug\\examples\\cii-observe.exe",
+          "D:\\a\\_temp\\schema-producer-tests\\unchanged\\original-resources",
+          "D:\\a\\_temp\\schema-producer-tests\\unchanged\\input.xml",
+          "1000",
+          "1938"
+        ],
+        "actual_input": "294f0e86b9c8db0973be57b7b83ae32624a63a22b18825a7dc981f04f50ba346"
+      }
+    ]
+  },
+  {
+    "scenario": "external-change",
+    "failure": null,
+    "actual_child_calls": [
+      {
+        "stage": "complete",
+        "command": [
+          "D:\\a\\_temp\\schema-consumer-target\\debug\\examples\\cii-observe.exe",
+          "D:\\a\\_temp\\schema-producer-tests\\external-change\\original-resources",
+          "D:\\a\\_temp\\schema-producer-tests\\external-change\\input.xml",
+          "1000"
+        ],
+        "actual_input": "294f0e86b9c8db0973be57b7b83ae32624a63a22b18825a7dc981f04f50ba346"
+      },
+      {
+        "stage": "partial",
+        "command": [
+          "D:\\a\\_temp\\schema-consumer-target\\debug\\examples\\cii-observe.exe",
+          "D:\\a\\_temp\\schema-producer-tests\\external-change\\original-resources",
+          "D:\\a\\_temp\\schema-producer-tests\\external-change\\input.xml",
+          "1000",
+          "1938"
+        ],
+        "actual_input": "294f0e86b9c8db0973be57b7b83ae32624a63a22b18825a7dc981f04f50ba346"
+      }
+    ]
+  },
+  {
+    "scenario": "snapshot-change",
+    "failure": "actual observation input differs from admitted snapshot",
+    "actual_child_calls": [
+      {
+        "stage": "complete",
+        "command": [
+          "D:\\a\\_temp\\schema-consumer-target\\debug\\examples\\cii-observe.exe",
+          "D:\\a\\_temp\\schema-producer-tests\\snapshot-change\\original-resources",
+          "D:\\a\\_temp\\schema-producer-tests\\snapshot-change\\input.xml",
+          "1000"
+        ],
+        "actual_input": "294f0e86b9c8db0973be57b7b83ae32624a63a22b18825a7dc981f04f50ba346"
+      },
+      {
+        "stage": "partial",
+        "command": [
+          "D:\\a\\_temp\\schema-consumer-target\\debug\\examples\\cii-observe.exe",
+          "D:\\a\\_temp\\schema-producer-tests\\snapshot-change\\original-resources",
+          "D:\\a\\_temp\\schema-producer-tests\\snapshot-change\\input.xml",
+          "1000",
+          "1938"
+        ],
+        "actual_input": "403b2693207a6debe03c006a0247e56e63a04afc05aae12d4beda3e09de772fb"
+      }
+    ]
+  },
+  {
+    "scenario": "malformed",
+    "failure": "complete failed; retained complete.status.json and raw output prefixes",
+    "actual_child_calls": []
+  }
+]

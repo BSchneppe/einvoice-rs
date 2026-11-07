@@ -1,0 +1,5 @@
+{
+  "kind": "development reproduction failure; not an Observation",
+  "error_type": "ValueError",
+  "message": "actual observation input differs from admitted snapshot"
+}

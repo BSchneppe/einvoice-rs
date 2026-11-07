@@ -1,0 +1,6 @@
+# Original evidence is byte-addressed, including CRLF inventories/empty stdout.
+development-evidence/** -text
+selected-core.json -text
+artifact-file-manifest.json -text
+hosted-artifact-metadata.json -text
+LICENSE -text

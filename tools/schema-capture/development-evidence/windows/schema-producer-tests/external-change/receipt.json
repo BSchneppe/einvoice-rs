@@ -1,0 +1,137 @@
+{
+  "archive": {
+    "bytes": 499607,
+    "sha256": "2530cd107c414511c5d0462ec10f886910395abfca820db82e83d70bf01221a8"
+  },
+  "backend_build_artifact": {
+    "executable": null,
+    "features": [
+      "default",
+      "unicode-normalization"
+    ],
+    "filenames": [
+      "D:\\a\\_temp/schema-consumer-target\\debug\\deps\\libxsd_schema-c183c0f6f0ae6028.rlib",
+      "D:\\a\\_temp/schema-consumer-target\\debug\\deps\\libxsd_schema-c183c0f6f0ae6028.rmeta"
+    ],
+    "fresh": true,
+    "manifest_path": "D:\\a\\einvoice-rs\\einvoice-rs\\vendor\\xsd-schema\\Cargo.toml",
+    "package_id": "path+file:///D:/a/einvoice-rs/einvoice-rs/vendor/xsd-schema#0.3.0",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 2,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2021",
+      "kind": [
+        "lib"
+      ],
+      "name": "xsd_schema",
+      "src_path": "D:\\a\\einvoice-rs\\einvoice-rs\\vendor\\xsd-schema\\src/lib.rs",
+      "test": true
+    }
+  },
+  "backend_consumed_source_identity": "11311b0c8933256f0bf854cdf546526162ebfeda37973b0e00f7d62e6cc79582",
+  "backend_features": [
+    "default",
+    "unicode-normalization"
+  ],
+  "build_command": [
+    "cargo",
+    "+1.83.0",
+    "build",
+    "--offline",
+    "--locked",
+    "--all-features",
+    "-p",
+    "einvoice-schema",
+    "--example",
+    "cii-observe",
+    "--message-format=json"
+  ],
+  "build_stderr": {
+    "bytes": 72,
+    "sha256": "f0788aa36d1c86b6ccdfb7f4042a5574102d82061c046422a2d42e008a1e4710"
+  },
+  "build_stdout": {
+    "bytes": 58668,
+    "sha256": "99ae5f7f2139d4c8b32c8358115a0e99d34171a9e6b893e730aed8d8f7e64dfd"
+  },
+  "cargo": "cargo 1.83.0 (5ffbef321 2024-10-29)\n",
+  "cargo_metadata": {
+    "bytes": 462612,
+    "sha256": "f988169db2b7eb7b9f80bb244c7b649c0d4a0863fb3d94a5d101afbd6eda73f7"
+  },
+  "complete_command": [
+    "D:\\a\\_temp\\schema-consumer-target\\debug\\examples\\cii-observe.exe",
+    "D:\\a\\_temp\\schema-producer-tests\\external-change\\original-resources",
+    "D:\\a\\_temp\\schema-producer-tests\\external-change\\input.xml",
+    "1000"
+  ],
+  "complete_output": {
+    "bytes": 4234,
+    "sha256": "4f62bd0f8936ae42671e60c8c426d6b20e2660d02e3d25464eb80bcacc0d7aca"
+  },
+  "executable": {
+    "bytes": 10522624,
+    "path": "D:\\a\\_temp\\schema-consumer-target\\debug\\examples\\cii-observe.exe",
+    "sha256": "4c1a077ba814bf1427b7ac5bba2fe45361a56c1937f46df20e20556aa75f03b2"
+  },
+  "generator_accounting": {
+    "bytes": 6451,
+    "sha256": "52ce9e0b84ab762393cbfee3f0da62dfb2dd82c2ef89442726f14b162c212be9"
+  },
+  "git_head": "890d1582ecb831e83c54b4e6cb817d1c3a7703d6",
+  "git_status_porcelain": "",
+  "input": {
+    "bytes": 8,
+    "sha256": "294f0e86b9c8db0973be57b7b83ae32624a63a22b18825a7dc981f04f50ba346"
+  },
+  "input_snapshot": "input.xml",
+  "kind": "schema-only-development-reproduction; no execution attestation",
+  "limits": "example has explicit demonstration allowances; no RSS/hard-deadline claim",
+  "loaded_schema_bytes": {
+    "resources/cii/16b/xsd/CrossIndustryInvoice_100pD16B.xsd": {
+      "bytes": 3078,
+      "sha256": "3baf143b90f289d62c5dfb086aa51fa183490a2d0b38a40c6b31dcae0760f2ba"
+    },
+    "resources/cii/16b/xsd/CrossIndustryInvoice_QualifiedDataType_100pD16B.xsd": {
+      "bytes": 36806,
+      "sha256": "6649215914728652e883662bec1d3eab008c215e86a59f3bb417db9723ee8c5c"
+    },
+    "resources/cii/16b/xsd/CrossIndustryInvoice_ReusableAggregateBusinessInformationEntity_100pD16B.xsd": {
+      "bytes": 99402,
+      "sha256": "1c42244298a863bcc0b5196983ff0a5d084fcabe58aea77ef82b242e7cd0ddfd"
+    },
+    "resources/cii/16b/xsd/CrossIndustryInvoice_UnqualifiedDataType_100pD16B.xsd": {
+      "bytes": 6967,
+      "sha256": "04fce6f6f28521886731294be18a4e6bb5cb3003456457d99ad5c4d3e652f497"
+    }
+  },
+  "partial_command": [
+    "D:\\a\\_temp\\schema-consumer-target\\debug\\examples\\cii-observe.exe",
+    "D:\\a\\_temp\\schema-producer-tests\\external-change\\original-resources",
+    "D:\\a\\_temp\\schema-producer-tests\\external-change\\input.xml",
+    "1000",
+    "1938"
+  ],
+  "partial_output": {
+    "bytes": 4650,
+    "sha256": "111fc60d0ce29eaaaa0dad81536f4344873b3ff6919079cda4b6f43222a017eb"
+  },
+  "rustc": "rustc 1.83.0 (90b35a623 2024-11-26)\nbinary: rustc\ncommit-hash: 90b35a6239c3d8bdabc530a6a0816f7ff89a0aaf\ncommit-date: 2024-11-26\nhost: x86_64-pc-windows-msvc\nrelease: 1.83.0\nLLVM version: 19.1.1\n",
+  "source_inventory": {
+    "bytes": 64572,
+    "sha256": "8bd6fc1791833fc1e6afe13d2a6e580edeeba81a0fd98c2ed1736504a995e3ab"
+  },
+  "source_unchanged_during_build_and_run": true,
+  "target_directory": "D:\\a\\_temp/schema-consumer-target"
+}

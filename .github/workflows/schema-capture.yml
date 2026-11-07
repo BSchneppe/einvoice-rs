@@ -1,0 +1,74 @@
+name: Offline exact-producer schema capture
+
+on:
+  pull_request:
+    paths:
+      - 'tools/schema-capture/**'
+      - 'crates/einvoice-schema/**'
+      - 'crates/einvoice-source/**'
+      - 'vendor/xsd-schema/**'
+      - 'vendor/xml-rs/**'
+      - 'vendor/*.provenance.json'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+      - '.github/workflows/schema-capture.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'tools/schema-capture/**'
+      - '.github/workflows/schema-capture.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-capture:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Historical merged producer objects, not live-source equality.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Strict grammar, genuine attempts and adversarial CLI checks
+        run: python -I -B -m unittest discover -s tools/schema-capture/tests -v
+      - name: Independently validate existing retained fixture bytes
+        # Stdlib only. No runtime, oracle, corpus, downloads or pip installs.
+        run: |
+          python -I - <<'PY'
+          import hashlib, json, subprocess
+          from pathlib import Path
+          root = Path('tools/schema-capture')
+          selection = json.loads((root / 'selected-core.json').read_bytes())
+          rows = sorted(selection['files'], key=lambda row: row['path'])
+          canonical = json.dumps(rows, sort_keys=True, separators=(',', ':')).encode()
+          assert hashlib.sha256(canonical).hexdigest() == '4b8905f470ed5b38138ac2ee2f45d6ec568b90c96c87212c370cffda3529771e'
+          assert len(rows) == 141
+          refs = {r['path']: r for r in json.loads((root / 'artifact-file-manifest.json').read_bytes())['files']}
+          assert len(refs) == 417
+          for row in rows:
+              data = (root / 'development-evidence' / row['path']).read_bytes()
+              assert len(data) == row['bytes'] and hashlib.sha256(data).hexdigest() == row['sha256']
+              assert row == refs[row['path']]
+          descriptor = json.loads((root / 'producer-2d82953.json').read_bytes())
+          revision = descriptor['reviewed_producer_revision']
+          def git_object(spec):
+              result = subprocess.run(['git', 'show', spec], capture_output=True, timeout=10)
+              if result.returncode:
+                  raise RuntimeError('Required historical producer Git object unavailable: ' + spec)
+              return result.stdout
+          tree = subprocess.run(['git', 'rev-parse', revision + '^{tree}'],
+                                capture_output=True, timeout=10, check=True).stdout.decode().strip()
+          assert tree == descriptor['reviewed_full_tree_correspondence']['tree']
+          for name, binding in descriptor['source_members'].items():
+              data = git_object(revision + ':' + name)
+              assert len(data) == binding['bytes'] and hashlib.sha256(data).hexdigest() == binding['sha256']
+          print('141 original files and historical merged source407 match; release_gate_eligible=false')
+          PY
+      - name: Require verification to leave tracked evidence unchanged
+        run: git diff --exit-code
