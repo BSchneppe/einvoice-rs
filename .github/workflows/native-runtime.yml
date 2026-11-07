@@ -1,0 +1,31 @@
+name: Typed native atomic runtime
+on:
+  pull_request:
+    paths: ['tools/native-runtime/**', 'crates/einvoice-numeric/**', 'tools/validation-generator/crates/validation-ir/**', '.github/workflows/native-runtime.yml']
+  push:
+    branches: [main]
+    paths: ['tools/native-runtime/**', 'crates/einvoice-numeric/**', 'tools/validation-generator/crates/validation-ir/**', '.github/workflows/native-runtime.yml']
+permissions:
+  contents: read
+jobs:
+  atomic:
+    name: Typed atomic primitives (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-15]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rust 1.83
+        run: rustup toolchain install 1.83.0 --profile minimal --component rustfmt --component clippy
+      - name: Scalar and resource regressions
+        run: cargo +1.83.0 test --locked --manifest-path tools/native-runtime/Cargo.toml
+      - name: Format, Clippy and documentation
+        run: |
+          cargo +1.83.0 fmt --manifest-path tools/native-runtime/Cargo.toml -- --check
+          cargo +1.83.0 clippy --locked --all-targets --manifest-path tools/native-runtime/Cargo.toml -- -D warnings
+          RUSTDOCFLAGS='-D warnings' cargo +1.83.0 doc --locked --no-deps --manifest-path tools/native-runtime/Cargo.toml

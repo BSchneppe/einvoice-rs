@@ -1,0 +1,15 @@
+[workspace]
+resolver = "2"
+
+[package]
+name = "einvoice-native-runtime"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.83"
+publish = false
+license-file = "../../LICENSE"
+description = "Private bounded typed atomic infrastructure; no XPath evaluator"
+
+[dependencies]
+einvoice-numeric = { path = "../../crates/einvoice-numeric" }
+validation-ir = { path = "../validation-generator/crates/validation-ir" }
