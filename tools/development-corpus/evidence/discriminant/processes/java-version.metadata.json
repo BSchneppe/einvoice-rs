@@ -1,0 +1,11 @@
+{
+  "process": "java-version",
+  "argv": [
+    "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/java",
+    "-version"
+  ],
+  "exit_code": 0,
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "e9b974c646ce3c53bdb2ca76c9fd1fcffd73d3ee00aaf73a57ccde4bdcbd1751",
+  "cwd": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f"
+}

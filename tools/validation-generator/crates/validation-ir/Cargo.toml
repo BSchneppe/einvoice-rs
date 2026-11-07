@@ -1,0 +1,9 @@
+[package]
+name = "validation-ir"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.83"
+publish = false
+
+[dependencies]
+serde = { version = "=1.0.228", features = ["derive"] }

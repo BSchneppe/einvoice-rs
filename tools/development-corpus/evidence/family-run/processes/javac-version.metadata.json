@@ -1,0 +1,12 @@
+{
+  "name": "javac-version",
+  "argv": [
+    "/Library/Java/JavaVirtualMachines/corretto-27.0.1.0.11/Contents/Home/bin/javac",
+    "-version"
+  ],
+  "cwd": "/Users/bene/.t3/worktrees/rust-einvoice/benediktschneppe-bsc-10-f6ea9ca4204b8a5f",
+  "exit_code": 0,
+  "status": "exited",
+  "stdout_sha256": "95e1ca704b55c6572df1f3a7261822c2ab0bf8f69968cad7c43ebecd93be2eb0",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

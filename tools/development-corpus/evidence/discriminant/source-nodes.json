@@ -1,0 +1,123 @@
+[
+  {
+    "member": "source/schematron/preprocessed/EN16931-CII-validation-preprocessed.sch",
+    "sha256": "54e0dc6d06cd7f17d268bb9696ff56f58d386ee28961c9bbef0a56718c400c89",
+    "node": "/{http://purl.oclc.org/dsdl/schematron}schema[1]/{http://purl.oclc.org/dsdl/schematron}pattern[2]/{http://purl.oclc.org/dsdl/schematron}rule[14]/{http://purl.oclc.org/dsdl/schematron}assert[61]",
+    "attributes": {
+      "id": "CII-SR-282",
+      "flag": "warning",
+      "test": "not(ram:SellerTaxRepresentativeTradeParty/ram:ID)"
+    },
+    "text": "[CII-SR-282] - BuyerTaxRepresentativeTradeParty should not be present",
+    "ancestors": [
+      {
+        "tag": "{http://purl.oclc.org/dsdl/schematron}pattern",
+        "attributes": {
+          "id": "EN16931-CII-Syntax"
+        }
+      },
+      {
+        "tag": "{http://purl.oclc.org/dsdl/schematron}rule",
+        "attributes": {
+          "context": "/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement"
+        }
+      }
+    ],
+    "serialized_node_for_reading_only": "<ns0:assert xmlns:ns0=\"http://purl.oclc.org/dsdl/schematron\" id=\"CII-SR-282\" flag=\"warning\" test=\"not(ram:SellerTaxRepresentativeTradeParty/ram:ID)\">[CII-SR-282] - BuyerTaxRepresentativeTradeParty should not be present</ns0:assert>\n      "
+  },
+  {
+    "member": "source/schematron/CII/EN16931-CII-syntax.sch",
+    "sha256": "a2c3d977fbb1aaf7563bc4620baa6840885dd7fba29294d50d19a3ece35aae44",
+    "node": "/{http://purl.oclc.org/dsdl/schematron}pattern[1]/{http://purl.oclc.org/dsdl/schematron}param[289]",
+    "attributes": {
+      "name": "CII-SR-282",
+      "value": "not(ram:BuyerTaxRepresentativeTradeParty)"
+    },
+    "text": "",
+    "ancestors": [
+      {
+        "tag": "{http://purl.oclc.org/dsdl/schematron}pattern",
+        "attributes": {
+          "is-a": "EN16931-CII",
+          "id": "EN16931-CII-Syntax"
+        }
+      }
+    ],
+    "serialized_node_for_reading_only": "<ns0:param xmlns:ns0=\"http://purl.oclc.org/dsdl/schematron\" name=\"CII-SR-282\" value=\"not(ram:BuyerTaxRepresentativeTradeParty)\" />\n\n\t"
+  },
+  {
+    "member": "source/schematron/CII/EN16931-CII-syntax.sch",
+    "sha256": "a2c3d977fbb1aaf7563bc4620baa6840885dd7fba29294d50d19a3ece35aae44",
+    "node": "/{http://purl.oclc.org/dsdl/schematron}pattern[1]/{http://purl.oclc.org/dsdl/schematron}param[290]",
+    "attributes": {
+      "name": "CII-SR-282",
+      "value": "not(ram:SellerTaxRepresentativeTradeParty/ram:ID)"
+    },
+    "text": "",
+    "ancestors": [
+      {
+        "tag": "{http://purl.oclc.org/dsdl/schematron}pattern",
+        "attributes": {
+          "is-a": "EN16931-CII",
+          "id": "EN16931-CII-Syntax"
+        }
+      }
+    ],
+    "serialized_node_for_reading_only": "<ns0:param xmlns:ns0=\"http://purl.oclc.org/dsdl/schematron\" name=\"CII-SR-282\" value=\"not(ram:SellerTaxRepresentativeTradeParty/ram:ID)\" />\n\t"
+  },
+  {
+    "member": "source/schematron/abstract/EN16931-CII-syntax.sch",
+    "sha256": "6b396a301786c00e7f3ba97e9bea2c25577b28fb5c3c60f6e6c05fc86b0aef0d",
+    "node": "/{http://purl.oclc.org/dsdl/schematron}pattern[1]/{http://purl.oclc.org/dsdl/schematron}rule[14]/{http://purl.oclc.org/dsdl/schematron}assert[61]",
+    "attributes": {
+      "test": "$CII-SR-282",
+      "flag": "warning",
+      "id": "CII-SR-282"
+    },
+    "text": "[CII-SR-282] - BuyerTaxRepresentativeTradeParty should not be present",
+    "ancestors": [
+      {
+        "tag": "{http://purl.oclc.org/dsdl/schematron}pattern",
+        "attributes": {
+          "abstract": "true",
+          "id": "EN16931-CII"
+        }
+      },
+      {
+        "tag": "{http://purl.oclc.org/dsdl/schematron}rule",
+        "attributes": {
+          "context": "$ApplicableHeaderTradeAgreement "
+        }
+      }
+    ],
+    "serialized_node_for_reading_only": "<ns0:assert xmlns:ns0=\"http://purl.oclc.org/dsdl/schematron\" test=\"$CII-SR-282\" flag=\"warning\" id=\"CII-SR-282\">[CII-SR-282] - BuyerTaxRepresentativeTradeParty should not be present</ns0:assert>\n\n\t\t"
+  },
+  {
+    "member": "config/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+    "sha256": "0911e927f13f9ae2cdc7f973643f27bf0ad3c5da02483c04a5b8a47eb4822199",
+    "node": "/{http://www.w3.org/1999/XSL/Transform}transform[1]/{http://www.w3.org/1999/XSL/Transform}template[79]/{http://www.w3.org/1999/XSL/Transform}choose[1]/{http://www.w3.org/1999/XSL/Transform}otherwise[1]/{https://doi.org/10.5281/zenodo.1495494}rule[1]/{http://www.w3.org/1999/XSL/Transform}if[61]/{http://purl.oclc.org/dsdl/svrl}failed-assert[1]",
+    "attributes": {
+      "location": "{schxslt:location(.)}",
+      "flag": "warning",
+      "id": "CII-SR-282"
+    },
+    "text": "\n                     not(ram:BuyerTaxRepresentativeTradeParty)\n                     [CII-SR-282] - BuyerTaxRepresentativeTradeParty should not be present\n                  ",
+    "ancestors": [
+      {
+        "tag": "{http://www.w3.org/1999/XSL/Transform}template",
+        "attributes": {
+          "match": "/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement ",
+          "priority": "40",
+          "mode": "d17e41"
+        }
+      },
+      {
+        "tag": "{http://www.w3.org/1999/XSL/Transform}if",
+        "attributes": {
+          "test": "not(not(ram:BuyerTaxRepresentativeTradeParty))"
+        }
+      }
+    ],
+    "serialized_node_for_reading_only": "<ns0:failed-assert xmlns:ns0=\"http://purl.oclc.org/dsdl/svrl\" xmlns:ns1=\"http://www.w3.org/1999/XSL/Transform\" location=\"{schxslt:location(.)}\" flag=\"warning\" id=\"CII-SR-282\">\n                     <ns1:attribute name=\"test\">not(ram:BuyerTaxRepresentativeTradeParty)</ns1:attribute>\n                     <ns0:text>[CII-SR-282] - BuyerTaxRepresentativeTradeParty should not be present</ns0:text>\n                  </ns0:failed-assert>\n               "
+  }
+]

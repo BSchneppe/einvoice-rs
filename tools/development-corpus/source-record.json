@@ -1,0 +1,65 @@
+{
+  "upstream_url": "https://huggingface.co/datasets/sinabis-group/sinabis-10k-synthetic-zugferd-xrechnung",
+  "creator": "Sinabis GmbH",
+  "year": 2026,
+  "title": "Sinabis Green Energy – 10k GoBD-compliant German E-Invoices (XRechnung 3.0 / ZUGFeRD)",
+  "immutable_revision": "8d9ab205ab74f360fac344a50fcd54c35d0cd9ba",
+  "artifact": {
+    "file": "sinabis.parquet",
+    "version": "8d9ab205ab74f360fac344a50fcd54c35d0cd9ba",
+    "url": "https://huggingface.co/datasets/sinabis-group/sinabis-10k-synthetic-zugferd-xrechnung/resolve/8d9ab205ab74f360fac344a50fcd54c35d0cd9ba/data/train-00000-of-00001.parquet",
+    "sha256": "f45674ce80b477a859c684c68e423f8bb52ad2c1647c97a9e29050f6519dee13"
+  },
+  "dataset_card": {
+    "file": "sinabis-README.md",
+    "version": "8d9ab205ab74f360fac344a50fcd54c35d0cd9ba",
+    "url": "https://huggingface.co/datasets/sinabis-group/sinabis-10k-synthetic-zugferd-xrechnung/raw/8d9ab205ab74f360fac344a50fcd54c35d0cd9ba/README.md",
+    "sha256": "6b1e08d286eabc899addeebc0d9fd8e8595d671ad83e04668a5baed3e2830f83"
+  },
+  "dataset_card_read_only_check": {
+    "path": "tools/oracle/notices/Sinabis-dataset-card.md",
+    "bytes": 12425,
+    "sha256": "6b1e08d286eabc899addeebc0d9fd8e8595d671ad83e04668a5baed3e2830f83",
+    "matches_pinned_bytes": true,
+    "network_retrieval_repeated": false
+  },
+  "selector": {
+    "expression": "xml_file == 'zugferd/b2b_service_maintenance/0000/0000000_SRV-2025-47731.xml'",
+    "columns": [
+      "idx",
+      "xml_file",
+      "xml",
+      "sha256_xml",
+      "theme"
+    ],
+    "expected_unique_rows": 1,
+    "idx": 0,
+    "encoding_rule": "source['xml'].encode('utf-8'); no XML parse/reserialization/newline normalization",
+    "checks_in_original_script": [
+      "table.num_rows == 1",
+      "source.sha256_xml == selected manifest row.sha256",
+      "SHA256(encoded xml) == selected row.sha256",
+      "encoded byte length == selected row.bytes",
+      "source.theme == selected row.scenario",
+      "cached original seed bytes == encoded xml"
+    ],
+    "idx_check_scope": "idx=0 is a documented prior source fact; seed_smoke.py:63-108 selects by xml_file and does not explicitly assert source.idx==0. Future extraction should assert idx==0 in addition to those original checks."
+  },
+  "seed": {
+    "bytes": 11214,
+    "sha256": "881f7bc3ff0513a6627a981301af2c0ec9bcdce2c9d1628d7858e581f4d8e91c",
+    "independently_hashed_this_pass": true
+  },
+  "prior_extraction": {
+    "status": "Previously observed extraction verified; documentary closure in this pass, not independently reread Parquet",
+    "references": [
+      "corpus-discovery.md:108-138",
+      "seed_smoke.py:63-108"
+    ],
+    "parquet_read_this_pass": false
+  },
+  "license": "CC-BY-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "modifications": "Baseline unchanged; all family and discriminant derivatives identified by exact retained versioned recipes. Superseded drafts retain their original status, not new labels.",
+  "s3_ruling": "Assembly cross-reference gap; exact upstream locator already exists in copied historical lock. New compact record links selected locator to external original selector. No acquisition required."
+}

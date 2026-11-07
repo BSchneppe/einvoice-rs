@@ -131,9 +131,64 @@ Supplied text is preserved, including original decimal spellings and expectation
 **An empty field-diagnostic list does not establish invoice validity.** This helper
 does not parse numeric inputs, check code lists, calculate or compare amounts,
 generate XML, or run native validation. It scans caller-owned input and collects
-findings without a resource budget. Numeric preparation and generation remain
-unimplemented, and `Target::encode` still returns `BuildError::Unavailable` even
-for a populated draft. No `f64` or malformed-to-zero path exists.
+findings without a resource budget. `Target::encode` still returns
+`BuildError::Unavailable` even for a populated, calculated draft. No `f64` or
+malformed-to-zero path exists.
+
+`draft.calculate(&target)` prepares exact amounts in a separate immutable
+`CalculatedInvoice`; `calculate_with_limits(&target, CalculationLimits { .. })`
+selects explicit limits. It first recognizes the existing exact target, checks
+all collection counts and every supplied string's byte length, then collects
+bounded field findings and parses numbers through the shared `einvoice-numeric`
+kernel. The draft and imported bytes remain unchanged.
+
+Line net is exact quantity × price, divided directly by the explicit positive
+price basis (one only when omitted), rounded once to two places with ties away
+from zero. Quantities may be signed or zero; prices are nonnegative and standard
+VAT rates are positive. An explicit basis unit must equal the quantity unit.
+Rounded line nets are summed by numerically equal VAT rate; groups are sorted by
+budgeted numeric comparison. Group tax is exact basis × rate / 100, rounded once
+with the same policy. Net sums line nets, tax sums group taxes, gross = net + tax,
+and due = gross. All currencies use two-place monetary output for this target;
+there is no currency conversion or minor-unit substitution.
+
+Every supplied amount expectation compares exactly, without rounding or
+validation tolerance. Trailing-zero spellings compare equal. Mismatches give
+`BuildDiagnostic` findings with exact public field paths, supplied/computed values
+and currency. Malformed expectations give lexical findings. Repeated numeric
+expected-group rates are ambiguous findings; rates absent from calculated lines
+are unknown-group findings, including when no expected amounts were supplied.
+
+The result exposes read-only `lines()`, `vat_groups()` and `totals()` plus
+`currency()`. Line inputs (`quantity`, `price`, optional `price_basis`, `vat_rate`)
+are canonical exact decimal strings for eventual serialization without repeating
+arithmetic. Line `net`, group `basis`/`tax` and total `net`/`tax`/`gross`/`due` are
+always two-place strings. Input line order and explicit-versus-omitted basis are
+preserved. It contains no party/description copies and cannot construct a public
+`Document`. **Calculation success is arithmetic preparation, never conformance.**
+
+`CalculationError` separates `UnsupportedTarget`, bounded `Fields` findings,
+`Resource { path, cause }` and unexpected `Processing { path, cause }` failures.
+Unknown target identifiers are not copied. Public `CalculationResource` and
+`CalculationFailure` types require no knowledge of numeric storage or XPath.
+One numeric budget covers all parses, operations, grouping/order/expectation
+comparisons and rendering; exhaustion never becomes an invoice fault or zero.
+
+`CalculationLimits::default()` allows 1,000 lines, 32 accounts, 1,000 expected
+groups, 1 MiB total supplied text, 16 KiB per business string, 4,096 diagnostics
+and 16 MiB retained result/diagnostic output (strings and records). Numeric
+per-value limits are 1,024 lexical bytes, 8,192 coefficient/intermediate bits,
+absolute scale 1,024 and 1,024 rendering/scratch bytes; cumulative numeric fuel
+is one billion abstract work units. These accommodate ordinary invoices and the
+original high-precision rounding cases while bounding adversarial work and
+retention. Larger callers may raise limits explicitly. Zero/platform-unsafe
+configurations are rejected with checked size arithmetic. Each rendering reserves
+its full per-value allowance before allocation and refunds unused bytes, so a
+tight aggregate cap may conservatively refuse even a small final string. Limits
+are deterministic conservative fuel/size bounds, not allocator/RSS guarantees;
+vector capacity, numeric scratch and allocator overhead remain proportional to
+the bounded data. No elapsed-time deadline or allocator-failure recovery is
+claimed.
 
 The creation model has no fields for allowances, charges, prepayments, payable
 adjustments or structured cash discounts. It supports no credit-note generation,

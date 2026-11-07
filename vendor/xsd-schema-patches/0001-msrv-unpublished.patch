@@ -1,0 +1,12 @@
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -11,7 +11,8 @@
+
+ [package]
+ edition = "2021"
+-rust-version = "1.85"
++rust-version = "1.83"
++publish = false
+ name = "xsd-schema"
+ version = "0.3.0"
+ authors = ["semyonc"]

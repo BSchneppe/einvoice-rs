@@ -1,0 +1,4 @@
+# The W3C schema documents in assets/ are shipped byte for byte as published
+# (assets/NOTICE.md records their SHA-256): no line-end conversion, ever.
+# xlink.xsd has CRLF line ends, xml.xsd LF.
+assets/*.xsd -text

@@ -1,0 +1,1708 @@
+{
+  "cases": [
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F01-prefix-b",
+      "input_sha256": "bde0a701b5dd19917e261c4f05ca9089098ce7e16ae37454e62c3332d78950f1",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F01-default-ram",
+      "input_sha256": "e0c26acfb8cdbb106ca0e70aa712f71c142a6d6867a8f4b4729f14b2ae4b041b",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F01-empty-delivery-ram",
+      "input_sha256": "1011d1cebf527358f4327217520143e3cfe23a021f89ddbdeef3f3e89b9abeae",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F01-empty-delivery-b",
+      "input_sha256": "5713f7d52f2f942200c0cd05e34bdcdd9120a3434ebfecd7c2614b9249bbda5d",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F01-local-shadow",
+      "input_sha256": "2532470570ad2b1fc75f94e18ccb73df9c87a6b2d48fc0ca81df49089db001f1",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 0,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F02-buyer-missing",
+      "input_sha256": "79e9deba35d58f28cd056c69906bf98829106296b51d71254775ccc8ccd148c7",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F02-buyer-empty",
+      "input_sha256": "f87855f10d9130d060f3ec6f4f5a50e563e18ea30004abc8d092a0bce1839cc8",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F02-buyer-whitespace",
+      "input_sha256": "5e581ea4711843d42135c0020bcd95690f5ab3b916d7af120cb31be6fdbe3c50",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 2,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F02-buyer-duplicate",
+      "input_sha256": "fa5b1a3ed6ba5e1f6c7e8a4f48da5b0ee87b3f70446c32b1175c6908ec18704b",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F02-careof",
+      "input_sha256": "390eca21a45944628435a4f6f5757fa27b7f1b767398792002c7231b784163f6",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F02-issue-date-duplicate",
+      "input_sha256": "c0203a097437464ffb7c5404e7088be14a00b2602a832596249fef420621d9b4",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [],
+        "line_items": 0,
+        "line_taxes_by_line": [],
+        "product_names_by_line": []
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F02-zero-lines",
+      "input_sha256": "04b42d5077361f88f9e91eccbb6e7d53c5be4c670d12f39c8b6a5279c11d6c55",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 2,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F02-terms-duplicate",
+      "input_sha256": "a0c9a44d0aea3fdbf143ef5d7142ff63fd67e1efd0919886be2d74bcab400d31",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          0,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F02-tax-zero",
+      "input_sha256": "7b0714fa00ff981781c50def54cadee0c58d5fcb43a1b7a110127a2128b75057",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          2,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F02-tax-two",
+      "input_sha256": "cb49eb74639cc3f02da2e54fd338904e8d00ee14e127728e27d9711770fcbde7",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          0,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F02-name-missing-2",
+      "input_sha256": "72d6b9c2e9de4d04e553c3f136f7503cc301baeb0a1dceb7ad55d35accecea57",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          0
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F02-name-missing-3",
+      "input_sha256": "37bb689e3f0e669138d879050650582815874df9c1977b6a6f0ed7c847d260d4",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          0,
+          0
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F02-name-missing-2-3",
+      "input_sha256": "39ecd92299c24b6a0ef8439035570b9f15112ae1c2d9e08bbcec51b454336f2f",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          0,
+          0
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F02-name-missing-2-3-shifted",
+      "input_sha256": "e8c34c7377a9efce9b8f6750cbfa4ed21108c46cc8f03fb5c5e4ed350d2ffde5",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F03-plus",
+      "input_sha256": "3bbe5cc4704e5ce37198a97e156c7cd4d7c68f44ef56fe6c2cd6586f03adc9d6",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F03-leading-zero",
+      "input_sha256": "ff689859ca54eb8d6a23a3ee8f2d369d85bff16b0996bc37d1a22450239cd8c0",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F03-trailing-zero",
+      "input_sha256": "9d0cdc7d418a2b011d315c2b1bbc1a625d09cc5c0244081807a235b58623573d",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F03-exponent",
+      "input_sha256": "e69490e90cf72817603b68a8efa2da48fa76127990b0a14d22caf550861e34d4",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F03-magnitude",
+      "input_sha256": "1b797669b7722d8be7bd75fa9733965073911186b37f5437329a2123379873d7",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F03-negative-price",
+      "input_sha256": "09d2092b32d1e4a473f9598d8b6fc5164fab1f0dc824a02a11fc4c45c0050f2b",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F03-round-below",
+      "input_sha256": "315d4e2784fcbf212e8714b4ed60dbed9a922f8e67c394d059a7484939425a2d",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F03-round-tie",
+      "input_sha256": "8a52323b0615113374856a770bfaa90b0dfb39a7393e8720ef21849a559af3ce",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F03-round-above",
+      "input_sha256": "b0283fd50f607c112ba2f0a88db7861ad2213486ab8c241d6c0fc4f5b0239ff3",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F03-round-tie-lower-header",
+      "input_sha256": "143b03f7c2ad6fdcf5fe8c6948cf39079c473aec58cf3a247782ace7c403ad64",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F03-precision-lines-2-3",
+      "input_sha256": "b50f65008c08667482fbefd25f339f69dc4bebc339851382de893694e18bcbba",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F04-leap-day",
+      "input_sha256": "e140c9f5601d565906b8e7f851b635d60eff5b087032a449b0251468bd8b262d",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F04-nonleap-day",
+      "input_sha256": "960fa97c256509f22075bcb26b468e1f3d31c3fffe2b2e3fb592125d60ad739c",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F04-month-13",
+      "input_sha256": "82280ee441a3fc9949fb0cc1ca5c763f00735c42dfd5993f83fd4825d2502b6d",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F04-day-zero",
+      "input_sha256": "aa8e6f1c5d831c7e0e2a2ba5450206ffb9a166b8f589a851fa92d35eb3d423f7",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F04-hyphenated",
+      "input_sha256": "b8e074aa0e06e6c4462dd850b85258f63b6ee58163781b43ddacbe96455317f5",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F04-format-203",
+      "input_sha256": "2b4bcf9f4269b03b51f86870af5cc020c663fdfbdabffc3f8f03412fead5f69b",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F05-currency-case",
+      "input_sha256": "1cd84202e03e49efe2c9b25ceb65d467b654806e5c7b1df6b5a882432fb0427e",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F05-currency-space",
+      "input_sha256": "6e611156034c7c1161d1f24ea37574282436f72a0dad1e4a25f90d3730e43442",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F05-currency-outside",
+      "input_sha256": "a61fc7870262a4034d4bb6ed7a967a2435b93350571bc0004f1309b1205d7ccb",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F05-unit-case",
+      "input_sha256": "cbfc846532347994a0ce5f98dec48e4256c5b3a052dd9e4ce13735295bb6cac7",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F05-unit-lines-2-3",
+      "input_sha256": "2d7adda2b8402c350d3a443d6cfaf0ef2a3dd2789f6a8aa4d07dd1824cfd0d2f",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F06-xml10-crlf-literal",
+      "input_sha256": "8225d6e7b1cb7d77209e3f6d920eae33a53fab2f8dc0690902176a912185e9ea",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F06-xml10-crlf-reference",
+      "input_sha256": "7a0635cadd5b1b1a25b262281cdca3784c951a2a8608b05510c8b2dd8e4bc837",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F06-xml10-cr-literal",
+      "input_sha256": "0d9c32466a3c8280a8710fd03da76da6824cd0e9a0908ba2b191a4b12340d172",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F06-xml10-cr-reference",
+      "input_sha256": "33f237ce23bd91a0dec1a47090783a1288c033ca1a7b93292eeb1a32dd6d316b",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F06-xml10-nel-literal",
+      "input_sha256": "bb1605471c1122fcf18affe3e55123333c9be0895302310316281c399eaef7d8",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F06-xml10-nel-reference",
+      "input_sha256": "11732e468d544b33463be0997ae0406962536914f4e00bd4fca5a765bee103f4",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": null,
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F06-xml11-nel-literal",
+      "input_sha256": "33917ed7d644bdf9e14b5673adc2372eea860bcaa8807f09e36783e7a03e2c98",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "not_checked_xml11_capability_not_assumed",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": null,
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F06-xml11-nel-reference",
+      "input_sha256": "142c2cdee6009c10d229652bd2447552863a1fe593871f67973028a48782947c",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "not_checked_xml11_capability_not_assumed",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F06-xml10-ls-literal",
+      "input_sha256": "f728dea580cc4f9bc8cceb721e8582d13becf1ed5c770ef8bae3ffa402e36a1b",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F06-xml10-ls-reference",
+      "input_sha256": "69055b3b598e0b46124b26d3bea4fcaaaeee6e95e72bcd6285a4d60847792f42",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": null,
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F06-xml11-ls-literal",
+      "input_sha256": "f89b4334f80d8f40039d84b711fd776ec1afb83f358267d8efd54fa1ec19f34a",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "not_checked_xml11_capability_not_assumed",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": null,
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F06-xml11-ls-reference",
+      "input_sha256": "a7f501eb1a9aa0fd43423b550402c53d030de5712632ba4b862db414ef897a16",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "not_checked_xml11_capability_not_assumed",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F06-attr-tab-literal",
+      "input_sha256": "569f2f2ae4d0f690e4c9bbc2a506c13c72a680d89baf03340f2d02dd054befb9",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F06-attr-tab-reference",
+      "input_sha256": "68b3a37e7cfcd3f4b0f5753c0fff8fb83c5411a9eb8a5d2f36b0af0d6086c4be",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": null,
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F06-xml11-attr-nel-literal",
+      "input_sha256": "7efe672d0e3a81004c9a7783e65bf48daf489e774873eb86fa7dcf4ecfa87646",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "not_checked_xml11_capability_not_assumed",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": null,
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F06-xml11-attr-nel-reference",
+      "input_sha256": "d8b8b39256550d79d2723e59cf71b40f7df37e0a3652870a6316fe2631deeaa6",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "not_checked_xml11_capability_not_assumed",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F06-utf8-bom",
+      "input_sha256": "9808cacee15d4bc1093a416eb84b251fdfc2ff6879b32ef8e110c2e13007a82b",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    },
+    {
+      "business_evaluated": false,
+      "counts": {
+        "buyer_references": 1,
+        "header_payment_terms": 1,
+        "line_ids_in_source_order": [
+          "1",
+          "2",
+          "3"
+        ],
+        "line_items": 3,
+        "line_taxes_by_line": [
+          1,
+          1,
+          1
+        ],
+        "product_names_by_line": [
+          1,
+          1,
+          1
+        ]
+      },
+      "counts_are_syntax_observations_not_findings": true,
+      "id": "F06-utf16-bom",
+      "input_sha256": "e8db2d1623fab9b3c44c1e2b912c55d87f00dab7e82f526ff8a680bd581ab495",
+      "oracle_evaluated": false,
+      "recipe_replayed_from_seed_twice": true,
+      "schema_evaluated": false,
+      "syntax": "stdlib_elementtree_parsed_xml10_synthetic_only",
+      "synthetic_only": true
+    }
+  ],
+  "scope": "synthetic byte recipe and XML1.0 syntax/count checks only; no schema or business validity"
+}

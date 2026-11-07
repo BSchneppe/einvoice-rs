@@ -1,0 +1,1109 @@
+// XPath 2.0 Parser Grammar (LALRPOP)
+//
+// This grammar is a precise translation of xpath2/XPath20Api/XPath20Api/XPath.y
+// The tokenizer emits composite tokens for axis specifiers and multi-word keywords
+// to avoid shift/reduce conflicts.
+
+use crate::xpath::ast::*;
+use crate::xpath::arena::{AstArena, AstNodeId, SourceSpan};
+use crate::xpath::lexer::{Token, LexerError};
+
+grammar<'input>(arena: &mut AstArena);
+
+extern {
+    type Location = usize;
+    type Error = LexerError;
+
+    enum Token {
+        // Literals
+        "string" => Token::StringLiteral(<String>),
+        "integer" => Token::IntegerLiteral(<String>),
+        "decimal" => Token::DecimalLiteral(<String>),
+        "double" => Token::DoubleLiteral(<String>),
+
+        // Names
+        "ncname" => Token::NCName(<String>),
+        "qname" => Token::QName(<String>),
+        "qname-nillable" => Token::QNameNillable(<String>),
+        "varname" => Token::VarName { prefix: <String>, local: <String> },
+
+        // Keywords
+        "for" => Token::For,
+        "in" => Token::In,
+        "return" => Token::Return,
+        "if" => Token::If,
+        "then" => Token::Then,
+        "else" => Token::Else,
+        "some" => Token::Some,
+        "every" => Token::Every,
+        "satisfies" => Token::Satisfies,
+        "and" => Token::And,
+        "or" => Token::Or,
+        "to" => Token::To,
+        "div" => Token::Div,
+        "idiv" => Token::IDiv,
+        "mod" => Token::Mod,
+        "union" => Token::Union,
+        "except" => Token::Except,
+        "intersect" => Token::Intersect,
+
+        // Type keywords (composite)
+        "instance of" => Token::InstanceOf,
+        "treat as" => Token::TreatAs,
+        "cast as" => Token::CastAs,
+        "castable as" => Token::CastableAs,
+
+        // Kind test keywords
+        "element" => Token::Element,
+        "attribute" => Token::Attribute,
+        "text" => Token::Text,
+        "comment" => Token::Comment,
+        "node" => Token::Node,
+        "document-node" => Token::DocumentNode,
+        "processing-instruction" => Token::ProcessingInstruction,
+        "schema-element" => Token::SchemaElement,
+        "schema-attribute" => Token::SchemaAttribute,
+        "item" => Token::Item,
+        "empty-sequence" => Token::EmptySequence,
+
+        // Axis specifiers (composite)
+        "axis-child" => Token::AxisChild,
+        "axis-descendant" => Token::AxisDescendant,
+        "axis-attribute" => Token::AxisAttribute,
+        "axis-self" => Token::AxisSelf,
+        "axis-descendant-or-self" => Token::AxisDescendantOrSelf,
+        "axis-following-sibling" => Token::AxisFollowingSibling,
+        "axis-following" => Token::AxisFollowing,
+        "axis-parent" => Token::AxisParent,
+        "axis-ancestor" => Token::AxisAncestor,
+        "axis-preceding-sibling" => Token::AxisPrecedingSibling,
+        "axis-preceding" => Token::AxisPreceding,
+        "axis-ancestor-or-self" => Token::AxisAncestorOrSelf,
+        "axis-namespace" => Token::AxisNamespace,
+
+        // Value comparison operators
+        "eq" => Token::Eq,
+        "ne" => Token::Ne,
+        "lt" => Token::Lt,
+        "le" => Token::Le,
+        "gt" => Token::Gt,
+        "ge" => Token::Ge,
+        "is" => Token::Is,
+
+        // Occurrence indicators
+        "?" => Token::OccurrenceZeroOrOne,
+        "+" => Token::OccurrenceOneOrMore,
+        "*" => Token::OccurrenceZeroOrMore,
+
+
+        // Multi-character operators
+        ".." => Token::DoublePeriod,
+        "//" => Token::DoubleSlash,
+        "!=" => Token::NotEquals,
+        "<=" => Token::LessEquals,
+        ">=" => Token::GreaterEquals,
+        "<<" => Token::DoubleLess,
+        ">>" => Token::DoubleGreater,
+
+        // Single-character tokens
+        "(" => Token::LParen,
+        ")" => Token::RParen,
+        "[" => Token::LBracket,
+        "]" => Token::RBracket,
+        "," => Token::Comma,
+        ":" => Token::Colon,
+        "@" => Token::At,
+        "$" => Token::Dollar,
+        "/" => Token::Slash,
+        "/only" => Token::SlashOnly,
+        "|" => Token::Pipe,
+        "plus" => Token::Plus,
+        "minus" => Token::Minus,
+        "star" => Token::Star,
+        "=" => Token::Equals,
+        "<" => Token::LessThan,
+        ">" => Token::GreaterThan,
+        "question" => Token::Question,
+        "." => Token::Dot,
+
+        // Mode-specific unary operators
+        "minus10" => Token::Minus10,
+        "plus10" => Token::Plus10,
+        "minus20" => Token::Minus20,
+        "plus20" => Token::Plus20,
+
+        // End of input
+        "eof" => Token::Eof,
+    }
+}
+
+// ============================================================================
+// Top-level Expression
+// ============================================================================
+
+// Entry point: Expr followed by Eof for proper error recovery
+pub Expr: AstNodeId = {
+    <e:ExprInner> "eof" => e,
+};
+
+ExprInner: AstNodeId = {
+    <l:@L> <e:ExprSingle> <r:@R> => {
+        arena.add(AstNode::Expr(ExprNode::single(e, SourceSpan::new(l, r))))
+    },
+    <l:@L> <seq:ExprInner> "," <e:ExprSingle> <r:@R> => {
+        // Append to existing sequence
+        let span = SourceSpan::new(l, r);
+        match arena.get_mut(seq) {
+            AstNode::Expr(ref mut expr) => {
+                expr.append(e, r);
+                seq
+            }
+            _ => {
+                // Create new sequence with both
+                arena.add(AstNode::Expr(ExprNode::sequence(vec![seq, e], span)))
+            }
+        }
+    },
+};
+
+ExprSingle: AstNodeId = {
+    ForExpr,
+    QuantifiedExpr,
+    IfExpr,
+    OrExpr,
+};
+
+// ============================================================================
+// For Expression
+// ============================================================================
+
+ForExpr: AstNodeId = {
+    <l:@L> <clause:SimpleForClause> "return" <ret:ExprSingle> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::For(ForNode::new(clause, ret, span)))
+    },
+};
+
+SimpleForClause: Vec<ForBinding> = {
+    "for" <b:ForClauseBody> => b,
+};
+
+ForClauseBody: Vec<ForBinding> = {
+    <b:ForClauseOperator> => vec![b],
+    <mut bs:ForClauseBody> "," <b:ForClauseOperator> => {
+        bs.push(b);
+        bs
+    },
+};
+
+ForClauseOperator: ForBinding = {
+    <l:@L> "$" <v:"varname"> "in" <e:ExprSingle> <r:@R> => {
+        ForBinding::new(v.0, v.1, e, SourceSpan::new(l, r))
+    },
+};
+
+// ============================================================================
+// Quantified Expression
+// ============================================================================
+
+QuantifiedExpr: AstNodeId = {
+    <l:@L> "some" <bindings:QuantifiedExprBody> "satisfies" <sat:ExprSingle> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::Quantified(QuantifiedNode::new(
+            QuantifierKind::Some,
+            bindings,
+            sat,
+            span,
+        )))
+    },
+    <l:@L> "every" <bindings:QuantifiedExprBody> "satisfies" <sat:ExprSingle> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::Quantified(QuantifiedNode::new(
+            QuantifierKind::Every,
+            bindings,
+            sat,
+            span,
+        )))
+    },
+};
+
+QuantifiedExprBody: Vec<ForBinding> = {
+    <b:QuantifiedExprOper> => vec![b],
+    <mut bs:QuantifiedExprBody> "," <b:QuantifiedExprOper> => {
+        bs.push(b);
+        bs
+    },
+};
+
+QuantifiedExprOper: ForBinding = {
+    <l:@L> "$" <v:"varname"> "in" <e:ExprSingle> <r:@R> => {
+        ForBinding::new(v.0, v.1, e, SourceSpan::new(l, r))
+    },
+};
+
+// ============================================================================
+// If Expression
+// ============================================================================
+
+IfExpr: AstNodeId = {
+    <l:@L> "if" "(" <test:ExprInner> ")" "then" <then_br:ExprSingle> "else" <else_br:ExprSingle> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::If(IfNode::new(test, then_br, else_br, span)))
+    },
+};
+
+// ============================================================================
+// Logical Operators (Or, And)
+// ============================================================================
+
+OrExpr: AstNodeId = {
+    AndExpr,
+    <l:@L> <left:OrExpr> "or" <right:AndExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::Or, left, right, span
+        )))
+    },
+};
+
+AndExpr: AstNodeId = {
+    ComparisonExpr,
+    <l:@L> <left:AndExpr> "and" <right:ComparisonExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::And, left, right, span
+        )))
+    },
+};
+
+// ============================================================================
+// Comparison Expressions
+// ============================================================================
+
+ComparisonExpr: AstNodeId = {
+    RangeExpr,
+    ValueComp,
+    GeneralComp,
+    NodeComp,
+};
+
+// General comparisons: = != < <= > >=
+GeneralComp: AstNodeId = {
+    <l:@L> <left:RangeExpr> "=" <right:RangeExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::GeneralEq, left, right, span
+        )))
+    },
+    <l:@L> <left:RangeExpr> "!=" <right:RangeExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::GeneralNe, left, right, span
+        )))
+    },
+    <l:@L> <left:RangeExpr> "<" <right:RangeExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::GeneralLt, left, right, span
+        )))
+    },
+    <l:@L> <left:RangeExpr> "<=" <right:RangeExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::GeneralLe, left, right, span
+        )))
+    },
+    <l:@L> <left:RangeExpr> ">" <right:RangeExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::GeneralGt, left, right, span
+        )))
+    },
+    <l:@L> <left:RangeExpr> ">=" <right:RangeExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::GeneralGe, left, right, span
+        )))
+    },
+};
+
+// Value comparisons: eq ne lt le gt ge
+ValueComp: AstNodeId = {
+    <l:@L> <left:RangeExpr> "eq" <right:RangeExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::ValueEq, left, right, span
+        )))
+    },
+    <l:@L> <left:RangeExpr> "ne" <right:RangeExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::ValueNe, left, right, span
+        )))
+    },
+    <l:@L> <left:RangeExpr> "lt" <right:RangeExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::ValueLt, left, right, span
+        )))
+    },
+    <l:@L> <left:RangeExpr> "le" <right:RangeExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::ValueLe, left, right, span
+        )))
+    },
+    <l:@L> <left:RangeExpr> "gt" <right:RangeExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::ValueGt, left, right, span
+        )))
+    },
+    <l:@L> <left:RangeExpr> "ge" <right:RangeExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::ValueGe, left, right, span
+        )))
+    },
+};
+
+// Node comparisons: is << >>
+NodeComp: AstNodeId = {
+    <l:@L> <left:RangeExpr> "is" <right:RangeExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::Is, left, right, span
+        )))
+    },
+    <l:@L> <left:RangeExpr> "<<" <right:RangeExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::Before, left, right, span
+        )))
+    },
+    <l:@L> <left:RangeExpr> ">>" <right:RangeExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::After, left, right, span
+        )))
+    },
+};
+
+// ============================================================================
+// Range Expression
+// ============================================================================
+
+RangeExpr: AstNodeId = {
+    AdditiveExpr,
+    <l:@L> <start:AdditiveExpr> "to" <end:AdditiveExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::Range(RangeNode::new(start, end, span)))
+    },
+};
+
+// ============================================================================
+// Arithmetic Expressions
+// ============================================================================
+
+AdditiveExpr: AstNodeId = {
+    MultiplicativeExpr,
+    <l:@L> <left:AdditiveExpr> "plus" <right:MultiplicativeExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::Add, left, right, span
+        )))
+    },
+    <l:@L> <left:AdditiveExpr> "minus" <right:MultiplicativeExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::Sub, left, right, span
+        )))
+    },
+};
+
+MultiplicativeExpr: AstNodeId = {
+    Xpath10UnaryExpr,
+    <l:@L> <left:MultiplicativeExpr> "star" <right:Xpath10UnaryExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::Mul, left, right, span
+        )))
+    },
+    <l:@L> <left:MultiplicativeExpr> "div" <right:Xpath10UnaryExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::Div, left, right, span
+        )))
+    },
+    <l:@L> <left:MultiplicativeExpr> "idiv" <right:Xpath10UnaryExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::IDiv, left, right, span
+        )))
+    },
+    <l:@L> <left:MultiplicativeExpr> "mod" <right:Xpath10UnaryExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::Mod, left, right, span
+        )))
+    },
+};
+
+// XPath 1.0 unary operators: lower precedence than | (union)
+// Only activated in XPath 1.0 mode (lexer emits Minus10/Plus10)
+Xpath10UnaryExpr: AstNodeId = {
+    UnionExpr,
+    <l:@L> "minus10" <e:Xpath10UnaryExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::UnaryOp(UnaryOpNode::new(
+            UnaryOpKind::Negate, e, span
+        )))
+    },
+    <l:@L> "plus10" <e:Xpath10UnaryExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::UnaryOp(UnaryOpNode::new(
+            UnaryOpKind::Identity, e, span
+        )))
+    },
+};
+
+// ============================================================================
+// Union and Intersect/Except
+// ============================================================================
+
+UnionExpr: AstNodeId = {
+    IntersectExceptExpr,
+    <l:@L> <left:UnionExpr> "union" <right:IntersectExceptExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::Union, left, right, span
+        )))
+    },
+    <l:@L> <left:UnionExpr> "|" <right:IntersectExceptExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::Union, left, right, span
+        )))
+    },
+};
+
+IntersectExceptExpr: AstNodeId = {
+    InstanceofExpr,
+    <l:@L> <left:IntersectExceptExpr> "intersect" <right:InstanceofExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::Intersect, left, right, span
+        )))
+    },
+    <l:@L> <left:IntersectExceptExpr> "except" <right:InstanceofExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::BinaryOp(BinaryOpNode::new(
+            BinaryOpKind::Except, left, right, span
+        )))
+    },
+};
+
+// ============================================================================
+// Type Expressions
+// ============================================================================
+
+InstanceofExpr: AstNodeId = {
+    TreatExpr,
+    <l:@L> <e:TreatExpr> "instance of" <t:SequenceType> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::TypeExpr(TypeExprNode::new(
+            TypeExprKind::InstanceOf, e, t, span
+        )))
+    },
+};
+
+TreatExpr: AstNodeId = {
+    CastableExpr,
+    <l:@L> <e:CastableExpr> "treat as" <t:SequenceType> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::TypeExpr(TypeExprNode::new(
+            TypeExprKind::TreatAs, e, t, span
+        )))
+    },
+};
+
+CastableExpr: AstNodeId = {
+    CastExpr,
+    <l:@L> <e:CastExpr> "castable as" <t:SingleType> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::TypeExpr(TypeExprNode::new(
+            TypeExprKind::CastableAs, e, t, span
+        )))
+    },
+};
+
+CastExpr: AstNodeId = {
+    UnaryExpr,
+    <l:@L> <e:UnaryExpr> "cast as" <t:SingleType> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::TypeExpr(TypeExprNode::new(
+            TypeExprKind::CastAs, e, t, span
+        )))
+    },
+};
+
+// ============================================================================
+// Unary Expression
+// ============================================================================
+
+UnaryExpr: AstNodeId = {
+    ValueExpr,
+    <l:@L> "minus20" <e:UnaryExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::UnaryOp(UnaryOpNode::new(
+            UnaryOpKind::Negate, e, span
+        )))
+    },
+    <l:@L> "plus20" <e:UnaryExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::UnaryOp(UnaryOpNode::new(
+            UnaryOpKind::Identity, e, span
+        )))
+    },
+};
+
+ValueExpr: AstNodeId = {
+    PathExpr,
+};
+
+// ============================================================================
+// Path Expressions
+// ============================================================================
+
+PathExpr: AstNodeId = {
+    // "/" alone (root document) - lexer emits SlashOnly when "/" not followed by step
+    <l:@L> "/only" <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::PathExpr(PathExprNode::root_only(span)))
+    },
+    // "/" followed by relative path - lexer emits Slash when followed by step-start
+    <l:@L> "/" <rel:RelativePathExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::PathExpr(PathExprNode::absolute(rel, span)))
+    },
+    // "//" followed by relative path
+    <l:@L> "//" <rel:RelativePathExpr> <r:@R> => {
+        // Insert descendant-or-self::node() step
+        let dos_span = SourceSpan::new(l, l + 2);
+        let dos = arena.add(AstNode::PathStep(PathStepNode::new(
+            Axis::DescendantOrSelf,
+            NodeTest::Kind(KindTest::AnyKind),
+            dos_span,
+        )));
+        let mut steps = vec![dos];
+        steps.extend(rel);
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::PathExpr(PathExprNode::absolute(steps, span)))
+    },
+    // Relative path only
+    <l:@L> <rel:RelativePathExpr> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::PathExpr(PathExprNode::relative(rel, span)))
+    },
+};
+
+RelativePathExpr: Vec<AstNodeId> = {
+    <s:StepExpr> => vec![s],
+    <mut path:RelativePathExpr> "/" <s:StepExpr> => {
+        path.push(s);
+        path
+    },
+    <l:@L> <mut path:RelativePathExpr> "//" <s:StepExpr> <r:@R> => {
+        // Insert descendant-or-self::node() step
+        let dos_span = SourceSpan::new(l, r);
+        let dos = arena.add(AstNode::PathStep(PathStepNode::new(
+            Axis::DescendantOrSelf,
+            NodeTest::Kind(KindTest::AnyKind),
+            dos_span,
+        )));
+        path.push(dos);
+        path.push(s);
+        path
+    },
+};
+
+StepExpr: AstNodeId = {
+    AxisStep,
+    FilterExpr,
+};
+
+// ============================================================================
+// Axis Step
+// ============================================================================
+
+AxisStep: AstNodeId = {
+    <s:ForwardStep> => s,
+    <l:@L> <s:ForwardStep> <preds:PredicateList> <r:@R> => {
+        // Add predicates to step
+        match arena.get_mut(s) {
+            AstNode::PathStep(ref mut step) => {
+                step.predicates = preds;
+                step.span.end = r;
+                s
+            }
+            _ => {
+                // Wrap in filter
+                let span = SourceSpan::new(l, r);
+                arena.add(AstNode::FilterExpr(FilterExprNode::new(s, preds, span)))
+            }
+        }
+    },
+    <s:ReverseStep> => s,
+    <l:@L> <s:ReverseStep> <preds:PredicateList> <r:@R> => {
+        match arena.get_mut(s) {
+            AstNode::PathStep(ref mut step) => {
+                step.predicates = preds;
+                step.span.end = r;
+                s
+            }
+            _ => {
+                let span = SourceSpan::new(l, r);
+                arena.add(AstNode::FilterExpr(FilterExprNode::new(s, preds, span)))
+            }
+        }
+    },
+};
+
+// ============================================================================
+// Forward Steps
+// ============================================================================
+
+ForwardStep: AstNodeId = {
+    <l:@L> "axis-child" <t:NodeTest> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::PathStep(PathStepNode::new(Axis::Child, t, span)))
+    },
+    <l:@L> "axis-descendant" <t:NodeTest> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::PathStep(PathStepNode::new(Axis::Descendant, t, span)))
+    },
+    <l:@L> "axis-attribute" <t:NodeTest> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::PathStep(PathStepNode::new(Axis::Attribute, t, span)))
+    },
+    <l:@L> "axis-self" <t:NodeTest> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::PathStep(PathStepNode::new(Axis::SelfAxis, t, span)))
+    },
+    <l:@L> "axis-descendant-or-self" <t:NodeTest> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::PathStep(PathStepNode::new(Axis::DescendantOrSelf, t, span)))
+    },
+    <l:@L> "axis-following-sibling" <t:NodeTest> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::PathStep(PathStepNode::new(Axis::FollowingSibling, t, span)))
+    },
+    <l:@L> "axis-following" <t:NodeTest> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::PathStep(PathStepNode::new(Axis::Following, t, span)))
+    },
+    <l:@L> "axis-namespace" <t:NodeTest> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::PathStep(PathStepNode::new(Axis::Namespace, t, span)))
+    },
+    AbbrevForwardStep,
+};
+
+AbbrevForwardStep: AstNodeId = {
+    // @NodeTest => attribute axis
+    <l:@L> "@" <t:NodeTest> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::PathStep(PathStepNode::new(Axis::Attribute, t, span)))
+    },
+    // NodeTest alone => child axis, except for an AttributeTest or a
+    // SchemaAttributeTest, which default to the attribute axis (§3.2.4).
+    <l:@L> <t:NodeTest> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::PathStep(PathStepNode::abbrev_forward(t, span)))
+    },
+};
+
+// ============================================================================
+// Reverse Steps
+// ============================================================================
+
+ReverseStep: AstNodeId = {
+    <l:@L> "axis-parent" <t:NodeTest> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::PathStep(PathStepNode::new(Axis::Parent, t, span)))
+    },
+    <l:@L> "axis-ancestor" <t:NodeTest> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::PathStep(PathStepNode::new(Axis::Ancestor, t, span)))
+    },
+    <l:@L> "axis-preceding-sibling" <t:NodeTest> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::PathStep(PathStepNode::new(Axis::PrecedingSibling, t, span)))
+    },
+    <l:@L> "axis-preceding" <t:NodeTest> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::PathStep(PathStepNode::new(Axis::Preceding, t, span)))
+    },
+    <l:@L> "axis-ancestor-or-self" <t:NodeTest> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::PathStep(PathStepNode::new(Axis::AncestorOrSelf, t, span)))
+    },
+    AbbrevReverseStep,
+};
+
+AbbrevReverseStep: AstNodeId = {
+    // ".." => parent::node()
+    <l:@L> ".." <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::PathStep(PathStepNode::abbrev_parent(span)))
+    },
+};
+
+// ============================================================================
+// Node Tests
+// ============================================================================
+
+NodeTest: NodeTest = {
+    KindTest,
+    NameTest,
+};
+
+NameTest: NodeTest = {
+    <qn:"qname"> => {
+        let parts: Vec<&str> = qn.splitn(2, ':').collect();
+        if parts.len() == 2 {
+            NodeTest::Name(NameTest::qname(parts[0].to_string(), parts[1].to_string()))
+        } else {
+            NodeTest::Name(NameTest::qname(String::new(), qn))
+        }
+    },
+    Wildcard,
+};
+
+Wildcard: NodeTest = {
+    // * => any name
+    "star" => NodeTest::Name(NameTest::any()),
+    // NCName:* => any local name in namespace
+    <prefix:"ncname"> ":" "star" => {
+        NodeTest::Name(NameTest::any_in_ns(prefix))
+    },
+    // *:NCName => any namespace with local name
+    "star" ":" <local:"ncname"> => {
+        NodeTest::Name(NameTest::any_ns(local))
+    },
+};
+
+// ============================================================================
+// Kind Tests
+// ============================================================================
+
+KindTest: NodeTest = {
+    DocumentTest,
+    ElementTest,
+    AttributeTest,
+    SchemaElementTest,
+    SchemaAttributeTest,
+    PITest,
+    CommentTest,
+    TextTest,
+    AnyKindTest,
+};
+
+AnyKindTest: NodeTest = {
+    "node" "(" ")" => NodeTest::Kind(KindTest::AnyKind),
+};
+
+DocumentTest: NodeTest = {
+    "document-node" "(" ")" => NodeTest::Kind(KindTest::Document(None)),
+    // document-node(element(...))
+    "document-node" "(" "element" "(" ")" ")" => {
+        NodeTest::Kind(KindTest::Document(Some(Box::new(
+            KindTest::Element(ElementTest::default())
+        ))))
+    },
+    "document-node" "(" "element" "(" <et:ElementTestInner> ")" ")" => {
+        NodeTest::Kind(KindTest::Document(Some(Box::new(et))))
+    },
+    // document-node(schema-element(...))
+    "document-node" "(" "schema-element" "(" <qn:"qname"> ")" ")" => {
+        NodeTest::Kind(KindTest::Document(Some(Box::new(
+            KindTest::SchemaElement(qn)
+        ))))
+    },
+};
+
+TextTest: NodeTest = {
+    "text" "(" ")" => NodeTest::Kind(KindTest::Text),
+};
+
+CommentTest: NodeTest = {
+    "comment" "(" ")" => NodeTest::Kind(KindTest::Comment),
+};
+
+PITest: NodeTest = {
+    "processing-instruction" "(" ")" => {
+        NodeTest::Kind(KindTest::ProcessingInstruction(None))
+    },
+    "processing-instruction" "(" <n:"ncname"> ")" => {
+        NodeTest::Kind(KindTest::ProcessingInstruction(Some(n)))
+    },
+    "processing-instruction" "(" <s:"string"> ")" => {
+        NodeTest::Kind(KindTest::ProcessingInstruction(Some(s)))
+    },
+};
+
+ElementTest: NodeTest = {
+    "element" "(" ")" => NodeTest::Kind(KindTest::Element(ElementTest::default())),
+    "element" "(" <et:ElementTestInner> ")" => NodeTest::Kind(et),
+};
+
+ElementTestInner: KindTest = {
+    <name:ElementNameOrWildcard> => {
+        KindTest::Element(ElementTest { name, type_name: None, nillable: false })
+    },
+    // Type without nillable "?" - lexer emits regular QName
+    <name:ElementNameOrWildcard> "," <tn:TypeName> => {
+        KindTest::Element(ElementTest { name, type_name: Some(tn), nillable: false })
+    },
+    // Type with nillable "?" - lexer combines into QNameNillable token
+    <name:ElementNameOrWildcard> "," <tn:TypeNameNillable> => {
+        KindTest::Element(ElementTest { name, type_name: Some(tn), nillable: true })
+    },
+};
+
+TypeNameNillable: QName = {
+    <qn:"qname-nillable"> => {
+        let parts: Vec<&str> = qn.splitn(2, ':').collect();
+        if parts.len() == 2 {
+            QName::new(parts[0].to_string(), parts[1].to_string())
+        } else {
+            QName::local_only(qn)
+        }
+    },
+};
+
+ElementNameOrWildcard: Option<QName> = {
+    <qn:"qname"> => {
+        let parts: Vec<&str> = qn.splitn(2, ':').collect();
+        if parts.len() == 2 {
+            Some(QName::new(parts[0].to_string(), parts[1].to_string()))
+        } else {
+            Some(QName::local_only(qn))
+        }
+    },
+    "star" => None,
+};
+
+AttributeTest: NodeTest = {
+    "attribute" "(" ")" => NodeTest::Kind(KindTest::Attribute(AttributeTest::default())),
+    "attribute" "(" <at:AttributeTestInner> ")" => NodeTest::Kind(at),
+};
+
+AttributeTestInner: KindTest = {
+    <name:AttributeOrWildcard> => {
+        KindTest::Attribute(AttributeTest { name, type_name: None })
+    },
+    <name:AttributeOrWildcard> "," <tn:TypeName> => {
+        KindTest::Attribute(AttributeTest { name, type_name: Some(tn) })
+    },
+};
+
+AttributeOrWildcard: Option<QName> = {
+    <qn:"qname"> => {
+        let parts: Vec<&str> = qn.splitn(2, ':').collect();
+        if parts.len() == 2 {
+            Some(QName::new(parts[0].to_string(), parts[1].to_string()))
+        } else {
+            Some(QName::local_only(qn))
+        }
+    },
+    "star" => None,
+};
+
+SchemaElementTest: NodeTest = {
+    "schema-element" "(" <set:SchemaElementTestInner> ")" => NodeTest::Kind(set),
+};
+
+SchemaElementTestInner: KindTest = {
+    <qn:"qname"> => {
+        KindTest::SchemaElement(qn)
+    },
+};
+
+SchemaAttributeTest: NodeTest = {
+    "schema-attribute" "(" <qn:"qname"> ")" => {
+        NodeTest::Kind(KindTest::SchemaAttribute(qn))
+    },
+};
+
+TypeName: QName = {
+    <qn:"qname"> => {
+        let parts: Vec<&str> = qn.splitn(2, ':').collect();
+        if parts.len() == 2 {
+            QName::new(parts[0].to_string(), parts[1].to_string())
+        } else {
+            QName::local_only(qn)
+        }
+    },
+};
+
+// ============================================================================
+// Filter Expression
+// ============================================================================
+
+FilterExpr: AstNodeId = {
+    PrimaryExpr,
+    <l:@L> <base:PrimaryExpr> <preds:PredicateList> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::FilterExpr(FilterExprNode::new(base, preds, span)))
+    },
+};
+
+PredicateList: Vec<AstNodeId> = {
+    <p:Predicate> => vec![p],
+    <mut ps:PredicateList> <p:Predicate> => {
+        ps.push(p);
+        ps
+    },
+};
+
+Predicate: AstNodeId = {
+    "[" <e:ExprInner> "]" => e,
+};
+
+// ============================================================================
+// Primary Expressions
+// ============================================================================
+
+PrimaryExpr: AstNodeId = {
+    Literal,
+    VarRef,
+    ParenthesizedExpr,
+    ContextItemExpr,
+    FunctionCall,
+};
+
+Literal: AstNodeId = {
+    <l:@L> <s:"string"> <r:@R> => {
+        arena.add(AstNode::Value(ValueNode::String(s)))
+    },
+    <l:@L> <n:"integer"> <r:@R> => {
+        arena.add(AstNode::Value(ValueNode::Integer(n)))
+    },
+    <l:@L> <n:"decimal"> <r:@R> => {
+        arena.add(AstNode::Value(ValueNode::Decimal(n)))
+    },
+    <l:@L> <n:"double"> <r:@R> => {
+        arena.add(AstNode::Value(ValueNode::Double(n)))
+    },
+};
+
+VarRef: AstNodeId = {
+    <l:@L> "$" <v:"varname"> <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::VarRef(VarRefNode::new(v.0, v.1, span)))
+    },
+};
+
+ParenthesizedExpr: AstNodeId = {
+    <l:@L> "(" ")" <r:@R> => {
+        arena.add(AstNode::Value(ValueNode::Empty))
+    },
+    "(" <e:ExprInner> ")" => e,
+};
+
+ContextItemExpr: AstNodeId = {
+    <l:@L> "." <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        arena.add(AstNode::ContextItem(ContextItemNode::new(span)))
+    },
+};
+
+FunctionCall: AstNodeId = {
+    <l:@L> <qn:"qname"> "(" ")" <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        let parts: Vec<&str> = qn.splitn(2, ':').collect();
+        let (prefix, local) = if parts.len() == 2 {
+            (parts[0].to_string(), parts[1].to_string())
+        } else {
+            (String::new(), qn)
+        };
+        arena.add(AstNode::FunctionCall(FunctionCallNode::new(prefix, local, vec![], span)))
+    },
+    <l:@L> <qn:"qname"> "(" <args:Args> ")" <r:@R> => {
+        let span = SourceSpan::new(l, r);
+        let parts: Vec<&str> = qn.splitn(2, ':').collect();
+        let (prefix, local) = if parts.len() == 2 {
+            (parts[0].to_string(), parts[1].to_string())
+        } else {
+            (String::new(), qn)
+        };
+        arena.add(AstNode::FunctionCall(FunctionCallNode::new(prefix, local, args, span)))
+    },
+};
+
+Args: Vec<AstNodeId> = {
+    <e:ExprSingle> => vec![e],
+    <mut args:Args> "," <e:ExprSingle> => {
+        args.push(e);
+        args
+    },
+};
+
+// ============================================================================
+// Sequence Types
+// ============================================================================
+
+SingleType: SequenceTypeNode = {
+    <l:@L> <t:AtomicType> <r:@R> => {
+        SequenceTypeNode::single(t, OccurrenceIndicator::One, SourceSpan::new(l, r))
+    },
+    <l:@L> <t:AtomicType> "?" <r:@R> => {
+        SequenceTypeNode::single(t, OccurrenceIndicator::ZeroOrOne, SourceSpan::new(l, r))
+    },
+};
+
+SequenceType: SequenceTypeNode = {
+    <l:@L> <t:ItemType> <r:@R> => {
+        SequenceTypeNode::single(t, OccurrenceIndicator::One, SourceSpan::new(l, r))
+    },
+    <l:@L> <t:ItemType> "?" <r:@R> => {
+        SequenceTypeNode::single(t, OccurrenceIndicator::ZeroOrOne, SourceSpan::new(l, r))
+    },
+    <l:@L> <t:ItemType> "+" <r:@R> => {
+        SequenceTypeNode::single(t, OccurrenceIndicator::OneOrMore, SourceSpan::new(l, r))
+    },
+    <l:@L> <t:ItemType> "*" <r:@R> => {
+        SequenceTypeNode::single(t, OccurrenceIndicator::ZeroOrMore, SourceSpan::new(l, r))
+    },
+    <l:@L> "empty-sequence" <r:@R> => {
+        SequenceTypeNode::empty(SourceSpan::new(l, r))
+    },
+};
+
+ItemType: ItemTypeNode = {
+    AtomicType,
+    KindTestItemType,
+    "item" => ItemTypeNode::Item,
+};
+
+KindTestItemType: ItemTypeNode = {
+    <kt:KindTest> => {
+        match kt {
+            NodeTest::Kind(k) => ItemTypeNode::Kind(k),
+            _ => ItemTypeNode::Item, // Shouldn't happen
+        }
+    },
+};
+
+AtomicType: ItemTypeNode = {
+    <qn:"qname"> => {
+        let parts: Vec<&str> = qn.splitn(2, ':').collect();
+        let qname = if parts.len() == 2 {
+            QName::new(parts[0].to_string(), parts[1].to_string())
+        } else {
+            QName::local_only(qn)
+        };
+        ItemTypeNode::Atomic(qname)
+    },
+};

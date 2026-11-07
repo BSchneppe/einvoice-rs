@@ -79,6 +79,27 @@ impl InvoiceDraft {
     pub fn field_diagnostics(&self) -> Vec<BuildDiagnostic> {
         crate::fields::diagnose(self)
     }
+
+    /// Prepare exact amounts with the documented default calculation limits.
+    ///
+    /// Success is arithmetic preparation, never conformance or encoded XML.
+    /// The draft and all original decimal spellings remain unchanged.
+    pub fn calculate(
+        &self,
+        target: &crate::Target,
+    ) -> Result<crate::CalculatedInvoice, crate::CalculationError> {
+        self.calculate_with_limits(target, crate::CalculationLimits::default())
+    }
+
+    /// Prepare exact amounts under one invoice-wide, caller-selected resource policy.
+    /// Invalid limits and exhausted resources are processing errors, not field faults.
+    pub fn calculate_with_limits(
+        &self,
+        target: &crate::Target,
+        limits: crate::CalculationLimits,
+    ) -> Result<crate::CalculatedInvoice, crate::CalculationError> {
+        crate::calculation::calculate(self, target, limits)
+    }
 }
 
 /// Creation cannot succeed until both encoding and native validation exist.

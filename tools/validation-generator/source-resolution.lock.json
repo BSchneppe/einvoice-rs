@@ -1,0 +1,1780 @@
+{
+  "format": "einvoice-source-resolution/1",
+  "target": "xrechnung-3.0.2-cii-d16b-kosit-2026-08-31",
+  "source_package": "sha256:bca50f12540ef24d181159a4daa77976ee4ebbd1f76927b650b9448471d8f62f",
+  "raw_ir_sha256": "8882e1e0550e0f45db2aa6e55ec28de0cc120b51983bba79f2bb175c5b02bed6",
+  "resources": {
+    "cen.zip/schematron/EN16931-CII-validation.sch": {
+      "archive_sha256": "1cd53cb8a84d38aedc82c0caede217da983a7934dd663f793a092fd66443c561",
+      "sha256": "7f3dc5e824cb945f4d630f4b93915166eb61b2bc5fd358f7bd0e5c2f22cd0741",
+      "size": 1982,
+      "role": "schematron"
+    },
+    "cen.zip/schematron/CII/EN16931-CII-syntax.sch": {
+      "archive_sha256": "1cd53cb8a84d38aedc82c0caede217da983a7934dd663f793a092fd66443c561",
+      "sha256": "a2c3d977fbb1aaf7563bc4620baa6840885dd7fba29294d50d19a3ece35aae44",
+      "size": 57641,
+      "role": "schematron"
+    },
+    "cen.zip/schematron/abstract/EN16931-CII-syntax.sch": {
+      "archive_sha256": "1cd53cb8a84d38aedc82c0caede217da983a7934dd663f793a092fd66443c561",
+      "sha256": "6b396a301786c00e7f3ba97e9bea2c25577b28fb5c3c60f6e6c05fc86b0aef0d",
+      "size": 77269,
+      "role": "schematron"
+    },
+    "cen.zip/schematron/preprocessed/EN16931-CII-validation-preprocessed.sch": {
+      "archive_sha256": "1cd53cb8a84d38aedc82c0caede217da983a7934dd663f793a092fd66443c561",
+      "sha256": "54e0dc6d06cd7f17d268bb9696ff56f58d386ee28961c9bbef0a56718c400c89",
+      "size": 240038,
+      "role": "schematron"
+    },
+    "cen.zip/xslt/EN16931-CII-validation.xslt": {
+      "archive_sha256": "1cd53cb8a84d38aedc82c0caede217da983a7934dd663f793a092fd66443c561",
+      "sha256": "0b234dea2bbfee739b7761e607a992c17fab88773014ef56355b6158cfb1cc53",
+      "size": 725518,
+      "role": "oracle_executable_evidence"
+    },
+    "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl": {
+      "archive_sha256": "2530cd107c414511c5d0462ec10f886910395abfca820db82e83d70bf01221a8",
+      "sha256": "0911e927f13f9ae2cdc7f973643f27bf0ad3c5da02483c04a5b8a47eb4822199",
+      "size": 934750,
+      "role": "oracle_executable_evidence"
+    },
+    "config.zip/scenarios.xml": {
+      "archive_sha256": "2530cd107c414511c5d0462ec10f886910395abfca820db82e83d70bf01221a8",
+      "sha256": "3e8161a39dfaa6aea4d990b279aab848be4f4c6169e820f354a159bda7693fb0",
+      "size": 40562,
+      "role": "policy_mapped_source"
+    }
+  },
+  "nodes": {
+    "entry": {
+      "selector": [
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "schema",
+          "sibling": 0,
+          "identity": {}
+        }
+      ],
+      "node": {
+        "source": {
+          "resource": "cen.zip/schematron/EN16931-CII-validation.sch",
+          "xml_byte_start": 175,
+          "xml_byte_end": 1981,
+          "line": 11,
+          "column": 1,
+          "attribute": null
+        },
+        "sha256": "3f033e9cefed396a6a12bcd1ef5a08de0b3d88184574799786ab61671f2e1898",
+        "attributes": {
+          "queryBinding": {
+            "source": {
+              "resource": "cen.zip/schematron/EN16931-CII-validation.sch",
+              "xml_byte_start": 647,
+              "xml_byte_end": 667,
+              "line": 17,
+              "column": 3,
+              "attribute": "queryBinding"
+            },
+            "sha256": "fc00596a13919032c5521c0aaa83297b12ce4d4b8e2448aabfd63875f7c7da0d",
+            "decoded_sha256": "383378d8f36f5bde38b0c022b6d8fd60c7f8ccd897856eabec81b242c5976e99"
+          }
+        }
+      },
+      "ancestors": []
+    },
+    "abstract_include": {
+      "selector": [
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "schema",
+          "sibling": 0,
+          "identity": {}
+        },
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "include",
+          "sibling": 1,
+          "identity": {
+            "href": "abstract/EN16931-CII-syntax.sch"
+          }
+        }
+      ],
+      "node": {
+        "source": {
+          "resource": "cen.zip/schematron/EN16931-CII-validation.sch",
+          "xml_byte_start": 1636,
+          "xml_byte_end": 1685,
+          "line": 37,
+          "column": 3,
+          "attribute": null
+        },
+        "sha256": "4fa14fc881907e3bbdb12e330ae33ffec46fec25b1d3e5403dff9b4b174662f3",
+        "attributes": {
+          "href": {
+            "source": {
+              "resource": "cen.zip/schematron/EN16931-CII-validation.sch",
+              "xml_byte_start": 1645,
+              "xml_byte_end": 1683,
+              "line": 37,
+              "column": 12,
+              "attribute": "href"
+            },
+            "sha256": "148715b9555d5773f35088858d32140ffdea0d2d6350bb3faf8b13dcb7d754ea",
+            "decoded_sha256": "7b3298686a96e66e9abfdeb64f2ec28f56d925c63f7749e45cd105d2fe50a024"
+          }
+        }
+      },
+      "ancestors": [
+        {
+          "source": {
+            "resource": "cen.zip/schematron/EN16931-CII-validation.sch",
+            "xml_byte_start": 175,
+            "xml_byte_end": 1981,
+            "line": 11,
+            "column": 1,
+            "attribute": null
+          },
+          "sha256": "3f033e9cefed396a6a12bcd1ef5a08de0b3d88184574799786ab61671f2e1898",
+          "attributes": {
+            "queryBinding": {
+              "source": {
+                "resource": "cen.zip/schematron/EN16931-CII-validation.sch",
+                "xml_byte_start": 647,
+                "xml_byte_end": 667,
+                "line": 17,
+                "column": 3,
+                "attribute": "queryBinding"
+              },
+              "sha256": "fc00596a13919032c5521c0aaa83297b12ce4d4b8e2448aabfd63875f7c7da0d",
+              "decoded_sha256": "383378d8f36f5bde38b0c022b6d8fd60c7f8ccd897856eabec81b242c5976e99"
+            }
+          }
+        }
+      ]
+    },
+    "concrete_include": {
+      "selector": [
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "schema",
+          "sibling": 0,
+          "identity": {}
+        },
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "include",
+          "sibling": 3,
+          "identity": {
+            "href": "CII/EN16931-CII-syntax.sch"
+          }
+        }
+      ],
+      "node": {
+        "source": {
+          "resource": "cen.zip/schematron/EN16931-CII-validation.sch",
+          "xml_byte_start": 1804,
+          "xml_byte_end": 1848,
+          "line": 41,
+          "column": 3,
+          "attribute": null
+        },
+        "sha256": "a0f39102a71c23f8e64e17e0059b41c4dc0a91dd38e9f6ca3eedcf8e9dc04465",
+        "attributes": {
+          "href": {
+            "source": {
+              "resource": "cen.zip/schematron/EN16931-CII-validation.sch",
+              "xml_byte_start": 1813,
+              "xml_byte_end": 1846,
+              "line": 41,
+              "column": 12,
+              "attribute": "href"
+            },
+            "sha256": "d4127ecaafe986559385aaf11e57d8b0e7fbaccf702f5f2e707dec03107a04f5",
+            "decoded_sha256": "46b616f8436b8a5ef6b5af02cec1b7f02bc38eaa467027db4a9327d68d7da598"
+          }
+        }
+      },
+      "ancestors": [
+        {
+          "source": {
+            "resource": "cen.zip/schematron/EN16931-CII-validation.sch",
+            "xml_byte_start": 175,
+            "xml_byte_end": 1981,
+            "line": 11,
+            "column": 1,
+            "attribute": null
+          },
+          "sha256": "3f033e9cefed396a6a12bcd1ef5a08de0b3d88184574799786ab61671f2e1898",
+          "attributes": {
+            "queryBinding": {
+              "source": {
+                "resource": "cen.zip/schematron/EN16931-CII-validation.sch",
+                "xml_byte_start": 647,
+                "xml_byte_end": 667,
+                "line": 17,
+                "column": 3,
+                "attribute": "queryBinding"
+              },
+              "sha256": "fc00596a13919032c5521c0aaa83297b12ce4d4b8e2448aabfd63875f7c7da0d",
+              "decoded_sha256": "383378d8f36f5bde38b0c022b6d8fd60c7f8ccd897856eabec81b242c5976e99"
+            }
+          }
+        }
+      ]
+    },
+    "concrete_pattern": {
+      "selector": [
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "pattern",
+          "sibling": 0,
+          "identity": {
+            "id": "EN16931-CII-Syntax"
+          }
+        }
+      ],
+      "node": {
+        "source": {
+          "resource": "cen.zip/schematron/CII/EN16931-CII-syntax.sch",
+          "xml_byte_start": 170,
+          "xml_byte_end": 57640,
+          "line": 8,
+          "column": 1,
+          "attribute": null
+        },
+        "sha256": "e2f4b627633591effe4e783c400afdaac9257faf8f9177f6f443bd0f6889a06b",
+        "attributes": {
+          "is-a": {
+            "source": {
+              "resource": "cen.zip/schematron/CII/EN16931-CII-syntax.sch",
+              "xml_byte_start": 224,
+              "xml_byte_end": 242,
+              "line": 8,
+              "column": 55,
+              "attribute": "is-a"
+            },
+            "sha256": "584e4218a6f3883b82a477b791ec97ce264895f2d84564516fc49679a813ccc0",
+            "decoded_sha256": "601c5e854b48afc817feb08d52519bb8b68840a777e0f5d2abe123bfda8d392a"
+          },
+          "id": {
+            "source": {
+              "resource": "cen.zip/schematron/CII/EN16931-CII-syntax.sch",
+              "xml_byte_start": 243,
+              "xml_byte_end": 266,
+              "line": 8,
+              "column": 74,
+              "attribute": "id"
+            },
+            "sha256": "a62b003ff3a2a96c58fcbe825bd861be27333d60149004047ffc1f1ee84e60ba",
+            "decoded_sha256": "15004ad021cd8b0f7297e1bd38527b0f135638d8765f097d242c847ddabf3ef0"
+          }
+        }
+      },
+      "ancestors": []
+    },
+    "buyer": {
+      "selector": [
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "pattern",
+          "sibling": 0,
+          "identity": {
+            "id": "EN16931-CII-Syntax"
+          }
+        },
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "param",
+          "sibling": 288,
+          "identity": {
+            "name": "CII-SR-282"
+          }
+        }
+      ],
+      "node": {
+        "source": {
+          "resource": "cen.zip/schematron/CII/EN16931-CII-syntax.sch",
+          "xml_byte_start": 26651,
+          "xml_byte_end": 26727,
+          "line": 427,
+          "column": 2,
+          "attribute": null
+        },
+        "sha256": "86488a2162a8060a4225e91008037ceb2003f7c1bbd8f38671ef915cbd4a450e",
+        "attributes": {
+          "name": {
+            "source": {
+              "resource": "cen.zip/schematron/CII/EN16931-CII-syntax.sch",
+              "xml_byte_start": 26658,
+              "xml_byte_end": 26675,
+              "line": 427,
+              "column": 9,
+              "attribute": "name"
+            },
+            "sha256": "d8870400be1b5e32288dbadd6dad85e43f30d47cec3cd11b15bf93e4e5cf1301",
+            "decoded_sha256": "09d22a258428cc58f7d96c0078a2d7546889b5d39cf0e8841125dcbb30fed834"
+          },
+          "value": {
+            "source": {
+              "resource": "cen.zip/schematron/CII/EN16931-CII-syntax.sch",
+              "xml_byte_start": 26676,
+              "xml_byte_end": 26725,
+              "line": 427,
+              "column": 27,
+              "attribute": "value"
+            },
+            "sha256": "7c2f54a60f11e218486770fd7924909ff73dca73adea36747605869847e9e8c3",
+            "decoded_sha256": "e86fdb2cc41034c984936266123796b8aa11e95cbec0f7a36a50dce9c4df1e4d"
+          }
+        }
+      },
+      "ancestors": [
+        {
+          "source": {
+            "resource": "cen.zip/schematron/CII/EN16931-CII-syntax.sch",
+            "xml_byte_start": 170,
+            "xml_byte_end": 57640,
+            "line": 8,
+            "column": 1,
+            "attribute": null
+          },
+          "sha256": "e2f4b627633591effe4e783c400afdaac9257faf8f9177f6f443bd0f6889a06b",
+          "attributes": {
+            "is-a": {
+              "source": {
+                "resource": "cen.zip/schematron/CII/EN16931-CII-syntax.sch",
+                "xml_byte_start": 224,
+                "xml_byte_end": 242,
+                "line": 8,
+                "column": 55,
+                "attribute": "is-a"
+              },
+              "sha256": "584e4218a6f3883b82a477b791ec97ce264895f2d84564516fc49679a813ccc0",
+              "decoded_sha256": "601c5e854b48afc817feb08d52519bb8b68840a777e0f5d2abe123bfda8d392a"
+            },
+            "id": {
+              "source": {
+                "resource": "cen.zip/schematron/CII/EN16931-CII-syntax.sch",
+                "xml_byte_start": 243,
+                "xml_byte_end": 266,
+                "line": 8,
+                "column": 74,
+                "attribute": "id"
+              },
+              "sha256": "a62b003ff3a2a96c58fcbe825bd861be27333d60149004047ffc1f1ee84e60ba",
+              "decoded_sha256": "15004ad021cd8b0f7297e1bd38527b0f135638d8765f097d242c847ddabf3ef0"
+            }
+          }
+        }
+      ]
+    },
+    "seller": {
+      "selector": [
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "pattern",
+          "sibling": 0,
+          "identity": {
+            "id": "EN16931-CII-Syntax"
+          }
+        },
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "param",
+          "sibling": 289,
+          "identity": {
+            "name": "CII-SR-282"
+          }
+        }
+      ],
+      "node": {
+        "source": {
+          "resource": "cen.zip/schematron/CII/EN16931-CII-syntax.sch",
+          "xml_byte_start": 26730,
+          "xml_byte_end": 26814,
+          "line": 429,
+          "column": 2,
+          "attribute": null
+        },
+        "sha256": "28d5e08fa89bb4f95dc03cd24dc54e33e0bad2c0ecba3a6521b1225028310aa3",
+        "attributes": {
+          "name": {
+            "source": {
+              "resource": "cen.zip/schematron/CII/EN16931-CII-syntax.sch",
+              "xml_byte_start": 26737,
+              "xml_byte_end": 26754,
+              "line": 429,
+              "column": 9,
+              "attribute": "name"
+            },
+            "sha256": "d8870400be1b5e32288dbadd6dad85e43f30d47cec3cd11b15bf93e4e5cf1301",
+            "decoded_sha256": "09d22a258428cc58f7d96c0078a2d7546889b5d39cf0e8841125dcbb30fed834"
+          },
+          "value": {
+            "source": {
+              "resource": "cen.zip/schematron/CII/EN16931-CII-syntax.sch",
+              "xml_byte_start": 26755,
+              "xml_byte_end": 26812,
+              "line": 429,
+              "column": 27,
+              "attribute": "value"
+            },
+            "sha256": "be0440d3b66a822ce7ea6418d9451d5c52ee4d2f28b9ab349b012fcfb13cf6d4",
+            "decoded_sha256": "83984285e7d9d41df2ee4838d49ccc4381f5a2adb934eac462d62ce01e18dd6f"
+          }
+        }
+      },
+      "ancestors": [
+        {
+          "source": {
+            "resource": "cen.zip/schematron/CII/EN16931-CII-syntax.sch",
+            "xml_byte_start": 170,
+            "xml_byte_end": 57640,
+            "line": 8,
+            "column": 1,
+            "attribute": null
+          },
+          "sha256": "e2f4b627633591effe4e783c400afdaac9257faf8f9177f6f443bd0f6889a06b",
+          "attributes": {
+            "is-a": {
+              "source": {
+                "resource": "cen.zip/schematron/CII/EN16931-CII-syntax.sch",
+                "xml_byte_start": 224,
+                "xml_byte_end": 242,
+                "line": 8,
+                "column": 55,
+                "attribute": "is-a"
+              },
+              "sha256": "584e4218a6f3883b82a477b791ec97ce264895f2d84564516fc49679a813ccc0",
+              "decoded_sha256": "601c5e854b48afc817feb08d52519bb8b68840a777e0f5d2abe123bfda8d392a"
+            },
+            "id": {
+              "source": {
+                "resource": "cen.zip/schematron/CII/EN16931-CII-syntax.sch",
+                "xml_byte_start": 243,
+                "xml_byte_end": 266,
+                "line": 8,
+                "column": 74,
+                "attribute": "id"
+              },
+              "sha256": "a62b003ff3a2a96c58fcbe825bd861be27333d60149004047ffc1f1ee84e60ba",
+              "decoded_sha256": "15004ad021cd8b0f7297e1bd38527b0f135638d8765f097d242c847ddabf3ef0"
+            }
+          }
+        }
+      ]
+    },
+    "context_param": {
+      "selector": [
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "pattern",
+          "sibling": 0,
+          "identity": {
+            "id": "EN16931-CII-Syntax"
+          }
+        },
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "param",
+          "sibling": 605,
+          "identity": {
+            "name": "ApplicableHeaderTradeAgreement"
+          }
+        }
+      ],
+      "node": {
+        "source": {
+          "resource": "cen.zip/schematron/CII/EN16931-CII-syntax.sch",
+          "xml_byte_start": 56271,
+          "xml_byte_end": 56420,
+          "line": 849,
+          "column": 2,
+          "attribute": null
+        },
+        "sha256": "876af5399f6bdd7749c6aa38fcb874d16054b069415de9deeda4366e6f571306",
+        "attributes": {
+          "name": {
+            "source": {
+              "resource": "cen.zip/schematron/CII/EN16931-CII-syntax.sch",
+              "xml_byte_start": 56278,
+              "xml_byte_end": 56315,
+              "line": 849,
+              "column": 9,
+              "attribute": "name"
+            },
+            "sha256": "e636db0f38376c0b9c5dabc357ed3acb2a980f2e3f29c996f8daa612a2c02e8e",
+            "decoded_sha256": "591731768aeb6ddbf0ae5cd4f432ab25cb362981990bcc17f8607423df81bac9"
+          },
+          "value": {
+            "source": {
+              "resource": "cen.zip/schematron/CII/EN16931-CII-syntax.sch",
+              "xml_byte_start": 56318,
+              "xml_byte_end": 56418,
+              "line": 850,
+              "column": 3,
+              "attribute": "value"
+            },
+            "sha256": "19826b08b87102a482ba55f042ddd11c51fecf60c36871ae0cd4576fd69c4143",
+            "decoded_sha256": "94ce659691fa67377ce162b3e2099aa6e7c05c28276d0e795cccddc699e0b1fa"
+          }
+        }
+      },
+      "ancestors": [
+        {
+          "source": {
+            "resource": "cen.zip/schematron/CII/EN16931-CII-syntax.sch",
+            "xml_byte_start": 170,
+            "xml_byte_end": 57640,
+            "line": 8,
+            "column": 1,
+            "attribute": null
+          },
+          "sha256": "e2f4b627633591effe4e783c400afdaac9257faf8f9177f6f443bd0f6889a06b",
+          "attributes": {
+            "is-a": {
+              "source": {
+                "resource": "cen.zip/schematron/CII/EN16931-CII-syntax.sch",
+                "xml_byte_start": 224,
+                "xml_byte_end": 242,
+                "line": 8,
+                "column": 55,
+                "attribute": "is-a"
+              },
+              "sha256": "584e4218a6f3883b82a477b791ec97ce264895f2d84564516fc49679a813ccc0",
+              "decoded_sha256": "601c5e854b48afc817feb08d52519bb8b68840a777e0f5d2abe123bfda8d392a"
+            },
+            "id": {
+              "source": {
+                "resource": "cen.zip/schematron/CII/EN16931-CII-syntax.sch",
+                "xml_byte_start": 243,
+                "xml_byte_end": 266,
+                "line": 8,
+                "column": 74,
+                "attribute": "id"
+              },
+              "sha256": "a62b003ff3a2a96c58fcbe825bd861be27333d60149004047ffc1f1ee84e60ba",
+              "decoded_sha256": "15004ad021cd8b0f7297e1bd38527b0f135638d8765f097d242c847ddabf3ef0"
+            }
+          }
+        }
+      ]
+    },
+    "abstract_pattern": {
+      "selector": [
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "pattern",
+          "sibling": 0,
+          "identity": {
+            "id": "EN16931-CII"
+          }
+        }
+      ],
+      "node": {
+        "source": {
+          "resource": "cen.zip/schematron/abstract/EN16931-CII-syntax.sch",
+          "xml_byte_start": 195,
+          "xml_byte_end": 77268,
+          "line": 8,
+          "column": 1,
+          "attribute": null
+        },
+        "sha256": "ff2cea852eeeab40e38ac1175778cda8292af17c16d87cc091735bfe3378bbbc",
+        "attributes": {
+          "abstract": {
+            "source": {
+              "resource": "cen.zip/schematron/abstract/EN16931-CII-syntax.sch",
+              "xml_byte_start": 249,
+              "xml_byte_end": 264,
+              "line": 8,
+              "column": 55,
+              "attribute": "abstract"
+            },
+            "sha256": "cb0e90f5e41a3fb6b3f9842c54f32b73daec18710a4ba185581652bbff4d4f96",
+            "decoded_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+          },
+          "id": {
+            "source": {
+              "resource": "cen.zip/schematron/abstract/EN16931-CII-syntax.sch",
+              "xml_byte_start": 265,
+              "xml_byte_end": 281,
+              "line": 8,
+              "column": 71,
+              "attribute": "id"
+            },
+            "sha256": "b7ba6a705e48bb40774ae3592b27b2307284627de99d330d40e109452acdbf5d",
+            "decoded_sha256": "601c5e854b48afc817feb08d52519bb8b68840a777e0f5d2abe123bfda8d392a"
+          }
+        }
+      },
+      "ancestors": []
+    },
+    "abstract_rule": {
+      "selector": [
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "pattern",
+          "sibling": 0,
+          "identity": {
+            "id": "EN16931-CII"
+          }
+        },
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "rule",
+          "sibling": 13,
+          "identity": {}
+        }
+      ],
+      "node": {
+        "source": {
+          "resource": "cen.zip/schematron/abstract/EN16931-CII-syntax.sch",
+          "xml_byte_start": 30055,
+          "xml_byte_end": 42828,
+          "line": 281,
+          "column": 2,
+          "attribute": null
+        },
+        "sha256": "3996dca8632b0089aa1afc4b9a574a5dfdf6c15048eb84b4b670e0888b59b9d2",
+        "attributes": {
+          "context": {
+            "source": {
+              "resource": "cen.zip/schematron/abstract/EN16931-CII-syntax.sch",
+              "xml_byte_start": 30061,
+              "xml_byte_end": 30103,
+              "line": 281,
+              "column": 8,
+              "attribute": "context"
+            },
+            "sha256": "923ccb019e2831cf0fd7e3a2b3f77f17c1693abe36899683793eeec485767891",
+            "decoded_sha256": "f1ee6a0114875b0688ccfd07450fd5eb74252ec2613961ead9b21c84991f768b"
+          }
+        }
+      },
+      "ancestors": [
+        {
+          "source": {
+            "resource": "cen.zip/schematron/abstract/EN16931-CII-syntax.sch",
+            "xml_byte_start": 195,
+            "xml_byte_end": 77268,
+            "line": 8,
+            "column": 1,
+            "attribute": null
+          },
+          "sha256": "ff2cea852eeeab40e38ac1175778cda8292af17c16d87cc091735bfe3378bbbc",
+          "attributes": {
+            "abstract": {
+              "source": {
+                "resource": "cen.zip/schematron/abstract/EN16931-CII-syntax.sch",
+                "xml_byte_start": 249,
+                "xml_byte_end": 264,
+                "line": 8,
+                "column": 55,
+                "attribute": "abstract"
+              },
+              "sha256": "cb0e90f5e41a3fb6b3f9842c54f32b73daec18710a4ba185581652bbff4d4f96",
+              "decoded_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+            },
+            "id": {
+              "source": {
+                "resource": "cen.zip/schematron/abstract/EN16931-CII-syntax.sch",
+                "xml_byte_start": 265,
+                "xml_byte_end": 281,
+                "line": 8,
+                "column": 71,
+                "attribute": "id"
+              },
+              "sha256": "b7ba6a705e48bb40774ae3592b27b2307284627de99d330d40e109452acdbf5d",
+              "decoded_sha256": "601c5e854b48afc817feb08d52519bb8b68840a777e0f5d2abe123bfda8d392a"
+            }
+          }
+        }
+      ]
+    },
+    "abstract_site": {
+      "selector": [
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "pattern",
+          "sibling": 0,
+          "identity": {
+            "id": "EN16931-CII"
+          }
+        },
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "rule",
+          "sibling": 13,
+          "identity": {}
+        },
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "assert",
+          "sibling": 60,
+          "identity": {
+            "id": "CII-SR-282"
+          }
+        }
+      ],
+      "node": {
+        "source": {
+          "resource": "cen.zip/schematron/abstract/EN16931-CII-syntax.sch",
+          "xml_byte_start": 37654,
+          "xml_byte_end": 37790,
+          "line": 353,
+          "column": 3,
+          "attribute": null
+        },
+        "sha256": "6fe46cdcc8a45f4cf7efeac6093b554f7aac65acdd539557f57156d4cb8c522c",
+        "attributes": {
+          "test": {
+            "source": {
+              "resource": "cen.zip/schematron/abstract/EN16931-CII-syntax.sch",
+              "xml_byte_start": 37662,
+              "xml_byte_end": 37680,
+              "line": 353,
+              "column": 11,
+              "attribute": "test"
+            },
+            "sha256": "015cd97d8c45ca9c0a17082746b5f1ca8dbdd81109b96e4f2cc7edbdb5058592",
+            "decoded_sha256": "9cfb9bb6397964de631cb263c27aafeb5ef105a8eaa85061e88478455dc649ee"
+          },
+          "flag": {
+            "source": {
+              "resource": "cen.zip/schematron/abstract/EN16931-CII-syntax.sch",
+              "xml_byte_start": 37681,
+              "xml_byte_end": 37695,
+              "line": 353,
+              "column": 30,
+              "attribute": "flag"
+            },
+            "sha256": "a6874d4ee64cdde3da5ed766bf1aeda449cd71fa36776c015011a06936fd8de2",
+            "decoded_sha256": "4bd9354bb652233497a0f42647464b81b83a83654fcf1511263a5d0120d74c91"
+          },
+          "id": {
+            "source": {
+              "resource": "cen.zip/schematron/abstract/EN16931-CII-syntax.sch",
+              "xml_byte_start": 37696,
+              "xml_byte_end": 37711,
+              "line": 353,
+              "column": 45,
+              "attribute": "id"
+            },
+            "sha256": "fd4837a99a80303ed92ca770a39ee9465e773bd8f28a1de94b419280c3a95823",
+            "decoded_sha256": "09d22a258428cc58f7d96c0078a2d7546889b5d39cf0e8841125dcbb30fed834"
+          }
+        }
+      },
+      "ancestors": [
+        {
+          "source": {
+            "resource": "cen.zip/schematron/abstract/EN16931-CII-syntax.sch",
+            "xml_byte_start": 195,
+            "xml_byte_end": 77268,
+            "line": 8,
+            "column": 1,
+            "attribute": null
+          },
+          "sha256": "ff2cea852eeeab40e38ac1175778cda8292af17c16d87cc091735bfe3378bbbc",
+          "attributes": {
+            "abstract": {
+              "source": {
+                "resource": "cen.zip/schematron/abstract/EN16931-CII-syntax.sch",
+                "xml_byte_start": 249,
+                "xml_byte_end": 264,
+                "line": 8,
+                "column": 55,
+                "attribute": "abstract"
+              },
+              "sha256": "cb0e90f5e41a3fb6b3f9842c54f32b73daec18710a4ba185581652bbff4d4f96",
+              "decoded_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+            },
+            "id": {
+              "source": {
+                "resource": "cen.zip/schematron/abstract/EN16931-CII-syntax.sch",
+                "xml_byte_start": 265,
+                "xml_byte_end": 281,
+                "line": 8,
+                "column": 71,
+                "attribute": "id"
+              },
+              "sha256": "b7ba6a705e48bb40774ae3592b27b2307284627de99d330d40e109452acdbf5d",
+              "decoded_sha256": "601c5e854b48afc817feb08d52519bb8b68840a777e0f5d2abe123bfda8d392a"
+            }
+          }
+        },
+        {
+          "source": {
+            "resource": "cen.zip/schematron/abstract/EN16931-CII-syntax.sch",
+            "xml_byte_start": 30055,
+            "xml_byte_end": 42828,
+            "line": 281,
+            "column": 2,
+            "attribute": null
+          },
+          "sha256": "3996dca8632b0089aa1afc4b9a574a5dfdf6c15048eb84b4b670e0888b59b9d2",
+          "attributes": {
+            "context": {
+              "source": {
+                "resource": "cen.zip/schematron/abstract/EN16931-CII-syntax.sch",
+                "xml_byte_start": 30061,
+                "xml_byte_end": 30103,
+                "line": 281,
+                "column": 8,
+                "attribute": "context"
+              },
+              "sha256": "923ccb019e2831cf0fd7e3a2b3f77f17c1693abe36899683793eeec485767891",
+              "decoded_sha256": "f1ee6a0114875b0688ccfd07450fd5eb74252ec2613961ead9b21c84991f768b"
+            }
+          }
+        }
+      ]
+    },
+    "raw_rule": {
+      "selector": [
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "schema",
+          "sibling": 0,
+          "identity": {}
+        },
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "pattern",
+          "sibling": 1,
+          "identity": {
+            "id": "EN16931-CII-Syntax"
+          }
+        },
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "rule",
+          "sibling": 13,
+          "identity": {}
+        }
+      ],
+      "node": {
+        "source": {
+          "resource": "cen.zip/schematron/preprocessed/EN16931-CII-validation-preprocessed.sch",
+          "xml_byte_start": 141246,
+          "xml_byte_end": 160194,
+          "line": 598,
+          "column": 5,
+          "attribute": null
+        },
+        "sha256": "7ad5f57dba5d53fd7018bc8bdb8867c5a672e6a934463b176c2d2c1898060389",
+        "attributes": {
+          "context": {
+            "source": {
+              "resource": "cen.zip/schematron/preprocessed/EN16931-CII-validation-preprocessed.sch",
+              "xml_byte_start": 141252,
+              "xml_byte_end": 141354,
+              "line": 598,
+              "column": 11,
+              "attribute": "context"
+            },
+            "sha256": "2e97dd619c5de9e0d3eec0eee0560928c92a7c1f4f0ce40d84b0cff3d18e38f0",
+            "decoded_sha256": "94ce659691fa67377ce162b3e2099aa6e7c05c28276d0e795cccddc699e0b1fa"
+          }
+        }
+      },
+      "ancestors": [
+        {
+          "source": {
+            "resource": "cen.zip/schematron/preprocessed/EN16931-CII-validation-preprocessed.sch",
+            "xml_byte_start": 177,
+            "xml_byte_end": 240037,
+            "line": 7,
+            "column": 59,
+            "attribute": null
+          },
+          "sha256": "54bf26294a870a7c481cb26838759ca34af74674f269f896e9aff0a79dfb4b39",
+          "attributes": {
+            "queryBinding": {
+              "source": {
+                "resource": "cen.zip/schematron/preprocessed/EN16931-CII-validation-preprocessed.sch",
+                "xml_byte_start": 230,
+                "xml_byte_end": 250,
+                "line": 7,
+                "column": 112,
+                "attribute": "queryBinding"
+              },
+              "sha256": "fc00596a13919032c5521c0aaa83297b12ce4d4b8e2448aabfd63875f7c7da0d",
+              "decoded_sha256": "383378d8f36f5bde38b0c022b6d8fd60c7f8ccd897856eabec81b242c5976e99"
+            }
+          }
+        },
+        {
+          "source": {
+            "resource": "cen.zip/schematron/preprocessed/EN16931-CII-validation-preprocessed.sch",
+            "xml_byte_start": 101309,
+            "xml_byte_end": 206501,
+            "line": 344,
+            "column": 3,
+            "attribute": null
+          },
+          "sha256": "7ffaaed970e99174908d9c83c62a26dd4e0a8cf42ba3fe11b6933aa5122649bc",
+          "attributes": {
+            "id": {
+              "source": {
+                "resource": "cen.zip/schematron/preprocessed/EN16931-CII-validation-preprocessed.sch",
+                "xml_byte_start": 101318,
+                "xml_byte_end": 101341,
+                "line": 344,
+                "column": 12,
+                "attribute": "id"
+              },
+              "sha256": "a62b003ff3a2a96c58fcbe825bd861be27333d60149004047ffc1f1ee84e60ba",
+              "decoded_sha256": "15004ad021cd8b0f7297e1bd38527b0f135638d8765f097d242c847ddabf3ef0"
+            }
+          }
+        }
+      ]
+    },
+    "raw_site": {
+      "selector": [
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "schema",
+          "sibling": 0,
+          "identity": {}
+        },
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "pattern",
+          "sibling": 1,
+          "identity": {
+            "id": "EN16931-CII-Syntax"
+          }
+        },
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "rule",
+          "sibling": 13,
+          "identity": {}
+        },
+        {
+          "namespace": "http://purl.oclc.org/dsdl/schematron",
+          "local": "assert",
+          "sibling": 60,
+          "identity": {
+            "id": "CII-SR-282"
+          }
+        }
+      ],
+      "node": {
+        "source": {
+          "resource": "cen.zip/schematron/preprocessed/EN16931-CII-validation-preprocessed.sch",
+          "xml_byte_start": 152806,
+          "xml_byte_end": 152980,
+          "line": 659,
+          "column": 7,
+          "attribute": null
+        },
+        "sha256": "062832e23a8794a980017bc984f48c2bc4e2045f5cfcda420ab572efcc58dc81",
+        "attributes": {
+          "id": {
+            "source": {
+              "resource": "cen.zip/schematron/preprocessed/EN16931-CII-validation-preprocessed.sch",
+              "xml_byte_start": 152814,
+              "xml_byte_end": 152829,
+              "line": 659,
+              "column": 15,
+              "attribute": "id"
+            },
+            "sha256": "fd4837a99a80303ed92ca770a39ee9465e773bd8f28a1de94b419280c3a95823",
+            "decoded_sha256": "09d22a258428cc58f7d96c0078a2d7546889b5d39cf0e8841125dcbb30fed834"
+          },
+          "flag": {
+            "source": {
+              "resource": "cen.zip/schematron/preprocessed/EN16931-CII-validation-preprocessed.sch",
+              "xml_byte_start": 152830,
+              "xml_byte_end": 152844,
+              "line": 659,
+              "column": 31,
+              "attribute": "flag"
+            },
+            "sha256": "a6874d4ee64cdde3da5ed766bf1aeda449cd71fa36776c015011a06936fd8de2",
+            "decoded_sha256": "4bd9354bb652233497a0f42647464b81b83a83654fcf1511263a5d0120d74c91"
+          },
+          "test": {
+            "source": {
+              "resource": "cen.zip/schematron/preprocessed/EN16931-CII-validation-preprocessed.sch",
+              "xml_byte_start": 152845,
+              "xml_byte_end": 152901,
+              "line": 659,
+              "column": 46,
+              "attribute": "test"
+            },
+            "sha256": "c2ab8aec395f0e670e4b6a717c24b1e12da55e309ca5ae11dda1ec78ebb0e295",
+            "decoded_sha256": "83984285e7d9d41df2ee4838d49ccc4381f5a2adb934eac462d62ce01e18dd6f"
+          }
+        }
+      },
+      "ancestors": [
+        {
+          "source": {
+            "resource": "cen.zip/schematron/preprocessed/EN16931-CII-validation-preprocessed.sch",
+            "xml_byte_start": 177,
+            "xml_byte_end": 240037,
+            "line": 7,
+            "column": 59,
+            "attribute": null
+          },
+          "sha256": "54bf26294a870a7c481cb26838759ca34af74674f269f896e9aff0a79dfb4b39",
+          "attributes": {
+            "queryBinding": {
+              "source": {
+                "resource": "cen.zip/schematron/preprocessed/EN16931-CII-validation-preprocessed.sch",
+                "xml_byte_start": 230,
+                "xml_byte_end": 250,
+                "line": 7,
+                "column": 112,
+                "attribute": "queryBinding"
+              },
+              "sha256": "fc00596a13919032c5521c0aaa83297b12ce4d4b8e2448aabfd63875f7c7da0d",
+              "decoded_sha256": "383378d8f36f5bde38b0c022b6d8fd60c7f8ccd897856eabec81b242c5976e99"
+            }
+          }
+        },
+        {
+          "source": {
+            "resource": "cen.zip/schematron/preprocessed/EN16931-CII-validation-preprocessed.sch",
+            "xml_byte_start": 101309,
+            "xml_byte_end": 206501,
+            "line": 344,
+            "column": 3,
+            "attribute": null
+          },
+          "sha256": "7ffaaed970e99174908d9c83c62a26dd4e0a8cf42ba3fe11b6933aa5122649bc",
+          "attributes": {
+            "id": {
+              "source": {
+                "resource": "cen.zip/schematron/preprocessed/EN16931-CII-validation-preprocessed.sch",
+                "xml_byte_start": 101318,
+                "xml_byte_end": 101341,
+                "line": 344,
+                "column": 12,
+                "attribute": "id"
+              },
+              "sha256": "a62b003ff3a2a96c58fcbe825bd861be27333d60149004047ffc1f1ee84e60ba",
+              "decoded_sha256": "15004ad021cd8b0f7297e1bd38527b0f135638d8765f097d242c847ddabf3ef0"
+            }
+          }
+        },
+        {
+          "source": {
+            "resource": "cen.zip/schematron/preprocessed/EN16931-CII-validation-preprocessed.sch",
+            "xml_byte_start": 141246,
+            "xml_byte_end": 160194,
+            "line": 598,
+            "column": 5,
+            "attribute": null
+          },
+          "sha256": "7ad5f57dba5d53fd7018bc8bdb8867c5a672e6a934463b176c2d2c1898060389",
+          "attributes": {
+            "context": {
+              "source": {
+                "resource": "cen.zip/schematron/preprocessed/EN16931-CII-validation-preprocessed.sch",
+                "xml_byte_start": 141252,
+                "xml_byte_end": 141354,
+                "line": 598,
+                "column": 11,
+                "attribute": "context"
+              },
+              "sha256": "2e97dd619c5de9e0d3eec0eee0560928c92a7c1f4f0ce40d84b0cff3d18e38f0",
+              "decoded_sha256": "94ce659691fa67377ce162b3e2099aa6e7c05c28276d0e795cccddc699e0b1fa"
+            }
+          }
+        }
+      ]
+    },
+    "release_comparison": {
+      "selector": [
+        {
+          "namespace": "http://www.w3.org/1999/XSL/Transform",
+          "local": "stylesheet",
+          "sibling": 0,
+          "identity": {}
+        },
+        {
+          "namespace": "http://www.w3.org/1999/XSL/Transform",
+          "local": "template",
+          "sibling": 91,
+          "identity": {}
+        },
+        {
+          "namespace": "http://www.w3.org/1999/XSL/Transform",
+          "local": "choose",
+          "sibling": 60,
+          "identity": {}
+        },
+        {
+          "namespace": "http://www.w3.org/1999/XSL/Transform",
+          "local": "otherwise",
+          "sibling": 0,
+          "identity": {}
+        },
+        {
+          "namespace": "http://purl.oclc.org/dsdl/svrl",
+          "local": "failed-assert",
+          "sibling": 0,
+          "identity": {}
+        }
+      ],
+      "node": {
+        "source": {
+          "resource": "cen.zip/xslt/EN16931-CII-validation.xslt",
+          "xml_byte_start": 449138,
+          "xml_byte_end": 449622,
+          "line": 7971,
+          "column": 9,
+          "attribute": null
+        },
+        "sha256": "088026e5c877b518521d7e0f2d8e9740620c34222ee4f19d41a3777ea3bb4fd1",
+        "attributes": {
+          "test": {
+            "source": {
+              "resource": "cen.zip/xslt/EN16931-CII-validation.xslt",
+              "xml_byte_start": 449158,
+              "xml_byte_end": 449214,
+              "line": 7971,
+              "column": 29,
+              "attribute": "test"
+            },
+            "sha256": "c2ab8aec395f0e670e4b6a717c24b1e12da55e309ca5ae11dda1ec78ebb0e295",
+            "decoded_sha256": "83984285e7d9d41df2ee4838d49ccc4381f5a2adb934eac462d62ce01e18dd6f"
+          }
+        }
+      },
+      "ancestors": [
+        {
+          "source": {
+            "resource": "cen.zip/xslt/EN16931-CII-validation.xslt",
+            "xml_byte_start": 193,
+            "xml_byte_end": 725517,
+            "line": 7,
+            "column": 59,
+            "attribute": null
+          },
+          "sha256": "84f928f36b0deb5b55000b362a551465ccf11cf2d218eb2e8250db6251898045",
+          "attributes": {
+            "version": {
+              "source": {
+                "resource": "cen.zip/xslt/EN16931-CII-validation.xslt",
+                "xml_byte_start": 975,
+                "xml_byte_end": 988,
+                "line": 7,
+                "column": 841,
+                "attribute": "version"
+              },
+              "sha256": "0cf5bf8acbeda58a4cf54de9b94a9e83d142f9c08b10394a39bb752c32fdc0eb",
+              "decoded_sha256": "d84bdb34d4eeef4034d77e5403f850e35bc4a51b1143e3a83510e1aaad839748"
+            }
+          }
+        },
+        {
+          "source": {
+            "resource": "cen.zip/xslt/EN16931-CII-validation.xslt",
+            "xml_byte_start": 406979,
+            "xml_byte_end": 475391,
+            "line": 7064,
+            "column": 1,
+            "attribute": null
+          },
+          "sha256": "f3e8255e16f678c2b14557307c7c2d80ddb31637c215be2f47ac1f4dc1681604",
+          "attributes": {
+            "match": {
+              "source": {
+                "resource": "cen.zip/xslt/EN16931-CII-validation.xslt",
+                "xml_byte_start": 406993,
+                "xml_byte_end": 407093,
+                "line": 7064,
+                "column": 15,
+                "attribute": "match"
+              },
+              "sha256": "e9d46b187ceab7f14298b33b6976d30343c6b3e38e28777a3e79ffc3ac751368",
+              "decoded_sha256": "94ce659691fa67377ce162b3e2099aa6e7c05c28276d0e795cccddc699e0b1fa"
+            },
+            "mode": {
+              "source": {
+                "resource": "cen.zip/xslt/EN16931-CII-validation.xslt",
+                "xml_byte_start": 407094,
+                "xml_byte_end": 407104,
+                "line": 7064,
+                "column": 116,
+                "attribute": "mode"
+              },
+              "sha256": "86c6a761a10178ed23d956c76062aa1f9843b860a22a9a27b21e48f260eb3e27",
+              "decoded_sha256": "f6792163b580976b138a2858aef742a37d096f581d54640169dd817414bb81a8"
+            },
+            "priority": {
+              "source": {
+                "resource": "cen.zip/xslt/EN16931-CII-validation.xslt",
+                "xml_byte_start": 407105,
+                "xml_byte_end": 407120,
+                "line": 7064,
+                "column": 127,
+                "attribute": "priority"
+              },
+              "sha256": "04e98d0a8832c49cee43b64765f95e02ff4ca2f701fcd7b00dc56055c5043f57",
+              "decoded_sha256": "b0ab628c9e14621846c58b4eb35060ef3885253a457d2d76136716d4850bad45"
+            }
+          }
+        },
+        {
+          "source": {
+            "resource": "cen.zip/xslt/EN16931-CII-validation.xslt",
+            "xml_byte_start": 449019,
+            "xml_byte_end": 449663,
+            "line": 7968,
+            "column": 1,
+            "attribute": null
+          },
+          "sha256": "af0a308937f4d5dcd9aff968247a2700805e03692991c2f6388c9d5073920aa0",
+          "attributes": {}
+        },
+        {
+          "source": {
+            "resource": "cen.zip/xslt/EN16931-CII-validation.xslt",
+            "xml_byte_start": 449114,
+            "xml_byte_end": 449645,
+            "line": 7970,
+            "column": 7,
+            "attribute": null
+          },
+          "sha256": "ba493b86d0f6ad6018e3adb4ec66febfe63c6314e8810fc8f5e4cb49cab6dc0a",
+          "attributes": {}
+        }
+      ]
+    },
+    "configured_comparison": {
+      "selector": [
+        {
+          "namespace": "http://www.w3.org/1999/XSL/Transform",
+          "local": "transform",
+          "sibling": 0,
+          "identity": {}
+        },
+        {
+          "namespace": "http://www.w3.org/1999/XSL/Transform",
+          "local": "template",
+          "sibling": 78,
+          "identity": {}
+        },
+        {
+          "namespace": "http://www.w3.org/1999/XSL/Transform",
+          "local": "choose",
+          "sibling": 0,
+          "identity": {}
+        },
+        {
+          "namespace": "http://www.w3.org/1999/XSL/Transform",
+          "local": "otherwise",
+          "sibling": 0,
+          "identity": {}
+        },
+        {
+          "namespace": "https://doi.org/10.5281/zenodo.1495494",
+          "local": "rule",
+          "sibling": 0,
+          "identity": {}
+        },
+        {
+          "namespace": "http://www.w3.org/1999/XSL/Transform",
+          "local": "if",
+          "sibling": 60,
+          "identity": {}
+        },
+        {
+          "namespace": "http://purl.oclc.org/dsdl/svrl",
+          "local": "failed-assert",
+          "sibling": 0,
+          "identity": {
+            "id": "CII-SR-282"
+          }
+        }
+      ],
+      "node": {
+        "source": {
+          "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+          "xml_byte_start": 586341,
+          "xml_byte_end": 586843,
+          "line": 7442,
+          "column": 19,
+          "attribute": null
+        },
+        "sha256": "46d5e22295a42473af67ec9367b5096b71f66e33999b57633e83a258d322b8b8",
+        "attributes": {
+          "location": {
+            "source": {
+              "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+              "xml_byte_start": 586443,
+              "xml_byte_end": 586475,
+              "line": 7443,
+              "column": 39,
+              "attribute": "location"
+            },
+            "sha256": "80868ab5edc82d552374515dbb5d16cb0e39e03959c357c9ae62e39a147bc023",
+            "decoded_sha256": "2891aa0a45edf220e61c786fa23e6e2e72ec7c2bf626f835edce11d98b818420"
+          },
+          "flag": {
+            "source": {
+              "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+              "xml_byte_start": 586514,
+              "xml_byte_end": 586528,
+              "line": 7444,
+              "column": 39,
+              "attribute": "flag"
+            },
+            "sha256": "a6874d4ee64cdde3da5ed766bf1aeda449cd71fa36776c015011a06936fd8de2",
+            "decoded_sha256": "4bd9354bb652233497a0f42647464b81b83a83654fcf1511263a5d0120d74c91"
+          },
+          "id": {
+            "source": {
+              "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+              "xml_byte_start": 586567,
+              "xml_byte_end": 586582,
+              "line": 7445,
+              "column": 39,
+              "attribute": "id"
+            },
+            "sha256": "fd4837a99a80303ed92ca770a39ee9465e773bd8f28a1de94b419280c3a95823",
+            "decoded_sha256": "09d22a258428cc58f7d96c0078a2d7546889b5d39cf0e8841125dcbb30fed834"
+          }
+        }
+      },
+      "ancestors": [
+        {
+          "source": {
+            "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+            "xml_byte_start": 39,
+            "xml_byte_end": 934749,
+            "line": 2,
+            "column": 1,
+            "attribute": null
+          },
+          "sha256": "fb5cfce29fb7db6a3c75881e8808f21000c8c8f0238c9974379698b213f12381",
+          "attributes": {
+            "version": {
+              "source": {
+                "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+                "xml_byte_start": 1016,
+                "xml_byte_end": 1029,
+                "line": 14,
+                "column": 16,
+                "attribute": "version"
+              },
+              "sha256": "0cf5bf8acbeda58a4cf54de9b94a9e83d142f9c08b10394a39bb752c32fdc0eb",
+              "decoded_sha256": "d84bdb34d4eeef4034d77e5403f850e35bc4a51b1143e3a83510e1aaad839748"
+            }
+          }
+        },
+        {
+          "source": {
+            "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+            "xml_byte_start": 543852,
+            "xml_byte_end": 612021,
+            "line": 6870,
+            "column": 4,
+            "attribute": null
+          },
+          "sha256": "69cef1e73e9ad7f87dd6542649b987245bfc391f8a68cd24ff7f6b4cebc7a130",
+          "attributes": {
+            "match": {
+              "source": {
+                "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+                "xml_byte_start": 543866,
+                "xml_byte_end": 543967,
+                "line": 6870,
+                "column": 18,
+                "attribute": "match"
+              },
+              "sha256": "7a99d7bf35ebf998d69985d9c865abb8f41777b000e9c3fd2b939f8ba5e1f52e",
+              "decoded_sha256": "650332394e27eb26246455d2c696776f84b6d16d16021c4b0588f9070669d15c"
+            },
+            "priority": {
+              "source": {
+                "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+                "xml_byte_start": 543985,
+                "xml_byte_end": 543998,
+                "line": 6871,
+                "column": 18,
+                "attribute": "priority"
+              },
+              "sha256": "4e49998f5dfe87fa06193515f279a811fb750e3bd81f27cd6f1d094f940e17b2",
+              "decoded_sha256": "d59eced1ded07f84c145592f65bdf854358e009c5cd705f5215bf18697fed103"
+            },
+            "mode": {
+              "source": {
+                "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+                "xml_byte_start": 544016,
+                "xml_byte_end": 544029,
+                "line": 6872,
+                "column": 18,
+                "attribute": "mode"
+              },
+              "sha256": "093b420824deedbb3cbc43d481f7cb84d62c601e9096cea0f0deb465f3b11bcc",
+              "decoded_sha256": "c17304eaea85ec0bde57b751455178772d2f8095525246bbf84238eae776e824"
+            }
+          }
+        },
+        {
+          "source": {
+            "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+            "xml_byte_start": 544104,
+            "xml_byte_end": 612002,
+            "line": 6874,
+            "column": 7,
+            "attribute": null
+          },
+          "sha256": "d584bd35ae1a4469facf5e909d1c002cc02bfa258a7bdd5d02b4ce302ccdcb60",
+          "attributes": {}
+        },
+        {
+          "source": {
+            "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+            "xml_byte_start": 545291,
+            "xml_byte_end": 611982,
+            "line": 6892,
+            "column": 10,
+            "attribute": null
+          },
+          "sha256": "e63524e954227659bdc5fa238d1e9d1a898d548058f2cc62c36e5cc8eb5e51c1",
+          "attributes": {}
+        },
+        {
+          "source": {
+            "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+            "xml_byte_start": 545319,
+            "xml_byte_end": 611706,
+            "line": 6893,
+            "column": 13,
+            "attribute": null
+          },
+          "sha256": "9b4579c908427c513ec2ce58c58d704728301112dee73d3f705b6c3b5b50ac2e",
+          "attributes": {
+            "pattern": {
+              "source": {
+                "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+                "xml_byte_start": 545333,
+                "xml_byte_end": 545350,
+                "line": 6893,
+                "column": 27,
+                "attribute": "pattern"
+              },
+              "sha256": "517e725144282f58da70457389c8106ad2921705e8757884222ba036b67782f8",
+              "decoded_sha256": "675207b329ecd2871884bd7eaf4ec6ac726a79090639138b831de377b8220274"
+            }
+          }
+        },
+        {
+          "source": {
+            "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+            "xml_byte_start": 586260,
+            "xml_byte_end": 586868,
+            "line": 7441,
+            "column": 16,
+            "attribute": null
+          },
+          "sha256": "8e69d81888b245ee83ea70475996a2daa1385eb8a1a116cc0143634ae24cfe27",
+          "attributes": {
+            "test": {
+              "source": {
+                "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+                "xml_byte_start": 586268,
+                "xml_byte_end": 586321,
+                "line": 7441,
+                "column": 24,
+                "attribute": "test"
+              },
+              "sha256": "442be23d6134d0c36d855dfe8521d41f76ede60d30a7067bc80f1802eaf62efd",
+              "decoded_sha256": "93bbe06b44dc712ac99838fd91b94fc28f1c81bc80967e247ef244893402814f"
+            }
+          }
+        }
+      ]
+    },
+    "configured_condition": {
+      "selector": [
+        {
+          "namespace": "http://www.w3.org/1999/XSL/Transform",
+          "local": "transform",
+          "sibling": 0,
+          "identity": {}
+        },
+        {
+          "namespace": "http://www.w3.org/1999/XSL/Transform",
+          "local": "template",
+          "sibling": 78,
+          "identity": {}
+        },
+        {
+          "namespace": "http://www.w3.org/1999/XSL/Transform",
+          "local": "choose",
+          "sibling": 0,
+          "identity": {}
+        },
+        {
+          "namespace": "http://www.w3.org/1999/XSL/Transform",
+          "local": "otherwise",
+          "sibling": 0,
+          "identity": {}
+        },
+        {
+          "namespace": "https://doi.org/10.5281/zenodo.1495494",
+          "local": "rule",
+          "sibling": 0,
+          "identity": {}
+        },
+        {
+          "namespace": "http://www.w3.org/1999/XSL/Transform",
+          "local": "if",
+          "sibling": 60,
+          "identity": {}
+        }
+      ],
+      "node": {
+        "source": {
+          "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+          "xml_byte_start": 586260,
+          "xml_byte_end": 586868,
+          "line": 7441,
+          "column": 16,
+          "attribute": null
+        },
+        "sha256": "8e69d81888b245ee83ea70475996a2daa1385eb8a1a116cc0143634ae24cfe27",
+        "attributes": {
+          "test": {
+            "source": {
+              "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+              "xml_byte_start": 586268,
+              "xml_byte_end": 586321,
+              "line": 7441,
+              "column": 24,
+              "attribute": "test"
+            },
+            "sha256": "442be23d6134d0c36d855dfe8521d41f76ede60d30a7067bc80f1802eaf62efd",
+            "decoded_sha256": "93bbe06b44dc712ac99838fd91b94fc28f1c81bc80967e247ef244893402814f"
+          }
+        }
+      },
+      "ancestors": [
+        {
+          "source": {
+            "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+            "xml_byte_start": 39,
+            "xml_byte_end": 934749,
+            "line": 2,
+            "column": 1,
+            "attribute": null
+          },
+          "sha256": "fb5cfce29fb7db6a3c75881e8808f21000c8c8f0238c9974379698b213f12381",
+          "attributes": {
+            "version": {
+              "source": {
+                "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+                "xml_byte_start": 1016,
+                "xml_byte_end": 1029,
+                "line": 14,
+                "column": 16,
+                "attribute": "version"
+              },
+              "sha256": "0cf5bf8acbeda58a4cf54de9b94a9e83d142f9c08b10394a39bb752c32fdc0eb",
+              "decoded_sha256": "d84bdb34d4eeef4034d77e5403f850e35bc4a51b1143e3a83510e1aaad839748"
+            }
+          }
+        },
+        {
+          "source": {
+            "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+            "xml_byte_start": 543852,
+            "xml_byte_end": 612021,
+            "line": 6870,
+            "column": 4,
+            "attribute": null
+          },
+          "sha256": "69cef1e73e9ad7f87dd6542649b987245bfc391f8a68cd24ff7f6b4cebc7a130",
+          "attributes": {
+            "match": {
+              "source": {
+                "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+                "xml_byte_start": 543866,
+                "xml_byte_end": 543967,
+                "line": 6870,
+                "column": 18,
+                "attribute": "match"
+              },
+              "sha256": "7a99d7bf35ebf998d69985d9c865abb8f41777b000e9c3fd2b939f8ba5e1f52e",
+              "decoded_sha256": "650332394e27eb26246455d2c696776f84b6d16d16021c4b0588f9070669d15c"
+            },
+            "priority": {
+              "source": {
+                "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+                "xml_byte_start": 543985,
+                "xml_byte_end": 543998,
+                "line": 6871,
+                "column": 18,
+                "attribute": "priority"
+              },
+              "sha256": "4e49998f5dfe87fa06193515f279a811fb750e3bd81f27cd6f1d094f940e17b2",
+              "decoded_sha256": "d59eced1ded07f84c145592f65bdf854358e009c5cd705f5215bf18697fed103"
+            },
+            "mode": {
+              "source": {
+                "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+                "xml_byte_start": 544016,
+                "xml_byte_end": 544029,
+                "line": 6872,
+                "column": 18,
+                "attribute": "mode"
+              },
+              "sha256": "093b420824deedbb3cbc43d481f7cb84d62c601e9096cea0f0deb465f3b11bcc",
+              "decoded_sha256": "c17304eaea85ec0bde57b751455178772d2f8095525246bbf84238eae776e824"
+            }
+          }
+        },
+        {
+          "source": {
+            "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+            "xml_byte_start": 544104,
+            "xml_byte_end": 612002,
+            "line": 6874,
+            "column": 7,
+            "attribute": null
+          },
+          "sha256": "d584bd35ae1a4469facf5e909d1c002cc02bfa258a7bdd5d02b4ce302ccdcb60",
+          "attributes": {}
+        },
+        {
+          "source": {
+            "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+            "xml_byte_start": 545291,
+            "xml_byte_end": 611982,
+            "line": 6892,
+            "column": 10,
+            "attribute": null
+          },
+          "sha256": "e63524e954227659bdc5fa238d1e9d1a898d548058f2cc62c36e5cc8eb5e51c1",
+          "attributes": {}
+        },
+        {
+          "source": {
+            "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+            "xml_byte_start": 545319,
+            "xml_byte_end": 611706,
+            "line": 6893,
+            "column": 13,
+            "attribute": null
+          },
+          "sha256": "9b4579c908427c513ec2ce58c58d704728301112dee73d3f705b6c3b5b50ac2e",
+          "attributes": {
+            "pattern": {
+              "source": {
+                "resource": "config.zip/resources/cii/16b/xsl/EN16931-CII-validation.xsl",
+                "xml_byte_start": 545333,
+                "xml_byte_end": 545350,
+                "line": 6893,
+                "column": 27,
+                "attribute": "pattern"
+              },
+              "sha256": "517e725144282f58da70457389c8106ad2921705e8757884222ba036b67782f8",
+              "decoded_sha256": "675207b329ecd2871884bd7eaf4ec6ac726a79090639138b831de377b8220274"
+            }
+          }
+        }
+      ]
+    },
+    "scenario": {
+      "selector": [
+        {
+          "namespace": "http://www.xoev.de/de/validator/framework/1/scenarios",
+          "local": "scenarios",
+          "sibling": 0,
+          "identity": {}
+        },
+        {
+          "namespace": "http://www.xoev.de/de/validator/framework/1/scenarios",
+          "local": "scenario",
+          "sibling": 5,
+          "identity": {}
+        }
+      ],
+      "node": {
+        "source": {
+          "resource": "config.zip/scenarios.xml",
+          "xml_byte_start": 19091,
+          "xml_byte_end": 23738,
+          "line": 334,
+          "column": 3,
+          "attribute": null
+        },
+        "sha256": "05cd16a99245d78cd3d00b54b4b61212b4e5e2a61a7df1ab4468a6752736a3e6",
+        "attributes": {}
+      },
+      "ancestors": [
+        {
+          "source": {
+            "resource": "config.zip/scenarios.xml",
+            "xml_byte_start": 130,
+            "xml_byte_end": 40561,
+            "line": 6,
+            "column": 1,
+            "attribute": null
+          },
+          "sha256": "21874ea4fc724ed1ef8ce606365c2795d3372802e7fb9ce7e4537e473d0850d2",
+          "attributes": {
+            "frameworkVersion": {
+              "source": {
+                "resource": "config.zip/scenarios.xml",
+                "xml_byte_start": 205,
+                "xml_byte_end": 229,
+                "line": 7,
+                "column": 3,
+                "attribute": "frameworkVersion"
+              },
+              "sha256": "8cc6bf069869321daa65dc63901760c0f0daff6aafbf43bc37fcb66ca10fe65b",
+              "decoded_sha256": "92521fc3cbd964bdc9f584a991b89fddaa5754ed1cc96d6d42445338669c1305"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "namespaces": {
+    "ccts": "urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:2",
+    "fn": "http://www.w3.org/2005/xpath-functions",
+    "qdt": "urn:un:unece:uncefact:data:standard:QualifiedDataType:100",
+    "ram": "urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100",
+    "rsm": "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100",
+    "udt": "urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100",
+    "xml": "http://www.w3.org/XML/1998/namespace",
+    "xs": "http://www.w3.org/2001/XMLSchema"
+  },
+  "policy_sha256": "3c85d979817fc70ffa3db987620e532ddf233191dc17d88bbd87352c6e7aa6cc",
+  "decisions": [
+    {
+      "id": "cii-sr-282-original-buyer-param",
+      "kind": "original_declarative_parameter",
+      "authority": "https://linear.app/bschneppe/issue/BSC-7/generate-version-pinned-validation-packages-through-an-explicit-ir#comment-f83ec40f",
+      "reason": "Select the exact original buyer parameter for the configured KoSIT target; preserve the conflicting preprocessed seller assertion and both declarative occurrences. This bounded decision does not certify other source correspondence.",
+      "parameter": "CII-SR-282",
+      "context_parameter": "ApplicableHeaderTradeAgreement",
+      "selected": "buyer",
+      "duplicates": [
+        "buyer",
+        "seller"
+      ],
+      "original_ast_sha256": "88c01137a1c87053f705686423e7a9cbf1fd8a3d67370ce690f80cd34faaaebf",
+      "effective_ast_sha256": "d4fbd5eb5a5fed83f784c60f8b1a0ef17fb1df8b132038059d247e4d4a7966ca",
+      "context_ast_sha256": "479a0ed7241cfa8c7abf8de1db530487103c40e07f36eaee0889bb576303a108",
+      "message_sha256": "e9307cff4dfda4dfd530e82fc5f141272338491c124a5e3dd1b8f19ec74b766c",
+      "flag": "warning",
+      "base_severity": "warning",
+      "effective_severity": "warning"
+    }
+  ]
+}

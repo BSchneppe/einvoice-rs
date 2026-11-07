@@ -1,0 +1,1358 @@
+{
+  "format": "einvoice-validation-ir/1",
+  "target": "fixture:one",
+  "source_package": "revision:1",
+  "backend": "Unavailable",
+  "schemas": [
+    {
+      "source": {
+        "resource": "main.sch",
+        "xml_byte_start": 0,
+        "xml_byte_end": 1820,
+        "line": 1,
+        "column": 1,
+        "attribute": null
+      },
+      "title": "Authored preservation fixture",
+      "namespaces": {
+        "fn": "http://www.w3.org/2005/xpath-functions",
+        "t": "urn:fixture",
+        "u": "urn:fixture:helpers",
+        "xml": "http://www.w3.org/XML/1998/namespace",
+        "xs": "http://www.w3.org/2001/XMLSchema"
+      },
+      "namespace_declarations": [
+        {
+          "prefix": "t",
+          "uri": "urn:fixture",
+          "source": {
+            "resource": "main.sch",
+            "xml_byte_start": 173,
+            "xml_byte_end": 207,
+            "line": 3,
+            "column": 3,
+            "attribute": null
+          }
+        },
+        {
+          "prefix": "u",
+          "uri": "urn:fixture:helpers",
+          "source": {
+            "resource": "main.sch",
+            "xml_byte_start": 210,
+            "xml_byte_end": 252,
+            "line": 4,
+            "column": 3,
+            "attribute": null
+          }
+        }
+      ],
+      "xpath_element_default_namespace": "",
+      "xpath_function_default_namespace": "http://www.w3.org/2005/xpath-functions",
+      "declared_default_phase": null,
+      "selection": "chosen",
+      "dispatch": "DocumentTraversalFirstMatchingRulePerPatternInSourceOrder",
+      "phases": [
+        {
+          "id": "chosen",
+          "active_patterns": [
+            "second",
+            "first"
+          ],
+          "source": {
+            "resource": "main.sch",
+            "xml_byte_start": 333,
+            "xml_byte_end": 411,
+            "line": 7,
+            "column": 3,
+            "attribute": null
+          }
+        },
+        {
+          "id": "other",
+          "active_patterns": [
+            "inactive"
+          ],
+          "source": {
+            "resource": "main.sch",
+            "xml_byte_start": 414,
+            "xml_byte_end": 468,
+            "line": 8,
+            "column": 3,
+            "attribute": null
+          }
+        }
+      ],
+      "includes": [
+        {
+          "from": {
+            "resource": "main.sch",
+            "xml_byte_start": 1006,
+            "xml_byte_end": 1034,
+            "line": 21,
+            "column": 3,
+            "attribute": null
+          },
+          "to": "common.sch"
+        }
+      ],
+      "globals": [
+        {
+          "id": "main.sch@255",
+          "name": {
+            "qualified": "value",
+            "namespace": "",
+            "local": "value"
+          },
+          "declared_owner": "schema",
+          "effective_scope": "xslt2_schema_global",
+          "initialization_context": "document-root",
+          "source": {
+            "resource": "main.sch",
+            "xml_byte_start": 255,
+            "xml_byte_end": 291,
+            "line": 5,
+            "column": 3,
+            "attribute": null
+          },
+          "sequence_type": null,
+          "value": {
+            "kind": "select",
+            "expression": {
+              "text": "'global'",
+              "source": {
+                "resource": "main.sch",
+                "xml_byte_start": 273,
+                "xml_byte_end": 289,
+                "line": 5,
+                "column": 21,
+                "attribute": "value"
+              },
+              "tree": {
+                "kind": "string",
+                "value": "global"
+              }
+            }
+          }
+        },
+        {
+          "id": "main.sch@294",
+          "name": {
+            "qualified": "forward",
+            "namespace": "",
+            "local": "forward"
+          },
+          "declared_owner": "schema",
+          "effective_scope": "xslt2_schema_global",
+          "initialization_context": "document-root",
+          "source": {
+            "resource": "main.sch",
+            "xml_byte_start": 294,
+            "xml_byte_end": 330,
+            "line": 6,
+            "column": 3,
+            "attribute": null
+          },
+          "sequence_type": null,
+          "value": {
+            "kind": "select",
+            "expression": {
+              "text": "$later",
+              "source": {
+                "resource": "main.sch",
+                "xml_byte_start": 314,
+                "xml_byte_end": 328,
+                "line": 6,
+                "column": 23,
+                "attribute": "value"
+              },
+              "tree": {
+                "kind": "variable",
+                "name": {
+                  "qualified": "later",
+                  "namespace": "",
+                  "local": "later"
+                },
+                "binding": "common.sch@67"
+              }
+            }
+          }
+        }
+      ],
+      "helpers": [
+        {
+          "name": {
+            "qualified": "u:recursive",
+            "namespace": "urn:fixture:helpers",
+            "local": "recursive"
+          },
+          "source": {
+            "resource": "main.sch",
+            "xml_byte_start": 471,
+            "xml_byte_end": 909,
+            "line": 9,
+            "column": 3,
+            "attribute": null
+          },
+          "result_type": {
+            "name": {
+              "qualified": "xs:integer",
+              "namespace": "http://www.w3.org/2001/XMLSchema",
+              "local": "integer"
+            },
+            "occurrence": null
+          },
+          "parameters": [
+            {
+              "id": "main.sch@525",
+              "name": {
+                "qualified": "value",
+                "namespace": "",
+                "local": "value"
+              },
+              "declared_owner": "{urn:fixture:helpers}recursive",
+              "effective_scope": "helper_parameter",
+              "initialization_context": "lexical-dynamic-context",
+              "source": {
+                "resource": "main.sch",
+                "xml_byte_start": 525,
+                "xml_byte_end": 566,
+                "line": 10,
+                "column": 5,
+                "attribute": null
+              },
+              "sequence_type": {
+                "name": {
+                  "qualified": "xs:integer",
+                  "namespace": "http://www.w3.org/2001/XMLSchema",
+                  "local": "integer"
+                },
+                "occurrence": null
+              },
+              "value": {
+                "kind": "parameter"
+              }
+            }
+          ],
+          "body": [
+            {
+              "kind": "choose",
+              "source": {
+                "resource": "main.sch",
+                "xml_byte_start": 571,
+                "xml_byte_end": 891,
+                "line": 11,
+                "column": 5,
+                "attribute": null
+              },
+              "branches": [
+                {
+                  "test": {
+                    "text": "$value = 0",
+                    "source": {
+                      "resource": "main.sch",
+                      "xml_byte_start": 600,
+                      "xml_byte_end": 617,
+                      "line": 12,
+                      "column": 17,
+                      "attribute": "test"
+                    },
+                    "tree": {
+                      "kind": "binary",
+                      "operator": "=",
+                      "left": {
+                        "kind": "variable",
+                        "name": {
+                          "qualified": "value",
+                          "namespace": "",
+                          "local": "value"
+                        },
+                        "binding": "main.sch@525"
+                      },
+                      "right": {
+                        "kind": "number",
+                        "lexical_kind": "integer",
+                        "lexeme": "0"
+                      }
+                    }
+                  },
+                  "body": [
+                    {
+                      "kind": "sequence",
+                      "expression": {
+                        "text": "0",
+                        "source": {
+                          "resource": "main.sch",
+                          "xml_byte_start": 632,
+                          "xml_byte_end": 642,
+                          "line": 12,
+                          "column": 49,
+                          "attribute": "select"
+                        },
+                        "tree": {
+                          "kind": "number",
+                          "lexical_kind": "integer",
+                          "lexeme": "0"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "otherwise": [
+                {
+                  "kind": "variable",
+                  "binding": {
+                    "id": "main.sch@686",
+                    "name": {
+                      "qualified": "local",
+                      "namespace": "",
+                      "local": "local"
+                    },
+                    "declared_owner": "{urn:fixture:helpers}recursive",
+                    "effective_scope": "helper_local",
+                    "initialization_context": "lexical-dynamic-context",
+                    "source": {
+                      "resource": "main.sch",
+                      "xml_byte_start": 686,
+                      "xml_byte_end": 734,
+                      "line": 14,
+                      "column": 9,
+                      "attribute": null
+                    },
+                    "sequence_type": null,
+                    "value": {
+                      "kind": "select",
+                      "expression": {
+                        "text": "$value - 1",
+                        "source": {
+                          "resource": "main.sch",
+                          "xml_byte_start": 713,
+                          "xml_byte_end": 732,
+                          "line": 14,
+                          "column": 36,
+                          "attribute": "select"
+                        },
+                        "tree": {
+                          "kind": "binary",
+                          "operator": "-",
+                          "left": {
+                            "kind": "variable",
+                            "name": {
+                              "qualified": "value",
+                              "namespace": "",
+                              "local": "value"
+                            },
+                            "binding": "main.sch@525"
+                          },
+                          "right": {
+                            "kind": "number",
+                            "lexical_kind": "integer",
+                            "lexeme": "1"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "kind": "variable",
+                  "binding": {
+                    "id": "main.sch@743",
+                    "name": {
+                      "qualified": "text",
+                      "namespace": "",
+                      "local": "text"
+                    },
+                    "declared_owner": "{urn:fixture:helpers}recursive",
+                    "effective_scope": "helper_local",
+                    "initialization_context": "lexical-dynamic-context",
+                    "source": {
+                      "resource": "main.sch",
+                      "xml_byte_start": 743,
+                      "xml_byte_end": 797,
+                      "line": 15,
+                      "column": 9,
+                      "attribute": null
+                    },
+                    "sequence_type": null,
+                    "value": {
+                      "kind": "content",
+                      "body": [
+                        {
+                          "kind": "text",
+                          "text": "00001 padded "
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "kind": "sequence",
+                  "expression": {
+                    "text": "u:recursive($local)",
+                    "source": {
+                      "resource": "main.sch",
+                      "xml_byte_start": 820,
+                      "xml_byte_end": 848,
+                      "line": 16,
+                      "column": 23,
+                      "attribute": "select"
+                    },
+                    "tree": {
+                      "kind": "call",
+                      "name": {
+                        "qualified": "u:recursive",
+                        "namespace": "urn:fixture:helpers",
+                        "local": "recursive"
+                      },
+                      "arguments": [
+                        {
+                          "kind": "variable",
+                          "name": {
+                            "qualified": "local",
+                            "namespace": "",
+                            "local": "local"
+                          },
+                          "binding": "main.sch@686"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": {
+            "qualified": "u:unused",
+            "namespace": "urn:fixture:helpers",
+            "local": "unused"
+          },
+          "source": {
+            "resource": "main.sch",
+            "xml_byte_start": 912,
+            "xml_byte_end": 1003,
+            "line": 20,
+            "column": 3,
+            "attribute": null
+          },
+          "result_type": {
+            "name": {
+              "qualified": "xs:string",
+              "namespace": "http://www.w3.org/2001/XMLSchema",
+              "local": "string"
+            },
+            "occurrence": null
+          },
+          "parameters": [],
+          "body": [
+            {
+              "kind": "sequence",
+              "expression": {
+                "text": "$later",
+                "source": {
+                  "resource": "main.sch",
+                  "xml_byte_start": 971,
+                  "xml_byte_end": 986,
+                  "line": 20,
+                  "column": 62,
+                  "attribute": "select"
+                },
+                "tree": {
+                  "kind": "variable",
+                  "name": {
+                    "qualified": "later",
+                    "namespace": "",
+                    "local": "later"
+                  },
+                  "binding": "common.sch@67"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "patterns": [
+        {
+          "id": "globals",
+          "source": {
+            "resource": "common.sch",
+            "xml_byte_start": 0,
+            "xml_byte_end": 120,
+            "line": 1,
+            "column": 1,
+            "attribute": null
+          },
+          "bindings": [
+            {
+              "id": "common.sch@67",
+              "name": {
+                "qualified": "later",
+                "namespace": "",
+                "local": "later"
+              },
+              "declared_owner": "pattern:globals",
+              "effective_scope": "xslt2_schema_global",
+              "initialization_context": "document-root",
+              "source": {
+                "resource": "common.sch",
+                "xml_byte_start": 67,
+                "xml_byte_end": 110,
+                "line": 1,
+                "column": 68,
+                "attribute": null
+              },
+              "sequence_type": null,
+              "value": {
+                "kind": "select",
+                "expression": {
+                  "text": "' 00001 00002 '",
+                  "source": {
+                    "resource": "common.sch",
+                    "xml_byte_start": 85,
+                    "xml_byte_end": 108,
+                    "line": 1,
+                    "column": 86,
+                    "attribute": "value"
+                  },
+                  "tree": {
+                    "kind": "string",
+                    "value": " 00001 00002 "
+                  }
+                }
+              }
+            }
+          ],
+          "rules": [],
+          "active": false,
+          "activation_reason": "inactive in selected phase; source retained"
+        },
+        {
+          "id": "first",
+          "source": {
+            "resource": "main.sch",
+            "xml_byte_start": 1037,
+            "xml_byte_end": 1477,
+            "line": 22,
+            "column": 3,
+            "attribute": null
+          },
+          "bindings": [],
+          "rules": [
+            {
+              "identity": "main.sch@1062",
+              "source": {
+                "resource": "main.sch",
+                "xml_byte_start": 1062,
+                "xml_byte_end": 1366,
+                "line": 23,
+                "column": 5,
+                "attribute": null
+              },
+              "flag": null,
+              "context": {
+                "text": "t:item[@code = $value]",
+                "source": {
+                  "resource": "main.sch",
+                  "xml_byte_start": 1068,
+                  "xml_byte_end": 1100,
+                  "line": 23,
+                  "column": 11,
+                  "attribute": "context"
+                },
+                "tree": {
+                  "kind": "filter",
+                  "base": {
+                    "kind": "step",
+                    "axis": "child",
+                    "test": {
+                      "kind": "name",
+                      "name": {
+                        "qualified": "t:item",
+                        "namespace": "urn:fixture",
+                        "local": "item"
+                      }
+                    }
+                  },
+                  "predicate": {
+                    "kind": "binary",
+                    "operator": "=",
+                    "left": {
+                      "kind": "step",
+                      "axis": "attribute",
+                      "test": {
+                        "kind": "name",
+                        "name": {
+                          "qualified": "code",
+                          "namespace": "",
+                          "local": "code"
+                        }
+                      }
+                    },
+                    "right": {
+                      "kind": "variable",
+                      "name": {
+                        "qualified": "value",
+                        "namespace": "",
+                        "local": "value"
+                      },
+                      "binding": "main.sch@255"
+                    }
+                  }
+                }
+              },
+              "bindings": [
+                {
+                  "id": "main.sch@1108",
+                  "name": {
+                    "qualified": "value",
+                    "namespace": "",
+                    "local": "value"
+                  },
+                  "declared_owner": "main.sch@1062",
+                  "effective_scope": "rule_local",
+                  "initialization_context": "lexical-dynamic-context",
+                  "source": {
+                    "resource": "main.sch",
+                    "xml_byte_start": 1108,
+                    "xml_byte_end": 1160,
+                    "line": 24,
+                    "column": 7,
+                    "attribute": null
+                  },
+                  "sequence_type": null,
+                  "value": {
+                    "kind": "select",
+                    "expression": {
+                      "text": "concat($value, '-local')",
+                      "source": {
+                        "resource": "main.sch",
+                        "xml_byte_start": 1126,
+                        "xml_byte_end": 1158,
+                        "line": 24,
+                        "column": 25,
+                        "attribute": "value"
+                      },
+                      "tree": {
+                        "kind": "call",
+                        "name": {
+                          "qualified": "concat",
+                          "namespace": "http://www.w3.org/2005/xpath-functions",
+                          "local": "concat"
+                        },
+                        "arguments": [
+                          {
+                            "kind": "variable",
+                            "name": {
+                              "qualified": "value",
+                              "namespace": "",
+                              "local": "value"
+                            },
+                            "binding": "main.sch@255"
+                          },
+                          {
+                            "kind": "string",
+                            "value": "-local"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ],
+              "sites": [
+                {
+                  "identity": "main.sch@1167",
+                  "source": {
+                    "resource": "main.sch",
+                    "xml_byte_start": 1167,
+                    "xml_byte_end": 1354,
+                    "line": 25,
+                    "column": 7,
+                    "attribute": null
+                  },
+                  "id": "one",
+                  "raw_flag": "fatal",
+                  "base_severity": "error",
+                  "effective_severity": "error",
+                  "test": {
+                    "text": "every $value in ('01', ' 002 ') satisfies (some $inner in ($value) satisfies $inner != '')",
+                    "source": {
+                      "resource": "main.sch",
+                      "xml_byte_start": 1197,
+                      "xml_byte_end": 1294,
+                      "line": 25,
+                      "column": 37,
+                      "attribute": "test"
+                    },
+                    "tree": {
+                      "kind": "bind",
+                      "operator": "every",
+                      "bindings": [
+                        {
+                          "id": "main.sch@1197/expr:7:value",
+                          "name": {
+                            "qualified": "value",
+                            "namespace": "",
+                            "local": "value"
+                          },
+                          "value": {
+                            "kind": "group",
+                            "operand": {
+                              "kind": "sequence",
+                              "items": [
+                                {
+                                  "kind": "string",
+                                  "value": "01"
+                                },
+                                {
+                                  "kind": "string",
+                                  "value": " 002 "
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ],
+                      "result": {
+                        "kind": "group",
+                        "operand": {
+                          "kind": "bind",
+                          "operator": "some",
+                          "bindings": [
+                            {
+                              "id": "main.sch@1197/expr:49:inner",
+                              "name": {
+                                "qualified": "inner",
+                                "namespace": "",
+                                "local": "inner"
+                              },
+                              "value": {
+                                "kind": "group",
+                                "operand": {
+                                  "kind": "variable",
+                                  "name": {
+                                    "qualified": "value",
+                                    "namespace": "",
+                                    "local": "value"
+                                  },
+                                  "binding": "main.sch@1197/expr:7:value"
+                                }
+                              }
+                            }
+                          ],
+                          "result": {
+                            "kind": "binary",
+                            "operator": "!=",
+                            "left": {
+                              "kind": "variable",
+                              "name": {
+                                "qualified": "inner",
+                                "namespace": "",
+                                "local": "inner"
+                              },
+                              "binding": "main.sch@1197/expr:49:inner"
+                            },
+                            "right": {
+                              "kind": "string",
+                              "value": ""
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "message": [
+                    {
+                      "kind": "text",
+                      "text": "before "
+                    },
+                    {
+                      "kind": "name",
+                      "source": {
+                        "resource": "main.sch",
+                        "xml_byte_start": 1302,
+                        "xml_byte_end": 1309,
+                        "line": 25,
+                        "column": 142,
+                        "attribute": null
+                      }
+                    },
+                    {
+                      "kind": "text",
+                      "text": " at "
+                    },
+                    {
+                      "kind": "value_of",
+                      "expression": {
+                        "text": "$value",
+                        "source": {
+                          "resource": "main.sch",
+                          "xml_byte_start": 1323,
+                          "xml_byte_end": 1338,
+                          "line": 25,
+                          "column": 163,
+                          "attribute": "select"
+                        },
+                        "tree": {
+                          "kind": "variable",
+                          "name": {
+                            "qualified": "value",
+                            "namespace": "",
+                            "local": "value"
+                          },
+                          "binding": "main.sch@1108"
+                        }
+                      }
+                    },
+                    {
+                      "kind": "text",
+                      "text": " tail"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "identity": "main.sch@1371",
+              "source": {
+                "resource": "main.sch",
+                "xml_byte_start": 1371,
+                "xml_byte_end": 1464,
+                "line": 27,
+                "column": 5,
+                "attribute": null
+              },
+              "flag": null,
+              "context": {
+                "text": "t:*",
+                "source": {
+                  "resource": "main.sch",
+                  "xml_byte_start": 1377,
+                  "xml_byte_end": 1390,
+                  "line": 27,
+                  "column": 11,
+                  "attribute": "context"
+                },
+                "tree": {
+                  "kind": "step",
+                  "axis": "child",
+                  "test": {
+                    "kind": "namespace",
+                    "prefix": "t",
+                    "namespace": "urn:fixture"
+                  }
+                }
+              },
+              "bindings": [],
+              "sites": [
+                {
+                  "identity": "main.sch@1391",
+                  "source": {
+                    "resource": "main.sch",
+                    "xml_byte_start": 1391,
+                    "xml_byte_end": 1457,
+                    "line": 27,
+                    "column": 25,
+                    "attribute": null
+                  },
+                  "id": "overlap",
+                  "raw_flag": "warning",
+                  "base_severity": "warning",
+                  "effective_severity": "warning",
+                  "test": {
+                    "text": "true()",
+                    "source": {
+                      "resource": "main.sch",
+                      "xml_byte_start": 1427,
+                      "xml_byte_end": 1440,
+                      "line": 27,
+                      "column": 61,
+                      "attribute": "test"
+                    },
+                    "tree": {
+                      "kind": "call",
+                      "name": {
+                        "qualified": "true",
+                        "namespace": "http://www.w3.org/2005/xpath-functions",
+                        "local": "true"
+                      },
+                      "arguments": []
+                    }
+                  },
+                  "message": [
+                    {
+                      "kind": "text",
+                      "text": "overlap"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "active": true,
+          "activation_reason": "selected; predicates determine contextual applicability"
+        },
+        {
+          "id": "second",
+          "source": {
+            "resource": "main.sch",
+            "xml_byte_start": 1480,
+            "xml_byte_end": 1662,
+            "line": 29,
+            "column": 3,
+            "attribute": null
+          },
+          "bindings": [],
+          "rules": [
+            {
+              "identity": "main.sch@1501",
+              "source": {
+                "resource": "main.sch",
+                "xml_byte_start": 1501,
+                "xml_byte_end": 1652,
+                "line": 29,
+                "column": 24,
+                "attribute": null
+              },
+              "flag": null,
+              "context": {
+                "text": "t:item",
+                "source": {
+                  "resource": "main.sch",
+                  "xml_byte_start": 1507,
+                  "xml_byte_end": 1523,
+                  "line": 29,
+                  "column": 30,
+                  "attribute": "context"
+                },
+                "tree": {
+                  "kind": "step",
+                  "axis": "child",
+                  "test": {
+                    "kind": "name",
+                    "name": {
+                      "qualified": "t:item",
+                      "namespace": "urn:fixture",
+                      "local": "item"
+                    }
+                  }
+                }
+              },
+              "bindings": [],
+              "sites": [
+                {
+                  "identity": "main.sch@1524",
+                  "source": {
+                    "resource": "main.sch",
+                    "xml_byte_start": 1524,
+                    "xml_byte_end": 1645,
+                    "line": 29,
+                    "column": 47,
+                    "attribute": null
+                  },
+                  "id": "independent",
+                  "raw_flag": "information",
+                  "base_severity": "information",
+                  "effective_severity": "information",
+                  "test": {
+                    "text": "for $i in 1 to 2, $j in $i return u:recursive($j)",
+                    "source": {
+                      "resource": "main.sch",
+                      "xml_byte_start": 1568,
+                      "xml_byte_end": 1624,
+                      "line": 29,
+                      "column": 91,
+                      "attribute": "test"
+                    },
+                    "tree": {
+                      "kind": "bind",
+                      "operator": "for",
+                      "bindings": [
+                        {
+                          "id": "main.sch@1568/expr:5:i",
+                          "name": {
+                            "qualified": "i",
+                            "namespace": "",
+                            "local": "i"
+                          },
+                          "value": {
+                            "kind": "binary",
+                            "operator": "to",
+                            "left": {
+                              "kind": "number",
+                              "lexical_kind": "integer",
+                              "lexeme": "1"
+                            },
+                            "right": {
+                              "kind": "number",
+                              "lexical_kind": "integer",
+                              "lexeme": "2"
+                            }
+                          }
+                        },
+                        {
+                          "id": "main.sch@1568/expr:19:j",
+                          "name": {
+                            "qualified": "j",
+                            "namespace": "",
+                            "local": "j"
+                          },
+                          "value": {
+                            "kind": "variable",
+                            "name": {
+                              "qualified": "i",
+                              "namespace": "",
+                              "local": "i"
+                            },
+                            "binding": "main.sch@1568/expr:5:i"
+                          }
+                        }
+                      ],
+                      "result": {
+                        "kind": "call",
+                        "name": {
+                          "qualified": "u:recursive",
+                          "namespace": "urn:fixture:helpers",
+                          "local": "recursive"
+                        },
+                        "arguments": [
+                          {
+                            "kind": "variable",
+                            "name": {
+                              "qualified": "j",
+                              "namespace": "",
+                              "local": "j"
+                            },
+                            "binding": "main.sch@1568/expr:19:j"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "message": [
+                    {
+                      "kind": "text",
+                      "text": "independent"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "active": true,
+          "activation_reason": "selected; predicates determine contextual applicability"
+        },
+        {
+          "id": "inactive",
+          "source": {
+            "resource": "main.sch",
+            "xml_byte_start": 1665,
+            "xml_byte_end": 1810,
+            "line": 30,
+            "column": 3,
+            "attribute": null
+          },
+          "bindings": [],
+          "rules": [
+            {
+              "identity": "main.sch@1688",
+              "source": {
+                "resource": "main.sch",
+                "xml_byte_start": 1688,
+                "xml_byte_end": 1800,
+                "line": 30,
+                "column": 26,
+                "attribute": null
+              },
+              "flag": null,
+              "context": {
+                "text": "//t:item[$later]",
+                "source": {
+                  "resource": "main.sch",
+                  "xml_byte_start": 1694,
+                  "xml_byte_end": 1720,
+                  "line": 30,
+                  "column": 32,
+                  "attribute": "context"
+                },
+                "tree": {
+                  "kind": "binary",
+                  "operator": "//",
+                  "left": {
+                    "kind": "root"
+                  },
+                  "right": {
+                    "kind": "filter",
+                    "base": {
+                      "kind": "step",
+                      "axis": "child",
+                      "test": {
+                        "kind": "name",
+                        "name": {
+                          "qualified": "t:item",
+                          "namespace": "urn:fixture",
+                          "local": "item"
+                        }
+                      }
+                    },
+                    "predicate": {
+                      "kind": "variable",
+                      "name": {
+                        "qualified": "later",
+                        "namespace": "",
+                        "local": "later"
+                      },
+                      "binding": "common.sch@67"
+                    }
+                  }
+                }
+              },
+              "bindings": [],
+              "sites": [
+                {
+                  "identity": "main.sch@1721",
+                  "source": {
+                    "resource": "main.sch",
+                    "xml_byte_start": 1721,
+                    "xml_byte_end": 1793,
+                    "line": 30,
+                    "column": 59,
+                    "attribute": null
+                  },
+                  "id": "not-selected",
+                  "raw_flag": "fatal",
+                  "base_severity": "error",
+                  "effective_severity": "error",
+                  "test": {
+                    "text": "false()",
+                    "source": {
+                      "resource": "main.sch",
+                      "xml_byte_start": 1760,
+                      "xml_byte_end": 1774,
+                      "line": 30,
+                      "column": 98,
+                      "attribute": "test"
+                    },
+                    "tree": {
+                      "kind": "call",
+                      "name": {
+                        "qualified": "false",
+                        "namespace": "http://www.w3.org/2005/xpath-functions",
+                        "local": "false"
+                      },
+                      "arguments": []
+                    }
+                  },
+                  "message": [
+                    {
+                      "kind": "text",
+                      "text": "Retain me"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "active": false,
+          "activation_reason": "inactive in selected phase; source retained"
+        }
+      ]
+    }
+  ],
+  "resources": {},
+  "source_graph": [],
+  "policy": null,
+  "requirements": [
+    {
+      "category": "axis",
+      "name": "attribute"
+    },
+    {
+      "category": "axis",
+      "name": "child"
+    },
+    {
+      "category": "function",
+      "name": "{http://www.w3.org/2005/xpath-functions}concat/2"
+    },
+    {
+      "category": "function",
+      "name": "{http://www.w3.org/2005/xpath-functions}false/0"
+    },
+    {
+      "category": "function",
+      "name": "{http://www.w3.org/2005/xpath-functions}true/0"
+    },
+    {
+      "category": "function",
+      "name": "{urn:fixture:helpers}recursive/1"
+    },
+    {
+      "category": "helper",
+      "name": "{urn:fixture:helpers}recursive/1"
+    },
+    {
+      "category": "helper",
+      "name": "{urn:fixture:helpers}unused/0"
+    },
+    {
+      "category": "kind",
+      "name": "binary"
+    },
+    {
+      "category": "kind",
+      "name": "bind"
+    },
+    {
+      "category": "kind",
+      "name": "call"
+    },
+    {
+      "category": "kind",
+      "name": "choose"
+    },
+    {
+      "category": "kind",
+      "name": "content"
+    },
+    {
+      "category": "kind",
+      "name": "filter"
+    },
+    {
+      "category": "kind",
+      "name": "group"
+    },
+    {
+      "category": "kind",
+      "name": "name"
+    },
+    {
+      "category": "kind",
+      "name": "namespace"
+    },
+    {
+      "category": "kind",
+      "name": "number"
+    },
+    {
+      "category": "kind",
+      "name": "parameter"
+    },
+    {
+      "category": "kind",
+      "name": "root"
+    },
+    {
+      "category": "kind",
+      "name": "select"
+    },
+    {
+      "category": "kind",
+      "name": "sequence"
+    },
+    {
+      "category": "kind",
+      "name": "step"
+    },
+    {
+      "category": "kind",
+      "name": "string"
+    },
+    {
+      "category": "kind",
+      "name": "text"
+    },
+    {
+      "category": "kind",
+      "name": "value_of"
+    },
+    {
+      "category": "kind",
+      "name": "variable"
+    },
+    {
+      "category": "numeric",
+      "name": "integer"
+    },
+    {
+      "category": "operator",
+      "name": "!="
+    },
+    {
+      "category": "operator",
+      "name": "-"
+    },
+    {
+      "category": "operator",
+      "name": "//"
+    },
+    {
+      "category": "operator",
+      "name": "="
+    },
+    {
+      "category": "operator",
+      "name": "every"
+    },
+    {
+      "category": "operator",
+      "name": "for"
+    },
+    {
+      "category": "operator",
+      "name": "some"
+    },
+    {
+      "category": "operator",
+      "name": "to"
+    },
+    {
+      "category": "semantics",
+      "name": "document-root-global-initialization"
+    },
+    {
+      "category": "semantics",
+      "name": "dynamic-diagnostics"
+    },
+    {
+      "category": "semantics",
+      "name": "first-match-per-pattern"
+    },
+    {
+      "category": "semantics",
+      "name": "lexical-shadowing"
+    },
+    {
+      "category": "semantics",
+      "name": "match-pattern-dispatch"
+    },
+    {
+      "category": "semantics",
+      "name": "processing-failure-propagation"
+    },
+    {
+      "category": "semantics",
+      "name": "recursive-helpers"
+    },
+    {
+      "category": "semantics",
+      "name": "schema-full-closure"
+    },
+    {
+      "category": "semantics",
+      "name": "xml-name-prefix-preservation"
+    },
+    {
+      "category": "type",
+      "name": "{http://www.w3.org/2001/XMLSchema}integer"
+    },
+    {
+      "category": "type",
+      "name": "{http://www.w3.org/2001/XMLSchema}string"
+    }
+  ]
+}
