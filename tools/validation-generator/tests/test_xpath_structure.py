@@ -148,10 +148,27 @@ class GrammarTests(unittest.TestCase):
                      "a \"or\" b", "a \"/\" b", "@'x'", "ram:*(1)", "\u03bb"]:
             with self.subTest(text=text), self.assertRaises(Unsupported):
                 Parser(text).parse()
-        for text in ["$x", "for $x in a return $x", "some $x in a satisfies $x",
-                     "every $x in a satisfies $x"]:
-            with self.subTest(text=text), self.assertRaisesRegex(BindingIdentityRequired, "binding identity"):
+        for text in ["$", "$*", "$a:*", "for $x in a", "some $x in a return $x",
+                     "every $x in a satisfies", "for $x in a, b return $x"]:
+            with self.subTest(text=text), self.assertRaises(Unsupported):
                 Parser(text).parse()
+
+    def test_variable_and_range_grammar(self):
+        self.assertEqual(Parser("$x").parse(), ("variable", "x", 1))
+        for operator, end in [("for", "return"), ("some", "satisfies"), ("every", "satisfies")]:
+            text = f"{operator} $x in a, $x in $x {end} $x"
+            offset = len(operator) + 2
+            second = text.index("$x", offset) + 1
+            initial = text.index("$x", second) + 1
+            result = text.rindex("$x") + 1
+            self.assertEqual(Parser(text).parse(),
+                             ("bind", operator, (("x", offset, step("a")),
+                                                 ("x", second, ("variable", "x", initial))),
+                              ("variable", "x", result)))
+        self.assertEqual(Parser("$x[1]").parse(), ("filter", ("variable", "x", 1), number("1")))
+        # Parsing preserves names and offsets; qualification cannot invent IDs.
+        with self.assertRaises(BindingIdentityRequired):
+            qualify(Parser("$x").parse(), {})
 
     def test_source_namespace_context(self):
         ns = {"ram": "urn:ram", "u": "urn:helper", "xs": "http://www.w3.org/2001/XMLSchema", "": "urn:xml"}

@@ -2,9 +2,9 @@
 
 Authority: W3C XPath 2.0 (second edition), Appendix A.1/A.2/A.4.
 Admitted forms: ASCII QNames, literals, sequences, groups, calls, conditionals,
-binary/unary operators, paths, axes, predicates and atomic QName type operands.
-Kind tests take no arguments. Other type/kind tests and binding resolution are
-explicitly unsupported. Trees preserve syntax, not evaluation equivalence.
+binary/unary operators, paths, axes, predicates, variables, for/some/every and
+atomic QName type operands. Kind tests take no arguments. Binding resolution is
+separate from parsing. Trees preserve syntax, not evaluation equivalence.
 """
 
 import re
@@ -85,9 +85,6 @@ def lex(text):
 class Parser:
     def __init__(self, text):
         self.tokens = lex(text)
-        # Inspect tokens, never raw '$' substrings in strings or comments.
-        if any(kind == "symbol" and value == "$" for kind, value, _ in self.tokens):
-            raise BindingIdentityRequired("binding identity requires independent resolution")
         self.tokens.append(("end", "<end>", len(text)))
         self.i = 0
 
@@ -116,6 +113,19 @@ class Parser:
         return items[0] if len(items) == 1 else ("sequence", tuple(items))
 
     def single(self):
+        # ExprSingle: ForExpr / QuantifiedExpr / IfExpr / OrExpr (XPath 2.0 A.1).
+        if any(self.at(s) for s in ("for", "some", "every")) and self.tokens[self.i + 1][1] == "$":
+            operator, bindings = self.take()[1], []
+            while True:
+                self.take("$")
+                name, offset = self.variable_name()
+                self.take("in")
+                bindings.append((name, offset, self.single()))
+                if not self.at(","):
+                    break
+                self.take(",")
+            self.take("return" if operator == "for" else "satisfies")
+            return ("bind", operator, tuple(bindings), self.single())
         if self.at("if") and self.tokens[self.i + 1][1] == "(":
             self.take("if")
             self.take("(")
@@ -126,6 +136,12 @@ class Parser:
             self.take("else")
             return ("if", condition, yes, self.single())
         return self.binary(1)
+
+    def variable_name(self):
+        kind, name, offset = self.take()
+        if kind != "name" or not re.fullmatch(QNAME, name):
+            raise Unsupported("expected variable QName")
+        return name, offset
 
     def binary(self, minimum):
         if self.at("+") or self.at("-"):
@@ -180,7 +196,10 @@ class Parser:
     def step(self):
         token = self.take()
         kind, value, _ = token
-        if kind == "number":
+        if value == "$" and kind == "symbol":
+            name, offset = self.variable_name()
+            base = ("variable", name, offset)
+        elif kind == "number":
             numeric = "double" if "e" in value.lower() else "decimal" if "." in value else "integer"
             base = ("number", numeric, value)
         elif kind == "string":
@@ -248,6 +267,8 @@ def qualify(tree, namespaces):
 
     def walk(node):
         kind = node[0]
+        if kind in {"variable", "bind"}:
+            raise BindingIdentityRequired("binding identity requires independent resolution")
         if kind == "name":
             return (kind, name(node[1]))
         if kind == "namespace":

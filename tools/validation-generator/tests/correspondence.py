@@ -23,6 +23,7 @@ import inventory as old
 import occurrences as lex
 import xpath_candidate
 import xpath_structure
+import xpath_bindings
 
 HERE = Path(__file__).resolve().parents[1]
 S = "http://purl.oclc.org/dsdl/schematron"
@@ -65,11 +66,11 @@ def check_occurrences(text, tree):
             f"XPath occurrence mismatch at None: missing={dict(expected - actual)!r}; extra={dict(actual - expected)!r}")
 
 
-def classify_expression(text, candidate_tree, namespaces, parsed):
+def classify_expression(text, candidate_tree, namespaces, parsed, bindings=None):
     """Parse each distinct source text once, before adapting any candidate tree.
 
-    namespaces is a source-context callback so binding facets can remain pending
-    without attempting name resolution. Errors are evidence, never a guessed tree.
+    Static context and binding callbacks use source XML alone. Errors are
+    evidence, never a guessed tree. Candidate adaptation follows source resolution.
     """
     if text not in parsed:
         try:
@@ -80,6 +81,31 @@ def classify_expression(text, candidate_tree, namespaces, parsed):
         tree = parsed[text]
         if isinstance(tree, Exception):
             raise tree
+        if xpath_bindings.contains_bindings(tree):
+            if bindings is None:
+                raise xpath_structure.BindingIdentityRequired()
+            strict = bindings(tree)
+            candidate = xpath_candidate.adapt(candidate_tree)
+            xpath_bindings.compare(strict, candidate)
+            evidence = {**strict, "candidate_tree": candidate}
+            if strict["resolved"]:
+                return ("mapped-exact" if strict["matching"] else "different",
+                        "independent syntactic structure and source binding identity comparison; no evaluation claim",
+                        read_json(enc(evidence)))
+            alternative = bindings(tree, True)
+            xpath_bindings.compare(alternative, candidate)
+            evidence["effective_common_global"] = alternative
+            for strict_ref, effective_ref in zip(evidence["references"], alternative["references"], strict=True):
+                strict_ref["strict_pattern_local"] = "resolved" if strict_ref["source_declaration"] else "unresolvable"
+                strict_ref["effective"] = effective_ref
+            if alternative["resolved"]:
+                return ("mapped-exact" if alternative["matching"] else "different",
+                        "independent binding identity with proven COMMON_GLOBAL scope; no evaluation claim",
+                        read_json(enc(evidence)))
+            reason = ("missing independent proof for common-global binding"
+                      if any(r.get("missing_common_global_proof") for r in alternative["references"])
+                      else "unresolved source binding")
+            return "unexamined", reason, read_json(enc(evidence))
         source = xpath_structure.qualify(tree, namespaces())
         candidate = xpath_candidate.adapt(candidate_tree)
     except xpath_structure.BindingIdentityRequired:
@@ -224,6 +250,7 @@ def parse_xml(data, archive, member, archive_digest, lock_digest):
     require(b"\x00" not in data, "unsupported XML byte encoding")
     parser = expat.ParserCreate(namespace_separator="}")
     nodes, stack, pending_ns = [], [], []
+    comments = []
     member_digest = sha(data)
 
     def expanded(name):
@@ -295,7 +322,13 @@ def parse_xml(data, archive, member, archive_digest, lock_digest):
     parser.StartElementHandler = start
     parser.EndElementHandler = end
     parser.CharacterDataHandler = lambda value: content({"text": value})
-    parser.CommentHandler = lambda value: content({"comment": value})
+    def comment(value):
+        begin = parser.CurrentByteIndex
+        end = data.index(b"-->", begin) + 3
+        comments.append({"text": value, "archive": archive, "member": member,
+                         "raw_span": [begin, end], "raw_sha256": sha(data[begin:end])})
+        content({"comment": value})
+    parser.CommentHandler = comment
     parser.ProcessingInstructionHandler = lambda target, value: content({"pi": [target, value]})
     parser.StartDoctypeDeclHandler = refuse
     parser.EntityDeclHandler = refuse
@@ -304,7 +337,7 @@ def parse_xml(data, archive, member, archive_digest, lock_digest):
     parser.SetParamEntityParsing(expat.XML_PARAM_ENTITY_PARSING_NEVER)
     parser.Parse(data, True)
     require(nodes, "empty selected XML")
-    return {"nodes": nodes}
+    return {"nodes": nodes, "comments": comments}
 
 
 def ancestors(doc, index):
@@ -561,6 +594,13 @@ def enumerate_obligations(candidate, docs, payload, ident):
     rows = []
     excluded_scaffolding = []
     parsed_expressions, static_contexts = {}, {}
+    source_scopes = None
+
+    def resolve_bindings(tree, k, i, attr, global_patterns=False):
+        nonlocal source_scopes
+        if source_scopes is None:
+            source_scopes = xpath_bindings.SourceScopes(docs)
+        return source_scopes.resolve(tree, k, i, attr, node(k, i)["attributes"][attr], global_patterns)
 
     def expression_namespaces(k, i):
         if k not in static_contexts:
@@ -582,6 +622,8 @@ def enumerate_obligations(candidate, docs, payload, ident):
         status, reason, evidence = classify_expression(
             row["evidence"]["source"], row["evidence"]["candidate"],
             lambda: expression_namespaces(k, i), parsed_expressions,
+            lambda tree, global_patterns=False: resolve_bindings(
+                tree, k, i, row["facet"].split(":", 1)[1], global_patterns),
         )
         row.update(status=status, reason=reason)
         row["evidence"].update(evidence)
