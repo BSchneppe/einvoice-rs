@@ -19,7 +19,7 @@ permissions:
 jobs:
   frontend:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     env:
       CARGO_MANIFEST: tools/validation-generator/Cargo.toml
     steps:
@@ -45,7 +45,7 @@ jobs:
       - name: Explicit verified acquisition
         run: python3 tools/validation-generator/scripts/fetch.py --out tools/validation-generator/.cache/archives
       - name: Full pinned source accounting and byte determinism
-        run: python3 tools/validation-generator/scripts/generate.py --archives tools/validation-generator/.cache/archives --out tools/validation-generator/.cache/ci-output --check-accounting tools/validation-generator/SOURCE-ACCOUNTING.json --check-candidate-accounting tools/validation-generator/CANDIDATE-ACCOUNTING.json
+        run: python3 tools/validation-generator/scripts/generate.py --archives tools/validation-generator/.cache/archives --out tools/validation-generator/.cache/ci-output --check-accounting tools/validation-generator/SOURCE-ACCOUNTING.json --check-candidate-accounting tools/validation-generator/CANDIDATE-ACCOUNTING.json --check-correspondence-accounting tools/validation-generator/CORRESPONDENCE-ACCOUNTING.json
       - name: Retain full inspection and candidate for review (non-executable)
         uses: actions/upload-artifact@v4
         with:
@@ -53,3 +53,4 @@ jobs:
           path: |
             tools/validation-generator/.cache/ci-output/one
             tools/validation-generator/.cache/ci-output/candidate-one
+            tools/validation-generator/.cache/ci-output/correspondence-one.json

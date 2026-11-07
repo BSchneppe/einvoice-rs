@@ -259,7 +259,8 @@ python3 tools/validation-generator/scripts/generate.py \
   --archives tools/validation-generator/.cache/archives \
   --out tools/validation-generator/.cache/resolution-reproduction \
   --check-accounting tools/validation-generator/SOURCE-ACCOUNTING.json \
-  --check-candidate-accounting tools/validation-generator/CANDIDATE-ACCOUNTING.json
+  --check-candidate-accounting tools/validation-generator/CANDIDATE-ACCOUNTING.json \
+  --check-correspondence-accounting tools/validation-generator/CORRESPONDENCE-ACCOUNTING.json
 ```
 
 This generates raw and candidate outputs twice with reversed archive arguments,
@@ -281,6 +282,53 @@ Backend and policy execution remain `Unavailable`; `runnable` still errors befor
 creating output. The local decision does not certify undiscovered differences,
 BSC-10 evidence, native parity, complete source resolution, protected attestation,
 AOT or performance. Independent review of this compiler pass is still required.
+
+## Independent correspondence accounting
+
+`tests/correspondence.py` reads the five pinned archives and `candidate-one`
+directly, using Python stdlib XML parsing independently of the Rust generator.
+It authenticates archive/member bytes against the oracle lock and additive JAR
+closure lock, and every candidate file against `CANDIDATE-ACCOUNTING.json`.
+`generate.py` runs this check and its corruption tests, compares summaries from
+both generation orders byte for byte, and checks the reviewed
+`CORRESPONDENCE-ACCOUNTING.json` with `--check-correspondence-accounting`.
+There is no dependency on discovery snapshots or source-inventory output.
+
+The complete denominator is 12,571 source occurrence/facet obligations:
+11,225 mapped-exact, 24 different, 3 ambiguous, 27 unsupported and 1,292
+unexamined. Ordered ownership, source ranges/hashes, exact expression strings,
+phase activation, binding declarations, helper constructors, message parts and
+nine severity overrides are compared. Original, preprocessed and configured
+views remain separate obligations. Matching IDs only associate comparison
+candidates; they do not establish equivalence. Exact strings retain padding and
+numeric spelling. Named constructor projections record raw trees, including the
+`sch:name` to `name()`/`name(.)` projection and removal of whitespace-only XSLT
+stylesheet text. Significant text is preserved.
+The complete four-stage scenario sequence differs from the candidate's nine-stage
+sequence, which also includes engine steps; resource presence is checked separately.
+Configured helpers and content initializers are compared to candidate bodies.
+Unknown primary elements/attributes produce unsupported rows. Excluded configured
+scaffolding bindings are listed by name and source location in the summary, outside
+the obligation denominator, so additions change the reviewed accounting.
+
+The summary binds the exact candidate, both source locks, all source members and
+the complete ordered obligation list. Mapped-exact rows are bound by a canonical
+list digest and category counts; every other row retains its full source and
+candidate evidence, JSON pointers and occurrence identity. Each non-exact row is
+one unshortened JSON line inside the summary, preserving whitespace in strings.
+Missing, extra or duplicate obligations, changed exact evidence and mixed
+candidate/summary pairs cannot pass the reviewed baseline comparison.
+
+The overall result is **incomplete**. The CII-SR-282 alternatives remain
+ambiguous/different; this check makes no new authority decision. Lexical or
+constructor preservation does not prove full XPath AST structure, configured
+rule dispatch/reachability, helper or external-parameter effects, or report/JAR
+policy effects. XSD semantics, HTML presentation, unrelated scenarios and
+arbitrary compiler scaffolding are outside this denominator. It never executes
+XSLT or invoices and proves no runtime parity, conformance, AOT or performance.
+`correspondence_audit` stays
+`PendingFullPredicateContextHelperMessagePolicyCorrespondence`, the backend and
+policy execution stay `Unavailable`, and `runnable` stays unavailable.
 
 Root regression checks (the generator remains isolated from that workspace):
 
