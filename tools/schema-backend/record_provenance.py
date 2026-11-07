@@ -26,10 +26,10 @@ def record(archive):
     require(set(original) == set(patched) and len(original) == 328, "package membership changed")
     identify = lambda b: {"bytes": len(b), "sha256": digest(b)}
     patch_dir = REPOSITORY / "vendor/xsd-schema-patches"
-    patch_names = ["0001-msrv-unpublished.patch", "0002-owned-diagnostic-evidence.patch", "0003-cooperative-stop.patch"]
+    patch_names = ["0001-msrv-unpublished.patch", "0002-owned-diagnostic-evidence.patch", "0003-cooperative-stop.patch", "0004-xml-character-content.patch"]
     manifest = {
         "format": "bsc8-maintained-xsd-v1",
-        "package": {"name": "xsd-schema", "version": "0.3.0", "local_revision": "bsc8-maintenance-1", "publish": False},
+        "package": {"name": "xsd-schema", "version": "0.3.0", "local_revision": "bsc8-maintenance-2", "publish": False},
         "archive": {"url": "https://crates.io/api/v1/crates/xsd-schema/0.3.0/download", **identify(data)},
         "recorded_upstream_vcs": json.loads(original[".cargo_vcs_info.json"]),
         "patches": [{"path": name, **identify((patch_dir / name).read_bytes())} for name in patch_names],

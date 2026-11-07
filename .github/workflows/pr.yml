@@ -48,7 +48,10 @@ jobs:
           profile: minimal
           override: true
       - name: Fetch committed workspace dependencies
-        run: cargo +1.83.0 fetch --locked
+        # Fetch the actual native host closure; unrelated WASI lock entries
+        # require newer Cargo manifest features and are not built by this job.
+        run: |
+          cargo +1.83.0 fetch --locked --target "$(rustc +1.83.0 -vV | sed -n 's/^host: //p')"
       - name: Archive source dependencies outside the checkout
         id: archive
         shell: bash
@@ -56,7 +59,8 @@ jobs:
           bundle_dir="$(mktemp -d)"
           archive_dir="$(mktemp -d)"
           git archive --format=tar --output="$bundle_dir/source.tar" HEAD -- \
-            Cargo.toml Cargo.lock LICENSE crates/einvoice crates/einvoice-numeric vendor/xml-rs vendor/xml-rs.patch vendor/xml-rs.provenance.json vendor/xml-rs-maintenance.md
+            Cargo.toml Cargo.lock LICENSE crates/einvoice crates/einvoice-numeric vendor/xml-rs vendor/xml-rs.patch vendor/xml-rs.provenance.json vendor/xml-rs-maintenance.md \
+            vendor/xsd-schema vendor/xsd-schema-patches vendor/xsd-schema.provenance.json tools/schema-backend/README.md
           tar -xf "$bundle_dir/source.tar" -C "$archive_dir"
           echo "directory=$archive_dir" >> "$GITHUB_OUTPUT"
       - name: Project the lock onto the source dependency workspace

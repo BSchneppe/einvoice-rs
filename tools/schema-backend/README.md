@@ -121,7 +121,7 @@ omitted index entry. Keep the temporary archive for inspection if verification
 fails. Verify again after checkout with `core.autocrlf=false` or `input`; CI
 disables conversion before checkout. Do not normalize upstream whitespace to
 make a whole new vendor package pass `git diff --check`; it includes original
-trailing spaces and CRLF. The three patch files and new maintainer code have
+trailing spaces and CRLF. The ordered patch files and new maintainer code have
 clean whitespace.
 
 ## Reproduction
@@ -136,7 +136,7 @@ python3 -m unittest discover -s tools/schema-backend -p 'test_*.py' -v
 python3 tools/schema-backend/verify_features.py --target aarch64-apple-darwin
 cargo +1.83.0 test --locked --manifest-path tools/schema-backend/Cargo.toml
 cargo +1.83.0 fmt --manifest-path tools/schema-backend/Cargo.toml --all -- --check
-rustfmt +1.83.0 --edition 2021 --check vendor/xsd-schema/src/validation/errors.rs vendor/xsd-schema/src/validation/simple.rs vendor/xsd-schema/src/validation/runtime.rs vendor/xsd-schema/src/validation/validator.rs
+rustfmt +1.83.0 --edition 2021 --check vendor/xsd-schema/src/validation/errors.rs vendor/xsd-schema/src/validation/simple.rs vendor/xsd-schema/src/validation/runtime.rs vendor/xsd-schema/src/validation/validator.rs vendor/xsd-schema/src/validation/quick_xml_driver.rs vendor/xsd-schema/src/validation/navigator_driver.rs
 cargo +1.83.0 clippy --locked --manifest-path tools/schema-backend/Cargo.toml --all-targets -- -D warnings
 cargo +1.83.0 clippy --locked --manifest-path tools/schema-backend/Cargo.toml -p xsd-schema --lib -- -D warnings
 RUSTDOCFLAGS='-D warnings' cargo +1.83.0 doc --locked --manifest-path tools/schema-backend/Cargo.toml --no-deps --document-private-items
