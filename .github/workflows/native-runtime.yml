@@ -19,7 +19,7 @@ jobs:
       run:
         shell: bash
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Rust 1.83
         run: rustup toolchain install 1.83.0 --profile minimal --component rustfmt --component clippy
       - name: Scalar and resource regressions
