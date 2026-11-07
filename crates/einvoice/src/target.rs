@@ -6,7 +6,8 @@ use crate::{
 };
 
 const TARGET_ID: &str = "xrechnung-3.0.2-cii-d16b-kosit-2026-08-31";
-const PROFILE_ID: &str = "urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0";
+pub(crate) const PROFILE_ID: &str =
+    "urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0";
 const STAGES: [Stage; 6] = [
     Stage::XmlSyntax,
     Stage::TargetSelection,

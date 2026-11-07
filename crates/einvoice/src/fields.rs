@@ -143,6 +143,19 @@ pub(crate) fn collect(
         checks.missing("payment", &["BR-DE-1"]);
     }
     checks.optional(&draft.payment_terms.text, "payment_terms.text");
+    if draft.payment_terms.text.as_ref().is_some_and(|text| {
+        text.split('\n').any(|line| {
+            line.trim_start_matches([' ', '\t', '\r', '\n'])
+                .starts_with('#')
+        })
+    }) {
+        checks.push(
+            "API-BUILD-UNSUPPORTED-TERMS",
+            "payment_terms.text",
+            "Creation supports plain prose only; hash-start lines request unsupported structured payment terms",
+            &[],
+        );
+    }
     checks.optional(&draft.payment_terms.due_date, "payment_terms.due_date");
     if let Some(date) = &draft.payment_terms.due_date {
         checks.date(date, "payment_terms.due_date");

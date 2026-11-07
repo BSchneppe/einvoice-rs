@@ -211,7 +211,12 @@ pub struct PaymentInstructions {
 pub struct PaymentTerms {
     /// Optional date in calendar-valid `YYYYMMDD` form.
     pub due_date: Option<String>,
-    /// Optional original prose. No discount interpretation is performed.
+    /// Optional original prose. Creation rejects LF-separated lines starting
+    /// with `#` after leading XML whitespace (space, tab, CR, LF), including
+    /// source-valid structured cash discounts. This is a builder capability
+    /// restriction, not an incoming-validity rule. Embedded `#`, Unicode
+    /// whitespace and ordinary prose are preserved; no discount interpretation
+    /// or final newline is required.
     pub text: Option<String>,
 }
 

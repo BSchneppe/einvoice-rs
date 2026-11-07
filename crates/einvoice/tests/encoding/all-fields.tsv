@@ -1,0 +1,99 @@
+# Independently specified source mapping, in schema leaf order. Bare names are ram.
+# C=context D=document L=first line A=agreement H=delivery S=settlement.
+# Attributes are unqualified. All represented business leaves and emitted attributes covered.
+C/BusinessProcessSpecifiedDocumentContextParameter/ID	urn:fdc:peppol.eu:2017:poacc:billing:01:1.0
+C/GuidelineSpecifiedDocumentContextParameter/ID	urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0
+D/ID	all-fields
+D/TypeCode	380
+D/IssueDateTime/udt:DateTimeString	20261106
+D/IssueDateTime/udt:DateTimeString/@format	102
+L/AssociatedDocumentLineDocument/LineID	line-1
+L/SpecifiedTradeProduct/Name	Original item
+L/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/ChargeAmount	12.345
+L/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/BasisQuantity	1
+L/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/BasisQuantity/@unitCode	C62
+L/SpecifiedLineTradeDelivery/BilledQuantity	2
+L/SpecifiedLineTradeDelivery/BilledQuantity/@unitCode	C62
+L/SpecifiedLineTradeSettlement/ApplicableTradeTax/TypeCode	VAT
+L/SpecifiedLineTradeSettlement/ApplicableTradeTax/CategoryCode	S
+L/SpecifiedLineTradeSettlement/ApplicableTradeTax/RateApplicablePercent	19
+L/SpecifiedLineTradeSettlement/SpecifiedTradeSettlementLineMonetarySummation/LineTotalAmount	24.69
+A/BuyerReference	buyer-reference
+A/SellerTradeParty/GlobalID	seller-global
+A/SellerTradeParty/GlobalID/@schemeID	0088
+A/SellerTradeParty/Name	Seller name
+A/SellerTradeParty/SpecifiedLegalOrganization/ID	seller-legal
+A/SellerTradeParty/SpecifiedLegalOrganization/ID/@schemeID	0002
+A/SellerTradeParty/DefinedTradeContact/PersonName	Seller person
+A/SellerTradeParty/DefinedTradeContact/TelephoneUniversalCommunication/CompleteNumber	+49 228 1111111
+A/SellerTradeParty/DefinedTradeContact/EmailURIUniversalCommunication/URIID	seller-contact@example.test
+A/SellerTradeParty/PostalTradeAddress/PostcodeCode	Seller postcode
+A/SellerTradeParty/PostalTradeAddress/LineOne	Seller street
+A/SellerTradeParty/PostalTradeAddress/LineTwo	Seller building
+A/SellerTradeParty/PostalTradeAddress/LineThree	Seller floor
+A/SellerTradeParty/PostalTradeAddress/CityName	Seller city
+A/SellerTradeParty/PostalTradeAddress/CountryID	DE
+A/SellerTradeParty/PostalTradeAddress/CountrySubDivisionName	Seller region
+A/SellerTradeParty/URIUniversalCommunication/URIID	seller@example.test
+A/SellerTradeParty/URIUniversalCommunication/URIID/@schemeID	EM
+A/SellerTradeParty/SpecifiedTaxRegistration[1]/ID	DE123456789
+A/SellerTradeParty/SpecifiedTaxRegistration[1]/ID/@schemeID	VA
+A/SellerTradeParty/SpecifiedTaxRegistration[2]/ID	seller-fiscal
+A/SellerTradeParty/SpecifiedTaxRegistration[2]/ID/@schemeID	FC
+A/BuyerTradeParty/ID	buyer-local
+A/BuyerTradeParty/Name	Buyer name
+A/BuyerTradeParty/SpecifiedLegalOrganization/ID	buyer-legal
+A/BuyerTradeParty/DefinedTradeContact/DepartmentName	Buyer department
+A/BuyerTradeParty/DefinedTradeContact/TelephoneUniversalCommunication/CompleteNumber	+49 228 2222222
+A/BuyerTradeParty/DefinedTradeContact/EmailURIUniversalCommunication/URIID	buyer-contact@example.test
+A/BuyerTradeParty/PostalTradeAddress/PostcodeCode	Buyer postcode
+A/BuyerTradeParty/PostalTradeAddress/LineOne	Buyer street
+A/BuyerTradeParty/PostalTradeAddress/LineTwo	Buyer building
+A/BuyerTradeParty/PostalTradeAddress/LineThree	Buyer floor
+A/BuyerTradeParty/PostalTradeAddress/CityName	Buyer city
+A/BuyerTradeParty/PostalTradeAddress/CountryID	DE
+A/BuyerTradeParty/PostalTradeAddress/CountrySubDivisionName	Buyer region
+A/BuyerTradeParty/URIUniversalCommunication/URIID	buyer-route
+A/BuyerTradeParty/URIUniversalCommunication/URIID/@schemeID	0204
+A/BuyerTradeParty/SpecifiedTaxRegistration/ID	DE987654321
+A/BuyerTradeParty/SpecifiedTaxRegistration/ID/@schemeID	VA
+A/SellerTaxRepresentativeTradeParty/Name	Representative name
+A/SellerTaxRepresentativeTradeParty/PostalTradeAddress/PostcodeCode	Representative postcode
+A/SellerTaxRepresentativeTradeParty/PostalTradeAddress/LineOne	Representative street
+A/SellerTaxRepresentativeTradeParty/PostalTradeAddress/LineTwo	Representative building
+A/SellerTaxRepresentativeTradeParty/PostalTradeAddress/LineThree	Representative floor
+A/SellerTaxRepresentativeTradeParty/PostalTradeAddress/CityName	Representative city
+A/SellerTaxRepresentativeTradeParty/PostalTradeAddress/CountryID	DE
+A/SellerTaxRepresentativeTradeParty/PostalTradeAddress/CountrySubDivisionName	Representative region
+A/SellerTaxRepresentativeTradeParty/SpecifiedTaxRegistration/ID	DE111111111
+A/SellerTaxRepresentativeTradeParty/SpecifiedTaxRegistration/ID/@schemeID	VA
+A/SellerOrderReferencedDocument/IssuerAssignedID	seller-order
+A/BuyerOrderReferencedDocument/IssuerAssignedID	purchase-order
+A/ContractReferencedDocument/IssuerAssignedID	contract-reference
+H	
+S/PaymentReference	remittance-reference
+S/InvoiceCurrencyCode	EUR
+S/SpecifiedTradeSettlementPaymentMeans[1]/TypeCode	30
+S/SpecifiedTradeSettlementPaymentMeans[1]/Information	Transfer description
+S/SpecifiedTradeSettlementPaymentMeans[1]/PayeePartyCreditorFinancialAccount/IBANID	DE89370400440532013000
+S/SpecifiedTradeSettlementPaymentMeans[1]/PayeePartyCreditorFinancialAccount/AccountName	IBAN holder
+S/SpecifiedTradeSettlementPaymentMeans[1]/PayeeSpecifiedCreditorFinancialInstitution/BICID	COBADEFFXXX
+S/SpecifiedTradeSettlementPaymentMeans[2]/TypeCode	30
+S/SpecifiedTradeSettlementPaymentMeans[2]/Information	Transfer description
+S/SpecifiedTradeSettlementPaymentMeans[2]/PayeePartyCreditorFinancialAccount/AccountName	Local holder
+S/SpecifiedTradeSettlementPaymentMeans[2]/PayeePartyCreditorFinancialAccount/ProprietaryID	local-account
+S/SpecifiedTradeSettlementPaymentMeans[2]/PayeeSpecifiedCreditorFinancialInstitution/BICID	MARKDEF1100
+S/ApplicableTradeTax/CalculatedAmount	4.69
+S/ApplicableTradeTax/TypeCode	VAT
+S/ApplicableTradeTax/BasisAmount	24.69
+S/ApplicableTradeTax/CategoryCode	S
+S/ApplicableTradeTax/RateApplicablePercent	19
+S/SpecifiedTradePaymentTerms/Description	Pay within 30 days & quote reference #42.
+S/SpecifiedTradePaymentTerms/DueDateDateTime/udt:DateTimeString	20261206
+S/SpecifiedTradePaymentTerms/DueDateDateTime/udt:DateTimeString/@format	102
+S/SpecifiedTradeSettlementHeaderMonetarySummation/LineTotalAmount	24.69
+S/SpecifiedTradeSettlementHeaderMonetarySummation/TaxBasisTotalAmount	24.69
+S/SpecifiedTradeSettlementHeaderMonetarySummation/TaxTotalAmount	4.69
+S/SpecifiedTradeSettlementHeaderMonetarySummation/TaxTotalAmount/@currencyID	EUR
+S/SpecifiedTradeSettlementHeaderMonetarySummation/GrandTotalAmount	29.38
+S/SpecifiedTradeSettlementHeaderMonetarySummation/DuePayableAmount	29.38
