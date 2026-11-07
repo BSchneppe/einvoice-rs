@@ -49,6 +49,8 @@ subprocess.run(['python3', str(HERE / 'tests/test_correspondence.py'), '--archiv
                 '--candidate', str(a.out / 'candidate-one')], check=True)
 subprocess.run(['python3', str(HERE / 'tests/test_xpath_structure.py')], check=True)
 subprocess.run(['python3', str(HERE / 'tests/test_xpath_bindings.py')], check=True)
+subprocess.run(['python3', str(HERE / 'tests/test_dispatch.py'), '--archives', str(a.archives),
+                '--candidate', str(a.out / 'candidate-one')], check=True)
 if a.check_correspondence_accounting:
     require(json.loads((a.out / 'correspondence-one.json').read_bytes()) == json.loads(a.check_correspondence_accounting.read_bytes()), 'reviewed correspondence accounting changed')
 subprocess.run(['python3', str(HERE / 'tests/inventory.py'), '--archives', str(a.archives), '--ir', str(a.out / 'one/ir.json'), '--other', str(a.out / 'two'), '--summary', str(a.out / 'accounting.json')], check=True)

@@ -472,6 +472,8 @@ def executable_view(doc):
 
 def enumerate_obligations(candidate, docs, payload, ident):
     """Compare source-derived occurrences, preserving every pending facet."""
+    import dispatch
+    configured_dispatch = dispatch.derive_documents(docs)
     package = candidate["effective_package"]
     require(candidate["backend"] == package["backend"] == package["policy"]["execution"] == "Unavailable", "backend state")
     require(candidate["correspondence_audit"] == "PendingFullPredicateContextHelperMessagePolicyCorrespondence", "audit state")
@@ -1866,6 +1868,10 @@ def enumerate_obligations(candidate, docs, payload, ident):
                 (p, "source line/column drift"))
         location_count += 1
 
+    # The dispatch checker derives both configured tables without candidate
+    # dispatch fields, then updates only the existing 158 occurrence/facet rows.
+    dispatch.update_obligations(rows, candidate, docs, configured_dispatch)
+
     require(len({r["obligation_id"] for r in rows}) == len(rows), "duplicate obligation")
     rows.sort(
         key=lambda r: (
@@ -1928,7 +1934,7 @@ def summarize(value, rows, coverage, location_count, payload, ident):
         "correspondence_audit": value["correspondence_audit"],
         "scope": {
             "included": "CEN original/preprocessed declarations; release CII-SR-282 conflict only; XR/common declarations; configured CEN/XR metadata, failure guards, messages, routing and helpers; selected CII scenario, non-HTML report owner trees and typed policy evidence",
-            "excluded": "XSD semantics, HTML presentation, unrelated scenarios, arbitrary compiler scaffolding, full AST/dispatch/helper-effect/policy-effect proofs, XSLT or invoice execution, runtime/backend, AOT and performance",
+            "excluded": "XSD semantics, HTML presentation, unrelated scenarios, arbitrary compiler scaffolding, full AST/helper-effect/policy-effect proofs, dispatch outside the pinned #ALL shape, match evaluation, strict XSLT 2.0 entry-wrapper portability, XSLT or invoice execution, runtime/backend, AOT and performance",
             "configured_xslt": "comparison evidence only; never executed",
             "granularity": "one entry per occurrence/facet; lexical and AST facets and original/preprocessed/configured views have separate obligations",
         },
@@ -1942,6 +1948,12 @@ def summarize(value, rows, coverage, location_count, payload, ident):
         "categories": categories,
         "obligations_sha256": sha(enc(rows)),
         "mapped_exact": {"count": len(exact), "canonical_list_sha256": sha(enc(exact))},
+        "dispatch_entry_profiles": [
+            {"obligation_id": r["obligation_id"], "status": r["status"],
+             **{k: r["evidence"]["dispatch"].get(k)
+                for k in ("entry", "entry_bytes_equal", "entry_note")}}
+            for r in rows if r["facet"] == "dispatch contract"
+        ],
         "non_exact": [r for r in rows if r["status"] != "mapped-exact"],
     }
 

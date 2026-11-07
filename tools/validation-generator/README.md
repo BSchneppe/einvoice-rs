@@ -295,7 +295,7 @@ both generation orders byte for byte, and checks the reviewed
 There is no dependency on discovery snapshots or source-inventory output.
 
 The complete denominator is 12,571 source occurrence/facet obligations:
-12,334 mapped-exact, 24 different, 3 ambiguous, 27 unsupported and 183
+12,492 mapped-exact, 24 different, 3 ambiguous, 27 unsupported and 25
 unexamined. Ordered ownership, source ranges/hashes, exact expression strings,
 phase activation, binding declarations, helper constructors, message parts and
 nine severity overrides are compared. Original, preprocessed and configured
@@ -337,6 +337,24 @@ proof occurrences. Missing proof leaves a facet unexamined. This introduces no
 new authority choice.
 These checks prove bounded syntax and binding identity, without evaluating XPath.
 
+`tests/dispatch.py` derives the complete template/control inventory, shared mode,
+explicit priority order, per-pattern suppression transitions, three traversal
+defaults and fresh descendant state from configured XML before reading candidate
+dispatch fields. It compares that table with independent Schematron source order
+(including the bounded common.sch include) and candidate rule order, using the
+existing XPath parser and binding resolver. This closes the existing 156 rule
+dispatch rows and two #ALL contracts, without changing the denominator. Unknown
+shapes fail closed with an explicit unsupported reason. Fixtures and mutations in
+`tests/test_dispatch.py` are run by `generate.py`.
+The two contracts additionally require the exact pinned `root()` entry-wrapper
+bytes, retaining their occurrence and SHA-256 in `dispatch_entry_profiles` in the
+summary. `root()` is XSLT 3.0 pattern syntax;
+no strict XSLT 2.0 portability or processor acceptance is claimed. Changed wrapper
+bytes leave a contract unexamined when its structural comparison otherwise passes.
+This proves structural correspondence of compiled dispatch to source/candidate
+order under the pinned shape. It executes no XSLT, evaluates no match or binding
+value, and proves no alternate phase variant or runtime dispatch implementation.
+
 The summary binds the exact candidate, both source locks, all source members and
 the complete ordered obligation list. Mapped-exact rows are bound by a canonical
 list digest and category counts; every other row retains its full source and
@@ -347,10 +365,11 @@ candidate/summary pairs cannot pass the reviewed baseline comparison.
 
 The overall result is **incomplete**. The CII-SR-282 alternatives remain
 ambiguous/different; this check makes no new authority decision. Lexical or
-constructor preservation does not prove binding identity, configured
-rule dispatch/reachability, helper or external-parameter effects, or report/JAR
-policy effects. XSD semantics, HTML presentation, unrelated scenarios and
-arbitrary compiler scaffolding are outside this denominator. It never executes
+constructor preservation alone does not prove binding identity or dispatch;
+the bounded checks above add those specific structural proofs. Helper and
+external-parameter effects, dispatch outside the pinned shape, and report/JAR
+policy effects remain unproved. XSD semantics, HTML presentation, unrelated
+scenarios and arbitrary compiler scaffolding are outside this denominator. It never executes
 XSLT or invoices and proves no runtime parity, conformance, AOT or performance.
 `correspondence_audit` stays
 `PendingFullPredicateContextHelperMessagePolicyCorrespondence`, the backend and
