@@ -1,7 +1,9 @@
-# Private typed atomic infrastructure
+# Private bounded XPath expression runtime
 
-Unpublished Rust 1.83 scalar infrastructure in its own workspace. This crate has
-no XPath evaluator, validator or package execution API. The root workspace's
+Unpublished Rust 1.83 atomic infrastructure and a borrowed-AST expression machine
+in their own workspace. This crate has no validator or package execution API.
+See [MACHINE.md](MACHINE.md) for the low-level machine API, semantics, resources
+and explicit capability gaps. The root workspace's
 `crates/*` wildcard cannot discover `tools/native-runtime`. All acceptance gates
 remain incomplete; parent integration and independent review are required.
 
@@ -9,7 +11,8 @@ remain incomplete; parent integration and independent review are required.
 UntypedAtomic. Integer wraps the merged `einvoice-numeric::Decimal` with an integral
 invariant, while Decimal retains its distinct type even when integral. Literal
 construction accepts the merged `validation_ir::NumericKind` directly. No parser,
-AST copy, compiler, source dependency or second exact arithmetic substrate exists.
+AST copy, compiler or second exact arithmetic substrate exists. The expression
+machine consumes the merged immutable `einvoice-source` API.
 
 ```rust
 use einvoice_native_runtime::{Arithmetic, AtomicType, Limits, NumericKind, Scope};
@@ -33,7 +36,7 @@ The scalar API includes lexical/typed casts, singleton-operand castability,
 `number(Some(atom))`/`number(None)`, arithmetic, numeric comparison, negation, abs,
 round and explicit string rendering. `resolve_type` rejects every other requested
 type, including derived types such as `xs:int`, as a capability failure.
-`numeric_compare` requires numeric operands after the future caller's comparison
+`numeric_compare` requires numeric operands after the machine's comparison
 conversion; it does not implement general/value/node comparison policies.
 String/untyped lexical constructors preserve all bytes. Integer casts trim edge codepoints through U+0020. Decimal and Boolean casts
 retain XML-only whitespace. The pinned Float/Double adapter admits edge C0
@@ -48,7 +51,7 @@ b.normalized_scale() + 18)` with checked signed arithmetic and HalfTowardZero.
 XPath round uses HalfTowardPositiveInfinity at the caller's signed precision.
 Binary round decomposes exact bits before quantizing, retaining negative zero.
 The supplied `i64` precision is a scalar API bound; arbitrary integer argument
-conversion/cardinality belong to the future function layer.
+conversion/cardinality belong to the expression function layer.
 
 Float/Double preserve IEEE zero signs, NaN, infinities, unordered comparisons,
 underflow and overflow. Required promotion to binary is explicit. Decimal-only
@@ -86,7 +89,7 @@ unsupported capability, foreign-scope and internal failures use `Error::Fatal`.
 `castable` catches only XPath faults from its own supplied-atom cast, and `number`
 converts only its specified lexical/type faults to NaN. Neither catches fatal
 failures. Operand evaluation errors cannot enter these APIs without a caller
-explicitly discarding them; evaluation/cardinality are absent here.
+explicitly discarding them; evaluation/cardinality are handled by the expression machine.
 
 A `Scope` is non-cloneable, with no reset method. It owns one kernel Budget for
 its whole lifetime, plus cumulative runtime fuel, conservative string allocation
@@ -137,11 +140,11 @@ all-target Clippy `-D warnings`, and docs `-D warnings`. Tests need no Java or
 network. Fixture provenance and an optional read-only pinned Saxon replay are in
 `tests/fixtures/README.md`.
 
-OPEN: sequences/replay/demand, nodes/atomization, function argument conversion and
-cardinality, EBV, general/value/node comparisons, function call dispatch,
-AST/Instruction execution, contexts/bindings/helpers, source adapters, strings and
-regex, diagnostics, package capability closure, target availability and full
-validator integration. There are no eager placeholders or success stubs for those
-features. Source resolution remains the compiler/parent's responsibility. The
-725 scalar reference rows are development evidence, not full XPath expression,
-invoice, package, native conformance, performance or release evidence.
+OPEN: helper/Instruction execution and temporary constructors, remaining strings,
+regex/casing data, match dispatch/messages, package capability closure, target
+availability, source/schema/policy/report integration, independent correspondence,
+coverage and release gates. These are explicit preparation failures or separate
+unimplemented layers. The scalar fixture/replay artifacts remain byte-identical;
+their historical README describes the scalar API's boundary. Machine evidence is
+separate under `tests/evaluator-fixtures`. Neither suite establishes full XPath,
+invoice acceptance, package conformance, performance or release readiness.

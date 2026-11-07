@@ -1,0 +1,1 @@
+<r xmlns:p="urn:p"><a id="one"><b>10</b><b>20</b><c><z/></c></a><a id="two"><b>30</b></a><n>9007199254740993</n><bad>bad</bad><empty/><split>A<!--cut-->B</split><p:e p:x="v"/><d>1.25</d><d>2.5</d></r>

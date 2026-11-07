@@ -8,6 +8,20 @@ pub const XQT_ERRORS: &str = "http://www.w3.org/2005/xqt-errors";
 pub enum Fault {
     /// Invalid lexical value for a cast.
     Forg0001,
+    /// Invalid effective boolean value.
+    Forg0006,
+    /// Required dynamic focus is absent.
+    Xpdy0002,
+    /// Axis/path operand is not a node.
+    Xpty0020,
+    /// A path returned both nodes and atomic values.
+    Xpty0018,
+    /// Left path operand contains an atomic value.
+    Xpty0019,
+    /// A lazy binding depends on itself.
+    Xtde0640,
+    /// Declared select binding type/cardinality conversion failed.
+    Xtte0570,
     /// Non-finite numeric cannot be cast to decimal/integer.
     Foca0002,
     /// Division by zero for decimal/integer or integer division.
@@ -22,6 +36,13 @@ impl Fault {
     pub fn local_name(self) -> &'static str {
         match self {
             Self::Forg0001 => "FORG0001",
+            Self::Forg0006 => "FORG0006",
+            Self::Xpdy0002 => "XPDY0002",
+            Self::Xpty0020 => "XPTY0020",
+            Self::Xpty0018 => "XPTY0018",
+            Self::Xpty0019 => "XPTY0019",
+            Self::Xtde0640 => "XTDE0640",
+            Self::Xtte0570 => "XTTE0570",
             Self::Foca0002 => "FOCA0002",
             Self::Foar0001 => "FOAR0001",
             Self::Foar0002 => "FOAR0002",
@@ -49,6 +70,10 @@ pub enum Resource {
     SizeOverflow,
     /// Exact kernel resource refusal, retaining its original cause.
     Numeric(einvoice_numeric::ResourceCause),
+    /// Expression preparation/execution dimension.
+    Machine(&'static str),
+    /// Immutable source query refused its cumulative budget.
+    SourceQuery,
 }
 
 /// Processing failures cannot be caught as XPath cast failures.

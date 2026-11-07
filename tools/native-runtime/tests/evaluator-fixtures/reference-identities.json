@@ -1,0 +1,10 @@
+{
+  "tests/evaluator-fixtures/queries.tsv": "887e8528836ab90f33990b0348d0799bb6fcaf25a6e877df6c81f73f6c1aa036",
+  "tests/evaluator-fixtures/select-bindings.tsv": "e431de103fdd8d450106cb1b6f9fbd28560b9fb2550bf3e2cc4450c12920a6a8",
+  "tests/evaluator-fixtures/document.xml": "c1dbef43ce3882176e464204b6f0c66cb3d085153b4305ed6a31421e87690782",
+  "tools/MachineProbe.java": "81e09f5bc898816a5c8baab9b50baaf2c57cb8b83b22eafe7aa6aae65d11f74f",
+  "tools/replay_machine.py": "432550ef19794e839e919d1e0c1addf1847c0cba909ffcff2b538413a84f49c9",
+  "jar": "799e64befca97d4080e03608c80b85dd5a5ecc5f4ae4f35d1116ec2855b9a7c9",
+  "python": "3.12.6 (v3.12.6:a4a2d2b0d85, Sep  6 2024, 16:08:03) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "java": "openjdk version \"27.0.1\" 2026-10-20\nOpenJDK Runtime Environment Corretto-27.0.1.0.11 (build 27.0.1+11-FR)\nOpenJDK 64-Bit Server VM Corretto-27.0.1.0.11 (build 27.0.1+11-FR, mixed mode, sharing)\n"
+}

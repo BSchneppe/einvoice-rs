@@ -8,8 +8,12 @@ edition = "2021"
 rust-version = "1.83"
 publish = false
 license-file = "../../LICENSE"
-description = "Private bounded typed atomic infrastructure; no XPath evaluator"
+description = "Private bounded XPath expression machine; no validator admission"
 
 [dependencies]
 einvoice-numeric = { path = "../../crates/einvoice-numeric" }
 validation-ir = { path = "../validation-generator/crates/validation-ir" }
+einvoice-source = { path = "../../crates/einvoice-source" }
+
+[patch.crates-io]
+xml-rs = { path = "../../vendor/xml-rs" }
