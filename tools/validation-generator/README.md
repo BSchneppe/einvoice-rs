@@ -295,7 +295,7 @@ both generation orders byte for byte, and checks the reviewed
 There is no dependency on discovery snapshots or source-inventory output.
 
 The complete denominator is 12,571 source occurrence/facet obligations:
-11,225 mapped-exact, 24 different, 3 ambiguous, 27 unsupported and 1,292
+12,253 mapped-exact, 24 different, 3 ambiguous, 27 unsupported and 264
 unexamined. Ordered ownership, source ranges/hashes, exact expression strings,
 phase activation, binding declarations, helper constructors, message parts and
 nine severity overrides are compared. Original, preprocessed and configured
@@ -311,6 +311,18 @@ Unknown primary elements/attributes produce unsupported rows. Excluded configure
 scaffolding bindings are listed by name and source location in the summary, outside
 the obligation denominator, so additions change the reviewed accounting.
 
+`tests/xpath_structure.py` independently parses the bounded XPath 2.0 subset in
+the pinned sources; `tests/xpath_candidate.py` separately adapts serialized IR.
+The check admits 1,028 variable-free AST facets by comparing canonical trees,
+preserving operator spelling and association, every Group, predicate attachment
+and order, axes and node tests, calls and ordered arguments, string values,
+numeric kind and exact lexeme, and sequence order. Required call/if parentheses
+are delimiters. Source XML/Schematron/scenario declarations supply namespaces.
+Each distinct expression is parsed once per inventory. Unsupported syntax or
+static context produces an explicit unsupported row. The 81 facets with variable
+references/binders remain unexamined: binding identity requires independent
+resolution. These comparisons prove syntactic structure only, not evaluation.
+
 The summary binds the exact candidate, both source locks, all source members and
 the complete ordered obligation list. Mapped-exact rows are bound by a canonical
 list digest and category counts; every other row retains its full source and
@@ -321,7 +333,7 @@ candidate/summary pairs cannot pass the reviewed baseline comparison.
 
 The overall result is **incomplete**. The CII-SR-282 alternatives remain
 ambiguous/different; this check makes no new authority decision. Lexical or
-constructor preservation does not prove full XPath AST structure, configured
+constructor preservation does not prove binding identity, configured
 rule dispatch/reachability, helper or external-parameter effects, or report/JAR
 policy effects. XSD semantics, HTML presentation, unrelated scenarios and
 arbitrary compiler scaffolding are outside this denominator. It never executes
