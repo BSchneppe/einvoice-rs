@@ -1,0 +1,44 @@
+[
+  {
+    "id": 13577314264,
+    "name": "schema-consumer-x86_64-unknown-linux-gnu",
+    "size_in_bytes": 461053,
+    "digest": "sha256:a2ee4a55dd0c0a02f20b3fbbe0c8e288136f3e7c9796a796983b78490afc047a",
+    "expired": false,
+    "workflow_run": {
+      "id": 42381413047,
+      "repository_id": 918302349,
+      "head_repository_id": 918302349,
+      "head_branch": "benediktschneppe/bsc-8-implement-complete-native-xrechnung",
+      "head_sha": "017fb00666944b51a43c5f06c3778f6887adb3d0"
+    }
+  },
+  {
+    "id": 13578150993,
+    "name": "schema-consumer-x86_64-pc-windows-msvc",
+    "size_in_bytes": 455778,
+    "digest": "sha256:19b88b7286fc2dd868577a7f7d422f50221c28651ac1cad1e7d0ef62de9503dd",
+    "expired": false,
+    "workflow_run": {
+      "id": 42381413047,
+      "repository_id": 918302349,
+      "head_repository_id": 918302349,
+      "head_branch": "benediktschneppe/bsc-8-implement-complete-native-xrechnung",
+      "head_sha": "017fb00666944b51a43c5f06c3778f6887adb3d0"
+    }
+  },
+  {
+    "id": 13577407546,
+    "name": "schema-consumer-aarch64-apple-darwin",
+    "size_in_bytes": 462897,
+    "digest": "sha256:860696428f966081fd4584fcba1c13e1f713c1ca7a94229f27849eac3e52e750",
+    "expired": false,
+    "workflow_run": {
+      "id": 42381413047,
+      "repository_id": 918302349,
+      "head_repository_id": 918302349,
+      "head_branch": "benediktschneppe/bsc-8-implement-complete-native-xrechnung",
+      "head_sha": "017fb00666944b51a43c5f06c3778f6887adb3d0"
+    }
+  }
+]

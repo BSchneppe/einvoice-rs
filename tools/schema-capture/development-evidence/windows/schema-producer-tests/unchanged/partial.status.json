@@ -1,0 +1,35 @@
+{
+  "stage": "partial",
+  "command": [
+    "D:\\a\\_temp\\schema-consumer-target\\debug\\examples\\cii-observe.exe",
+    "D:\\a\\_temp\\schema-producer-tests\\unchanged\\original-resources",
+    "D:\\a\\_temp\\schema-producer-tests\\unchanged\\input.xml",
+    "1000",
+    "1938"
+  ],
+  "cwd": "D:\\a\\einvoice-rs\\einvoice-rs",
+  "returncode": 0,
+  "launch_error": null,
+  "timeout_seconds": 300,
+  "timed_out": false,
+  "per_stream_limit": 33554432,
+  "truncated": [
+    false,
+    false
+  ],
+  "read_errors": [
+    null,
+    null
+  ],
+  "pipe_drain_complete": true,
+  "stdout": {
+    "path": "partial.json",
+    "bytes": 4650,
+    "sha256": "111fc60d0ce29eaaaa0dad81536f4344873b3ff6919079cda4b6f43222a017eb"
+  },
+  "stderr": {
+    "path": "partial.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "stage": "partial",
+  "command": [
+    "/Users/runner/work/_temp/schema-consumer-target/debug/examples/cii-observe",
+    "/Users/runner/work/_temp/schema-valid/original-resources",
+    "/Users/runner/work/_temp/schema-valid/input.xml",
+    "1000",
+    "11270"
+  ],
+  "cwd": "/Users/runner/work/einvoice-rs/einvoice-rs",
+  "returncode": 0,
+  "launch_error": null,
+  "timeout_seconds": 300,
+  "timed_out": false,
+  "per_stream_limit": 33554432,
+  "truncated": [
+    false,
+    false
+  ],
+  "read_errors": [
+    null,
+    null
+  ],
+  "pipe_drain_complete": true,
+  "stdout": {
+    "path": "partial.json",
+    "bytes": 3190,
+    "sha256": "c3fd73dc32c7a7972986627ddc0f97877c97b5cafbc8e966de552b3d156e89da"
+  },
+  "stderr": {
+    "path": "partial.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "stage": "complete",
+  "command": [
+    "D:\\a\\_temp\\schema-consumer-target\\debug\\examples\\cii-observe.exe",
+    "D:\\a\\_temp\\schema-valid\\original-resources",
+    "D:\\a\\_temp\\schema-valid\\input.xml",
+    "1000"
+  ],
+  "cwd": "D:\\a\\einvoice-rs\\einvoice-rs",
+  "returncode": 0,
+  "launch_error": null,
+  "timeout_seconds": 300,
+  "timed_out": false,
+  "per_stream_limit": 33554432,
+  "truncated": [
+    false,
+    false
+  ],
+  "read_errors": [
+    null,
+    null
+  ],
+  "pipe_drain_complete": true,
+  "stdout": {
+    "path": "complete.json",
+    "bytes": 2770,
+    "sha256": "287e6f5cd70f7b8ed7defc9f79e60576b494ccf5ae11d57fce88939097694c9a"
+  },
+  "stderr": {
+    "path": "complete.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
