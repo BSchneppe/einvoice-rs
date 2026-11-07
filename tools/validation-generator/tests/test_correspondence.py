@@ -20,6 +20,7 @@ from pathlib import Path
 import correspondence as audit
 import candidate as candidate_checks
 from inventory import all_expressions
+from test_xpath_structure import ir_number
 
 
 def rules(value):
@@ -75,7 +76,7 @@ class CorrespondenceTests(unittest.TestCase):
         self.assertEqual(self.summary["denominator"], 12571)
         self.assertEqual(
             self.summary["counts"],
-            {"mapped-exact": 11225, "different": 24, "ambiguous": 3, "unsupported": 27, "unexamined": 1292},
+            {"mapped-exact": 12253, "different": 24, "ambiguous": 3, "unsupported": 27, "unexamined": 264},
         )
 
     def test_moved_assertion_to_another_rule(self):
@@ -224,6 +225,97 @@ class CorrespondenceTests(unittest.TestCase):
 
         # The full AST remains unexamined, but its exact evidence cannot drift.
         self.changed(edit, "expression AST:value", "unexamined", "unexamined")
+
+    def test_structure_facets_reject_candidate_mutants(self):
+        def objects(x):
+            if isinstance(x, dict):
+                yield x
+                for child in x.values():
+                    yield from objects(child)
+            elif isinstance(x, list):
+                for child in x:
+                    yield from objects(child)
+
+        def chain(x):
+            return (x.get("kind") == "binary" and x.get("operator") in {"and", "or", "/", "*"}
+                    and x["left"].get("kind") == "binary" and x["left"]["operator"] == x["operator"])
+
+        def reassociate(x):
+            left = x["left"]
+            x["left"], x["right"] = left["left"], {
+                "kind": "binary", "operator": x["operator"], "left": left["right"], "right": x["right"]}
+
+        def move_group(x):
+            body = x["operand"]
+            x.clear()
+            x.update(body)
+            x["left"] = {"kind": "group", "operand": x["left"]}
+
+        def move_predicate(x):
+            predicate = x["right"]
+            base = {"kind": "binary", "operator": "/", "left": x["left"], "right": predicate["base"]}
+            x.clear()
+            x.update(kind="filter", base=base, predicate=predicate["predicate"])
+
+        mutations = [
+            ("reassociation", chain, reassociate),
+            ("moved Group", lambda x: x.get("kind") == "group" and x["operand"].get("kind") == "binary",
+             move_group),
+            ("moved predicate", lambda x: x.get("kind") == "binary" and x["operator"] == "/"
+             and x["right"].get("kind") == "filter", move_predicate),
+            ("swapped axis", lambda x: x.get("kind") == "step" and x["axis"] == "child",
+             lambda x: x.update(axis="descendant")),
+            ("wrong arity", lambda x: x.get("kind") == "call" and bool(x["arguments"]),
+             lambda x: x["arguments"].pop()),
+        ]
+        value, docs, cases, used = copy.deepcopy(self.value), copy.deepcopy(self.docs), [], set()
+        for label, predicate, mutate in mutations:
+            row = next(r for r in self.rows if "expression AST:" in r["facet"] and r["status"] == "mapped-exact"
+                       and r["candidate_locations"][0] not in used
+                       and any(predicate(x) for x in objects(r["evidence"]["candidate"])))
+            pointer = row["candidate_locations"][0]
+            used.add(pointer)
+            cases.append((label, row["obligation_id"], pointer, predicate, mutate))
+
+        # The pinned decimal source references $documentCurrencyCode and remains
+        # pending. Seed two variable-free in-memory source/candidate fixtures at
+        # distinct real expression facets to exercise numeric admission end to end.
+        for label, mutate in [("numeric lexeme", lambda x: x.update(lexeme=".02")),
+                              ("numeric kind", lambda x: x.update(lexical_kind="double"))]:
+            row = next(r for r in self.rows if r["facet"] == "expression AST:value"
+                       and r["status"] == "mapped-exact" and r["candidate_locations"][0] not in used)
+            pointer = row["candidate_locations"][0]
+            used.add(pointer)
+            expression = audit.resolve_pointer(value, pointer.rsplit("/", 1)[0])
+            expression.update(text="0.02", tree=ir_number("0.02", "decimal"))
+            source = row["source"]
+            docs[source["archive"] + "!" + source["member"]]["nodes"][source["node_index"]]["attributes"]["value"] = "0.02"
+            cases.append((label, row["obligation_id"], pointer, lambda x: x.get("kind") == "number", mutate))
+
+        baseline, _, _ = audit.enumerate_obligations(value, docs, self.payload, self.ident)
+        for _, _, pointer, predicate, mutate in cases:
+            mutate(next(x for x in objects(audit.resolve_pointer(value, pointer)) if predicate(x)))
+        changed, _, _ = audit.enumerate_obligations(value, docs, self.payload, self.ident)
+        before = {r["obligation_id"]: r for r in baseline}
+        after = {r["obligation_id"]: r for r in changed}
+        for label, obligation, _, _, _ in cases:
+            with self.subTest(mutation=label, obligation=obligation):
+                original, mutant = before[obligation], after[obligation]
+                self.assertEqual(original["status"], "mapped-exact")
+                self.assertEqual(mutant["status"], "different")
+                self.assertEqual(original["source"], mutant["source"])
+                self.assertEqual(original["evidence"]["source_tree"], original["evidence"]["candidate_tree"])
+                self.assertNotEqual(mutant["evidence"]["source_tree"], mutant["evidence"]["candidate_tree"])
+        # Structural mutations do not alter the separately compared lexical facets.
+        self.assertEqual([r for r in baseline if "expression lexical:" in r["facet"]],
+                         [r for r in changed if "expression lexical:" in r["facet"]])
+
+    def test_binding_facets_remain_pending(self):
+        pending = [r for r in self.rows if "expression AST:" in r["facet"] and r["status"] == "unexamined"]
+        self.assertEqual(len(pending), 81)
+        self.assertTrue(all(r["reason"] == "binding identity requires independent resolution" for r in pending))
+        decimal = next(r for r in pending if "0.02" in r["evidence"]["source"])
+        self.assertEqual(decimal["obligation_id"], "181157d697cc95badd84")
 
     def test_reordered_name_value_of_and_text_message_parts(self):
         def edit(value):

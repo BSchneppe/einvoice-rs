@@ -21,6 +21,8 @@ from xml.parsers import expat
 import candidate as independent_candidate
 import inventory as old
 import occurrences as lex
+import xpath_candidate
+import xpath_structure
 
 HERE = Path(__file__).resolve().parents[1]
 S = "http://purl.oclc.org/dsdl/schematron"
@@ -61,6 +63,34 @@ def check_occurrences(text, tree):
     actual = lex.tree_occurrences(tree)
     require(expected == actual,
             f"XPath occurrence mismatch at None: missing={dict(expected - actual)!r}; extra={dict(actual - expected)!r}")
+
+
+def classify_expression(text, candidate_tree, namespaces, parsed):
+    """Parse each distinct source text once, before adapting any candidate tree.
+
+    namespaces is a source-context callback so binding facets can remain pending
+    without attempting name resolution. Errors are evidence, never a guessed tree.
+    """
+    if text not in parsed:
+        try:
+            parsed[text] = xpath_structure.Parser(text).parse()
+        except xpath_structure.Unsupported as error:
+            parsed[text] = error
+    try:
+        tree = parsed[text]
+        if isinstance(tree, Exception):
+            raise tree
+        source = xpath_structure.qualify(tree, namespaces())
+        candidate = xpath_candidate.adapt(candidate_tree)
+    except xpath_structure.BindingIdentityRequired:
+        return "unexamined", "binding identity requires independent resolution", {}
+    except xpath_structure.Unsupported as error:
+        return "unsupported", "independent XPath structure check unsupported", {"structure_error": str(error)}
+    return (
+        "mapped-exact" if source == candidate else "different",
+        "independent syntactic structure comparison; no evaluation or binding identity claim",
+        {"source_tree": source, "candidate_tree": candidate},
+    )
 
 
 def sha(data):
@@ -530,6 +560,31 @@ def enumerate_obligations(candidate, docs, payload, ident):
 
     rows = []
     excluded_scaffolding = []
+    parsed_expressions, static_contexts = {}, {}
+
+    def expression_namespaces(k, i):
+        if k not in static_contexts:
+            declarations = {}
+            for n in docs[k]["nodes"]:
+                if "xpath-default-namespace" in n["attributes"]:
+                    raise xpath_structure.Unsupported("xpath-default-namespace requires host-language handling")
+                if n["name"] == [S, "ns"]:
+                    declarations[n["attributes"]["prefix"]] = n["attributes"]["uri"]
+                if n["name"] == [C, "namespace"] and "prefix" in n["attributes"]:
+                    declarations[n["attributes"]["prefix"]] = "".join(
+                        p["text"] for p in n["content"] if "text" in p
+                    )
+            static_contexts[k] = declarations
+        return {"xs": "http://www.w3.org/2001/XMLSchema", "fn": xpath_structure.FN,
+                **node(k, i)["namespaces"], **static_contexts[k]}
+
+    def check_structure(row, k, i):
+        status, reason, evidence = classify_expression(
+            row["evidence"]["source"], row["evidence"]["candidate"],
+            lambda: expression_namespaces(k, i), parsed_expressions,
+        )
+        row.update(status=status, reason=reason)
+        row["evidence"].update(evidence)
 
     def add(k, i, cat, facet, expected, actual=None, paths=None, status=None, reason=None, extra=None):
         if status is None:
@@ -893,8 +948,7 @@ def enumerate_obligations(candidate, docs, payload, ident):
                     lexical = "pass"
                 except (AssertionError, KeyError, ValueError) as error:
                     lexical = "fail:" + repr(error)
-                # Exact source AST preservation cannot be inferred from the lexical multiset check.
-                add(
+                row = add(
                     k,
                     i,
                     cat,
@@ -908,6 +962,9 @@ def enumerate_obligations(candidate, docs, payload, ident):
                     + "; association, precedence, grouping and full binding identity are not independently established",
                     extra={"lexical_check": lexical},
                 )
+                # Preserve every row of the separately reviewed authority conflict.
+                if not (local == "assert" and attrs.get("id") == "CII-SR-282"):
+                    check_structure(row, k, i)
     # Original CEN entry/abstract/concrete obligations: bounded textual parameter projection for discovery only.
     entry = "cen.zip!schematron/EN16931-CII-validation.sch"
     for i, n in enumerate(docs[entry]["nodes"]):
@@ -1529,7 +1586,7 @@ def enumerate_obligations(candidate, docs, payload, ident):
             ["/effective_package/policy/" + field],
         )
         check_occurrences(text(k, i), e["tree"])
-        add(
+        row = add(
             k,
             i,
             PS,
@@ -1540,6 +1597,7 @@ def enumerate_obligations(candidate, docs, payload, ident):
             status="unexamined",
             reason="exact selector text and lexical occurrences checked; AST grouping/association not independently established",
         )
+        check_structure(row, k, i)
     ovidx = next(j for j, c in enumerate(package["policy"]["clauses"]) if c["kind"] == "overrides")
     values = package["policy"]["clauses"][ovidx]["values"]
     for i in range(204, 213):
@@ -1714,8 +1772,7 @@ def enumerate_obligations(candidate, docs, payload, ident):
             reason="xslt2 source dialect is an implicit compiler/IR contract; no separate candidate queryBinding field, and no execution semantics claim",
         )
 
-    # Every expression-associated AST remains pending except the separately authored selected tree.
-    # Add selected original predicate proof without overriding the raw source conflict.
+    # Retain the selected original predicate proof without overriding the raw source conflict.
     r = candidate["resolutions"][0]
     src = r["effective"]["source"]
     k = src["resource"].replace("/", "!", 1)
