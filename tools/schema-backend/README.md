@@ -13,6 +13,19 @@ complete published package in `vendor/xsd-schema`. The package remains named
 remain intact. See `vendor/xsd-schema.provenance.json` and the ordered patches.
 A future distribution decision is still required before publishing consumers.
 
+Byte retention does not establish a complete license record. The retained
+[`timsort.rs`](../../vendor/xsd-schema/src/xpath/timsort.rs) header declares
+GPL version 2 only and refers to a Classpath exception;
+[`item_set.rs`](../../vendor/xsd-schema/src/xpath/item_set.rs) declares Ms-PL
+and refers to License.rtf or License.txt. The pinned upstream archive does not
+include the referenced full license and exception texts. These XPath modules
+are excluded by the approved default feature graph, but their files remain in
+the retained source. The package's MIT/Apache declaration and the upstream
+[assets notice](../../vendor/xsd-schema/assets/NOTICE.md)'s description of the
+rest of the crate do not reconcile those headers. The source/notice record
+remains unresolved for a future distribution; this is not a conclusion about
+license compatibility or permission.
+
 ## Source and dependency identity
 
 The archive authority is SHA-256
