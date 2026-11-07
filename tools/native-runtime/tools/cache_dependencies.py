@@ -11,9 +11,10 @@ import tomllib
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--registry-cache", type=Path, default=Path.home() / ".cargo/registry/cache")
+parser.add_argument("--cache-dir", type=Path, help="Optional isolated output directory (default: this crate .cache)")
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[1]
-cache = root / ".cache"
+cache = args.cache_dir.resolve() if args.cache_dir else root / ".cache"
 vendor = cache / "vendor"
 vendor.mkdir(parents=True, exist_ok=True)
 for package in tomllib.loads((root / "Cargo.lock").read_text())["package"]:

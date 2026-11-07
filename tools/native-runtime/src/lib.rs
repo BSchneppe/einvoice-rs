@@ -6,6 +6,7 @@ mod budget;
 mod conversion;
 mod error;
 mod ieee;
+pub mod machine;
 mod numeric;
 mod value;
 

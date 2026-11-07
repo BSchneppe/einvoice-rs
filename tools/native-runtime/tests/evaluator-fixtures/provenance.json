@@ -1,0 +1,24 @@
+{
+  "original_cases_sha256": "b3f5f54696ca5c9fbdd94d190124c4cce249eba9bf80d605dbe813af9d189b17",
+  "original_document_sha256": "c1dbef43ce3882176e464204b6f0c66cb3d085153b4305ed6a31421e87690782",
+  "supplemental_ids": [
+    "machine-ancestor-axis",
+    "machine-ancestor-group",
+    "machine-text-values",
+    "machine-atomic-path",
+    "machine-for-focus",
+    "machine-for-shadow",
+    "machine-union",
+    "machine-abs-round",
+    "machine-attribute-data",
+    "machine-namespace-data",
+    "machine-namespace-identity",
+    "machine-attribute-identity",
+    "machine-atomic-path-prefix",
+    "machine-empty-general",
+    "machine-filter-zero",
+    "machine-root-atomic"
+  ],
+  "query_sha256": "887e8528836ab90f33990b0348d0799bb6fcaf25a6e877df6c81f73f6c1aa036",
+  "select_bindings_sha256": "e431de103fdd8d450106cb1b6f9fbd28560b9fb2550bf3e2cc4450c12920a6a8"
+}
