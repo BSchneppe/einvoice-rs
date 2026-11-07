@@ -11,6 +11,9 @@ verified published package. Paths are relative to the extracted package root.
    origins at native emission sites. Raw diagnostics remain unchanged.
 3. `0003-cooperative-stop.patch`: backward-compatible sink stop query, guarded
    dispatch and terminal out-of-band abort, including IDREF finalization.
+4. `0004-xml-character-content.patch`: classify XML S exactly in both bundled
+   drivers and the runtime; reject any character children in empty or nilled
+   content, while preserving legal Unicode text in mixed/simple content.
 
 Regression fixtures and maintenance commands live in `tools/schema-backend`.
 `verify_provenance.py` checks every consumed package byte and patch offline.

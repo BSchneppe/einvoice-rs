@@ -3,7 +3,7 @@
   "package": {
     "name": "xsd-schema",
     "version": "0.3.0",
-    "local_revision": "bsc8-maintenance-1",
+    "local_revision": "bsc8-maintenance-2",
     "publish": false
   },
   "archive": {
@@ -32,6 +32,11 @@
       "path": "0003-cooperative-stop.patch",
       "bytes": 18138,
       "sha256": "21ff570ce29eacc9aac2cc54adc51540cb16dfb57e79b999f5d2ef4d10aabcc0"
+    },
+    {
+      "path": "0004-xml-character-content.patch",
+      "bytes": 3989,
+      "sha256": "e47877144d7492fea32d0b68c238fff5aa4c5393b2bd8d38587b909c66da578e"
     }
   ],
   "files": [
@@ -2131,8 +2136,8 @@
         "sha256": "5f09206c310d397ddbbdb2ef9edcc1e345f36e9d443a81588edf307e17f98e8e"
       },
       "patched": {
-        "bytes": 24925,
-        "sha256": "5f09206c310d397ddbbdb2ef9edcc1e345f36e9d443a81588edf307e17f98e8e"
+        "bytes": 24995,
+        "sha256": "df0cbf5cf0755954483da79a25ffa060d62e535763904a3dc64d77a2a56946c2"
       }
     },
     {
@@ -2143,8 +2148,8 @@
         "sha256": "b94ed9bd09eb568df5dd6b629034425b69949ae9a909a39ebc4095a2841a3fd2"
       },
       "patched": {
-        "bytes": 53988,
-        "sha256": "b94ed9bd09eb568df5dd6b629034425b69949ae9a909a39ebc4095a2841a3fd2"
+        "bytes": 54034,
+        "sha256": "97ce6fead4b63c3995f6f8a3e05bd875866f9984ecbb439ab481b6f07c630fee"
       }
     },
     {
@@ -2155,8 +2160,8 @@
         "sha256": "1295162988a44b44d03aca15555ce1f68f5d683a620eb937a1879af83d28c9b7"
       },
       "patched": {
-        "bytes": 402093,
-        "sha256": "858954017515118f5a57de074270660bf5aa8afa2c8ad2f97bc9e8e7cb4ce072"
+        "bytes": 401560,
+        "sha256": "e65510ebfdac7260d3695327a2f29878cd66e59b534c40ccf5f5af0a7966c536"
       }
     },
     {

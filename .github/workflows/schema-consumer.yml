@@ -1,0 +1,87 @@
+name: Native source schema consumer
+
+on:
+  pull_request:
+    paths:
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+      - 'crates/einvoice-schema/**'
+      - 'crates/einvoice-source/**'
+      - 'vendor/**'
+      - 'tools/validation-generator/SOURCE-ACCOUNTING.json'
+      - '.github/workflows/schema-consumer.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+      - 'crates/einvoice-schema/**'
+      - 'crates/einvoice-source/**'
+      - 'vendor/**'
+      - 'tools/validation-generator/SOURCE-ACCOUNTING.json'
+      - '.github/workflows/schema-consumer.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  supplied-closure:
+    name: Rust 1.83 original schema closure (${{ matrix.target }})
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+          - os: macos-15
+            target: aarch64-apple-darwin
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - name: Preserve original source and fixture bytes
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.6'
+      - name: Install Rust 1.83
+        run: rustup toolchain install 1.83.0 --profile minimal
+      - name: Select isolated target directory
+        run: echo "CARGO_TARGET_DIR=$RUNNER_TEMP/schema-consumer-target" >> "$GITHUB_ENV"
+      - name: Fetch committed host dependencies
+        run: cargo +1.83.0 fetch --locked --target '${{ matrix.target }}'
+      - name: Supply unchanged pinned configuration archive
+        run: |
+          python - <<'PY'
+          import hashlib, json, os, pathlib, urllib.request
+          pin = next(p for p in json.loads(pathlib.Path('tools/oracle/artifacts.lock.json').read_bytes())['artifacts'] if p['file'] == 'config.zip')
+          with urllib.request.urlopen(pin['url'], timeout=60) as response:
+              data = response.read(499608)
+          assert len(data) == 499607 and hashlib.sha256(data).hexdigest() == pin['sha256']
+          pathlib.Path(os.environ['RUNNER_TEMP'], 'schema-config.zip').write_bytes(data)
+          PY
+      - name: Bounded I/O and actual failed/drifted producer regressions
+        run: |
+          python crates/einvoice-schema/tools/test_observe.py
+          python crates/einvoice-schema/tools/test_reproduction.py --archive "$RUNNER_TEMP/schema-config.zip" --output "$RUNNER_TEMP/schema-producer-tests"
+      - name: Original closure with authored structural-only input
+        run: |
+          python crates/einvoice-schema/tools/observe.py --archive "$RUNNER_TEMP/schema-config.zip" --input crates/einvoice-schema/tests/fixtures/minimal-schema.xml --output "$RUNNER_TEMP/schema-valid"
+          export EINVOICE_CII_RESOURCE_DIR="$RUNNER_TEMP/schema-valid/original-resources"
+          export EINVOICE_SCHEMA_INPUT="$GITHUB_WORKSPACE/crates/einvoice-schema/tests/fixtures/minimal-schema.xml"
+          cargo +1.83.0 test --offline --locked -p einvoice-schema --test pinned -- --ignored
+      - name: Retain raw development attempts on success or failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: schema-consumer-${{ matrix.target }}
+          path: |
+            ${{ runner.temp }}/schema-producer-tests
+            ${{ runner.temp }}/schema-valid

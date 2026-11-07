@@ -662,7 +662,10 @@ where
         return Ok(());
     }
 
-    let kind = if pending.chars().all(|c| c.is_whitespace()) {
+    let kind = if pending
+        .bytes()
+        .all(|b| matches!(b, b' ' | b'\t' | b'\r' | b'\n'))
+    {
         runtime.validate_whitespace(pending);
         TextKind::Whitespace
     } else {

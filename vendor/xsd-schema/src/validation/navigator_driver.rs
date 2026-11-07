@@ -273,7 +273,10 @@ where
             let text = nav.value_ref();
             // Classify by content, exactly as the streaming driver does,
             // rather than trusting the node-type label.
-            if text.chars().all(|c| c.is_whitespace()) {
+            if text
+                .bytes()
+                .all(|b| matches!(b, b' ' | b'\t' | b'\r' | b'\n'))
+            {
                 runtime.validate_whitespace(&text);
             } else {
                 runtime.validate_text(&text);

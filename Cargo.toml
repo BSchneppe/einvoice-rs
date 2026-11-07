@@ -1,7 +1,8 @@
 [workspace]
 members = ["crates/*"]
-exclude = ["vendor/xml-rs"]
+exclude = ["vendor/xml-rs", "vendor/xsd-schema"]
 resolver = "2"
 
 [patch.crates-io]
 xml-rs = { path = "vendor/xml-rs" }
+xsd-schema = { path = "vendor/xsd-schema" }

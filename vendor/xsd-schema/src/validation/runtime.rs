@@ -4299,11 +4299,14 @@ impl<'a, S: ValidationSink> ValidationRuntime<'a, S> {
         // Collect errors first to avoid borrow conflicts
         let mut pending_errors: Vec<(&'static str, String, Option<errors::NativeCause>)> =
             Vec::new();
-        let has_non_ws = !text.trim().is_empty();
+        let has_characters = !text.is_empty();
+        let has_non_ws = text
+            .bytes()
+            .any(|b| !matches!(b, b' ' | b'\t' | b'\r' | b'\n'));
 
         if let Some(ev_state) = self.validation_stack.last_mut() {
             // 1. Check content type
-            if has_non_ws {
+            if has_characters {
                 match ev_state.content_type {
                     Some(ContentType::Empty) => {
                         let elem_name = self
@@ -4320,7 +4323,7 @@ impl<'a, S: ValidationSink> ValidationRuntime<'a, S> {
                             None,
                         ));
                     }
-                    Some(ContentType::ElementOnly) => {
+                    Some(ContentType::ElementOnly) if has_non_ws => {
                         let elem_name = self
                             .schema_set
                             .name_table
@@ -4339,15 +4342,9 @@ impl<'a, S: ValidationSink> ValidationRuntime<'a, S> {
                 }
             }
 
-            // 2. Check xsi:nil — per cvc-elt.3.2.1 (XSD 1.1 §3.3.4.3),
-            // a nilled element's children must be empty: no element info items
-            // and no character info items. For mixed content this includes
-            // whitespace, which is otherwise significant (only ignorable in
-            // element-only content).
-            if ev_state.is_nil
-                && (has_non_ws || matches!(ev_state.content_type, Some(ContentType::Mixed)))
-                && !text.is_empty()
-            {
+            // cvc-elt.3.2.1: nilled elements have no character children,
+            // including XML S, regardless of the declared content variety.
+            if ev_state.is_nil && has_characters {
                 let elem_name = self
                     .schema_set
                     .name_table
@@ -4436,17 +4433,9 @@ impl<'a, S: ValidationSink> ValidationRuntime<'a, S> {
                 ));
             }
 
-            // cvc-elt.3.2.1: a nilled element must have empty content. For
-            // mixed and text-only content whitespace is significant, so any
-            // text (including whitespace) is invalid. Element-only and empty
-            // content treat whitespace as ignorable, so it stays accepted.
-            if ev_state.is_nil
-                && !text.is_empty()
-                && matches!(
-                    ev_state.content_type,
-                    Some(ContentType::TextOnly) | Some(ContentType::Mixed)
-                )
-            {
+            // cvc-elt.3.2.1: XML S still consists of character children;
+            // nilled elements cannot contain it, even in element-only content.
+            if ev_state.is_nil && !text.is_empty() {
                 let elem_name = self
                     .schema_set
                     .name_table
