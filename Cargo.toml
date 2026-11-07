@@ -1,3 +1,7 @@
 [workspace]
 members = ["crates/*"]
+exclude = ["vendor/xml-rs"]
 resolver = "2"
+
+[patch.crates-io]
+xml-rs = { path = "vendor/xml-rs" }
