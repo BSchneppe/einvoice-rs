@@ -1,0 +1,43 @@
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -14,6 +14,7 @@
+ rust-version = "1.70"
+ name = "xml-rs"
+ version = "0.8.28"
++publish = false
+ authors = ["Vladimir Matveev <vmatveev@citrine.cc>"]
+ build = false
+ include = [
+--- a/src/reader/parser/inside_closing_tag_name.rs
++++ b/src/reader/parser/inside_closing_tag_name.rs
+@@ -9,8 +9,7 @@
+         match s {
+             ClosingTagSubstate::CTInsideName => self.read_qualified_name(t, QualifiedNameTarget::ClosingTagNameTarget, |this, token, name| {
+                 match name.prefix_ref() {
+-                    Some(prefix) if prefix == namespace::NS_XML_PREFIX ||
+-                                    prefix == namespace::NS_XMLNS_PREFIX =>
++                    Some(prefix) if prefix == namespace::NS_XMLNS_PREFIX =>
+                         Some(this.error(SyntaxError::InvalidNamePrefix(prefix.into()))),
+                     _ => {
+                         this.data.element_name = Some(name.clone());
+--- a/src/reader/parser/inside_opening_tag.rs
++++ b/src/reader/parser/inside_opening_tag.rs
+@@ -13,8 +13,7 @@
+         match s {
+             OpeningTagSubstate::InsideName => self.read_qualified_name(t, QualifiedNameTarget::OpeningTagNameTarget, |this, token, name| {
+                 match name.prefix_ref() {
+-                    Some(prefix) if prefix == namespace::NS_XML_PREFIX ||
+-                                    prefix == namespace::NS_XMLNS_PREFIX =>
++                    Some(prefix) if prefix == namespace::NS_XMLNS_PREFIX =>
+                         Some(this.error(SyntaxError::InvalidNamePrefix(prefix.into()))),
+                     _ => {
+                         this.data.element_name = Some(name.clone());
+@@ -88,7 +87,7 @@
+                     // declaring default namespace
+                     None if &*name.local_name == namespace::NS_XMLNS_PREFIX =>
+                         match &*value {
+-                            namespace::NS_XMLNS_PREFIX | namespace::NS_XML_PREFIX | namespace::NS_XML_URI | namespace::NS_XMLNS_URI =>
++                            namespace::NS_XML_URI | namespace::NS_XMLNS_URI =>
+                                 Some(this.error(SyntaxError::InvalidDefaultNamespace(value.into()))),
+                             _ => {
+                                 this.nst.put(namespace::NS_NO_PREFIX, value.clone());

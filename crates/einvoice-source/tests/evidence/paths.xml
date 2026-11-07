@@ -1,0 +1,5 @@
+<?pre x?><r xmlns:p="urn:a" xmlns:q="urn:a" a="X
+Y	Z&#xD;&#xA;&#x9;">A<![CDATA[B]]>&amp;C<!--cut-->D<?pi v?>E<![CDATA[]]><![CDATA[F]]><p:k/><q:k/><q:k xmlns:q="urn:b"/><?pi second?><?other x?><!--C
+D--><?nl P
+Q?>&#13;
+&#10;&#x1F600;</r><!--post-->

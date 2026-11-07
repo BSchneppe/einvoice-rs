@@ -27,6 +27,7 @@ mod calculation_bounds;
 mod document;
 mod domain;
 mod draft;
+mod encoding;
 mod fields;
 mod report;
 mod syntax;

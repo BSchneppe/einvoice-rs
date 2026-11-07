@@ -1,0 +1,14 @@
+[package]
+name = "einvoice-source"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.83"
+publish = false
+license-file = "../../LICENSE"
+repository = "https://github.com/BSchneppe/einvoice-rs"
+description = "Internal bounded immutable XML source arena and lexical evidence"
+readme = "README.md"
+
+[dependencies]
+xml-rs = "=0.8.28"
+xmlparser = "=0.13.6"

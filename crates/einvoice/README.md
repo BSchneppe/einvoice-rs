@@ -190,6 +190,28 @@ vector capacity, numeric scratch and allocator overhead remain proportional to
 the bounded data. No elapsed-time deadline or allocator-failure recovery is
 claimed.
 
+Plain payment terms preserve caller prose, including embedded `#`, Unicode
+whitespace and text without a final newline. An LF-separated line beginning with
+`#` after leading XML whitespace (space, tab, CR, LF) yields
+`API-BUILD-UNSUPPORTED-TERMS` at `payment_terms.text`. This builder capability
+restriction includes source-valid structured discounts and invalid hash protocols;
+it is not an incoming-validity rule or a claim to interpret natural-language
+discounts. Field diagnostics and bounded calculation use the same check.
+
+A private preparation path calculates once from the same immutable draft and
+emits fresh CII UTF-8 bytes with the fixed source-mapped vocabulary. It consumes
+canonical calculated numbers without repeating arithmetic, preserves every
+represented business field, counts exact escaped output before allocation, and
+checks every append against the reserved size. Its separate XML output cap is
+16 MiB by default; calculation limits still apply independently. These bounds do
+not promise total RSS or allocator quotas. This path returns no public bytes or
+`Document`; `Target::encode` remains `Unavailable` until genuine native validation
+and independent KoSIT acceptance of the exact emitted bytes are integrated.
+
+Private unit tests can export actual returned vectors for independent checks;
+see [the encoding test instructions](tests/encoding/README.md). These outputs
+have development provenance and are not validated invoices.
+
 The creation model has no fields for allowances, charges, prepayments, payable
 adjustments or structured cash discounts. It supports no credit-note generation,
 PDF workflow or import editing. Incoming validation keeps its full target scope.

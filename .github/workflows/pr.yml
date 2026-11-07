@@ -56,7 +56,7 @@ jobs:
           bundle_dir="$(mktemp -d)"
           archive_dir="$(mktemp -d)"
           git archive --format=tar --output="$bundle_dir/source.tar" HEAD -- \
-            Cargo.toml Cargo.lock LICENSE crates/einvoice crates/einvoice-numeric
+            Cargo.toml Cargo.lock LICENSE crates/einvoice crates/einvoice-numeric vendor/xml-rs vendor/xml-rs.patch vendor/xml-rs.provenance.json vendor/xml-rs-maintenance.md
           tar -xf "$bundle_dir/source.tar" -C "$archive_dir"
           echo "directory=$archive_dir" >> "$GITHUB_OUTPUT"
       - name: Project the lock onto the source dependency workspace
