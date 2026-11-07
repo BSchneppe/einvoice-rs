@@ -579,6 +579,16 @@ def enumerate_obligations(candidate, docs, payload, ident):
                 yield from walk(c, p + "/" + str(i))
 
     objects = list(walk(candidate))
+    # Preserve traversal order and duplicates, but index named counterparts once
+    # per enumeration rather than scanning the whole candidate per declaration.
+    bindings_by_name = collections.defaultdict(list)
+    helpers_by_name = collections.defaultdict(list)
+    for p, v in objects:
+        if p.startswith("/effective_package/") and isinstance(v, dict):
+            if "effective_scope" in v:
+                bindings_by_name[v["name"]["qualified"]].append((p, v))
+            if "result_type" in v:
+                helpers_by_name[v["name"]["qualified"]].append((p, v))
     bysource = collections.defaultdict(list)
     for p, v in objects:
         if isinstance(v, dict) and isinstance(v.get("source"), dict):
@@ -1418,21 +1428,14 @@ def enumerate_obligations(candidate, docs, payload, ident):
             name = n["attributes"].get("name")
             matches = [
                 (p, v)
-                for p, v in objects
-                if p.startswith("/effective_package/")
-                and isinstance(v, dict)
-                and v.get("effective_scope") in ["xslt2_schema_global", "rule_local"]
-                and v["name"]["qualified"] == name
+                for p, v in bindings_by_name.get(name, [])
+                if v.get("effective_scope") in ["xslt2_schema_global", "rule_local"]
             ]
             if not matches:
                 # Exclusion must not depend on candidate scope: a counterpart anywhere keeps the obligation.
                 elsewhere = [
                     p
-                    for p, v in objects
-                    if p.startswith("/effective_package/")
-                    and isinstance(v, dict)
-                    and "effective_scope" in v
-                    and v["name"]["qualified"] == name
+                    for p, v in bindings_by_name.get(name, [])
                 ]
                 if elsewhere or name in source_binding_names:
                     add(
@@ -1507,14 +1510,7 @@ def enumerate_obligations(candidate, docs, payload, ident):
             if n["name"] != [X, "function"]:
                 continue
             qualified = n["attributes"].get("name")
-            matches = [
-                (p, v)
-                for p, v in objects
-                if p.startswith("/effective_package/")
-                and isinstance(v, dict)
-                and "result_type" in v
-                and v["name"]["qualified"] == qualified
-            ]
+            matches = helpers_by_name.get(qualified, [])
             expected = xmlhelper(k, i)
             if len(matches) == 1:
                 p, h = matches[0]
