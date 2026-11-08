@@ -76,8 +76,14 @@ class CorrespondenceTests(unittest.TestCase):
         self.assertEqual(self.summary["denominator"], 12571)
         self.assertEqual(
             self.summary["counts"],
-            {"mapped-exact": 12334, "different": 24, "ambiguous": 3, "unsupported": 27, "unexamined": 183},
+            {"mapped-exact": 12492, "different": 24, "ambiguous": 3, "unsupported": 27, "unexamined": 25},
         )
+        self.assertEqual(len(self.summary["dispatch_entry_profiles"]), 2)
+        for profile in self.summary["dispatch_entry_profiles"]:
+            self.assertEqual(profile["status"], "mapped-exact")
+            self.assertTrue(profile["entry_bytes_equal"])
+            self.assertEqual(len(profile["entry"]["raw_sha256"]), 64)
+            self.assertIn("no strict XSLT 2.0 portability", profile["entry_note"])
 
     def test_moved_assertion_to_another_rule(self):
         def edit(value):
