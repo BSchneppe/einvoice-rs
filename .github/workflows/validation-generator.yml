@@ -23,7 +23,7 @@ jobs:
     env:
       CARGO_MANIFEST: tools/validation-generator/Cargo.toml
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@1.83.0
         with:
           components: rustfmt, clippy
