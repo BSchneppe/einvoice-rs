@@ -24,7 +24,7 @@ jobs:
       CARGO_MANIFEST: tools/validation-generator/Cargo.toml
     steps:
       - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@1.83.0
+      - uses: dtolnay/rust-toolchain@1.120.0
         with:
           components: rustfmt, clippy
       - uses: actions/setup-python@v5
