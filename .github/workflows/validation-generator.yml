@@ -27,7 +27,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@1.83.0
         with:
           components: rustfmt, clippy
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
       - name: Fetch isolated locked dependencies

@@ -45,7 +45,7 @@ jobs:
       - name: Preserve source bytes
         run: git config --global core.autocrlf false
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
       - name: Install Rust 1.83
