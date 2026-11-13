@@ -80,7 +80,7 @@ jobs:
           cargo +1.83.0 test --offline --locked -p einvoice-schema --test pinned -- --ignored
       - name: Retain raw development attempts on success or failure
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: schema-consumer-${{ matrix.target }}
           path: |
